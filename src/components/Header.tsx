@@ -104,6 +104,20 @@ export const Header: FC = () => {
         >
           کاربران در ایکس (X)
         </Link>
+        <Link
+          to="/faq"
+          style={{
+            background: "var(--ff-tab-bg)",
+            border: "1px solid var(--ff-border)",
+            borderRadius: 3,
+            padding: "5px 14px",
+            fontSize: 12.5,
+            fontWeight: "bold",
+            color: "var(--ff-text)",
+          }}
+        >
+          سوالات متداول
+        </Link>
       </nav>
 
       <div

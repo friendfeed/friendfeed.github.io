@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { XCrossoverPage } from "./pages/XCrossoverPage";
+import { FaqPage } from "./pages/FaqPage";
 import { SearchProvider } from "./services/SearchContext";
 
 // HomePage / ProfilePage / PyramidPage / HistoryPage exist in ./pages but
@@ -16,6 +17,7 @@ const App: FC = () => (
       <main style={{ maxWidth: 1100, margin: "0 auto", padding: 16, width: "100%", flex: 1 }}>
         <Routes>
           <Route path="/" element={<XCrossoverPage />} />
+          <Route path="/faq" element={<FaqPage />} />
         </Routes>
       </main>
       <footer
