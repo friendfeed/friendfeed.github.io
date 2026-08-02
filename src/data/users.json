@@ -1,0 +1,53 @@
+[
+  {
+    "id": "nimanilian",
+    "username": "nimanilian",
+    "displayName": "Nima Nilian",
+    "isHonoraryMember": false,
+    "generalNotes": "Seed record supplied directly by the project researcher from a manual archive.org session. Treat numeric stats and subscription list as accurate to the cited snapshot date; everything else in this dataset should be verified the same way before being added.",
+    "snapshots": [
+      {
+        "capturedAt": "2008-12-22",
+        "archiveUrl": "https://web.archive.org/web/20081222093731/http://friendfeed.com/nimanilian",
+        "isPrivate": false,
+        "stats": {
+          "commentsThisWeek": 81,
+          "commentsAllTime": 199,
+          "likesThisWeek": 77,
+          "likesAllTime": 227
+        },
+        "links": [],
+        "subscriptions": [
+          { "displayName": "Elnaz" },
+          { "displayName": "Farbod" },
+          { "displayName": "Kamangir", "username": "kamangir" },
+          { "displayName": "mahshid", "username": "mahshid" },
+          { "displayName": "Maryam Ardakani" },
+          { "displayName": "Maryaminaa", "username": "maryaminaa" },
+          { "displayName": "Nima" },
+          { "displayName": "sahandram", "username": "sahandram" },
+          { "displayName": "shandiz", "username": "shandiz" },
+          { "displayName": "Shibi" }
+        ],
+        "subscribers": [],
+        "rooms": [],
+        "notes": "26 additional subscriptions were listed on the archived page but not individually recorded yet ('...and 26 more »'). Add them as they are transcribed."
+      }
+    ],
+    "xMatch": {
+      "handle": "nilian",
+      "url": "https://x.com/nilian",
+      "confidence": "probable",
+      "reasoning": "Handle is a near-match to the FriendFeed username (nimanilian -> nilian). Researcher independently found a Twitter presence active 2 Aug 2009 - 15 Nov 2009 linking to the blog nilian1807.blogspot.com, which is a strong secondary signal, but no single archived page has been found that directly states both accounts belong to the same person. Needs a direct textual bridge (e.g. a FriendFeed 'filter' panel Twitter link, or a tweet referencing FriendFeed) before this can be upgraded to confirmed.",
+      "isLive": true,
+      "snapshots": [
+        {
+          "capturedAt": "2009-08-02",
+          "handle": "nilian",
+          "url": "https://x.com/nilian",
+          "bio": "Linked to blog: nilian1807.blogspot.com"
+        }
+      ]
+    }
+  }
+]

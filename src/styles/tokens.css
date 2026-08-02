@@ -1,0 +1,97 @@
+/* -----------------------------------------------------------------------
+   Design tokens, rebuilt directly from a real archived FriendFeed profile
+   screenshot (colors sampled by pixel from the source image, not guessed):
+
+     nav / action links ......... #0000CC  (sampled from "Me" nav text)
+     tab / pill / button bg ..... #efefef  (sampled from tab background)
+     sidebar / panel wash ....... #f4f4f4  (sampled from left column)
+     page background ............ #ffffff  (near-white, sampled #fffffa)
+     avatar border ............... light neutral gray, thin, no radius tricks
+
+   FriendFeed's actual UI was NOT rounded pills, gradients, or shadows --
+   it was flat, dense, Arial-based, and slightly gray. The previous version
+   of this file invented a nicer-looking but *inauthentic* blue/gradient
+   theme; this version intentionally undoes that in favor of accuracy.
+   ----------------------------------------------------------------------- */
+
+:root {
+  --ff-bg: #ffffff;
+  --ff-panel: #ffffff;
+  --ff-panel-alt: #f4f4f4;
+  --ff-tab-bg: #efefef;
+  --ff-border: #cccccc;
+  --ff-border-strong: #999999;
+
+  --ff-link: #0000cc;
+  --ff-link-visited: #551a8b;
+
+  --ff-like: #b8860b;
+  --ff-comment: #557799;
+  --ff-confirmed: #2e7d32;
+  --ff-probable: #b7791f;
+  --ff-speculative: #a24b4b;
+  --ff-unverified: #8a8a8a;
+
+  --ff-text: #000000;
+  --ff-muted: #666666;
+  --ff-muted-light: #999999;
+
+  --ff-font-body: "Vazirmatn", Tahoma, Arial, "Segoe UI", sans-serif;
+  --ff-font-display: "Vazirmatn", Tahoma, Arial, sans-serif;
+
+  --ff-radius: 3px;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ff-bg);
+  color: var(--ff-text);
+  font-family: var(--ff-font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  direction: rtl;
+}
+
+a {
+  color: var(--ff-link);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--ff-font-display);
+  font-weight: bold;
+  margin: 0 0 8px;
+  color: var(--ff-text);
+}
+
+button {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ff-panel-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ff-border-strong);
+  border-radius: 5px;
+}
