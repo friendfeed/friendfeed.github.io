@@ -46,6 +46,15 @@ export const IconTwitter: FC<IconProps> = (p) => (
   </svg>
 );
 
+/** Current (post-2023) X logo -- used as a small badge over the "live"
+ *  profile photo so it reads as "this is where they are now", separate
+ *  from the legacy bird mark above which is kept for any older context. */
+export const IconX: FC<IconProps> = (p) => (
+  <svg {...base(p)} fill="currentColor" stroke="none">
+    <path d="M13.6 10.6 20.4 3h-2l-5.9 6.6L7.8 3H3l7.1 10.1L3 21h2l6.2-7 5 7H21l-7.4-10.4Zm-2.2 2.5-.7-1L5 4.6h2.2l4.6 6.4.7 1 6 8.4h-2.2l-4.9-6.9Z" />
+  </svg>
+);
+
 export const IconFacebook: FC<IconProps> = (p) => (
   <svg {...base(p)} fill="currentColor" stroke="none">
     <path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v7h3v-7H16l.5-3h-3V9.7c0-.4.3-.7.5-.7Z" />

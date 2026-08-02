@@ -14,6 +14,29 @@
       content="آرشیو غیررسمی جامعه فارسی‌زبان فرندفید (۱۳۸۶-۱۳۸۸) و ردیابی حساب‌های کاربران در ایکس"
     />
     <title>فرندفید فارسی | آرشیو</title>
+    <script>
+      // Decode half of the GitHub Pages SPA fallback -- see public/404.html
+      // for the full explanation. If we were bounced here from 404.html
+      // (recognizable by the "?/" the redirect appends), rewrite the
+      // visible URL back to the real path before React mounts, so
+      // react-router sees the correct route on first render.
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      })(window.location);
+    </script>
   </head>
   <body>
     <div id="root"></div>

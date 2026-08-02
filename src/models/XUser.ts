@@ -9,4 +9,7 @@ export interface XUserRecord {
   handle: string;
   displayName: string;
   imagePath: string | null;
+  /** Optional override when the FriendFeed username differed from the
+   *  current X handle -- falls back to `handle` when absent. */
+  archiveHandle?: string;
 }

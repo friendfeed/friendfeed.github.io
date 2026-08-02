@@ -4,7 +4,7 @@ import { useXUsers } from "../services/useXUsers";
 import { useSearch } from "../services/SearchContext";
 import { XUserCell } from "../components/XUserCell";
 
-const PAGE_SIZE = 48;
+const PAGE_SIZE = 20;
 
 export const XCrossoverPage: FC = () => {
   const users = useXUsers();
@@ -40,7 +40,7 @@ export const XCrossoverPage: FC = () => {
           marginBottom: 6,
         }}
       >
-        <h1 style={{ fontSize: 14 }}>کاربران در ایکس (X)</h1>
+        <h1 style={{ fontSize: 14 }}>آرشیو و کاربران فعلی</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {normalizedQuery
             ? `${filtered.length} نتیجه از ${users.length} کاربر`
@@ -67,7 +67,7 @@ export const XCrossoverPage: FC = () => {
             style={{
               display: "flex",
               flexWrap: "wrap",
-              gap: "2px 6px",
+              gap: "14px 14px",
             }}
           >
             {pageUsers.map((u) => (

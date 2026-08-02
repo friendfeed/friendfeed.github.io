@@ -41,6 +41,13 @@
 
   --ff-radius: 3px;
 
+  /* Popover / hover-card look, sampled from the "profile mini-card" that
+     used to open on hover over an avatar in the home feed (see reference
+     screenshot). Flat white panel, thin gray border, a soft single-side
+     drop shadow -- no rounded corners beyond the tiny 3px radius above. */
+  --ff-card-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  --ff-sidebar-width: 132px;
+
   color-scheme: light;
 }
 
@@ -94,4 +101,34 @@ button {
 ::-webkit-scrollbar-thumb {
   background: var(--ff-border-strong);
   border-radius: 5px;
+}
+
+/* Sidebar + main content: side-by-side on desktop, stacked on narrow
+   viewports so the fixed-width nav column doesn't squeeze the card grid
+   down to nothing on phones. */
+.ff-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+@media (max-width: 680px) {
+  .ff-layout {
+    flex-direction: column;
+  }
+  .ff-sidebar {
+    width: 100% !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid var(--ff-border);
+  }
+  .ff-sidebar nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 14px !important;
+  }
+  .ff-sidebar > div {
+    margin-top: 8px !important;
+    padding-top: 8px !important;
+    border-top: none !important;
+  }
 }

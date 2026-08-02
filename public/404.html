@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>فرندفید فارسی | آرشیو</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      //
+      // GitHub Pages serves this file for any path it doesn't recognize
+      // as a real file (i.e. every client-side route like /faq or
+      // /magazine when someone opens the link directly or refreshes).
+      // It rewrites the real path into a query string and redirects to
+      // the site root, where index.html's inline script (see below)
+      // decodes it back into the real URL via history.replaceState --
+      // so react-router ends up on the right page with no visible
+      // redirect and no server-side rewrite rules needed.
+      //
+      // pathSegmentsToKeep is 0 because this repo is a user/org GitHub
+      // Pages repo (named exactly "<user>.github.io"), which GitHub
+      // always serves at the domain root rather than under a
+      // "/<repo-name>/" project subpath. If this project ever moves to
+      // a project-page repo instead, bump this to 1.
+      var pathSegmentsToKeep = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          "//" +
+          l.hostname +
+          (l.port ? ":" + l.port : "") +
+          l.pathname
+            .split("/")
+            .slice(0, 1 + pathSegmentsToKeep)
+            .join("/") +
+          "/?/" +
+          l.pathname
+            .slice(1)
+            .split("/")
+            .slice(pathSegmentsToKeep)
+            .join("/")
+            .replace(/&/g, "~and~") +
+          (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
