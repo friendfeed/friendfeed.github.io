@@ -1,0 +1,13 @@
+{
+  "name": "فرندفید فارسی | آرشیو",
+  "short_name": "فرندفید فارسی",
+  "description": "آرشیو غیررسمی جامعه فارسی‌زبان فرندفید و ردیابی حساب‌های کاربران در ایکس",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#5b9bd5",
+  "icons": [
+    { "src": "icon-192.webp", "sizes": "192x192", "type": "image/webp" },
+    { "src": "icon-512.webp", "sizes": "512x512", "type": "image/webp" }
+  ]
+}
