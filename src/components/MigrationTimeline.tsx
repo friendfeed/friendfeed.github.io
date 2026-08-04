@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react";
+import { Fragment, type FC, type ReactNode } from "react";
 import { IconNetwork, IconOff, IconRss, IconTwitter, IconUsers } from "../icons/Icons";
 
 /**
@@ -166,25 +166,41 @@ export const MigrationTimeline: FC = () => (
       دیگری بودند که یکی‌یکی تعطیل شدند و کاربرانشان را به این دو، و بعدتر فقط به توییتر، هل دادند.
     </p>
 
-    {/* ---- Vertical timeline ---- */}
-    <div style={{ position: "relative", paddingInlineStart: 4 }}>
+    {/* ---- Vertical timeline ----
+        Laid out as a 2-column CSS grid (icon column fixed at 34px, content
+        column flexible) instead of per-row flexbox. The connecting line is
+        an absolutely-positioned sibling pinned to the exact center of the
+        34px icon column (16px inline-start + half of the 2px line width),
+        so it lines up with the icon circles regardless of row height, and
+        stays correct in RTL. */}
+    <div
+      style={{
+        position: "relative",
+        display: "grid",
+        gridTemplateColumns: "34px 1fr",
+        columnGap: 14,
+        rowGap: 20,
+      }}
+    >
       <div
         aria-hidden
         style={{
           position: "absolute",
           insetInlineStart: 16,
-          top: 6,
-          bottom: 6,
+          top: 17,
+          bottom: 17,
           width: 2,
           background: "var(--ff-border)",
         }}
       />
       {entries.map((e, i) => (
-        <div key={i} style={{ display: "flex", gap: 14, marginBottom: i === entries.length - 1 ? 0 : 20 }}>
-          <div style={{ ...iconWrap, borderColor: kindColor[e.kind], color: kindColor[e.kind], zIndex: 1 }}>
+        <Fragment key={i}>
+          <div
+            style={{ ...iconWrap, borderColor: kindColor[e.kind], color: kindColor[e.kind], zIndex: 1 }}
+          >
             {e.icon}
           </div>
-          <div style={{ flex: 1, paddingTop: 3 }}>
+          <div style={{ paddingTop: 3 }}>
             <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
               <span
                 style={{
@@ -205,49 +221,76 @@ export const MigrationTimeline: FC = () => (
               {e.body}
             </p>
           </div>
-        </div>
+        </Fragment>
       ))}
     </div>
 
-    {/* ---- Illustrative growth chart ---- */}
+    {/* ---- Illustrative growth chart ----
+        Redesigned with: (1) enough top margin that the title never clips,
+        (2) a real numbered index axis (1-5) with gridlines, since a chart
+        with no scale at all reads as broken, and (3) "تعطیلی" instead of
+        the ambiguous "افت" on the shutdown bars — افت on its own reads as
+        "decline", which is the wrong direction of causation (it's the
+        service's closure driving growth elsewhere, not a decline here). */}
     <div style={{ marginTop: 22 }}>
-      <svg viewBox="0 0 560 190" width="100%" height="auto" role="img" aria-label="نمودار مفهومی رشد جامعه فارسی‌زبان فرندفید و توییتر پس از هر مهاجرت">
-        <line x1="40" y1="150" x2="540" y2="150" stroke="var(--ff-border-strong)" strokeWidth="1.5" />
-        <line x1="40" y1="20" x2="40" y2="150" stroke="var(--ff-border-strong)" strokeWidth="1.5" />
+      <svg
+        viewBox="0 0 600 230"
+        width="100%"
+        height="auto"
+        role="img"
+        aria-label="نمودار مفهومی رشد جامعه فارسی‌زبان فرندفید و توییتر پس از هر مهاجرت، بر مبنای شاخص نسبی نه آمار دقیق"
+      >
+        <text x="576" y="22" fontSize="11.5" fontWeight="bold" textAnchor="end" fill="var(--ff-text)">
+          رشد جمعیت کاربران فارسی‌زبان فرندفید و توییتر
+        </text>
+        <text x="576" y="37" fontSize="9.5" textAnchor="end" fill="var(--ff-muted-light)">
+          شاخص نسبی، نه شمار واقعی کاربران
+        </text>
+
+        {/* y-axis gridlines + numeric scale, 0 to 5 */}
+        {[0, 1, 2, 3, 4, 5].map((v) => {
+          const y = 190 - v * 28;
+          return (
+            <g key={v}>
+              <line x1="46" y1={y} x2="576" y2={y} stroke="var(--ff-border)" strokeWidth="1" />
+              <text x="38" y={y + 3.5} fontSize="10" textAnchor="end" fill="var(--ff-muted-light)">
+                {["۰", "۱", "۲", "۳", "۴", "۵"][v]}
+              </text>
+            </g>
+          );
+        })}
+        <line x1="46" y1="62" x2="46" y2="190" stroke="var(--ff-border-strong)" strokeWidth="1.5" />
+        <line x1="46" y1="190" x2="576" y2="190" stroke="var(--ff-border-strong)" strokeWidth="1.5" />
 
         {[
-          { x: 70, h: 18, label: "۲۰۰۷", sub: "فرندفید" },
-          { x: 160, h: 40, label: "۲۰۰۹", sub: "افت یاهو۳۶۰" },
-          { x: 260, h: 55, label: "۲۰۱۱", sub: "گوگل‌پلاس" },
-          { x: 360, h: 78, label: "۲۰۱۳", sub: "افت ریدر" },
-          { x: 460, h: 105, label: "۲۰۱۵+", sub: "فقط توییتر" },
-        ].map((bar, i) => (
-          <g key={i}>
-            <rect
-              x={bar.x - 22}
-              y={150 - bar.h}
-              width="44"
-              height={bar.h}
-              rx="3"
-              fill="var(--ff-link)"
-              opacity={0.15 + i * 0.18}
-            />
-            <text x={bar.x} y="166" fontSize="10.5" textAnchor="middle" fill="var(--ff-muted)">
-              {bar.label}
-            </text>
-            <text x={bar.x} y="180" fontSize="9.5" textAnchor="middle" fill="var(--ff-muted-light)">
-              {bar.sub}
-            </text>
-          </g>
-        ))}
-
-        <text x="40" y="14" fontSize="10.5" fill="var(--ff-muted-light)">
-          جمعیت کاربران فارسی‌زبان (روند مفهومی)
-        </text>
+          { x: 110, v: 1, label: "۲۰۰۷", sub: "فرندفید راه می‌افتد", kind: "launch" as const },
+          { x: 214, v: 2, label: "۲۰۰۹", sub: "تعطیلی یاهو ۳۶۰", kind: "shutdown" as const },
+          { x: 318, v: 2.6, label: "۲۰۱۱", sub: "گوگل‌پلاس می‌آید", kind: "launch" as const },
+          { x: 422, v: 3.6, label: "۲۰۱۳", sub: "تعطیلی گوگل‌ریدر", kind: "shutdown" as const },
+          { x: 526, v: 5, label: "۲۰۱۵+", sub: "فقط توییتر می‌ماند", kind: "shutdown" as const },
+        ].map((bar, i) => {
+          const barKindColor = bar.kind === "shutdown" ? "#c1121f" : "var(--ff-link)";
+          const h = bar.v * 28;
+          const y = 190 - h;
+          return (
+            <g key={i}>
+              <rect x={bar.x - 24} y={y} width="48" height={h} rx="4" fill={barKindColor} opacity={0.75} />
+              <text x={bar.x} y={y - 8} fontSize="10.5" fontWeight="bold" textAnchor="middle" fill="var(--ff-text)">
+                {bar.v % 1 === 0 ? bar.v : bar.v.toFixed(1).replace(".", "٫")}
+              </text>
+              <text x={bar.x} y="206" fontSize="11" fontWeight="bold" textAnchor="middle" fill="var(--ff-muted)">
+                {bar.label}
+              </text>
+              <text x={bar.x} y="220" fontSize="9.5" textAnchor="middle" fill="var(--ff-muted-light)">
+                {bar.sub}
+              </text>
+            </g>
+          );
+        })}
       </svg>
       <p style={{ margin: "6px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center" }}>
-        این نمودار آماری دقیق نیست، فقط روند کلی را نشان می‌دهد: بعد از هر تعطیلی، بخشی از کاربران
-        سرویس بسته‌شده به فرندفید و توییتر اضافه می‌شدند.
+        این نمودار آماری دقیق نیست، فقط روند کلی را با یک شاخص نسبی نشان می‌دهد: بعد از هر تعطیلی
+        (میله‌های قرمز)، بخشی از کاربران سرویس بسته‌شده به فرندفید و توییتر اضافه می‌شدند.
       </p>
     </div>
 

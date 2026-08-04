@@ -267,28 +267,69 @@ export const HomePage: FC = () => {
           </div>
         </div>
 
-        <div style={{ margin: "18px 0", display: "flex", gap: 16, flexWrap: "wrap" }}>
-          <figure style={{ flex: "1 1 260px", minWidth: 220, maxWidth: 340, margin: 0 }}>
+        <div style={{ margin: "18px 0", display: "flex", gap: 16, flexWrap: "wrap", alignItems: "stretch" }}>
+          <figure
+            style={{
+              flex: "1 1 260px",
+              minWidth: 220,
+              maxWidth: 340,
+              margin: 0,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <img
               src="/images/history/facebook-deal-group.webp"
-              alt="عکس دسته‌جمعی تیم فرندفید و فیس‌بوک در دوران خرید"
+              alt="عکس دسته‌جمعی بنیان‌گذاران فرندفید و نمایندگان فیس‌بوک، شب امضای قرارداد خرید"
               style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-card-shadow)" }}
             />
-            <figcaption style={{ marginTop: 6, fontSize: 11, color: "var(--ff-muted-light)", textAlign: "center" }}>
-              عکس دسته‌جمعی تیم، همان روزهای نهایی‌شدن خرید
+            <figcaption
+              style={{
+                marginTop: 8,
+                fontSize: 11,
+                lineHeight: 1.9,
+                color: "var(--ff-muted-light)",
+                textAlign: "center",
+              }}
+            >
+              از چپ به راست: <strong>ون اسمیت</strong> (فیس‌بوک) · <strong>جیم نوریس</strong> (فرندفید) ·{" "}
+              <strong>پل باکهایت</strong> (فرندفید) · <strong>برت تیلور</strong> (فرندفید) ·{" "}
+              <strong>مارک زاکربرگ</strong> (فیس‌بوک)
             </figcaption>
           </figure>
-          <figure style={{ flex: "1 1 260px", minWidth: 220, maxWidth: 340, margin: 0 }}>
+          <figure
+            style={{
+              flex: "1 1 260px",
+              minWidth: 220,
+              maxWidth: 340,
+              margin: 0,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <img
               src="/images/history/facebook-deal-table.webp"
-              alt="عکس تیم دور میز کار در دوران خرید فرندفید"
+              alt="بنیان‌گذاران فرندفید و نمایندگان فیس‌بوک دور میز کار، شب امضای قرارداد خرید"
               style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-card-shadow)" }}
             />
-            <figcaption style={{ marginTop: 6, fontSize: 11, color: "var(--ff-muted-light)", textAlign: "center" }}>
-              دور میز کار، در حال گفت‌وگو و کار روی لپ‌تاپ
+            <figcaption
+              style={{
+                marginTop: 8,
+                fontSize: 11,
+                lineHeight: 1.9,
+                color: "var(--ff-muted-light)",
+                textAlign: "center",
+              }}
+            >
+              همان جمع دور میز کار؛ <strong>مارک زاکربرگ</strong> (فیس‌بوک) کنار لپ‌تاپ، به همراه
+              بنیان‌گذاران فرندفید و ون اسمیت از فیس‌بوک
             </figcaption>
           </figure>
         </div>
+        <p style={{ margin: "0 0 12px", fontSize: 10.5, color: "var(--ff-muted-light)" }}>
+          منبع شناسایی افراد در عکس‌ها: Kara Swisher, "Boys Will Be... Especially in Silicon
+          Valley, Boys: Some Photos Après FaceFeed," AllThingsD, ۱۰ آگوست ۲۰۰۹.
+        </p>
 
         <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 100%" }}>
