@@ -408,6 +408,14 @@ export const HomePage: FC = () => {
               کنی، دقیقاً همان دردی که کاربران فرندفید یک بار با تعطیلی ناگهانی سرویس تجربه‌اش کرده بودند.
             </p>
 
+            <figure style={{ margin: "28px 0 32px" }}>
+              <img
+                src="/images/diagrams/friendfeed-migration.svg"
+                alt="نمودار مهاجرت جامعه فرندفید به سه پلتفرم: ایکس، فری‌فید و بلواسکای"
+                style={{ display: "block", width: "100%", height: "auto", maxWidth: 680, margin: "0 auto" }}
+              />
+            </figure>
+
             <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
               پنج سال و نیم بعد، در ۹ مارس ۲۰۱۵، یک پست کوتاه در وبلاگ فرندفید منتشر شد. تیم فیس‌بوک نوشت که
               از وقتی به فیس‌بوک پیوسته‌اند سرویس را نگه داشته‌اند، اما تعداد کاربرانش پیوسته کم شده و
