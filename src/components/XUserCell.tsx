@@ -17,6 +17,24 @@ const archiveUrl = (handle: string) =>
   `https://web.archive.org/web/20150000000000*/http://friendfeed.com/${handle}`;
 
 /**
+ * Live-first avatar loading, via unavatar.io (a free proxy that resolves
+ * a real X profile photo by handle -- direct hotlinking to x.com itself
+ * doesn't work: x.com/handle/photo is a JS-rendered webpage, not an
+ * image file, and X has no public unauthenticated endpoint that returns
+ * one). `fallback=false` makes unavatar return a 404 instead of a
+ * generic placeholder when the handle has no photo (or doesn't exist),
+ * so our own <img onError> below can reliably fall through to the local
+ * webp snapshot instead of unavatar's silhouette.
+ *
+ * Note: unavatar's free tier is rate-limited (tens of requests/day per
+ * visitor IP). Once exhausted, these requests 429/404 and every card
+ * just falls through to the local webp for the rest of that visitor's
+ * session -- same as before this feature existed, not broken.
+ */
+const liveAvatarUrl = (handle: string) =>
+  `https://unavatar.io/x/${encodeURIComponent(handle)}?fallback=false`;
+
+/**
  * Redesign pass: previous version used a square, un-cropped photo with a
  * boxy badge and two flat grey buttons that read as an afterthought.
  * This version:
@@ -30,12 +48,26 @@ const archiveUrl = (handle: string) =>
  *    "modern crossover" card;
  *  - turns the two links into a single, evenly-weighted action row with
  *    a clear hover state instead of a static grey bar.
+ *
+ * Avatar source cascades: live X photo (unavatar) -> local webp snapshot
+ * -> generic default avatar. Each stage only kicks in once the previous
+ * one has failed to load.
  */
 export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
-  const [imgFailed, setImgFailed] = useState(false);
-  const showImage = !!user.imagePath && !imgFailed;
-  const imgSrc = showImage ? `${BASE}${user.imagePath}` : null;
+  const [stage, setStage] = useState<"live" | "local" | "none">("live");
   const archiveHandle = user.friendfeedHandle || user.handle;
+
+  let imgSrc: string | null = null;
+  if (stage === "live") {
+    imgSrc = liveAvatarUrl(user.handle);
+  } else if (stage === "local" && user.imagePath) {
+    imgSrc = `${BASE}${user.imagePath}`;
+  }
+
+  const handleImgError = () => {
+    if (stage === "live") setStage(user.imagePath ? "local" : "none");
+    else if (stage === "local") setStage("none");
+  };
 
   return (
     <div
@@ -67,7 +99,7 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
                 background: "#fff",
                 display: "block",
               }}
-              onError={() => setImgFailed(true)}
+              onError={handleImgError}
             />
           ) : (
             <div style={{ borderRadius: "50%", overflow: "hidden", border: "1px solid var(--ff-border)" }}>
