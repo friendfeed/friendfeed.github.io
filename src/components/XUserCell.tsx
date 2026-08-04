@@ -14,7 +14,7 @@ const BASE = import.meta.env.BASE_URL;
  * snapshots exist for that username rather than one exact date.
  */
 const archiveUrl = (handle: string) =>
-  `https://web.archive.org/web/20260000000000*/http://friendfeed.com/${handle}`;
+  `https://web.archive.org/web/20150000000000*/http://friendfeed.com/${handle}`;
 
 /**
  * A single person, one card -- not two separate boxes. UX rationale:
@@ -37,7 +37,7 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
   const [imgFailed, setImgFailed] = useState(false);
   const showImage = !!user.imagePath && !imgFailed;
   const imgSrc = showImage ? `${BASE}${user.imagePath}` : null;
-  const archiveHandle = user.archiveHandle || user.handle;
+  const archiveHandle = user.friendfeedHandle || user.handle;
 
   return (
     <div
