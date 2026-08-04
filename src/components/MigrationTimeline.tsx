@@ -1,15 +1,16 @@
 import { Fragment, type FC, type ReactNode } from "react";
-import { IconNetwork, IconOff, IconRss, IconTwitter, IconUsers } from "../icons/Icons";
+import { IconComment, IconNetwork, IconOff, IconRss, IconTwitter, IconUsers } from "../icons/Icons";
 
 /**
  * Full migration story for the Farsi-speaking online community: the
  * overlap between early FriendFeed and early Twitter, and how each
- * later shutdown of a competing service (Yahoo 360, Google Reader,
- * Google+) pushed another wave of users toward FriendFeed and/or
- * Twitter. Dates below are checked against public sources (see the
- * citation list at the bottom of the section in HistoryPage). The
- * *sizes* of the community at each point are not exact, documented
- * statistics, so the chart is explicitly labeled as illustrative.
+ * later shutdown of a competing service (Yahoo Chat rooms, Yahoo 360,
+ * Google Reader, Google+) pushed another wave of users toward
+ * FriendFeed and/or Twitter. Dates below are checked against public
+ * sources (see the citation list at the bottom of the section in
+ * HistoryPage). The *sizes* of the community at each point are not
+ * exact, documented statistics, so the chart is explicitly labeled
+ * as illustrative / a relative index, not a real user count.
  */
 
 type TimelineEntry = {
@@ -34,15 +35,29 @@ const iconWrap: React.CSSProperties = {
 
 const entries: TimelineEntry[] = [
   {
+    date: "۷ ژانویه ۱۹۹۷",
+    title: "اتاق‌های گفتگوی یاهو راه‌اندازی می‌شوند",
+    icon: <IconComment width={16} height={16} />,
+    kind: "launch",
+    body: (
+      <>
+        سال‌ها قبل از فرندفید و توییتر، اولین نسل فارسی‌زبان‌های اینترنت، جایی برای هم‌صحبتی داشتند:
+        اتاق‌های گفتگوی یاهو (Yahoo! Chat)، که یاهو در ۷ ژانویه ۱۹۹۷ راه انداخت. برای خیلی از
+        فارسی‌زبان‌ها، این اولین تجربه‌ی جمع‌شدن دور یک هویت آنلاین مشترک بود، سال‌ها قبل از این‌که
+        اصلاً اسمی از شبکه اجتماعی به آن معنای امروزی وجود داشته باشد.
+      </>
+    ),
+  },
+  {
     date: "۲۰۰۵",
     title: "یاهو ۳۶۰ راه‌اندازی می‌شود",
     icon: <IconNetwork width={16} height={16} />,
     kind: "launch",
     body: (
       <>
-        قبل از این‌که اصلاً اسمی از فرندفید یا توییتر باشد، بخشی از فارسی‌زبان‌های اینترنت، به‌خصوص
-        وبلاگ‌نویس‌ها، دور یاهو ۳۶۰ جمع بودند: ترکیبی از وبلاگ و پروفایل اجتماعی که یاهو در مارس ۲۰۰۵
-        راه انداخت.
+        نسل بعدی از همان جمع، و کاربران تازه‌ای که به آن‌ها اضافه شدند، این‌بار دور یاهو ۳۶۰ جمع
+        شدند: ترکیبی از وبلاگ و پروفایل اجتماعی که یاهو در مارس ۲۰۰۵ راه انداخت و امکانات به‌مراتب
+        بیشتری از اتاق‌های گفتگوی ساده قدیمی داشت.
       </>
     ),
   },
@@ -111,6 +126,21 @@ const entries: TimelineEntry[] = [
     ),
   },
   {
+    date: "۱۴ دسامبر ۲۰۱۲",
+    title: "اتاق‌های گفتگوی یاهو برای همیشه بسته می‌شوند",
+    icon: <IconOff width={16} height={16} />,
+    kind: "shutdown",
+    body: (
+      <>
+        یاهو در ۳۰ نوامبر ۲۰۱۲ اعلام کرد و در ۱۴ دسامبر همان سال عملی کرد: اتاق‌های گفتگوی عمومی‌اش
+        را برای همیشه بست، همان جایی که نسل اول فارسی‌زبان‌های اینترنت پانزده سال قبل از آن دور هم
+        جمع شده بودند. تا آن موقع اغلب کاربران فعال از سال‌ها قبل به جاهای دیگر کوچ کرده بودند، اما
+        این بستن رسمی، آخرین حلقه از قدیمی‌ترین نسل جامعه آنلاین فارسی‌زبان را هم به سمت فرندفید و
+        توییتر هل داد.
+      </>
+    ),
+  },
+  {
     date: "۱ ژوئیه ۲۰۱۳",
     title: "گوگل ریدر بسته می‌شود",
     icon: <IconRss width={16} height={16} />,
@@ -157,13 +187,31 @@ const kindColor: Record<TimelineEntry["kind"], string> = {
   note: "var(--ff-link)",
 };
 
+/**
+ * Single source of truth for the growth chart, shared between the bars
+ * and the x-axis labels below them, so the two can never drift out of
+ * sync with each other the way separate arrays could.
+ */
+const chartData: { v: number; label: string; sub: string; kind: "launch" | "shutdown" }[] = [
+  { v: 1, label: "۱۹۹۷", sub: "اتاق‌های گفتگوی یاهو", kind: "launch" },
+  { v: 1.6, label: "۲۰۰۵", sub: "یاهو ۳۶۰ می‌آید", kind: "launch" },
+  { v: 2.1, label: "۲۰۰۹", sub: "تعطیلی یاهو ۳۶۰", kind: "shutdown" },
+  { v: 2.6, label: "۲۰۱۱", sub: "گوگل‌پلاس می‌آید", kind: "launch" },
+  { v: 3.1, label: "۲۰۱۲", sub: "تعطیلی اتاق‌های یاهو", kind: "shutdown" },
+  { v: 4, label: "۲۰۱۳", sub: "تعطیلی گوگل‌ریدر", kind: "shutdown" },
+  { v: 5, label: "۲۰۱۵+", sub: "فقط توییتر می‌ماند", kind: "shutdown" },
+];
+
 export const MigrationTimeline: FC = () => (
   <div>
     <p style={{ margin: "0 0 16px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
       جامعه فارسی‌زبان فرندفید و توییتر، در واقع از اول دو جامعه جدا نبودند. همان چند صد نفری که در
       روزهای اول توییتر فارسی فعال بودند، دقیقاً همان‌هایی بودند که در فرندفید هم عضو شدند و دو
-      پلتفرم را هم‌زمان زندگی می‌کردند. آن‌چه جمعیت این دو پلتفرم را بزرگ‌تر و بزرگ‌تر کرد، سرویس‌های
-      دیگری بودند که یکی‌یکی تعطیل شدند و کاربرانشان را به این دو، و بعدتر فقط به توییتر، هل دادند.
+      پلتفرم را هم‌زمان زندگی می‌کردند. اما این جمع از دل خلأ بیرون نیامد: نسل‌های قبلی همین جامعه، از
+      اتاق‌های گفتگوی یاهو در دهه ۱۹۹۰ تا یاهو ۳۶۰ در میانه دهه ۲۰۰۰، هر بار که سرویس محبوب‌شان تعطیل
+      می‌شد، به‌دنبال خانه بعدی می‌گشتند. آن‌چه جمعیت فرندفید و توییتر را بزرگ‌تر و بزرگ‌تر کرد، دقیقاً
+      همین زنجیره از تعطیلی‌ها بود: هر سرویس دیگری که یکی‌یکی بسته شد، کاربرانش را به این دو، و بعدتر
+      فقط به توییتر، هل داد.
     </p>
 
     {/* ---- Vertical timeline ----
@@ -226,71 +274,110 @@ export const MigrationTimeline: FC = () => (
     </div>
 
     {/* ---- Illustrative growth chart ----
-        Redesigned with: (1) enough top margin that the title never clips,
-        (2) a real numbered index axis (1-5) with gridlines, since a chart
-        with no scale at all reads as broken, and (3) "تعطیلی" instead of
-        the ambiguous "افت" on the shutdown bars — افت on its own reads as
-        "decline", which is the wrong direction of causation (it's the
-        service's closure driving growth elsewhere, not a decline here). */}
+        Rebuilt as plain HTML/CSS instead of SVG <text>: SVG text with
+        textAnchor="end" doesn't reliably apply the Unicode bidi algorithm
+        for Farsi across browsers, which is what was silently truncating
+        the title down to its last word or two. HTML text doesn't have
+        that problem and wraps normally, so every label is guaranteed to
+        render in full. Also added an explicit legend and an "how to read
+        this" line, since a chart with colored bars but no legend doesn't
+        explain itself. */}
     <div style={{ marginTop: 22 }}>
-      <svg
-        viewBox="0 0 600 230"
-        width="100%"
-        height="auto"
-        role="img"
-        aria-label="نمودار مفهومی رشد جامعه فارسی‌زبان فرندفید و توییتر پس از هر مهاجرت، بر مبنای شاخص نسبی نه آمار دقیق"
-      >
-        <text x="576" y="22" fontSize="11.5" fontWeight="bold" textAnchor="end" fill="var(--ff-text)">
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8, marginBottom: 4 }}>
+        <h3 style={{ fontSize: 13, margin: 0 }}>
           رشد جمعیت کاربران فارسی‌زبان فرندفید و توییتر
-        </text>
-        <text x="576" y="37" fontSize="9.5" textAnchor="end" fill="var(--ff-muted-light)">
-          شاخص نسبی، نه شمار واقعی کاربران
-        </text>
+        </h3>
+        <span style={{ fontSize: 10.5, color: "var(--ff-muted-light)" }}>شاخص نسبی، نه شمار واقعی کاربران</span>
+      </div>
 
-        {/* y-axis gridlines + numeric scale, 0 to 5 */}
-        {[0, 1, 2, 3, 4, 5].map((v) => {
-          const y = 190 - v * 28;
-          return (
-            <g key={v}>
-              <line x1="46" y1={y} x2="576" y2={y} stroke="var(--ff-border)" strokeWidth="1" />
-              <text x="38" y={y + 3.5} fontSize="10" textAnchor="end" fill="var(--ff-muted-light)">
-                {["۰", "۱", "۲", "۳", "۴", "۵"][v]}
-              </text>
-            </g>
-          );
-        })}
-        <line x1="46" y1="62" x2="46" y2="190" stroke="var(--ff-border-strong)" strokeWidth="1.5" />
-        <line x1="46" y1="190" x2="576" y2="190" stroke="var(--ff-border-strong)" strokeWidth="1.5" />
+      {/* Legend: explains what red vs. blue bars mean, since color alone
+          doesn't communicate that without a key. */}
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", margin: "8px 0 14px" }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--ff-muted)" }}>
+          <span style={{ width: 11, height: 11, borderRadius: 3, background: "var(--ff-link)", display: "inline-block" }} />
+          راه‌اندازی یک سرویس جدید
+        </span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--ff-muted)" }}>
+          <span style={{ width: 11, height: 11, borderRadius: 3, background: "#c1121f", display: "inline-block" }} />
+          تعطیلی یک سرویس رقیب (و مهاجرت کاربرانش)
+        </span>
+      </div>
 
-        {[
-          { x: 110, v: 1, label: "۲۰۰۷", sub: "فرندفید راه می‌افتد", kind: "launch" as const },
-          { x: 214, v: 2, label: "۲۰۰۹", sub: "تعطیلی یاهو ۳۶۰", kind: "shutdown" as const },
-          { x: 318, v: 2.6, label: "۲۰۱۱", sub: "گوگل‌پلاس می‌آید", kind: "launch" as const },
-          { x: 422, v: 3.6, label: "۲۰۱۳", sub: "تعطیلی گوگل‌ریدر", kind: "shutdown" as const },
-          { x: 526, v: 5, label: "۲۰۱۵+", sub: "فقط توییتر می‌ماند", kind: "shutdown" as const },
-        ].map((bar, i) => {
-          const barKindColor = bar.kind === "shutdown" ? "#c1121f" : "var(--ff-link)";
-          const h = bar.v * 28;
-          const y = 190 - h;
-          return (
-            <g key={i}>
-              <rect x={bar.x - 24} y={y} width="48" height={h} rx="4" fill={barKindColor} opacity={0.75} />
-              <text x={bar.x} y={y - 8} fontSize="10.5" fontWeight="bold" textAnchor="middle" fill="var(--ff-text)">
-                {bar.v % 1 === 0 ? bar.v : bar.v.toFixed(1).replace(".", "٫")}
-              </text>
-              <text x={bar.x} y="206" fontSize="11" fontWeight="bold" textAnchor="middle" fill="var(--ff-muted)">
-                {bar.label}
-              </text>
-              <text x={bar.x} y="220" fontSize="9.5" textAnchor="middle" fill="var(--ff-muted-light)">
-                {bar.sub}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-      <p style={{ margin: "6px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center" }}>
-        این نمودار آماری دقیق نیست، فقط روند کلی را با یک شاخص نسبی نشان می‌دهد: بعد از هر تعطیلی
-        (میله‌های قرمز)، بخشی از کاربران سرویس بسته‌شده به فرندفید و توییتر اضافه می‌شدند.
+      {/* Chart body: fixed-width numeric axis column (0-5) on the right
+          (RTL leading edge) + a row of bars, laid out with CSS grid so the
+          bars' baseline and the axis's "0" line always land on the same
+          pixel row regardless of container width. */}
+      <div style={{ display: "grid", gridTemplateColumns: "24px 1fr", columnGap: 10 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            height: 160,
+            fontSize: 10,
+            color: "var(--ff-muted-light)",
+            textAlign: "center",
+          }}
+        >
+          <span>۵</span>
+          <span>۴</span>
+          <span>۳</span>
+          <span>۲</span>
+          <span>۱</span>
+          <span>۰</span>
+        </div>
+
+        <div
+          style={{
+            position: "relative",
+            height: 160,
+            borderInlineStart: "1.5px solid var(--ff-border-strong)",
+            borderBottom: "1.5px solid var(--ff-border-strong)",
+            backgroundImage:
+              "repeating-linear-gradient(to top, var(--ff-border) 0, var(--ff-border) 1px, transparent 1px, transparent 32px)",
+          }}
+        >
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "flex-end", justifyContent: "space-around", padding: "0 6px" }}>
+            {chartData.map((bar, i) => (
+              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 56 }}>
+                <span style={{ fontSize: 10.5, fontWeight: "bold", color: "var(--ff-text)", marginBottom: 3 }}>
+                  {bar.v % 1 === 0 ? bar.v : bar.v.toFixed(1).replace(".", "٫")}
+                </span>
+                <div
+                  style={{
+                    width: 34,
+                    height: (bar.v / 5) * 160,
+                    borderRadius: "4px 4px 0 0",
+                    background: bar.kind === "shutdown" ? "#c1121f" : "var(--ff-link)",
+                    opacity: 0.85,
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* x-axis labels, laid out to match the bars above via the same
+          justify-content: space-around rhythm */}
+      <div style={{ display: "grid", gridTemplateColumns: "24px 1fr", columnGap: 10, marginTop: 6 }}>
+        <div />
+        <div style={{ display: "flex", justifyContent: "space-around", padding: "0 6px" }}>
+          {chartData.map((x, i) => (
+            <div key={i} style={{ width: 56, textAlign: "center" }}>
+              <div style={{ fontSize: 10.5, fontWeight: "bold", color: "var(--ff-muted)" }}>{x.label}</div>
+              <div style={{ fontSize: 9, color: "var(--ff-muted-light)", lineHeight: 1.5 }}>{x.sub}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p style={{ margin: "12px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center" }}>
+        این نمودار آماری دقیق نیست، آمار رسمی از شمار کاربران فارسی‌زبان این سرویس‌ها منتشر نشده. عدد
+        روی هر ستون فقط یک شاخص نسبی از ۰ تا ۵ است که نشان می‌دهد جمعیت فارسی‌زبان فرندفید و توییتر،
+        روی هم، در آن مقطع نسبت به شروع کار چند برابر شده بود؛ نه یک رقم واقعی. الگوی کلی که نشان
+        می‌دهد این است: بعد از هر تعطیلی سرویس رقیب (ستون‌های قرمز)، جمعیت این دو پلتفرم یک پله بالاتر
+        می‌رفت.
       </p>
     </div>
 

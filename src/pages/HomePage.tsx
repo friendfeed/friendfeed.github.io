@@ -267,7 +267,29 @@ export const HomePage: FC = () => {
           </div>
         </div>
 
-        <div style={{ margin: "18px 0", display: "flex", gap: 16, flexWrap: "wrap", alignItems: "stretch" }}>
+        <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+          <div style={{ flex: "1 1 100%" }}>
+            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+              اما خود فرندفید سرنوشت آشنای اغلب این‌جور خریدهای شرکتی را پیدا کرد. بنیان‌گذارانش به تیم
+              مهندسی فیس‌بوک پیوستند، توسعه محصول عملاً متوقف شد و سایت فقط «روشن» نگه داشته شد، بدون ویژگی
+              تازه، بدون تبلیغات، بدون رشد. کاربرانش هم کم‌کم و بی‌سروصدا به جاهای دیگر رفتند.
+            </p>
+          </div>
+        </div>
+
+        {/* Two deal-night photos, centered as a pair instead of left-aligned
+            in a wide row (which used to leave a large empty gap on one side
+            when the row was wider than the two 340px-capped figures). */}
+        <div
+          style={{
+            margin: "18px 0",
+            display: "flex",
+            gap: 16,
+            flexWrap: "wrap",
+            alignItems: "stretch",
+            justifyContent: "center",
+          }}
+        >
           <figure
             style={{
               flex: "1 1 260px",
@@ -326,19 +348,13 @@ export const HomePage: FC = () => {
             </figcaption>
           </figure>
         </div>
-        <p style={{ margin: "0 0 12px", fontSize: 10.5, color: "var(--ff-muted-light)" }}>
+        <p style={{ margin: "0 0 12px", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center" }}>
           منبع شناسایی افراد در عکس‌ها: Kara Swisher, "Boys Will Be... Especially in Silicon
           Valley, Boys: Some Photos Après FaceFeed," AllThingsD, ۱۰ آگوست ۲۰۰۹.
         </p>
 
         <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 100%" }}>
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              اما خود فرندفید سرنوشت آشنای اغلب این‌جور خریدهای شرکتی را پیدا کرد. بنیان‌گذارانش به تیم
-              مهندسی فیس‌بوک پیوستند، توسعه محصول عملاً متوقف شد و سایت فقط «روشن» نگه داشته شد، بدون ویژگی
-              تازه، بدون تبلیغات، بدون رشد. کاربرانش هم کم‌کم و بی‌سروصدا به جاهای دیگر رفتند.
-            </p>
-
             <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
               خیلی از این کاربرها هم دست‌خالی نرفتند: چند نفر از برنامه‌نویس‌های همان جامعه، به‌جای این‌که
               منتظر بمانند فرندفید یک روز واقعاً تعطیل شود، از صفر یک کپی متن‌باز از آن ساختند و اسمش را
@@ -395,10 +411,10 @@ export const HomePage: FC = () => {
       {/* ---- Migration timeline: how the Farsi community moved between platforms ---- */}
       <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
         <h2 style={{ fontSize: 15, margin: "0 0 4px" }}>
-          مسیر مهاجرت جامعه فارسی‌زبان: از یاهو ۳۶۰ تا توییتر
+          مسیر مهاجرت جامعه فارسی‌زبان: از اتاق‌های گفتگوی یاهو تا توییتر
         </h2>
         <p style={{ margin: "0 0 16px", fontSize: 12, color: "var(--ff-muted-light)" }}>
-          تایم‌لاین تاریخی تعطیلی سرویس‌ها و مهاجرت کاربران، از ۲۰۰۵ تا ۲۰۱۹
+          تایم‌لاین تاریخی تعطیلی سرویس‌ها و مهاجرت کاربران، از ۱۹۹۷ تا ۲۰۱۹
         </p>
         <MigrationTimeline />
       </section>
