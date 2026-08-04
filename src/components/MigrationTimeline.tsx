@@ -191,15 +191,22 @@ const kindColor: Record<TimelineEntry["kind"], string> = {
  * Single source of truth for the growth chart, shared between the bars
  * and the x-axis labels below them, so the two can never drift out of
  * sync with each other the way separate arrays could.
+ *
+ * `platform` matters here: the chart tracks one continuous *community*
+ * across its successive main hangouts, not literally "FriendFeed and
+ * Twitter users" for the whole span (Twitter didn't exist in 1997, and
+ * neither did FriendFeed until Oct 2007) — see the caption below the
+ * chart, which spells this out so the early bars don't read as a claim
+ * about FriendFeed/Twitter population before either service existed.
  */
-const chartData: { v: number; label: string; sub: string; kind: "launch" | "shutdown" }[] = [
-  { v: 1, label: "۱۹۹۷", sub: "اتاق‌های گفتگوی یاهو", kind: "launch" },
-  { v: 1.6, label: "۲۰۰۵", sub: "یاهو ۳۶۰ می‌آید", kind: "launch" },
-  { v: 2.1, label: "۲۰۰۹", sub: "تعطیلی یاهو ۳۶۰", kind: "shutdown" },
-  { v: 2.6, label: "۲۰۱۱", sub: "گوگل‌پلاس می‌آید", kind: "launch" },
-  { v: 3.1, label: "۲۰۱۲", sub: "تعطیلی اتاق‌های یاهو", kind: "shutdown" },
-  { v: 4, label: "۲۰۱۳", sub: "تعطیلی گوگل‌ریدر", kind: "shutdown" },
-  { v: 5, label: "۲۰۱۵+", sub: "فقط توییتر می‌ماند", kind: "shutdown" },
+const chartData: { v: number; label: string; sub: string; platform: string; kind: "launch" | "shutdown" }[] = [
+  { v: 1, label: "۱۹۹۷", sub: "اتاق‌های گفتگوی یاهو", platform: "چت یاهو", kind: "launch" },
+  { v: 1.6, label: "۲۰۰۵", sub: "یاهو ۳۶۰ می‌آید", platform: "چت یاهو + یاهو۳۶۰", kind: "launch" },
+  { v: 2.1, label: "۲۰۰۹", sub: "تعطیلی یاهو ۳۶۰", platform: "فرندفید + توییتر", kind: "shutdown" },
+  { v: 2.6, label: "۲۰۱۱", sub: "گوگل‌پلاس می‌آید", platform: "فرندفید + توییتر", kind: "launch" },
+  { v: 3.1, label: "۲۰۱۲", sub: "تعطیلی اتاق‌های یاهو", platform: "فرندفید + توییتر", kind: "shutdown" },
+  { v: 4, label: "۲۰۱۳", sub: "تعطیلی گوگل‌ریدر", platform: "فرندفید + توییتر", kind: "shutdown" },
+  { v: 5, label: "۲۰۱۵+", sub: "فقط توییتر می‌ماند", platform: "فقط توییتر", kind: "shutdown" },
 ];
 
 export const MigrationTimeline: FC = () => (
@@ -285,10 +292,16 @@ export const MigrationTimeline: FC = () => (
     <div style={{ marginTop: 22 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8, marginBottom: 4 }}>
         <h3 style={{ fontSize: 13, margin: 0 }}>
-          رشد جمعیت کاربران فارسی‌زبان فرندفید و توییتر
+          رشد پیوسته جامعه فارسی‌زبان، نسل‌به‌نسل تا فرندفید و توییتر
         </h3>
         <span style={{ fontSize: 10.5, color: "var(--ff-muted-light)" }}>شاخص نسبی، نه شمار واقعی کاربران</span>
       </div>
+      <p style={{ margin: "0 0 10px", fontSize: 11, lineHeight: 1.8, color: "var(--ff-muted)" }}>
+        این نمودار یک جامعه واحد را دنبال می‌کند که در طول زمان چند بار خانه عوض کرد، نه فرندفید و
+        توییتر را از ابتدا. تا ۲۰۰۹ عدد روی هر ستون، اندازه همان جمع در سرویس پیشین (چت یاهو یا
+        یاهو۳۶۰) است؛ از ۲۰۰۹ به بعد که فرندفید و توییتر به خانه اصلی‌اش تبدیل شدند، همان عدد جمعیت
+        این دو را نشان می‌دهد.
+      </p>
 
       {/* Legend: explains what red vs. blue bars mean, since color alone
           doesn't communicate that without a key. */}
@@ -367,6 +380,9 @@ export const MigrationTimeline: FC = () => (
             <div key={i} style={{ width: 56, textAlign: "center" }}>
               <div style={{ fontSize: 10.5, fontWeight: "bold", color: "var(--ff-muted)" }}>{x.label}</div>
               <div style={{ fontSize: 9, color: "var(--ff-muted-light)", lineHeight: 1.5 }}>{x.sub}</div>
+              <div style={{ fontSize: 8.5, color: "var(--ff-link)", lineHeight: 1.5, marginTop: 2 }}>
+                ({x.platform})
+              </div>
             </div>
           ))}
         </div>
@@ -374,10 +390,9 @@ export const MigrationTimeline: FC = () => (
 
       <p style={{ margin: "12px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center" }}>
         این نمودار آماری دقیق نیست، آمار رسمی از شمار کاربران فارسی‌زبان این سرویس‌ها منتشر نشده. عدد
-        روی هر ستون فقط یک شاخص نسبی از ۰ تا ۵ است که نشان می‌دهد جمعیت فارسی‌زبان فرندفید و توییتر،
-        روی هم، در آن مقطع نسبت به شروع کار چند برابر شده بود؛ نه یک رقم واقعی. الگوی کلی که نشان
-        می‌دهد این است: بعد از هر تعطیلی سرویس رقیب (ستون‌های قرمز)، جمعیت این دو پلتفرم یک پله بالاتر
-        می‌رفت.
+        روی هر ستون فقط یک شاخص نسبی از ۰ تا ۵ است، برچسب زیر هر ستون هم مشخص می‌کند در آن مقطع
+        داریم اندازه کدام سرویس را می‌بینیم. الگوی کلی که نشان می‌دهد این است: بعد از هر تعطیلی سرویس
+        رقیب (ستون‌های قرمز)، این جامعه یک پله بزرگ‌تر می‌شد.
       </p>
     </div>
 
@@ -407,7 +422,16 @@ export const MigrationTimeline: FC = () => (
         درباره‌ی آن روزهای کوچک و صمیمی باقی مانده تا یک رقم دقیق و مستند.
       </p>
       <p style={{ margin: "10px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)" }}>
-        منبع بخش سیاسی: مریم شفیع‌پور، «در توییتر فارسی چه می‌گذرد؟»، peace-mark.org.
+        منبع بخش سیاسی: مریم شفیع‌پور،{" "}
+        <a
+          href="https://www.peace-mark.org/articles/70-10/"
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: "var(--ff-link)" }}
+        >
+          «در توییتر فارسی چه می‌گذرد؟»
+        </a>
+        ، peace-mark.org.
       </p>
     </div>
   </div>

@@ -279,10 +279,12 @@ export const HomePage: FC = () => {
 
         {/* Two deal-night photos, centered as a pair instead of left-aligned
             in a wide row (which used to leave a large empty gap on one side
-            when the row was wider than the two 340px-capped figures). */}
+            when the row was wider than the two 340px-capped figures). Extra
+            top margin here (was 18px, now 32px) so the photos don't sit
+            almost flush against the paragraph above them. */}
         <div
           style={{
-            margin: "18px 0",
+            margin: "32px 0 18px",
             display: "flex",
             gap: 16,
             flexWrap: "wrap",
