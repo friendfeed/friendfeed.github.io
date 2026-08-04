@@ -11,5 +11,5 @@ export interface XUserRecord {
   imagePath: string | null;
   /** Optional override when the FriendFeed username differed from the
    *  current X handle -- falls back to `handle` when absent. */
-  archiveHandle?: string;
+  friendfeedHandle?: string;
 }
