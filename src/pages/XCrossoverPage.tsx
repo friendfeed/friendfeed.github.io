@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { useXUsers } from "../services/useXUsers";
 import { useSearch } from "../services/SearchContext";
 import { XUserCell } from "../components/XUserCell";
@@ -11,7 +11,12 @@ export const XCrossoverPage: FC = () => {
   useSEO({ path: "/" });
   const users = useXUsers();
   const { query } = useSearch();
-  const [page, setPage] = useState(0);
+  // Page lives in the URL (?page=N) instead of component state, so the
+  // address bar actually changes as you paginate -- back/forward works,
+  // and a specific page can be shared/bookmarked/linked to directly.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageParam = parseInt(searchParams.get("page") ?? "1", 10);
+  const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam - 1 : 0;
 
   const normalizedQuery = query.trim().toLowerCase();
   const filtered = normalizedQuery
@@ -28,7 +33,7 @@ export const XCrossoverPage: FC = () => {
   const pageUsers = filtered.slice(start, start + PAGE_SIZE);
 
   const goTo = (p: number) => {
-    setPage(p);
+    setSearchParams(p === 0 ? {} : { page: String(p + 1) });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -93,39 +98,37 @@ const PageNav: FC<{ page: number; pageCount: number; onGo: (p: number) => void }
 }) => {
   if (pageCount <= 1) return null;
   const pages = Array.from({ length: pageCount }, (_, i) => i);
+  const hrefFor = (p: number) => (p === 0 ? "/" : `/?page=${p + 1}`);
   return (
     <div style={{ fontSize: 12.5, display: "flex", gap: 8, alignItems: "center", marginBottom: 8, flexWrap: "wrap" }}>
       {pages.map((p) => (
-        <button
+        <Link
           key={p}
-          onClick={() => onGo(p)}
+          to={hrefFor(p)}
+          onClick={(e) => {
+            e.preventDefault();
+            onGo(p);
+          }}
           style={{
-            border: "none",
-            background: "none",
-            padding: 0,
-            cursor: "pointer",
             fontWeight: p === page ? "bold" : "normal",
             color: p === page ? "var(--ff-text)" : "var(--ff-link)",
             fontSize: 12.5,
           }}
         >
           {p + 1}
-        </button>
+        </Link>
       ))}
       {page < pageCount - 1 && (
-        <button
-          onClick={() => onGo(page + 1)}
-          style={{
-            border: "none",
-            background: "none",
-            padding: 0,
-            cursor: "pointer",
-            color: "var(--ff-link)",
-            fontSize: 12.5,
+        <Link
+          to={hrefFor(page + 1)}
+          onClick={(e) => {
+            e.preventDefault();
+            onGo(page + 1);
           }}
+          style={{ color: "var(--ff-link)", fontSize: 12.5 }}
         >
           صفحه بعد »
-        </button>
+        </Link>
       )}
     </div>
   );

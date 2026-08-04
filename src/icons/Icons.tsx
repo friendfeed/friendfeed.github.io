@@ -46,12 +46,13 @@ export const IconTwitter: FC<IconProps> = (p) => (
   </svg>
 );
 
-/** Current (post-2023) X logo -- used as a small badge over the "live"
- *  profile photo so it reads as "this is where they are now", separate
- *  from the legacy bird mark above which is kept for any older context. */
+/** Official X (post-2023) logo mark -- used as a small badge over the
+ *  "live" profile photo so it reads as "this is where they are now",
+ *  separate from the legacy bird mark above which is kept for any older
+ *  context. Path is the official X brand glyph. */
 export const IconX: FC<IconProps> = (p) => (
-  <svg {...base(p)} fill="currentColor" stroke="none">
-    <path d="M13.6 10.6 20.4 3h-2l-5.9 6.6L7.8 3H3l7.1 10.1L3 21h2l6.2-7 5 7H21l-7.4-10.4Zm-2.2 2.5-.7-1L5 4.6h2.2l4.6 6.4.7 1 6 8.4h-2.2l-4.9-6.9Z" />
+  <svg {...base(p)} viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117Z" />
   </svg>
 );
 

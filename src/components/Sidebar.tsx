@@ -47,7 +47,7 @@ export const Sidebar: FC = () => {
           اتاق‌ها
         </span>
         <Link to="/" style={itemStyle(pathname === "/")}>
-          همه
+          همه کاربران
         </Link>
       </nav>
 

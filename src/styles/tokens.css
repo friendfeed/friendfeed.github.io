@@ -103,9 +103,21 @@ button {
   border-radius: 5px;
 }
 
-/* Sidebar + main content: side-by-side on desktop, stacked on narrow
-   viewports so the fixed-width nav column doesn't squeeze the card grid
-   down to nothing on phones. */
+/* X-crossover card: small, intentional departure from the flat FriendFeed
+   chrome elsewhere -- a subtle lift on hover so the card reads as an
+   interactive unit, and a clear hover fill on each action link. */
+.ff-x-card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+.ff-x-card-action {
+  background: var(--ff-panel);
+  transition: background-color 120ms ease;
+}
+.ff-x-card-action:hover {
+  background: var(--ff-panel-alt);
+  text-decoration: none;
+}
 .ff-layout {
   display: flex;
   align-items: flex-start;

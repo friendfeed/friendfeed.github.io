@@ -17,21 +17,19 @@ const archiveUrl = (handle: string) =>
   `https://web.archive.org/web/20150000000000*/http://friendfeed.com/${handle}`;
 
 /**
- * A single person, one card -- not two separate boxes. UX rationale:
- * showing the same person as two disconnected cards reads as two
- * different people at a glance; the badge/chip pattern below (one photo,
- * a small "which era" badge on it, two clearly-labeled link buttons)
- * is the same "before/after" convention used by profile-migration and
- * verified-account UIs, so it stays legible without a caption explaining
- * what's going on.
- *
- * Spacing pass: the first version packed everything edge-to-edge (8px
- * card padding, 4-8px internal gaps, 10px text) which read as cramped --
- * dense card grids like this need *more* air per item, not less, since
- * there's nothing else on the page competing for attention. Padding,
- * gaps and line-height below are all bumped up from the first pass with
- * that in mind, and each row (photo+identity, then link buttons) gets
- * clear separation instead of touching the card edges.
+ * Redesign pass: previous version used a square, un-cropped photo with a
+ * boxy badge and two flat grey buttons that read as an afterthought.
+ * This version:
+ *  - crops the avatar into a circle (the near-universal "this is a
+ *    person" convention) with a crisper current-account badge sitting on
+ *    its edge, using the real X brand mark;
+ *  - gives the card a touch of radius + a slightly stronger shadow on
+ *    hover so it reads as an interactive/clickable unit rather than a
+ *    flat data row -- an intentional, small departure from the rest of
+ *    the site's flat FriendFeed-authentic chrome, scoped to this one
+ *    "modern crossover" card;
+ *  - turns the two links into a single, evenly-weighted action row with
+ *    a clear hover state instead of a static grey bar.
  */
 export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
   const [imgFailed, setImgFailed] = useState(false);
@@ -41,25 +39,29 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
 
   return (
     <div
+      className="ff-x-card"
       style={{
         display: "flex",
         flexDirection: "column",
-        width: 168,
+        width: 172,
         background: "var(--ff-panel)",
         border: "1px solid var(--ff-border)",
-        boxShadow: "var(--ff-card-shadow)",
+        borderRadius: 10,
+        overflow: "hidden",
         flexShrink: 0,
+        transition: "box-shadow 120ms ease, transform 120ms ease",
       }}
     >
-      <div style={{ display: "flex", gap: 12, padding: "14px 12px 12px" }}>
+      <div style={{ display: "flex", gap: 12, padding: "16px 14px 14px" }}>
         <div style={{ position: "relative", flexShrink: 0 }}>
           {imgSrc ? (
             <img
               src={imgSrc}
               alt={user.displayName}
-              width={50}
-              height={50}
+              width={52}
+              height={52}
               style={{
+                borderRadius: "50%",
                 border: "1px solid var(--ff-border)",
                 objectFit: "cover",
                 background: "#fff",
@@ -68,23 +70,24 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
               onError={() => setImgFailed(true)}
             />
           ) : (
-            <div style={{ border: "1px solid var(--ff-border)" }}>
-              <DefaultAvatar size={50} />
+            <div style={{ borderRadius: "50%", overflow: "hidden", border: "1px solid var(--ff-border)" }}>
+              <DefaultAvatar size={52} />
             </div>
           )}
-          {/* Current-account badge on the photo itself -- this is the live
-              identity, so it gets the mark directly on the avatar. */}
+          {/* Current-account badge on the photo itself, using the real X
+              mark -- this is the live identity, so it gets the mark
+              directly on the avatar. */}
           <span
             title="حساب فعلی در ایکس"
             style={{
               position: "absolute",
-              bottom: -4,
-              left: -4,
-              width: 17,
-              height: 17,
+              bottom: -3,
+              insetInlineStart: -3,
+              width: 18,
+              height: 18,
               borderRadius: "50%",
               background: "#000",
-              border: "2px solid #fff",
+              border: "2px solid var(--ff-panel)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -94,12 +97,12 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
           </span>
         </div>
 
-        <div style={{ minWidth: 0, paddingTop: 2 }}>
+        <div style={{ minWidth: 0, paddingTop: 3 }}>
           <div
             style={{
-              fontSize: 12,
+              fontSize: 12.5,
               fontWeight: "bold",
-              color: "var(--ff-link)",
+              color: "var(--ff-text)",
               lineHeight: 1.4,
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -125,10 +128,9 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
         </div>
       </div>
 
-      {/* Two clearly-labeled, icon-led buttons rather than plain text
-          links -- keeps "which link goes where" unambiguous even without
-          reading the Farsi label, per the icon+label convention used for
-          this kind of dual-destination card. */}
+      {/* Single evenly-weighted action row -- two icon+label links with a
+          clear hover fill, separated by a thin divider instead of a flat
+          grey background block. */}
       <div
         style={{
           display: "flex",
@@ -140,16 +142,17 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
           target="_blank"
           rel="noreferrer"
           title={`آرشیو فرندفید: friendfeed.com/${archiveHandle}`}
+          className="ff-x-card-action"
           style={{
             flex: 1,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             gap: 6,
-            padding: "9px 6px",
+            padding: "10px 6px",
             fontSize: 11,
+            fontWeight: 600,
             color: "var(--ff-muted)",
-            background: "var(--ff-panel-alt)",
             borderInlineEnd: "1px solid var(--ff-border)",
           }}
         >
@@ -167,16 +170,17 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
           target="_blank"
           rel="noreferrer"
           title={`ایکس: x.com/${user.handle}`}
+          className="ff-x-card-action"
           style={{
             flex: 1,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             gap: 6,
-            padding: "9px 6px",
+            padding: "10px 6px",
             fontSize: 11,
-            color: "var(--ff-link)",
-            background: "var(--ff-panel-alt)",
+            fontWeight: 600,
+            color: "var(--ff-text)",
           }}
         >
           <IconX width={11} height={11} />
