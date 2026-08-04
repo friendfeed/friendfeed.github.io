@@ -71,6 +71,7 @@ export const XCrossoverPage: FC = () => {
           <PageNav page={safePage} pageCount={pageCount} onGo={goTo} />
 
           <div
+            className="ff-x-grid"
             style={{
               display: "flex",
               flexWrap: "wrap",
@@ -100,7 +101,7 @@ const PageNav: FC<{ page: number; pageCount: number; onGo: (p: number) => void }
   const pages = Array.from({ length: pageCount }, (_, i) => i);
   const hrefFor = (p: number) => (p === 0 ? "/users" : `/users?page=${p + 1}`);
   return (
-    <div style={{ fontSize: 12.5, display: "flex", gap: 8, alignItems: "center", marginBottom: 8, flexWrap: "wrap" }}>
+    <div className="ff-page-nav" style={{ fontSize: 12.5, display: "flex", gap: 8, alignItems: "center", marginBottom: 8, flexWrap: "wrap" }}>
       {pages.map((p) => (
         <Link
           key={p}

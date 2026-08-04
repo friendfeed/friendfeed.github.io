@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
+import { BottomNav } from "./components/BottomNav";
 import { HomePage } from "./pages/HomePage";
 import { XCrossoverPage } from "./pages/XCrossoverPage";
 import { FaqPage } from "./pages/FaqPage";
@@ -63,6 +64,10 @@ const App: FC = () => {
           شده‌اند.
         </footer>
       </div>
+      {/* Mobile app tab bar. CSS-only visibility (see .ff-bottom-nav in
+          tokens.css) -- hidden above the 680px breakpoint, where
+          <Sidebar> is the nav instead. */}
+      <BottomNav />
     </SearchProvider>
   );
 };

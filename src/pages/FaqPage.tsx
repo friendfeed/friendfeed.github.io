@@ -209,6 +209,7 @@ export const FaqPage: FC = () => {
         {SLANG.map((entry, i) => (
           <div
             key={entry.term}
+            className="ff-glossary-row"
             style={{
               display: "flex",
               gap: 14,
@@ -220,6 +221,7 @@ export const FaqPage: FC = () => {
             }}
           >
             <div
+              className="ff-glossary-term"
               style={{
                 flexShrink: 0,
                 width: 150,
@@ -253,6 +255,7 @@ export const FaqPage: FC = () => {
         {LIKE_TYPES.map((entry, i) => (
           <div
             key={entry.term}
+            className="ff-glossary-row"
             style={{
               display: "flex",
               gap: 14,
@@ -264,6 +267,7 @@ export const FaqPage: FC = () => {
             }}
           >
             <div
+              className="ff-glossary-term"
               style={{
                 flexShrink: 0,
                 width: 150,

@@ -29,8 +29,9 @@ export const Header: FC = () => {
   const userCount = xUsersRaw.length;
 
   return (
-    <header style={{ background: "#fff", borderBottom: "1px solid var(--ff-border)" }}>
+    <header className="ff-app-header" style={{ background: "#fff", borderBottom: "1px solid var(--ff-border)" }}>
       <div
+        className="ff-app-header-inner"
         style={{
           maxWidth: 1100,
           margin: "0 auto",
@@ -42,7 +43,7 @@ export const Header: FC = () => {
           flexWrap: "nowrap",
         }}
       >
-        <div style={{ minWidth: 0, maxWidth: 460 }}>
+        <div className="ff-app-header-search" style={{ minWidth: 0, maxWidth: 460 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
             <input
               type="text"
@@ -79,7 +80,7 @@ export const Header: FC = () => {
           </div>
         </div>
 
-        <div style={{ textAlign: "center", flexShrink: 0 }}>
+        <div className="ff-app-header-brand" style={{ textAlign: "center", flexShrink: 0 }}>
           <Link to="/" style={{ display: "flex", alignItems: "center" }}>
             <img
               src="/brand/friendfeed-wordmark.webp"
