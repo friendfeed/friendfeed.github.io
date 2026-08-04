@@ -135,3 +135,34 @@ export const IconUsers: FC<IconProps> = (p) => (
     <path d="M15 20a5 5 0 0 1 6-4.8" />
   </svg>
 );
+
+/** Generic RSS/feed glyph, used for the Google Reader timeline entry. */
+export const IconRss: FC<IconProps> = (p) => (
+  <svg {...base(p)}>
+    <circle cx="6" cy="18" r="1.6" fill="currentColor" stroke="none" />
+    <path d="M4 11.5a8.5 8.5 0 0 1 8.5 8.5" />
+    <path d="M4 5.5a14.5 14.5 0 0 1 14.5 14.5" />
+  </svg>
+);
+
+/** Generic "switched off / retired" glyph, used for shutdown events on
+ *  the timeline (Yahoo 360, Google Reader, Google+, FriendFeed itself). */
+export const IconOff: FC<IconProps> = (p) => (
+  <svg {...base(p)}>
+    <path d="M12 3v8" />
+    <path d="M6.5 6.5a8 8 0 1 0 11 0" />
+  </svg>
+);
+
+/** Generic layered-squares glyph for a general-purpose social network
+ *  entry on the timeline (Yahoo 360, Google+) where we deliberately avoid
+ *  reproducing any brand's actual logo mark. */
+export const IconNetwork: FC<IconProps> = (p) => (
+  <svg {...base(p)}>
+    <rect x="4" y="4" width="7" height="7" rx="1.5" />
+    <rect x="13" y="4" width="7" height="7" rx="1.5" />
+    <rect x="4" y="13" width="7" height="7" rx="1.5" />
+    <rect x="13" y="13" width="7" height="7" rx="1.5" />
+  </svg>
+);
+
