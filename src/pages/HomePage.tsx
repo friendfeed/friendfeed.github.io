@@ -14,29 +14,29 @@ const panelStyle: React.CSSProperties = {
  * Branded frame for the archived screenshots: reuses the same
  * browser-chrome motif as the hero (traffic-light dots + URL bar) so the
  * two illustrative screenshots read as part of the same site identity
- * instead of bare, borderless images. Also lets the images run larger
- * without looking like unstyled attachments.
+ * instead of bare, borderless images.
+ *
+ * The image renders at its natural aspect ratio (width: 100%, height:
+ * auto) -- no object-fit crop. An earlier version force-stretched the
+ * image to match the height of the paragraph text next to it, which
+ * cropped real content off the sides (sidebar labels) and, on one source
+ * screenshot, revealed a baked-in reflection effect below the real
+ * window. Both source screenshots have since been cropped at the file
+ * level to remove their dead margins/reflections (see /public/images/history),
+ * so the frame no longer needs a CSS crop to avoid showing empty space.
  */
 const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
   src,
   alt,
   caption,
 }) => (
-  // height: 100% lets this figure stretch to match the height of a taller
-  // sibling in a flex row (e.g. the paragraph text next to it) instead of
-  // staying at its own natural (shorter) height, which used to leave a
-  // block of empty space below the image.
-  <figure style={{ margin: 0, height: "100%", display: "flex", flexDirection: "column" }}>
+  <figure style={{ margin: 0 }}>
     <div
       style={{
         borderRadius: 6,
         overflow: "hidden",
         boxShadow: "var(--ff-card-shadow)",
         background: "#fff",
-        display: "flex",
-        flexDirection: "column",
-        flex: 1,
-        minHeight: 0,
       }}
     >
       <div
@@ -46,7 +46,6 @@ const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
           gap: 6,
           padding: "7px 10px",
           background: "#e8e8e8",
-          flexShrink: 0,
         }}
       >
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff5f57" }} />
@@ -61,15 +60,7 @@ const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
           friendfeed.com
         </span>
       </div>
-      {/* flex: 1 + object-fit: cover makes the screenshot itself grow to
-          fill all remaining height in the frame (cropping instead of
-          letterboxing), so the image now fills its column edge-to-edge
-          with no leftover white space underneath. */}
-      <img
-        src={src}
-        alt={alt}
-        style={{ width: "100%", flex: 1, minHeight: 220, objectFit: "cover", display: "block" }}
-      />
+      <img src={src} alt={alt} style={{ width: "100%", height: "auto", display: "block" }} />
     </div>
     <figcaption
       style={{
@@ -77,7 +68,6 @@ const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
         fontSize: 11,
         color: "var(--ff-muted-light)",
         textAlign: "center",
-        flexShrink: 0,
       }}
     >
       {caption}
@@ -223,41 +213,44 @@ export const HomePage: FC = () => {
       <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
         <h2 style={{ fontSize: 15, margin: "0 0 10px" }}>درباره فرندفید</h2>
 
-        <div style={{ display: "flex", alignItems: "stretch", gap: 18, flexWrap: "wrap-reverse" }}>
-          <div style={{ flex: "1 1 320px", minWidth: 260 }}>
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-text)" }}>
-              فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت بود. این سرویس در اکتبر ۲۰۰۷ توسط برت
-              تیلور، جیم نوریس، پل باکهایت و سنجیو سینگ راه‌اندازی شد و به‌روزرسانی‌های شبکه‌های اجتماعی،
-              وبلاگ‌ها و میکروبلاگ‌ها را در یک صفحه کنار هم می‌آورد. فیس‌بوک فرندفید را در سال ۲۰۰۹ خرید. یکی
-              از ویژگی‌های شاخص آن به‌روزرسانی زنده فید بدون نیاز به رفرش صفحه بود، فناوری‌ای که آن زمان کمتر
-              سایتی داشت.
-            </p>
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              کار کردن با آن خیلی ساده بود: ثبت‌نام می‌کردی، چند نفر را دنبال می‌کردی و یک فید شخصی و زنده
-              داشتی، پر از عکسی که یکی در فلیکر گذاشته بود، لینکی که یکی دیگر پیدا کرده بود، یا ویدیویی که یک
-              دوست پسندیده بود. در عوض، دوستانت هم فید خودشان را داشتند، پر از همان چیزهایی که تو به اشتراک
-              گذاشته بودی.
-            </p>
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              شروع یک گفت‌وگو زیر یک پست، یا نشان دادن این‌که چیزی را دوست داری، فقط یک کلیک فاصله داشت. حتی
-              می‌شد گروه ساخت، مثلاً برای خانواده یا برای هم‌تیمی‌های سرکار، و فقط به‌روزرسانی‌های همان‌ها را
-              دنبال کرد. چیزی هم برای نصب نبود؛ فرندفید را از ایمیل، از موبایل و حتی از دل فیس‌بوک هم می‌شد
-              خواند و در آن پست گذاشت. اگر فیدت را عمومی می‌کردی، حتی آدم‌های بدون حساب هم می‌توانستند آن را
-              ببینند یا در وبلاگ‌شان جاسازی کنند.
-            </p>
-            <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              فرندفید سریع بود، ساده بود و گفت‌وگومحور. و چون هر فید از آدم‌هایی ساخته می‌شد که واقعاً
-              برایت مهم بودند، محتوایش هم برایت مهم بود.
-            </p>
-          </div>
+        {/* Stacked layout: big full-width screenshot on top, text below.
+            A side-by-side flex layout previously forced the image to
+            stretch/crop to match the text column's height, which cut real
+            content off its sides. Stacking removes that mismatch entirely
+            and lets the screenshot show at full size, uncropped. */}
+        <div style={{ maxWidth: 640, margin: "0 auto 20px" }}>
+          <ScreenshotFrame
+            src="/images/history/rachel-fisher-home.webp"
+            alt="اسکرین‌شات آرشیوی از صفحه اصلی فرندفید"
+            caption="اسکرین‌شات از صفحه اصلی فرندفید، از دوران فعالیت سرویس"
+          />
+        </div>
 
-          <div style={{ flex: "1 1 380px", minWidth: 320, maxWidth: 460 }}>
-            <ScreenshotFrame
-              src="/images/history/rachel-fisher-home.webp"
-              alt="اسکرین‌شات آرشیوی از صفحه اصلی فرندفید"
-              caption="اسکرین‌شات از صفحه اصلی فرندفید، از دوران فعالیت سرویس"
-            />
-          </div>
+        <div>
+          <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-text)" }}>
+            فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت بود. این سرویس در اکتبر ۲۰۰۷ توسط برت
+            تیلور، جیم نوریس، پل باکهایت و سنجیو سینگ راه‌اندازی شد و به‌روزرسانی‌های شبکه‌های اجتماعی،
+            وبلاگ‌ها و میکروبلاگ‌ها را در یک صفحه کنار هم می‌آورد. فیس‌بوک فرندفید را در سال ۲۰۰۹ خرید. یکی
+            از ویژگی‌های شاخص آن به‌روزرسانی زنده فید بدون نیاز به رفرش صفحه بود، فناوری‌ای که آن زمان کمتر
+            سایتی داشت.
+          </p>
+          <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+            کار کردن با آن خیلی ساده بود: ثبت‌نام می‌کردی، چند نفر را دنبال می‌کردی و یک فید شخصی و زنده
+            داشتی، پر از عکسی که یکی در فلیکر گذاشته بود، لینکی که یکی دیگر پیدا کرده بود، یا ویدیویی که یک
+            دوست پسندیده بود. در عوض، دوستانت هم فید خودشان را داشتند، پر از همان چیزهایی که تو به اشتراک
+            گذاشته بودی.
+          </p>
+          <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+            شروع یک گفت‌وگو زیر یک پست، یا نشان دادن این‌که چیزی را دوست داری، فقط یک کلیک فاصله داشت. حتی
+            می‌شد گروه ساخت، مثلاً برای خانواده یا برای هم‌تیمی‌های سرکار، و فقط به‌روزرسانی‌های همان‌ها را
+            دنبال کرد. چیزی هم برای نصب نبود؛ فرندفید را از ایمیل، از موبایل و حتی از دل فیس‌بوک هم می‌شد
+            خواند و در آن پست گذاشت. اگر فیدت را عمومی می‌کردی، حتی آدم‌های بدون حساب هم می‌توانستند آن را
+            ببینند یا در وبلاگ‌شان جاسازی کنند.
+          </p>
+          <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+            فرندفید سریع بود، ساده بود و گفت‌وگومحور. و چون هر فید از آدم‌هایی ساخته می‌شد که واقعاً
+            برایت مهم بودند، محتوایش هم برایت مهم بود.
+          </p>
         </div>
       </section>
 
@@ -265,30 +258,30 @@ export const HomePage: FC = () => {
       <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
         <h2 style={{ fontSize: 15, margin: "0 0 10px" }}>چرا فرندفید دیگر وجود ندارد؟</h2>
 
-        <div style={{ display: "flex", alignItems: "stretch", gap: 18, flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 380px", minWidth: 320, maxWidth: 460 }}>
-            <ScreenshotFrame
-              src="/images/history/ana-home.webp"
-              alt="اسکرین‌شات آرشیوی دیگر از صفحه اصلی فرندفید"
-              caption="یک فید نمونه از فرندفید، همان روزهایی که هنوز پر از پست و کامنت بود"
-            />
-          </div>
-
-          <div style={{ flex: "1 1 320px", minWidth: 260 }}>
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              آگوست ۲۰۰۹. فیس‌بوک آن‌موقع هنوز بزرگ‌ترین شبکه اجتماعی دنیا بود، اما توییتر داشت خیلی سریع
-              رشد می‌کرد و «به‌روزرسانی زنده» تبدیل شده بود به چیزی که همه می‌خواستند. فیس‌بوک فرندفید را با
-              رقمی حدود پنجاه میلیون دلار خرید، و آن‌طور که بعدها روشن شد، این خرید بیشتر برای تیم مهندسی‌اش
-              بود تا برای خود سرویس. همان فناوری فید زنده‌ای که فرندفید ساخته بود، چند سال بعد در دل «فید
-              خبری» فیس‌بوک، همان چیزی که امروز میلیاردها نفر هر روز می‌بینند، دوباره به کار گرفته شد.
-            </p>
-          </div>
+        {/* Stacked layout here too, for the same reason as the About
+            section above: side-by-side forced the image to stretch/crop
+            to the text's height. Now the screenshot shows uncropped at
+            full size, with the story text following below it. */}
+        <div style={{ maxWidth: 640, margin: "0 auto 20px" }}>
+          <ScreenshotFrame
+            src="/images/history/ana-home.webp"
+            alt="اسکرین‌شات آرشیوی دیگر از صفحه اصلی فرندفید"
+            caption="یک فید نمونه از فرندفید، همان روزهایی که هنوز پر از پست و کامنت بود"
+          />
         </div>
 
-        {/* marginTop separates this paragraph from the figcaption directly
-            above it (they used to sit almost flush against each other with
-            no visual break between the image credit line and the next
-            block of story text). */}
+        <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+          آگوست ۲۰۰۹. فیس‌بوک آن‌موقع هنوز بزرگ‌ترین شبکه اجتماعی دنیا بود، اما توییتر داشت خیلی سریع
+          رشد می‌کرد و «به‌روزرسانی زنده» تبدیل شده بود به چیزی که همه می‌خواستند. فیس‌بوک فرندفید را با
+          رقمی حدود پنجاه میلیون دلار خرید، و آن‌طور که بعدها روشن شد، این خرید بیشتر برای تیم مهندسی‌اش
+          بود تا برای خود سرویس. همان فناوری فید زنده‌ای که فرندفید ساخته بود، چند سال بعد در دل «فید
+          خبری» فیس‌بوک، همان چیزی که امروز میلیاردها نفر هر روز می‌بینند، دوباره به کار گرفته شد.
+        </p>
+
+        {/* marginTop separates this paragraph from the figcaption above it
+            (they used to sit almost flush against each other with no
+            visual break between the image credit line and the next block
+            of story text). */}
         <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 22 }}>
           <div style={{ flex: "1 1 100%" }}>
             <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
