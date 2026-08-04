@@ -10,6 +10,63 @@ const panelStyle: React.CSSProperties = {
 };
 
 /**
+ * Branded frame for the archived screenshots: reuses the same
+ * browser-chrome motif as the hero (traffic-light dots + URL bar) so the
+ * two illustrative screenshots read as part of the same site identity
+ * instead of bare, borderless images. Also lets the images run larger
+ * without looking like unstyled attachments.
+ */
+const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
+  src,
+  alt,
+  caption,
+}) => (
+  <figure style={{ margin: 0 }}>
+    <div
+      style={{
+        borderRadius: 6,
+        overflow: "hidden",
+        boxShadow: "var(--ff-card-shadow)",
+        background: "#fff",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+          padding: "7px 10px",
+          background: "#e8e8e8",
+        }}
+      >
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff5f57" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#febc2e" }} />
+        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#28c840" }} />
+        <img
+          src="/brand/friendfeed-wordmark.webp"
+          alt="FriendFeed"
+          style={{ height: 12, marginInlineStart: 8, display: "block" }}
+        />
+        <span dir="ltr" style={{ marginInlineStart: "auto", fontSize: 10, color: "var(--ff-muted)" }}>
+          friendfeed.com
+        </span>
+      </div>
+      <img src={src} alt={alt} style={{ width: "100%", display: "block" }} />
+    </div>
+    <figcaption
+      style={{
+        marginTop: 8,
+        fontSize: 11,
+        color: "var(--ff-muted-light)",
+        textAlign: "center",
+      }}
+    >
+      {caption}
+    </figcaption>
+  </figure>
+);
+
+/**
  * The site's landing page. Previously "/" was the X-crossover user list
  * (moved to /users -- see Sidebar, which puts that link at the top of the
  * nav since it's the thing people actually come here for). This page is
@@ -90,13 +147,13 @@ export const HomePage: FC = () => {
               <span
                 title="این سرویس دیگر ثبت‌نام نمی‌پذیرد"
                 style={{
-                  background: "#e8a33d",
+                  background: "var(--ff-link)",
                   color: "#fff",
                   fontSize: 13,
                   fontWeight: "bold",
                   padding: "8px 16px",
                   borderRadius: 3,
-                  opacity: 0.55,
+                  opacity: 0.5,
                   cursor: "not-allowed",
                 }}
               >
@@ -150,7 +207,7 @@ export const HomePage: FC = () => {
         <div style={{ display: "flex", gap: 18, flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 320px", minWidth: 260 }}>
             <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-text)" }}>
-              فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت است. این سرویس در اکتبر ۲۰۰۷ توسط برت
+              فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت بود. این سرویس در اکتبر ۲۰۰۷ توسط برت
               تیلور، جیم نوریس، پل باکهایت و سنجیو سینگ راه‌اندازی شد و به‌روزرسانی‌های شبکه‌های اجتماعی،
               وبلاگ‌ها و میکروبلاگ‌ها را در یک صفحه کنار هم می‌آورد. فیس‌بوک فرندفید را در سال ۲۰۰۹ خرید. یکی
               از ویژگی‌های شاخص آن به‌روزرسانی زنده فید بدون نیاز به رفرش صفحه بود، فناوری‌ای که آن زمان کمتر
@@ -175,28 +232,13 @@ export const HomePage: FC = () => {
             </p>
           </div>
 
-          <figure style={{ flex: "0 1 260px", minWidth: 220, margin: 0 }}>
-            <img
+          <div style={{ flex: "1 1 380px", minWidth: 320, maxWidth: 460 }}>
+            <ScreenshotFrame
               src="/images/history/rachel-fisher-home.webp"
               alt="اسکرین‌شات آرشیوی از صفحه اصلی فرندفید"
-              style={{
-                width: "100%",
-                display: "block",
-                borderRadius: 4,
-                border: "1px solid var(--ff-border)",
-              }}
+              caption="اسکرین‌شات واقعی از صفحه اصلی فرندفید، از دوران فعالیت سرویس"
             />
-            <figcaption
-              style={{
-                marginTop: 6,
-                fontSize: 11,
-                color: "var(--ff-muted-light)",
-                textAlign: "center",
-              }}
-            >
-              اسکرین‌شات واقعی از صفحه اصلی فرندفید، از دوران فعالیت سرویس
-            </figcaption>
-          </figure>
+          </div>
         </div>
       </section>
 
@@ -205,28 +247,13 @@ export const HomePage: FC = () => {
         <h2 style={{ fontSize: 15, margin: "0 0 10px" }}>چرا فرندفید دیگر وجود ندارد؟</h2>
 
         <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
-          <figure style={{ flex: "0 1 260px", minWidth: 220, margin: 0 }}>
-            <img
+          <div style={{ flex: "1 1 380px", minWidth: 320, maxWidth: 460 }}>
+            <ScreenshotFrame
               src="/images/history/ana-home.webp"
               alt="اسکرین‌شات آرشیوی دیگر از صفحه اصلی فرندفید"
-              style={{
-                width: "100%",
-                display: "block",
-                borderRadius: 4,
-                border: "1px solid var(--ff-border)",
-              }}
+              caption="یک فید نمونه از فرندفید، همان روزهایی که هنوز پر از پست و کامنت بود"
             />
-            <figcaption
-              style={{
-                marginTop: 6,
-                fontSize: 11,
-                color: "var(--ff-muted-light)",
-                textAlign: "center",
-              }}
-            >
-              یک فید نمونه از فرندفید، همان روزهایی که هنوز پر از پست و کامنت بود
-            </figcaption>
-          </figure>
+          </div>
 
           <div style={{ flex: "1 1 320px", minWidth: 260 }}>
             <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
@@ -241,6 +268,42 @@ export const HomePage: FC = () => {
               اما خود فرندفید سرنوشت آشنای اغلب این‌جور خریدهای شرکتی را پیدا کرد. بنیان‌گذارانش به تیم
               مهندسی فیس‌بوک پیوستند، توسعه محصول عملاً متوقف شد و سایت فقط «روشن» نگه داشته شد، بدون ویژگی
               تازه، بدون تبلیغات، بدون رشد. کاربرانش هم کم‌کم و بی‌سروصدا به جاهای دیگر رفتند.
+            </p>
+
+            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+              خیلی از این کاربرها هم دست‌خالی نرفتند: چند نفر از برنامه‌نویس‌های همان جامعه، به‌جای این‌که
+              منتظر بمانند فرندفید یک روز واقعاً تعطیل شود، از صفر یک کپی متن‌باز از آن ساختند و اسمش را
+              گذاشتند{" "}
+              <a
+                href="https://freefeed.net/"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "var(--ff-link)" }}
+              >
+                فری‌فید
+              </a>
+              . همان فید، همان لایک، همان منطق دنبال‌کردن و کامنت‌گذاشتن، فقط این‌بار روی سروری که خودِ
+              کاربرانش اداره‌اش می‌کردند، نه یک شرکت بزرگ. بخش زیادی از کاربران فارسی‌زبان فرندفید هم دقیقاً
+              همین مسیر را رفتند و جمع‌شان را در فری‌فید از نو ساختند، چون هیچ‌جای دیگری این‌قدر به حال‌وهوای
+              فرندفید نزدیک نبود.
+            </p>
+
+            <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+              گروهی دیگر از کاربران هم ترجیح دادند به جای یک جایگزین یک‌به‌یک، سراغ چیزی بزرگ‌تر و
+              شلوغ‌تر بروند: توییتر (که این روزها{" "}
+              <span dir="ltr">X</span>
+              {" "}نام دارد). و به‌تازگی، موج تازه‌ای از همین جامعه به{" "}
+              <a
+                href="https://bsky.app/"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "var(--ff-link)" }}
+              >
+                بلواسکای
+              </a>{" "}
+              کوچ کرده: شبکه‌ای که ظاهرش شبیه توییتر است اما زیرساختش غیرمتمرکز است، یعنی هویت و دنبال‌کننده‌هایت
+              مال یک شرکت خاص نیستند و می‌توانی هر وقت خواستی حسابت را به سرویس دیگری روی همان پروتکل منتقل
+              کنی، دقیقاً همان دردی که کاربران فرندفید یک بار با تعطیلی ناگهانی سرویس تجربه‌اش کرده بودند.
             </p>
 
             <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>

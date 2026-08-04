@@ -33,6 +33,36 @@ export const HistoryPage: FC = () => (
       </p>
     </section>
 
+    <section style={panelStyle}>
+      <h2 style={{ fontSize: 14, margin: "0 0 10px" }}>عکس‌های یادگاری از دوران خرید</h2>
+      <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 1.9, color: "var(--ff-muted)" }}>
+        دو عکس زیر مربوط به همان دوره‌ای است که خرید فرندفید توسط فیس‌بوک نهایی شد؛ تیم دو شرکت را کنار هم
+        نشان می‌دهد، یک بار در حیاط پشتی و یک بار پای میز کار.
+      </p>
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+        <figure style={{ flex: "1 1 260px", minWidth: 220, maxWidth: 340, margin: 0 }}>
+          <img
+            src="/images/history/facebook-deal-group.webp"
+            alt="عکس دسته‌جمعی تیم فرندفید و فیس‌بوک در دوران خرید"
+            style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-shadow-panel)" }}
+          />
+          <figcaption style={{ marginTop: 6, fontSize: 11, color: "var(--ff-muted)", textAlign: "center" }}>
+            عکس دسته‌جمعی تیم، همان روزهای نهایی‌شدن خرید
+          </figcaption>
+        </figure>
+        <figure style={{ flex: "1 1 260px", minWidth: 220, maxWidth: 340, margin: 0 }}>
+          <img
+            src="/images/history/facebook-deal-table.webp"
+            alt="عکس تیم دور میز کار در دوران خرید فرندفید"
+            style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-shadow-panel)" }}
+          />
+          <figcaption style={{ marginTop: 6, fontSize: 11, color: "var(--ff-muted)", textAlign: "center" }}>
+            دور میز کار، در حال گفت‌وگو و کار روی لپ‌تاپ
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section style={{ ...panelStyle, borderStyle: "dashed" }}>
       <h2 style={{ fontSize: 14 }}>
         تحلیل ویدیو: «فرندفید پیش و پس از انتخابات ۱۳۸۸»
