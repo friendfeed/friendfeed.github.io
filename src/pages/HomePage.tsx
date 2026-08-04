@@ -147,7 +147,7 @@ export const HomePage: FC = () => {
               <span
                 title="این سرویس دیگر ثبت‌نام نمی‌پذیرد"
                 style={{
-                  background: "var(--ff-link)",
+                  background: "#2e7df3",
                   color: "#fff",
                   fontSize: 13,
                   fontWeight: "bold",
@@ -236,7 +236,7 @@ export const HomePage: FC = () => {
             <ScreenshotFrame
               src="/images/history/rachel-fisher-home.webp"
               alt="اسکرین‌شات آرشیوی از صفحه اصلی فرندفید"
-              caption="اسکرین‌شات واقعی از صفحه اصلی فرندفید، از دوران فعالیت سرویس"
+              caption="اسکرین‌شات از صفحه اصلی فرندفید، از دوران فعالیت سرویس"
             />
           </div>
         </div>
@@ -263,7 +263,34 @@ export const HomePage: FC = () => {
               بود تا برای خود سرویس. همان فناوری فید زنده‌ای که فرندفید ساخته بود، چند سال بعد در دل «فید
               خبری» فیس‌بوک، همان چیزی که امروز میلیاردها نفر هر روز می‌بینند، دوباره به کار گرفته شد.
             </p>
+          </div>
+        </div>
 
+        <div style={{ margin: "18px 0", display: "flex", gap: 16, flexWrap: "wrap" }}>
+          <figure style={{ flex: "1 1 260px", minWidth: 220, maxWidth: 340, margin: 0 }}>
+            <img
+              src="/images/history/facebook-deal-group.webp"
+              alt="عکس دسته‌جمعی تیم فرندفید و فیس‌بوک در دوران خرید"
+              style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-card-shadow)" }}
+            />
+            <figcaption style={{ marginTop: 6, fontSize: 11, color: "var(--ff-muted-light)", textAlign: "center" }}>
+              عکس دسته‌جمعی تیم، همان روزهای نهایی‌شدن خرید
+            </figcaption>
+          </figure>
+          <figure style={{ flex: "1 1 260px", minWidth: 220, maxWidth: 340, margin: 0 }}>
+            <img
+              src="/images/history/facebook-deal-table.webp"
+              alt="عکس تیم دور میز کار در دوران خرید فرندفید"
+              style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-card-shadow)" }}
+            />
+            <figcaption style={{ marginTop: 6, fontSize: 11, color: "var(--ff-muted-light)", textAlign: "center" }}>
+              دور میز کار، در حال گفت‌وگو و کار روی لپ‌تاپ
+            </figcaption>
+          </figure>
+        </div>
+
+        <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+          <div style={{ flex: "1 1 100%" }}>
             <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
               اما خود فرندفید سرنوشت آشنای اغلب این‌جور خریدهای شرکتی را پیدا کرد. بنیان‌گذارانش به تیم
               مهندسی فیس‌بوک پیوستند، توسعه محصول عملاً متوقف شد و سایت فقط «روشن» نگه داشته شد، بدون ویژگی
@@ -288,7 +315,7 @@ export const HomePage: FC = () => {
               فرندفید نزدیک نبود.
             </p>
 
-            <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
+            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
               گروهی دیگر از کاربران هم ترجیح دادند به جای یک جایگزین یک‌به‌یک، سراغ چیزی بزرگ‌تر و
               شلوغ‌تر بروند: توییتر (که این روزها{" "}
               <span dir="ltr">X</span>
@@ -331,7 +358,7 @@ export const HomePage: FC = () => {
             fontSize: 13,
             fontWeight: "bold",
             color: "#fff",
-            background: "var(--ff-link)",
+            background: "#2e7df3",
             padding: "9px 22px",
             borderRadius: 3,
           }}
