@@ -1,42 +1,65 @@
-<svg width="680" height="320" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ffmig-title ffmig-desc">
-<title id="ffmig-title">Diagram showing FriendFeed's community migrating to three platforms</title>
-<desc id="ffmig-desc">FriendFeed at the top branches down into three destinations: X (formerly Twitter), FreeFeed, and Bluesky.</desc>
+<svg width="680" height="440" viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ffmig-title ffmig-desc">
+<title id="ffmig-title">Diagram showing the Farsi community's migration into and out of FriendFeed</title>
+<desc id="ffmig-desc">Four earlier communities (Yahoo Chat Rooms, Yahoo 360, Google Reader, Google+) fed users into FriendFeed as each was shut down. FriendFeed then branches down into three later destinations: X (formerly Twitter), FreeFeed, and Bluesky.</desc>
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
 <path d="M2 1L8 5L2 9" fill="none" stroke="#8b8a85" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </marker>
 </defs>
 
-<rect x="250" y="40" width="180" height="64" rx="10" fill="#f1efe8" stroke="#5f5e5a" stroke-width="0.5"/>
-<text x="340" y="65" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#2c2c2a">FriendFeed</text>
-<text x="340" y="83" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5f5e5a">2007–2015</text>
+<!-- ---- Upstream sources: earlier communities that fed into FriendFeed as each was shut down ---- -->
+<rect x="24" y="16" width="140" height="52" rx="9" fill="#f1efe8" stroke="#8b8a85" stroke-width="0.5"/>
+<text x="94" y="37" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#2c2c2a">Yahoo Chat Rooms</text>
+<text x="94" y="54" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5f5e5a">1997–2012</text>
 
-<path d="M340 104 L340 140" fill="none" stroke="#8b8a85" stroke-width="0.5"/>
-<path d="M120 140 L560 140" fill="none" stroke="#8b8a85" stroke-width="0.5"/>
-<path d="M120 140 L120 176" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
-<path d="M340 140 L340 176" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
-<path d="M560 140 L560 176" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+<rect x="188" y="16" width="140" height="52" rx="9" fill="#f1efe8" stroke="#8b8a85" stroke-width="0.5"/>
+<text x="258" y="37" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#2c2c2a">Yahoo 360</text>
+<text x="258" y="54" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5f5e5a">2005–2009</text>
 
-<rect x="30" y="180" width="180" height="108" rx="10" fill="#141414" stroke="#141414" stroke-width="0.5"/>
-<circle cx="120" cy="222" r="27" fill="#ffffff"/>
-<g transform="translate(103,205) scale(1.35)" fill="#141414">
+<rect x="352" y="16" width="140" height="52" rx="9" fill="#f1efe8" stroke="#8b8a85" stroke-width="0.5"/>
+<text x="422" y="37" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#2c2c2a">Google Reader</text>
+<text x="422" y="54" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5f5e5a">closed 2013</text>
+
+<rect x="516" y="16" width="140" height="52" rx="9" fill="#f1efe8" stroke="#8b8a85" stroke-width="0.5"/>
+<text x="586" y="37" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#2c2c2a">Google+</text>
+<text x="586" y="54" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5f5e5a">2011–2019</text>
+
+<!-- converging lines from each source down into the FriendFeed box -->
+<path d="M94 68 L338 148" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path d="M258 68 L339 148" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path d="M422 68 L341 148" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path d="M586 68 L342 148" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+
+<rect x="250" y="150" width="180" height="64" rx="10" fill="#f1efe8" stroke="#5f5e5a" stroke-width="0.5"/>
+<text x="340" y="175" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#2c2c2a">FriendFeed</text>
+<text x="340" y="193" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5f5e5a">2007–2015</text>
+
+<path d="M340 214 L340 250" fill="none" stroke="#8b8a85" stroke-width="0.5"/>
+<path d="M120 250 L560 250" fill="none" stroke="#8b8a85" stroke-width="0.5"/>
+<path d="M120 250 L120 286" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path d="M340 250 L340 286" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path d="M560 250 L560 286" fill="none" stroke="#8b8a85" stroke-width="0.5" marker-end="url(#arrow)"/>
+
+<rect x="30" y="290" width="180" height="108" rx="10" fill="#141414" stroke="#141414" stroke-width="0.5"/>
+<circle cx="120" cy="332" r="27" fill="#ffffff"/>
+<g transform="translate(103,315) scale(1.35)" fill="#141414">
 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
 </g>
-<text x="120" y="260" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff">X</text>
-<text x="120" y="277" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#c9c9c6">formerly Twitter</text>
+<text x="120" y="370" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff">X</text>
+<text x="120" y="387" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#c9c9c6">formerly Twitter</text>
 
-<rect x="250" y="180" width="180" height="108" rx="10" fill="#0f6e56" stroke="#0f6e56" stroke-width="0.5"/>
-<circle cx="340" cy="222" r="27" fill="#ffffff"/>
-<text x="340" y="224" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="26" fill="#0f6e56">ff</text>
-<text x="340" y="260" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff">FreeFeed</text>
-<text x="340" y="277" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#bfe4d9">open-source, self-hosted</text>
+<rect x="250" y="290" width="180" height="108" rx="10" fill="#0f6e56" stroke="#0f6e56" stroke-width="0.5"/>
+<circle cx="340" cy="332" r="27" fill="#ffffff"/>
+<text x="340" y="334" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="26" fill="#0f6e56">ff</text>
+<text x="340" y="370" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff">FreeFeed</text>
+<text x="340" y="387" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#bfe4d9">open-source, self-hosted</text>
 
-<rect x="470" y="180" width="180" height="108" rx="10" fill="#1185fe" stroke="#1185fe" stroke-width="0.5"/>
-<circle cx="560" cy="222" r="27" fill="#ffffff"/>
-<g transform="translate(542,204) scale(1.5)" fill="#1185fe">
+<rect x="470" y="290" width="180" height="108" rx="10" fill="#1185fe" stroke="#1185fe" stroke-width="0.5"/>
+<circle cx="560" cy="332" r="27" fill="#ffffff"/>
+<g transform="translate(542,314) scale(1.5)" fill="#1185fe">
 <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.203-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/>
 </g>
-<text x="560" y="260" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff">Bluesky</text>
-<text x="560" y="277" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#cfe6ff">decentralized network</text>
+<text x="560" y="370" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff">Bluesky</text>
+<text x="560" y="387" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#cfe6ff">decentralized network</text>
 
 </svg>

@@ -411,7 +411,7 @@ export const HomePage: FC = () => {
             <figure style={{ margin: "28px 0 32px" }}>
               <img
                 src="/images/diagrams/friendfeed-migration.svg"
-                alt="نمودار مهاجرت جامعه فرندفید به سه پلتفرم: ایکس، فری‌فید و بلواسکای"
+                alt="نمودار مهاجرت جامعه: از اتاق‌های گفتگوی یاهو، یاهو ۳۶۰، گوگل ریدر و گوگل پلاس به فرندفید، و از فرندفید به سه پلتفرم بعدی: ایکس، فری‌فید و بلواسکای"
                 style={{ display: "block", width: "100%", height: "auto", maxWidth: 680, margin: "0 auto" }}
               />
             </figure>
