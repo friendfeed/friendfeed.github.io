@@ -7,7 +7,7 @@
 </marker>
 </defs>
 
-<!-- ---- Upstream sources: earlier communities that fed into FriendFeed as each was shut down ---- -->
+<!-- Upstream sources: earlier communities that fed into FriendFeed as each was shut down -->
 <rect x="24" y="16" width="140" height="52" rx="9" fill="#f1efe8" stroke="#8b8a85" stroke-width="0.5"/>
 <text x="94" y="37" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#2c2c2a">Yahoo Chat Rooms</text>
 <text x="94" y="54" text-anchor="middle" dominant-baseline="central" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#5f5e5a">1997–2012</text>
