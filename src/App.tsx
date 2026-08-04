@@ -2,15 +2,20 @@ import type { FC } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
+import { HomePage } from "./pages/HomePage";
 import { XCrossoverPage } from "./pages/XCrossoverPage";
 import { FaqPage } from "./pages/FaqPage";
 import { MagazinePage } from "./pages/MagazinePage";
 import { SearchProvider } from "./services/SearchContext";
 
-// HomePage / ProfilePage / PyramidPage / HistoryPage exist in ./pages but
-// are intentionally not routed yet -- current scope is the X-crossover
-// tab only, per instruction. They'll come back online once the archive
-// and pyramid data passes are done.
+// ProfilePage / PyramidPage / HistoryPage exist in ./pages but are
+// intentionally not routed yet -- current scope is the home page + the
+// X-crossover user list (now at /users), per instruction. They'll come
+// back online once the archive and pyramid data passes are done.
+//
+// "/" used to BE the X-crossover list. It's now the landing/about page
+// (HomePage); the user list lives at /users instead -- see Sidebar,
+// which puts that link at the top of the nav.
 
 const App: FC = () => (
   <SearchProvider>
@@ -29,7 +34,8 @@ const App: FC = () => (
         <Sidebar />
         <main style={{ padding: "16px 0", minWidth: 0, flex: 1 }}>
           <Routes>
-            <Route path="/" element={<XCrossoverPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/users" element={<XCrossoverPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/magazine" element={<MagazinePage />} />
           </Routes>

@@ -161,9 +161,14 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
       </div>
 
       {/* Single evenly-weighted action row -- both buttons now share the
-          exact same anatomy (circular brand-colored icon chip + label),
-          instead of one plain icon and one boxy image with a mismatched
-          border. */}
+          exact same anatomy (a flat, borderless SQUARE icon chip + label).
+          Previously the FriendFeed badge sat inside a circular blue chip:
+          the badge artwork itself is already a rounded square, so masking
+          it into a circle clipped its corners against a mismatched blue
+          and made the edges look like they were "bleeding". Squaring both
+          chips (to match the FF mark's own shape) and dropping the extra
+          background/border fixes that and makes the two actions read as
+          one consistent family instead of two different styles. */}
       <div
         style={{
           display: "flex",
@@ -189,27 +194,13 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
             borderInlineEnd: "1px solid var(--ff-border)",
           }}
         >
-          <span
-            style={{
-              width: 16,
-              height: 16,
-              borderRadius: "50%",
-              background: "#4a90e2",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              overflow: "hidden",
-              flexShrink: 0,
-            }}
-          >
-            <img
-              src="/brand/ff-badge.webp"
-              alt=""
-              width={12}
-              height={12}
-              style={{ display: "block" }}
-            />
-          </span>
+          <img
+            src="/brand/ff-badge.webp"
+            alt=""
+            width={16}
+            height={16}
+            style={{ display: "block", borderRadius: 4, flexShrink: 0 }}
+          />
           آرشیو
         </a>
         <a
@@ -234,7 +225,7 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
             style={{
               width: 16,
               height: 16,
-              borderRadius: "50%",
+              borderRadius: 4,
               background: "#000",
               display: "flex",
               alignItems: "center",

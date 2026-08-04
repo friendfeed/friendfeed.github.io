@@ -8,7 +8,7 @@ import { useSEO } from "../seo/useSEO";
 const PAGE_SIZE = 20;
 
 export const XCrossoverPage: FC = () => {
-  useSEO({ path: "/" });
+  useSEO({ path: "/users" });
   const users = useXUsers();
   const { query } = useSearch();
   // Page lives in the URL (?page=N) instead of component state, so the
@@ -98,7 +98,7 @@ const PageNav: FC<{ page: number; pageCount: number; onGo: (p: number) => void }
 }) => {
   if (pageCount <= 1) return null;
   const pages = Array.from({ length: pageCount }, (_, i) => i);
-  const hrefFor = (p: number) => (p === 0 ? "/" : `/?page=${p + 1}`);
+  const hrefFor = (p: number) => (p === 0 ? "/users" : `/users?page=${p + 1}`);
   return (
     <div style={{ fontSize: 12.5, display: "flex", gap: 8, alignItems: "center", marginBottom: 8, flexWrap: "wrap" }}>
       {pages.map((p) => (

@@ -11,10 +11,12 @@ import { Link, useLocation } from "react-router-dom";
  * literal left/right copy.
  *
  * Items are mapped to what this project actually has pages for --
- * "Everyone" is the X-crossover directory (the closest analogue to the
- * original global "Everyone" feed), and the rest are kept as labelled,
- * inert placeholders matching the source screenshot's structure so the
- * chrome reads as authentic FriendFeed rather than an invented menu.
+ * "همه کاربران" (the X-crossover directory, at /users) is the main
+ * content of the site, so it sits at the very top of the nav now that
+ * the homepage itself ("خانه", /) is a separate landing/about page and
+ * no longer shows the list. The rest are kept as labelled, inert
+ * placeholders matching the source screenshot's structure so the chrome
+ * reads as authentic FriendFeed rather than an invented menu.
  */
 const itemStyle = (active: boolean): CSSProperties => ({
   display: "block",
@@ -37,18 +39,18 @@ export const Sidebar: FC = () => {
       }}
     >
       <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        <span style={itemStyle(false)} aria-disabled="true">
+        <Link to="/users" style={itemStyle(pathname === "/users")}>
+          همه کاربران
+        </Link>
+        <Link to="/" style={itemStyle(pathname === "/")}>
           خانه
-        </span>
+        </Link>
         <span style={itemStyle(false)} aria-disabled="true">
           من
         </span>
         <span style={itemStyle(false)} aria-disabled="true">
           اتاق‌ها
         </span>
-        <Link to="/" style={itemStyle(pathname === "/")}>
-          همه کاربران
-        </Link>
       </nav>
 
       <div

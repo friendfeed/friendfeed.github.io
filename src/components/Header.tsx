@@ -12,12 +12,17 @@ const toPersianDigits = (n: number) =>
  * the active page via SearchContext), and plain flat nav text.
  *
  * Two-column layout: logo + live user count anchored to the left, search
- * box + tagline anchored to the right -- each pair grouped together
- * rather than the logo/search sitting alone with copy underneath both.
- * DOM order below is search-block-then-logo-block on purpose: this is an
- * RTL document, so in a row flex container the first child renders on
- * the *right* and the second on the *left* -- putting the logo block
- * second is what actually lands it on the left edge.
+ * box anchored to the right -- each pair grouped together rather than
+ * the logo/search sitting alone with copy underneath both. DOM order
+ * below is search-block-then-logo-block on purpose: this is an RTL
+ * document, so in a row flex container the first child renders on the
+ * *right* and the second on the *left* -- putting the logo block second
+ * is what actually lands it on the left edge.
+ *
+ * The long "what is FriendFeed" paragraph that used to live here has
+ * moved to the homepage (/) -- it's a proper landing page now, so the
+ * header itself stays lean, matching the real archived chrome (search +
+ * logo, no marketing copy in every page's header).
  */
 export const Header: FC = () => {
   const { query, setQuery } = useSearch();
@@ -72,32 +77,6 @@ export const Header: FC = () => {
               جستجو
             </button>
           </div>
-          <p
-            style={{
-              margin: "10px 0 0",
-              fontSize: 12,
-              fontWeight: "bold",
-              color: "var(--ff-text)",
-              lineHeight: 1.9,
-            }}
-          >
-            فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت است.
-          </p>
-          <p
-            style={{
-              margin: "4px 0 0",
-              fontSize: 12,
-              color: "var(--ff-muted)",
-              lineHeight: 1.9,
-            }}
-          >
-            این سرویس در اکتبر ۲۰۰۷ توسط برت تیلور، جیم نوریس، پل باکهایت و
-            سنجیو سینگ راه‌اندازی شد و به‌روزرسانی‌های شبکه‌های اجتماعی،
-            وبلاگ‌ها و میکروبلاگ‌ها را در یک صفحه کنار هم می‌آورد. فیس‌بوک
-            فرندفید را در سال ۲۰۰۹ خرید. یکی از ویژگی‌های شاخص آن
-            به‌روزرسانی زنده فید بدون نیاز به رفرش صفحه بود، فناوری‌ای که آن
-            زمان کمتر سایتی داشت.
-          </p>
         </div>
 
         <div style={{ textAlign: "center", flexShrink: 0 }}>
