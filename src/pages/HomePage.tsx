@@ -22,13 +22,21 @@ const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
   alt,
   caption,
 }) => (
-  <figure style={{ margin: 0 }}>
+  // height: 100% lets this figure stretch to match the height of a taller
+  // sibling in a flex row (e.g. the paragraph text next to it) instead of
+  // staying at its own natural (shorter) height, which used to leave a
+  // block of empty space below the image.
+  <figure style={{ margin: 0, height: "100%", display: "flex", flexDirection: "column" }}>
     <div
       style={{
         borderRadius: 6,
         overflow: "hidden",
         boxShadow: "var(--ff-card-shadow)",
         background: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        flex: 1,
+        minHeight: 0,
       }}
     >
       <div
@@ -38,6 +46,7 @@ const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
           gap: 6,
           padding: "7px 10px",
           background: "#e8e8e8",
+          flexShrink: 0,
         }}
       >
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff5f57" }} />
@@ -52,7 +61,15 @@ const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
           friendfeed.com
         </span>
       </div>
-      <img src={src} alt={alt} style={{ width: "100%", display: "block" }} />
+      {/* flex: 1 + object-fit: cover makes the screenshot itself grow to
+          fill all remaining height in the frame (cropping instead of
+          letterboxing), so the image now fills its column edge-to-edge
+          with no leftover white space underneath. */}
+      <img
+        src={src}
+        alt={alt}
+        style={{ width: "100%", flex: 1, minHeight: 220, objectFit: "cover", display: "block" }}
+      />
     </div>
     <figcaption
       style={{
@@ -60,6 +77,7 @@ const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
         fontSize: 11,
         color: "var(--ff-muted-light)",
         textAlign: "center",
+        flexShrink: 0,
       }}
     >
       {caption}
@@ -205,7 +223,7 @@ export const HomePage: FC = () => {
       <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
         <h2 style={{ fontSize: 15, margin: "0 0 10px" }}>درباره فرندفید</h2>
 
-        <div style={{ display: "flex", gap: 18, flexWrap: "wrap-reverse" }}>
+        <div style={{ display: "flex", alignItems: "stretch", gap: 18, flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 320px", minWidth: 260 }}>
             <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-text)" }}>
               فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت بود. این سرویس در اکتبر ۲۰۰۷ توسط برت
@@ -247,7 +265,7 @@ export const HomePage: FC = () => {
       <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
         <h2 style={{ fontSize: 15, margin: "0 0 10px" }}>چرا فرندفید دیگر وجود ندارد؟</h2>
 
-        <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", alignItems: "stretch", gap: 18, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 380px", minWidth: 320, maxWidth: 460 }}>
             <ScreenshotFrame
               src="/images/history/ana-home.webp"
@@ -267,7 +285,11 @@ export const HomePage: FC = () => {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+        {/* marginTop separates this paragraph from the figcaption directly
+            above it (they used to sit almost flush against each other with
+            no visual break between the image credit line and the next
+            block of story text). */}
+        <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 22 }}>
           <div style={{ flex: "1 1 100%" }}>
             <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
               اما خود فرندفید سرنوشت آشنای اغلب این‌جور خریدهای شرکتی را پیدا کرد. بنیان‌گذارانش به تیم
