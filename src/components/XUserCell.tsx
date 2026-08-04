@@ -160,9 +160,10 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
         </div>
       </div>
 
-      {/* Single evenly-weighted action row -- two icon+label links with a
-          clear hover fill, separated by a thin divider instead of a flat
-          grey background block. */}
+      {/* Single evenly-weighted action row -- both buttons now share the
+          exact same anatomy (circular brand-colored icon chip + label),
+          instead of one plain icon and one boxy image with a mismatched
+          border. */}
       <div
         style={{
           display: "flex",
@@ -180,7 +181,7 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: 6,
+            gap: 7,
             padding: "10px 6px",
             fontSize: 11,
             fontWeight: 600,
@@ -188,13 +189,27 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
             borderInlineEnd: "1px solid var(--ff-border)",
           }}
         >
-          <img
-            src="/brand/ff-badge.webp"
-            alt=""
-            width={13}
-            height={13}
-            style={{ display: "block", borderRadius: 2 }}
-          />
+          <span
+            style={{
+              width: 16,
+              height: 16,
+              borderRadius: "50%",
+              background: "#4a90e2",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              overflow: "hidden",
+              flexShrink: 0,
+            }}
+          >
+            <img
+              src="/brand/ff-badge.webp"
+              alt=""
+              width={12}
+              height={12}
+              style={{ display: "block" }}
+            />
+          </span>
           آرشیو
         </a>
         <a
@@ -208,14 +223,27 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: 6,
+            gap: 7,
             padding: "10px 6px",
             fontSize: 11,
             fontWeight: 600,
             color: "var(--ff-text)",
           }}
         >
-          <IconX width={11} height={11} />
+          <span
+            style={{
+              width: 16,
+              height: 16,
+              borderRadius: "50%",
+              background: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <IconX width={9} height={9} color="#fff" />
+          </span>
           ایکس
         </a>
       </div>
