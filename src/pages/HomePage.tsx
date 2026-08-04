@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
+import { MigrationTimeline } from "../components/MigrationTimeline";
 
 const panelStyle: React.CSSProperties = {
   background: "var(--ff-panel)",
@@ -173,7 +174,7 @@ export const HomePage: FC = () => {
               </span>
             </div>
             <p style={{ marginTop: 14, fontSize: 11, color: "var(--ff-muted-light)" }}>
-              این آرشیو یک بازسازی غیررسمی و غیرفعال است. دکمه‌های بالا فقط برای حس‌وحال نوستالژیک این‌جا
+              این آرشیو یک بازسازی غیررسمی و غیرفعال است. دکمه‌های بالا فقط برای حس‌وحال تاریخی این‌جا
               هستند و به هیچ حساب واقعی وصل نمی‌شوند.{" "}
               <Link to="/users" style={{ color: "var(--ff-link)" }}>
                 فهرست کاربران را این‌جا ببینید
@@ -348,6 +349,17 @@ export const HomePage: FC = () => {
           وی‌بک‌مشین و خاطره‌ی جمعی چند هزار نفری که یک بار، برای چند سال، بهترین گوشه اینترنتشان همین‌جا
           بود. این آرشیو هم دقیقاً برای همین ساخته شده: تا آن خاطره، این‌بار به فارسی، یک‌جا جمع بماند.
         </p>
+      </section>
+
+      {/* ---- Migration timeline: how the Farsi community moved between platforms ---- */}
+      <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
+        <h2 style={{ fontSize: 15, margin: "0 0 4px" }}>
+          مسیر مهاجرت جامعه فارسی‌زبان: از یاهو ۳۶۰ تا توییتر
+        </h2>
+        <p style={{ margin: "0 0 16px", fontSize: 12, color: "var(--ff-muted-light)" }}>
+          تایم‌لاین تاریخی تعطیلی سرویس‌ها و مهاجرت کاربران، از ۲۰۰۵ تا ۲۰۱۹
+        </p>
+        <MigrationTimeline />
       </section>
 
       <div style={{ textAlign: "center", marginBottom: 8 }}>
