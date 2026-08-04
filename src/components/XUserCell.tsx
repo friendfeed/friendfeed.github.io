@@ -154,7 +154,7 @@ export const XUserCell: FC<{ user: XUserRecord }> = ({ user }) => {
           }}
         >
           <img
-            src="./brand/ff-badge.webp"
+            src="/brand/ff-badge.webp"
             alt=""
             width={13}
             height={13}

@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { useSEO } from "../seo/useSEO";
 
 /**
  * "مجله فرندفید" -- a single-post weblog page, styled like a classic
@@ -20,6 +21,23 @@ import type { FC } from "react";
  * specific claims beyond what's well documented about that period.
  */
 export const MagazinePage: FC = () => {
+  useSEO({
+    path: "/magazine",
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: "فرندفید ایرانی بعد از خرداد ۸۸: از سرگرمی به پناهگاه اطلاعات",
+        inLanguage: "fa",
+        isPartOf: {
+          "@type": "WebSite",
+          name: "فرندفید فارسی | آرشیو",
+          url: "https://friendfeed.github.io",
+        },
+      },
+    ],
+  });
+
   return (
     <article style={{ maxWidth: 760, margin: "0 auto" }}>
       <div
@@ -34,7 +52,7 @@ export const MagazinePage: FC = () => {
           preload="metadata"
           style={{ display: "block", width: "100%", background: "#000" }}
         >
-          <source src="./media/friendfeed-magazine.mp4" type="video/mp4" />
+          <source src="/media/friendfeed-magazine.mp4" type="video/mp4" />
         </video>
       </div>
 

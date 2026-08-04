@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://friendfeed.github.io/sitemap.xml

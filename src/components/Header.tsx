@@ -103,7 +103,7 @@ export const Header: FC = () => {
         <div style={{ textAlign: "center", flexShrink: 0 }}>
           <Link to="/" style={{ display: "flex", alignItems: "center" }}>
             <img
-              src="./brand/friendfeed-wordmark.webp"
+              src="/brand/friendfeed-wordmark.webp"
               alt="FriendFeed"
               style={{ height: 34, display: "block" }}
             />

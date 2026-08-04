@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useXUsers } from "../services/useXUsers";
 import { useSearch } from "../services/SearchContext";
 import { XUserCell } from "../components/XUserCell";
+import { useSEO } from "../seo/useSEO";
 
 const PAGE_SIZE = 20;
 
 export const XCrossoverPage: FC = () => {
+  useSEO({ path: "/" });
   const users = useXUsers();
   const { query } = useSearch();
   const [page, setPage] = useState(0);

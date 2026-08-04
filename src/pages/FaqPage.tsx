@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { useSEO } from "../seo/useSEO";
 
 /**
  * FAQ / glossary page: Persian FriendFeed-community slang ("فرفرستان" jargon).
@@ -80,6 +81,24 @@ const LIKE_TYPES: SlangEntry[] = [
 ];
 
 export const FaqPage: FC = () => {
+  useSEO({
+    path: "/faq",
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [...SLANG, ...LIKE_TYPES].map((entry) => ({
+          "@type": "Question",
+          name: entry.term,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: entry.meaning,
+          },
+        })),
+      },
+    ],
+  });
+
   return (
     <div>
       <h1 style={{ fontSize: 14, marginBottom: 6 }}>سوالات متداول و فرهنگ لغت فرفری</h1>
