@@ -44,9 +44,9 @@ export const Sidebar: FC = () => {
         <Link to="/users" style={itemStyle(pathname === "/users")}>
           همه کاربران
         </Link>
-        <span style={itemStyle(false)} aria-disabled="true">
-          من
-        </span>
+        <Link to="/subscriptions" style={itemStyle(pathname === "/subscriptions")}>
+          Subscriptions
+        </Link>
         <span style={itemStyle(false)} aria-disabled="true">
           اتاق‌ها
         </span>
