@@ -51,9 +51,15 @@ export const GooderDiagram: FC = () => (
     */}
     <div style={{ position: "relative", direction: "ltr" }}>
       <svg viewBox={`0 0 ${VB_W} ${VB_H}`} style={{ width: "100%", height: "auto", display: "block" }} role="img" aria-label="نمودار: چند وبلاگ جدا از هم در گودر جمع می‌شوند، و بعد از تعطیلی گودر، همان جمع به فرندفید فارسی و توییتر تقسیم می‌شود">
+      {/* ---- Blogs -> گودر ---- */}
       {blogs.map((b, i) => (
         <path key={i} d={curve(b.x, 40, hub.x, hub.y - 26)} fill="none" stroke={b.color} strokeOpacity={0.45} strokeWidth={2} />
       ))}
+      
+      {/* ---- Comments circulating inside گودر (small dashed loops) ---- */}
+      <circle cx={hub.x} cy={hub.y} r={42} fill="none" stroke="#999" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="3,2" />
+      
+      {/* ---- گودر -> Destinations ---- */}
       {dests.map((d, i) => (
         <path key={i} d={curve(hub.x, hub.y + 26, d.x, d.y - 16)} fill="none" stroke={d.color} strokeOpacity={0.55} strokeWidth={2.5} />
       ))}
@@ -122,7 +128,7 @@ export const GooderDiagram: FC = () => (
     </div>
 
     <p style={{ margin: "10px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center", direction: "rtl" }}>
-      وبلاگ‌های پراکنده، در گودر یک‌جا جمع می‌شدند؛ بعد از تعطیلی‌اش، همان جمع بین فرندفید فارسی و توییتر تقسیم شد.
+      وبلاگ‌های پراکنده، در گودر یک‌جا جمع می‌شدند؛ کاربران درون خود گودر کامنت و نظر اشتراک می‌کردند (حلقه‌ی خط‌چین)؛ بعد از تعطیلی، همان جمع بین فرندفید فارسی و توییتر تقسیم شد.
     </p>
   </div>
 );
