@@ -67,24 +67,13 @@ export const SubscriptionsPage: FC = () => {
 
   return (
     <div style={{ maxWidth: "100%", padding: "0" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginBottom: 16,
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
-        <h1 style={{ fontSize: 14, margin: 0 }}>مشترکان فرندفید</h1>
-        <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
-          {searchQuery
-            ? `${filteredUsers.length} نتیجه از ${users.length} کاربر`
-            : `${users.length} کاربر`}
-        </span>
-      </div>
-
+      {/* This page's own search bar now lives here, at the very top --
+          it used to sit lower on the page while the shared <Header>'s
+          search box (wired to a totally different dataset via
+          SearchContext, meant for /users) rendered above it, so the
+          page showed two search inputs where only the lower one
+          actually did anything. <Header> is no longer shown on this
+          route (see App.tsx) and this box has taken its place. */}
       <div
         style={{
           background: "var(--ff-panel)",
@@ -110,6 +99,24 @@ export const SubscriptionsPage: FC = () => {
             boxSizing: "border-box",
           }}
         />
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          marginBottom: 16,
+          flexWrap: "wrap",
+          gap: 12,
+        }}
+      >
+        <h1 style={{ fontSize: 14, margin: 0 }}>مشترکان فرندفید</h1>
+        <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
+          {searchQuery
+            ? `${filteredUsers.length} نتیجه از ${users.length} کاربر`
+            : `${users.length} کاربر`}
+        </span>
       </div>
 
       {filteredUsers.length === 0 ? (

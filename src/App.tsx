@@ -27,7 +27,7 @@ const App: FC = () => {
   // Every other page (home, faq, magazine, google-reader, ...) starts
   // flush at the top with no header above it, same as the home page
   // always has.
-  const showHeader = pathname === "/users" || pathname === "/subscriptions";
+  const showHeader = pathname === "/users";
   // Pages without the header (everything but /users) sat flush against
   // the very top of the viewport once the header was made conditional,
   // so they get extra top padding here instead, applied to the shared
