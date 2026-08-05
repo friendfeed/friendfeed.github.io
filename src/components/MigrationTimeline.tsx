@@ -391,7 +391,13 @@ export const MigrationTimeline: FC = () => (
         className="growth-chart-scroll"
         style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "0 -2px", padding: "0 2px", direction: "ltr" }}
       >
-        <div style={{ minWidth: 640 }}>
+        {/* 1000px (not 640) so that 6 gaps between 7 points give ~167px
+            of spacing -- comfortably more than each label's 148px box.
+            The original 640px min-width put points only ~107px apart,
+            which is *narrower* than the label boxes above them, so
+            adjacent labels physically overlapped (this was the actual
+            cause of the "mixed text" bug -- not a bidi issue). */}
+        <div style={{ minWidth: 1000 }}>
           {/* Era header bar: segmented, width-matched to the plot below
               via the same growthLeftPct() math used for the SVG, so
               boundaries always line up with the point where each era

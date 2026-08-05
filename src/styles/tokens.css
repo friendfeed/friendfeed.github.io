@@ -204,6 +204,15 @@ button {
 
   .ff-layout {
     flex-direction: column;
+    /* .ff-layout's base align-items: flex-start is meant for the
+       desktop row layout. In column direction that same value stops
+       <main> from stretching to the container's width -- it sizes to
+       its own max-content width instead, which is how a single wide
+       child (e.g. the growth chart's 640px min-width) was silently
+       pulling the whole page wider than the viewport on mobile,
+       hiding/overlapping anything past the right edge. Stretch is the
+       correct cross-axis behavior for a single-column mobile layout. */
+    align-items: stretch;
     padding-inline: max(14px, var(--ff-safe-left)) max(14px, var(--ff-safe-right)) !important;
   }
 
