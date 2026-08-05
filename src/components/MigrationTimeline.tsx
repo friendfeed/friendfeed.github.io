@@ -202,26 +202,63 @@ const kindColor: Record<TimelineEntry["kind"], string> = {
 };
 
 /**
- * Single source of truth for the growth chart, shared between the bars
- * and the x-axis labels below them, so the two can never drift out of
- * sync with each other the way separate arrays could.
- *
- * `platform` matters here: the chart tracks one continuous *community*
- * across its successive main hangouts, not literally "FriendFeed and
- * Twitter users" for the whole span (Twitter didn't exist in 1997, and
- * neither did FriendFeed until Oct 2007) — see the caption below the
- * chart, which spells this out so the early bars don't read as a claim
- * about FriendFeed/Twitter population before either service existed.
+ * Single source of truth for the growth chart: one continuous
+ * *community* moving through its successive main hangouts. Each step
+ * is one migration wave, not a measured user count (no such stats
+ * were ever published), so the chart intentionally has no numeric
+ * y-axis — see the redesign note above the chart body.
  */
-const chartData: { v: number; label: string; sub: string; platform: string; kind: "launch" | "shutdown" }[] = [
-  { v: 1, label: "۱۹۹۷", sub: "اتاق‌های گفتگوی یاهو", platform: "چت یاهو", kind: "launch" },
-  { v: 1.6, label: "۲۰۰۵", sub: "یاهو ۳۶۰ می‌آید", platform: "چت یاهو + یاهو۳۶۰", kind: "launch" },
-  { v: 2.1, label: "۲۰۰۹", sub: "تعطیلی یاهو ۳۶۰", platform: "فرندفید + توییتر", kind: "shutdown" },
-  { v: 2.6, label: "۲۰۱۱", sub: "گوگل‌پلاس می‌آید", platform: "فرندفید + توییتر", kind: "launch" },
-  { v: 3.1, label: "۲۰۱۲", sub: "تعطیلی اتاق‌های یاهو", platform: "فرندفید + توییتر", kind: "shutdown" },
-  { v: 4, label: "۲۰۱۳", sub: "تعطیلی گوگل‌ریدر", platform: "فرندفید + توییتر", kind: "shutdown" },
-  { v: 5, label: "۲۰۱۵+", sub: "فقط توییتر می‌ماند", platform: "فقط توییتر", kind: "shutdown" },
+type GrowthStep = { year: string; title: string; kind: "launch" | "shutdown" };
+
+const growthSteps: GrowthStep[] = [
+  { year: "۱۹۹۷", title: "اتاق‌های گفتگوی یاهو راه‌اندازی می‌شود", kind: "launch" },
+  { year: "۲۰۰۵", title: "یاهو ۳۶۰ و گوگل ریدر راه‌اندازی می‌شوند", kind: "launch" },
+  { year: "۲۰۰۹", title: "یاهو ۳۶۰ تعطیل می‌شود", kind: "shutdown" },
+  { year: "۲۰۱۱", title: "گوگل پلاس راه‌اندازی می‌شود", kind: "launch" },
+  { year: "۲۰۱۲", title: "اتاق‌های گفتگوی یاهو تعطیل می‌شوند", kind: "shutdown" },
+  { year: "۲۰۱۳", title: "گوگل ریدر تعطیل می‌شود", kind: "shutdown" },
+  { year: "۲۰۱۵+", title: "فرندفید تعطیل می‌شود، فقط توییتر می‌ماند", kind: "shutdown" },
 ];
+
+/** Eras the community lived through, as x-index ranges into growthSteps
+ * (inclusive), rendered as a labeled background band instead of
+ * repeating the platform name under every single point. */
+const growthEras: { from: number; to: number; label: string }[] = [
+  { from: 0, to: 1, label: "خانه: اتاق‌های گفتگوی یاهو" },
+  { from: 1, to: 2, label: "خانه: یاهو ۳۶۰" },
+  { from: 2, to: 6, label: "خانه: فرندفید + توییتر" },
+  { from: 6, to: 6, label: "فقط توییتر" },
+];
+
+// Chart geometry, computed once from growthSteps.length so the SVG
+// path, the markers, and the HTML label overlays all stay in sync.
+const GROWTH_VB_W = 1040;
+const GROWTH_VB_H = 300;
+const GROWTH_MARGIN_X = 30;
+const GROWTH_PLOT_W = GROWTH_VB_W - GROWTH_MARGIN_X * 2;
+const GROWTH_BASE_Y = 230;
+const GROWTH_TOP_Y = 46;
+const GROWTH_PLOT_H = GROWTH_BASE_Y - GROWTH_TOP_Y;
+
+const growthStepX = (i: number) => GROWTH_MARGIN_X + (i * GROWTH_PLOT_W) / (growthSteps.length - 1);
+const growthStepY = (stage: number) => GROWTH_BASE_Y - (stage / growthSteps.length) * GROWTH_PLOT_H;
+const growthLeftPct = (i: number) => (growthStepX(i) / GROWTH_VB_W) * 100;
+
+// Stepped ("staircase") path: flat at the current stage until the
+// x-position where the next event happens, then a vertical jump.
+// This is the standard shape for "one quantity that changes only at
+// discrete events over time" — much clearer here than unconnected
+// bars, since the whole point of this chart is that it is one
+// continuously-growing community, not seven unrelated measurements.
+const growthLinePath = (() => {
+  let d = `M ${growthStepX(0)} ${growthStepY(1)}`;
+  for (let i = 1; i < growthSteps.length; i++) {
+    d += ` H ${growthStepX(i)} V ${growthStepY(i + 1)}`;
+  }
+  return d;
+})();
+
+const growthAreaPath = `${growthLinePath} L ${growthStepX(growthSteps.length - 1)} ${GROWTH_BASE_Y} L ${growthStepX(0)} ${GROWTH_BASE_Y} Z`;
 
 export const MigrationTimeline: FC = () => (
   <div>
@@ -294,119 +331,186 @@ export const MigrationTimeline: FC = () => (
       ))}
     </div>
 
-    {/* ---- Illustrative growth chart ----
-        Rebuilt as plain HTML/CSS instead of SVG <text>: SVG text with
-        textAnchor="end" doesn't reliably apply the Unicode bidi algorithm
-        for Farsi across browsers, which is what was silently truncating
-        the title down to its last word or two. HTML text doesn't have
-        that problem and wraps normally, so every label is guaranteed to
-        render in full. Also added an explicit legend and an "how to read
-        this" line, since a chart with colored bars but no legend doesn't
-        explain itself. */}
+    {/* ---- Growth chart, redesigned as a stepped ("staircase") line ----
+        Why a step chart instead of bars: this tracks ONE continuously
+        growing community moving through discrete events, not seven
+        independent measurements, so a connected staircase (value flat,
+        then jumps at the moment of each event) is the standard,
+        immediately-readable shape for that story — see e.g. Tufte or
+        any time-series style guide on "step vs. bar" for event-driven
+        series. It also removes two sources of confusion in the old
+        version: (1) bar height AND bar color each separately encoding
+        different things (magnitude vs. event type), and (2) fake
+        precision from decimal values (2.6, 3.1) for a number that was
+        always just an ordinal illustration. Every step here is equal
+        height on purpose — there is no numeric y-axis, because there
+        is no real measurement behind it, and pretending otherwise with
+        numbers is worse than just showing the shape of the growth.
+        Platform-era labels moved from a 3rd text line under every
+        single point into shaded background bands (like recession bands
+        on an economic chart), so "which platform is home right now"
+        reads as a region instead of repeated text. */}
     <div style={{ marginTop: 22 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8, marginBottom: 4 }}>
         <h3 style={{ fontSize: 13, margin: 0 }}>
-          رشد پیوسته جامعه فارسی‌زبان، نسل‌به‌نسل تا فرندفید و توییتر
+          رشد پلکانی جامعه فارسی‌زبان: هر موج مهاجرت، یک پله
         </h3>
-        <span style={{ fontSize: 10.5, color: "var(--ff-muted-light)" }}>شاخص نسبی، نه شمار واقعی کاربران</span>
+        <span style={{ fontSize: 10.5, color: "var(--ff-muted-light)" }}>شاخص ترتیبی، نه شمار واقعی کاربران</span>
       </div>
-      <p style={{ margin: "0 0 10px", fontSize: 11, lineHeight: 1.8, color: "var(--ff-muted)" }}>
-        این نمودار یک جامعه واحد را دنبال می‌کند که در طول زمان چند بار خانه عوض کرد، نه فرندفید و
-        توییتر را از ابتدا. تا ۲۰۰۹ عدد روی هر ستون، اندازه همان جمع در سرویس پیشین (چت یاهو یا
-        یاهو۳۶۰) است؛ از ۲۰۰۹ به بعد که فرندفید و توییتر به خانه اصلی‌اش تبدیل شدند، همان عدد جمعیت
-        این دو را نشان می‌دهد.
+      <p style={{ margin: "0 0 12px", fontSize: 11, lineHeight: 1.8, color: "var(--ff-muted)" }}>
+        این نمودار یک جامعه واحد را دنبال می‌کند، نه فرندفید و توییتر را از ابتدا. هر پله دقیقاً یک
+        رویداد است؛ ارتفاع پله‌ها عمداً یکسان است چون آمار رسمی‌ای برای شمار واقعی کاربران فارسی‌زبان
+        این سرویس‌ها وجود ندارد؛ آن‌چه واقعی و مستند است فقط توالی و جهت رویدادهاست: این جامعه هیچ‌وقت
+        کوچک‌تر نشد، فقط خانه عوض کرد.
       </p>
 
-      {/* Legend: explains what red vs. blue bars mean, since color alone
-          doesn't communicate that without a key. */}
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", margin: "8px 0 14px" }}>
+      {/* Legend: two event types, matching the icon + color used for
+          "launch" / "shutdown" in the vertical timeline above, so the
+          two visuals read as one consistent system rather than two
+          separate charts. */}
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", margin: "8px 0 6px" }}>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--ff-muted)" }}>
-          <span style={{ width: 11, height: 11, borderRadius: 3, background: "var(--ff-link)", display: "inline-block" }} />
+          <span style={{ width: 14, height: 14, borderRadius: "50%", background: "#fff", border: `2px solid ${kindColor.launch}`, display: "inline-block" }} />
           راه‌اندازی یک سرویس جدید
         </span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--ff-muted)" }}>
-          <span style={{ width: 11, height: 11, borderRadius: 3, background: "#c1121f", display: "inline-block" }} />
+          <span style={{ width: 14, height: 14, borderRadius: "50%", background: "#fff", border: `2px solid ${kindColor.shutdown}`, display: "inline-block" }} />
           تعطیلی یک سرویس رقیب (و مهاجرت کاربرانش)
         </span>
       </div>
 
-      {/* Chart body: fixed-width numeric axis column (0-5) on the right
-          (RTL leading edge) + a row of bars, laid out with CSS grid so the
-          bars' baseline and the axis's "0" line always land on the same
-          pixel row regardless of container width. */}
-      <div style={{ display: "grid", gridTemplateColumns: "24px 1fr", columnGap: 10 }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            height: 160,
-            fontSize: 10,
-            color: "var(--ff-muted-light)",
-            textAlign: "center",
-          }}
-        >
-          <span>۵</span>
-          <span>۴</span>
-          <span>۳</span>
-          <span>۲</span>
-          <span>۱</span>
-          <span>۰</span>
-        </div>
+      {/* On narrow (mobile) screens, 7 labeled points can't shrink
+          below a certain width without their text overlapping — so
+          instead of shrinking the text into illegibility, the whole
+          chart gets a fixed minimum width and the OUTER wrapper
+          scrolls horizontally. This is the standard mobile pattern for
+          dense charts/tables (scroll the data, don't squash it); a
+          small scroll hint is shown only on narrow screens where it's
+          needed. */}
+      <div
+        className="growth-chart-scroll"
+        style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "0 -2px", padding: "0 2px", direction: "ltr" }}
+      >
+        <div style={{ minWidth: 640 }}>
+          {/* Era header bar: segmented, width-matched to the plot below
+              via the same growthLeftPct() math used for the SVG, so
+              boundaries always line up with the point where each era
+              actually starts. */}
+          <div style={{ position: "relative", height: 30, direction: "ltr" }}>
+            {growthEras.map((era, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  insetInlineStart: `${growthLeftPct(era.from)}%`,
+                  width: `${growthLeftPct(era.to) - growthLeftPct(era.from)}%`,
+                  textAlign: "center",
+                  fontSize: 10,
+                  color: "var(--ff-muted-light)",
+                  borderBottom: "2px solid var(--ff-border)",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  padding: "0 4px 5px",
+                }}
+              >
+                {era.label}
+              </div>
+            ))}
+          </div>
 
-        <div
-          style={{
-            position: "relative",
-            height: 160,
-            borderInlineStart: "1.5px solid var(--ff-border-strong)",
-            borderBottom: "1.5px solid var(--ff-border-strong)",
-            backgroundImage:
-              "repeating-linear-gradient(to top, var(--ff-border) 0, var(--ff-border) 1px, transparent 1px, transparent 32px)",
-          }}
-        >
-          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "flex-end", justifyContent: "space-around", padding: "0 6px" }}>
-            {chartData.map((bar, i) => (
-              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 56 }}>
-                <span style={{ fontSize: 10.5, fontWeight: "bold", color: "var(--ff-text)", marginBottom: 3 }}>
-                  {bar.v % 1 === 0 ? bar.v : bar.v.toFixed(1).replace(".", "٫")}
-                </span>
-                <div
+          {/* Chart body: the staircase itself is pure SVG geometry (no
+              SVG <text>, for the bidi reasons noted elsewhere in this
+              file); all Farsi labels are plain HTML, absolutely
+              positioned from the same growthLeftPct() values so they
+              can never drift out of sync with the shape above them.
+              Direction is forced to ltr — time reads left-to-right here
+              (oldest to newest) because an ascending staircase is the
+              one layout everyone reads correctly on sight, in either
+              script direction; the caption below spells this out
+              explicitly rather than leaving it implicit. */}
+          <div style={{ position: "relative", direction: "ltr" }}>
+            <svg
+              viewBox={`0 0 ${GROWTH_VB_W} ${GROWTH_VB_H}`}
+              style={{ width: "100%", height: "auto", display: "block" }}
+              role="img"
+              aria-label="نمودار پلکانی رشد جامعه: هفت رویداد از ۱۹۹۷ تا ۲۰۱۵ به بعد، هر رویداد یک پله بالاتر از قبلی"
+            >
+              <line x1={GROWTH_MARGIN_X} y1={GROWTH_BASE_Y} x2={GROWTH_VB_W - GROWTH_MARGIN_X} y2={GROWTH_BASE_Y} stroke="var(--ff-border-strong)" strokeWidth={1.5} />
+              <path d={growthAreaPath} fill="var(--ff-link)" opacity={0.08} />
+              <path d={growthLinePath} fill="none" stroke="var(--ff-link)" strokeWidth={2.5} strokeLinejoin="round" />
+              {growthSteps.map((step, i) => {
+                const cx = growthStepX(i);
+                const cy = growthStepY(i + 1);
+                const color = kindColor[step.kind];
+                return (
+                  <g key={i}>
+                    <circle cx={cx} cy={cy} r={9} fill="#fff" stroke={color} strokeWidth={2.5} />
+                    {step.kind === "launch" ? (
+                      <path d={`M ${cx} ${cy - 4} V ${cy + 4} M ${cx - 4} ${cy} H ${cx + 4}`} stroke={color} strokeWidth={1.6} strokeLinecap="round" />
+                    ) : (
+                      <path
+                        d={`M ${cx} ${cy - 3.6} V ${cy} M ${cx - 3} ${cy - 2.2} A 4.2 4.2 0 1 0 ${cx + 3} ${cy - 2.2}`}
+                        fill="none"
+                        stroke={color}
+                        strokeWidth={1.6}
+                        strokeLinecap="round"
+                      />
+                    )}
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+
+          {/* x-axis labels: bold year pill + one short line per event,
+              instead of the old 3-line stack under every point. */}
+          <div style={{ position: "relative", height: 54, direction: "ltr", marginTop: 2 }}>
+            {growthSteps.map((step, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  insetInlineStart: `${growthLeftPct(i)}%`,
+                  transform: "translateX(-50%)",
+                  width: 148,
+                  textAlign: "center",
+                }}
+              >
+                <span
                   style={{
-                    width: 34,
-                    height: (bar.v / 5) * 160,
-                    borderRadius: "4px 4px 0 0",
-                    background: bar.kind === "shutdown" ? "#c1121f" : "var(--ff-link)",
-                    opacity: 0.85,
+                    display: "inline-block",
+                    fontSize: 10.5,
+                    fontWeight: "bold",
+                    color: kindColor[step.kind],
+                    background: "var(--ff-panel-alt)",
+                    border: "1px solid var(--ff-border)",
+                    borderRadius: 3,
+                    padding: "1px 6px",
+                    marginBottom: 4,
+                    direction: "rtl",
                   }}
-                />
+                >
+                  {step.year}
+                </span>
+                <div style={{ fontSize: 9.5, lineHeight: 1.5, color: "var(--ff-muted)", direction: "rtl" }}>{step.title}</div>
               </div>
             ))}
           </div>
         </div>
       </div>
+      <p
+        className="growth-chart-scroll-hint"
+        style={{ margin: "4px 0 0", fontSize: 10, color: "var(--ff-muted-light)", textAlign: "center", display: "none" }}
+      >
+        ‹ برای دیدن کل نمودار به چپ و راست بکشید ›
+      </p>
 
-      {/* x-axis labels, laid out to match the bars above via the same
-          justify-content: space-around rhythm */}
-      <div style={{ display: "grid", gridTemplateColumns: "24px 1fr", columnGap: 10, marginTop: 6 }}>
-        <div />
-        <div style={{ display: "flex", justifyContent: "space-around", padding: "0 6px" }}>
-          {chartData.map((x, i) => (
-            <div key={i} style={{ width: 56, textAlign: "center" }}>
-              <div style={{ fontSize: 10.5, fontWeight: "bold", color: "var(--ff-muted)" }}>{x.label}</div>
-              <div style={{ fontSize: 9, color: "var(--ff-muted-light)", lineHeight: 1.5 }}>{x.sub}</div>
-              <div style={{ fontSize: 8.5, color: "var(--ff-link)", lineHeight: 1.5, marginTop: 2 }}>
-                ({x.platform})
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <p style={{ margin: "12px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center" }}>
-        این نمودار آماری دقیق نیست، آمار رسمی از شمار کاربران فارسی‌زبان این سرویس‌ها منتشر نشده. عدد
-        روی هر ستون فقط یک شاخص نسبی از ۰ تا ۵ است، برچسب زیر هر ستون هم مشخص می‌کند در آن مقطع
-        داریم اندازه کدام سرویس را می‌بینیم. الگوی کلی که نشان می‌دهد این است: بعد از هر تعطیلی سرویس
-        رقیب (ستون‌های قرمز)، این جامعه یک پله بزرگ‌تر می‌شد.
+      <p style={{ margin: "10px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center", direction: "rtl" }}>
+        زمان در این نمودار از چپ به راست پیش می‌رود (۱۹۹۷ تا ۲۰۱۵ به بعد). این نمودار آماری دقیق
+        نیست؛ آمار رسمی از شمار کاربران فارسی‌زبان این سرویس‌ها منتشر نشده، برای همین به‌جای عدد،
+        فقط توالی و جهت رویدادها را نشان می‌دهد. الگوی کلی همیشه یکسان است: بعد از هر تعطیلی سرویس
+        رقیب (نشان قرمز)، این جامعه یک پله بزرگ‌تر می‌شد و هرگز به پله قبلی برنگشت.
       </p>
     </div>
 

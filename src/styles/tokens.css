@@ -183,6 +183,14 @@ button {
     font-size: 15px;
   }
 
+  /* The growth-staircase chart in MigrationTimeline gets a fixed
+     min-width and scrolls horizontally below 680px so its 7 labels
+     never overlap; the hint text is only useful once scrolling is
+     actually in play. */
+  .growth-chart-scroll-hint {
+    display: block !important;
+  }
+
   body {
     font-size: 14.5px;
     padding-bottom: calc(var(--ff-bottom-nav-height) + var(--ff-safe-bottom));
