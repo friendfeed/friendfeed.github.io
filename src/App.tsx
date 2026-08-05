@@ -21,15 +21,17 @@ import { SearchProvider } from "./services/SearchContext";
 
 const App: FC = () => {
   const { pathname } = useLocation();
-  // The header (logo + search box) is chrome built for the user-browsing
-  // pages. The home page is a standalone landing/about page, so it starts
-  // flush at the top with no header above it.
-  const isHomePage = pathname === "/";
+  // The header (logo + search box) is chrome built specifically for
+  // browsing/searching the user list, so it only renders on /users now.
+  // Every other page (home, faq, magazine, google-reader, ...) starts
+  // flush at the top with no header above it, same as the home page
+  // always has.
+  const showHeader = pathname === "/users";
 
   return (
     <SearchProvider>
       <div style={{ minHeight: "100%", display: "flex", flexDirection: "column" }}>
-        {!isHomePage && <Header />}
+        {showHeader && <Header />}
         <div
           className="ff-layout"
           style={{

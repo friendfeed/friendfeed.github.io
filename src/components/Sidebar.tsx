@@ -70,10 +70,7 @@ export const Sidebar: FC = () => {
         </Link>
         <Link
           to="/magazine/google-reader"
-          style={{
-            ...itemStyle(pathname === "/magazine/google-reader"),
-            paddingRight: 12,
-          }}
+          style={itemStyle(pathname === "/magazine/google-reader")}
         >
           گودر (گوگل ریدر)
         </Link>
