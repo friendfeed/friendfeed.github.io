@@ -1,39 +1,40 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { useSEO } from "../seo/useSEO";
-import { GoogleReaderHero } from "../components/GoogleReaderHero";
+import { GoogleReaderTopBar } from "../components/GoogleReaderTopBar";
+import { GoogleReaderPost } from "../components/GoogleReaderPost";
+import { GooderDiagram } from "../components/GooderDiagram";
+import { readerPosts } from "../data/googleReaderArticle";
 
 /**
  * "گودر" (Google Reader) article, linked as its own sub-item under
  * "مجله فرندفید" in the Sidebar (see Sidebar.tsx) rather than folded
- * into MagazinePage.tsx. Kept as a fully separate page/section on
- * purpose: MagazinePage is a single-post video-led layout about
- * FriendFeed itself, while this one is about گودر, the sibling
- * community/tool that Farsi bloggers used alongside (and before)
- * FriendFeed, so it gets its own route, its own hero, and its own
- * structured sections instead of one flowing article.
+ * into MagazinePage.tsx.
  *
- * Hero: a recreated, animated Google Reader UI (see
- * ../components/GoogleReaderHero.tsx) instead of the old empty dashed
- * placeholder box. Kept as its own component/panel, separate from the
- * article body below it, so it can be revised independently.
+ * Full redesign: this page previously paired a small animated 3-pane
+ * Reader demo (GoogleReaderHero.tsx) with an otherwise ordinary text
+ * article underneath it. Per request, the demo hero is gone and the
+ * *entire* article now IS the Google Reader experience: the wordmark
+ * bar up top (GoogleReaderTopBar), then every section of the article
+ * rendered as a real Reader item (GoogleReaderPost) with its own feed
+ * name, star/share/like row, and a small fake comment thread for
+ * atmosphere. Clicking a post reproduces the exact mark-as-read wash
+ * the old hero's autoplay loop used, just user-triggered instead of on
+ * a timer. A small SVG diagram (GooderDiagram) illustrates the
+ * many-blogs-into-one-hub-then-back-out-to-two-destinations shape of
+ * the whole story.
  *
  * Content is adapted from research on the Farsi Google Reader
- * ("گودر") blogger community: what it was, how it grew a social layer,
- * who used it and for what, its relationship with FriendFeed Farsi and
- * Twitter, and how/where it ended. Per site style, no em dashes; normal
- * punctuation only.
+ * ("گودر") blogger community. Per site style, no em dashes; normal
+ * punctuation only. Wording pass: افول -> پایان, گودری‌های فارسی ->
+ * گودری‌های فارسی‌زبان, and a few other Arabic-heavy words swapped for
+ * plainer Persian (see data/googleReaderArticle.ts for the full list).
  */
-const panelStyle = {
-  background: "var(--ff-panel)",
-  border: "1px solid var(--ff-border)",
-} as const;
-
 export const GoogleReaderPage: FC = () => {
   useSEO({
     path: "/magazine/google-reader",
     title: "گودر | فرندفید فارسی",
     description:
-      "گودر (گوگل ریدر) و جامعه‌ی وبلاگ‌نویسان فارسی: از کجا آمد، چطور به یک اجتماع تبدیل شد، رابطه‌اش با فرندفید فارسی و توییتر، و اینکه در پایان کاربرانش به کجا مهاجرت کردند.",
+      "گودر (گوگل ریدر) و جامعه‌ی وبلاگ‌نویسان فارسی‌زبان: از کجا آمد، چطور به یک اجتماع تبدیل شد، رابطه‌اش با فرندفید فارسی و توییتر، و اینکه در پایان کاربرانش به کجا مهاجرت کردند.",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -49,151 +50,48 @@ export const GoogleReaderPage: FC = () => {
     ],
   });
 
+  const [readIds, setReadIds] = useState<Set<string>>(new Set());
+  const totalUnread = readerPosts.length - readIds.size;
+
+  const markRead = (id: string) => setReadIds((prev) => new Set(prev).add(id));
+
   return (
     <article style={{ maxWidth: 760, margin: "0 auto" }}>
-      {/* ---- Hero: recreated, animated Google Reader UI ---- */}
-      <section style={{ marginBottom: 18 }} aria-label="بازسازی رابط کاربری گوگل ریدر">
-        <GoogleReaderHero />
+      {/* ---- Google Reader top chrome ---- */}
+      <section style={{ marginBottom: 4 }} aria-label="رابط گوگل ریدر">
+        <GoogleReaderTopBar totalUnread={totalUnread} />
       </section>
 
-      {/* ---- Article body, in its own panel, separate from the hero ---- */}
-      <div
+      {/* ---- Diagram: blogs -> گودر -> فرندفید/توییتر ---- */}
+      <section
         style={{
-          ...panelStyle,
-          padding: "20px 24px 28px",
+          background: "var(--ff-panel)",
+          border: "1px solid var(--ff-border)",
+          borderTop: "none",
+          padding: "14px 16px 4px",
+        }}
+        aria-label="نمودار تجمیع و مهاجرت"
+      >
+        <GooderDiagram />
+      </section>
+
+      {/* ---- The article itself, as a Reader item stream ---- */}
+      <section aria-label="فهرست پست‌ها" style={{ marginTop: 16 }}>
+        {readerPosts.map((post) => (
+          <GoogleReaderPost key={post.id} post={post} isRead={readIds.has(post.id)} onRead={markRead} />
+        ))}
+      </section>
+
+      <p
+        style={{
+          margin: "14px 2px 0",
+          fontSize: 10.5,
+          color: "var(--ff-muted-light)",
+          textAlign: "center",
         }}
       >
-        <h1
-          style={{
-            fontSize: 20,
-            lineHeight: 1.5,
-            margin: "0 0 14px",
-            color: "var(--ff-text)",
-          }}
-        >
-          گودر: خانه‌ی گمشده‌ی وبلاگ‌نویسان فارسی
-        </h1>
-
-        <div style={{ fontSize: 13.5, lineHeight: 2.1, color: "var(--ff-text)" }}>
-          <p style={{ margin: "0 0 16px" }}>
-            پیش از آنکه توییتر و اینستاگرام محل تجمع فارسی‌زبانان اینترنت شوند،
-            یک ابزار ساده و فنی به نام Google Reader که کاربران فارسی‌زبان آن
-            را با شوخ‌طبعی «گودر» نامیدند، به یکی از پرشورترین اجتماعات آنلاین
-            وبلاگستان فارسی تبدیل شد.
-          </p>
-
-          <h2 style={{ fontSize: 15.5, margin: "22px 0 10px", color: "var(--ff-text)" }}>
-            گوگل ریدر چه بود
-          </h2>
-          <p style={{ margin: "0 0 16px" }}>
-            Google Reader محصولی از آزمایشگاه گوگل بود که در مهر ۱۳۸۴ (اکتبر
-            ۲۰۰۵) منتشر شد و دو سال بعد از حالت بتا خارج شد. ماهیت اصلی آن یک
-            فیدخوان (RSS/Atom Reader) بود؛ ابزاری که فیدهای وبلاگ‌ها و
-            وب‌سایت‌های مورد علاقه‌ی کاربر را در یک صفحه جمع می‌کرد تا او مجبور
-            نباشد هر بار به‌صورت جداگانه به هر وبلاگ سر بزند. در دوره‌ای که
-            وبلاگستان فارسی به صدها هزار وبلاگ رسیده بود، همین قابلیت
-            ساده گوگل ریدر را به‌سرعت در میان بلاگرهای فارسی جا انداخت.
-          </p>
-
-          <h2 style={{ fontSize: 15.5, margin: "22px 0 10px", color: "var(--ff-text)" }}>
-            از ابزار فنی تا یک اجتماع
-          </h2>
-          <p style={{ margin: "0 0 16px" }}>
-            گوگل ریدر در ابتدا صرفاً یک فیدخوان شخصی بود، نه یک شبکه‌ی اجتماعی.
-            اما چند ویژگی آن به‌مرور کارکرد اجتماعی پیدا کرد: اشتراک‌گذاری هر
-            پست خوانده‌شده با یک کلیک، دنبال کردن دیگر کاربران گودر، لایک و
-            کامنت روی هر آیتم، و در ادامه امکان نوشتن مستقیم یک یادداشت کوتاه
-            داخل خود گودر بدون نیاز به داشتن پستی در وبلاگ منبع. همین لایه‌ی
-            اجتماعی، جامعه‌ای برای گفتگو، شوخی، جدل و هم‌فکری ساخت. کاربران
-            پست‌های وبلاگ‌های محبوبشان را با یکدیگر به اشتراک می‌گذاشتند، زیر آن
-            پست‌ها بحث می‌کردند و کاربران گودر به لایک‌ها و کامنت‌ها و به عادت
-            روزانه‌ی مرور مطالب پرلایک برای باخبر شدن از اخبار روز دلبسته شده
-            بودند.
-          </p>
-
-          <h2 style={{ fontSize: 15.5, margin: "22px 0 10px", color: "var(--ff-text)" }}>
-            چه کسانی بودند و درباره‌ی چه می‌نوشتند
-          </h2>
-          <p style={{ margin: "0 0 16px" }}>
-            جامعه‌ی گودری‌ها عمدتاً از میان همان وبلاگ‌نویسان دوره‌ی طلایی
-            وبلاگستان فارسی شکل گرفت؛ افرادی که پیش از پیوستن به گودر معمولاً
-            از قبل صاحب وبلاگ شخصی بودند، با موضوعاتی از خاطرات روزمره و
-            ادبیات و شعر تا نقد فیلم و کتاب، فناوری، سیاست و طنز. آنچه گودر را
-            از خودِ وبلاگستان متمایز می‌کرد تجمیع بود؛ به‌جای پراکندگی محتوا در
-            هزاران آدرس مجزا، گودر یک نقطه‌ی مرکزی ساخت که در آن بهترین
-            پست‌های روز به‌سرعت بالا می‌آمدند، کاربران وبلاگ‌های تازه را از
-            طریق شبکه‌ی اجتماعی خودشان کشف می‌کردند، و بحث زیر یک پست گاهی
-            پرشورتر از کامنت‌های خودِ وبلاگ می‌شد.
-          </p>
-
-          <h2 style={{ fontSize: 15.5, margin: "22px 0 10px", color: "var(--ff-text)" }}>
-            رابطه با فرندفید فارسی و توییتر
-          </h2>
-          <p style={{ margin: "0 0 16px" }}>
-            فرندفید از نظر ساختاری شباهت زیادی به کارکرد اجتماعی گودر داشت؛ هر
-            دو حول محور اشتراک‌گذاری لینک، لایک و کامنت می‌چرخیدند و هر دو
-            همان الگوریتم بالا آمدن دوباره‌ی مطلب با لایک یا کامنت تازه را
-            داشتند. بسیاری از گودری‌های فارسی، فرندفید را بستری موازی یا مکمل
-            گودر تجربه کردند؛ همان جمع آشنا و همان سبک گفتگو، با آزادی بیشتر
-            برای پیوست چند شبکه‌ی دیگر به یک فید واحد. توییتر نقش متفاوتی
-            داشت و بیشتر بستر پخش سریع خبر و اعلان کوتاه بود، در حالی که گودر
-            و فرندفید محل بحث عمیق‌تر و گفتگوی چندنفره‌ی طولانی‌تر بودند. با
-            این حال، وقتی گودر عملاً از دور خارج شد، توییتر یکی از مقصدهای
-            اصلی مهاجرت شد.
-          </p>
-
-          <h2 style={{ fontSize: 15.5, margin: "22px 0 10px", color: "var(--ff-text)" }}>
-            افول: چرا و چگونه تمام شد
-          </h2>
-          <p style={{ margin: "0 0 16px" }}>
-            افول گودر دو مرحله داشت. در سال ۱۳۹۱ (۲۰۱۲)، گوگل در چارچوب تلاش
-            برای سوق دادن کاربران به گوگل پلاس، لایه‌ی اجتماعی گوگل ریدر
-            (دنبال کردن دیگران، کامنت و لایک عمومی) را به‌شدت محدود کرد؛
-            ضربه‌ای به همان چیزی که کاربران فارسی گودر را برایش دوست داشتند،
-            نه خودِ فیدخوانی بلکه بعد اجتماعی آن. سپس در خرداد ۱۳۹۲ (مارس تا
-            ژوئیه ۲۰۱۳)، گوگل رسماً اعلام کرد که به‌دلیل کاهش استفاده، سرویس
-            را از اول ژوئیه‌ی ۲۰۱۳ به‌طور کامل تعطیل می‌کند. از دوم ژوئیه،
-            کاربران با صفحه‌ای مواجه شدند که پایان کامل سرویس را اعلام می‌کرد
-            و تمام داده‌های آن‌ها، از افراد دنبال‌شده تا پست‌های ستاره‌دار و
-            اشتراک‌گذاری‌ها، به‌طور سیستماتیک از سرورهای گوگل حذف شد.
-          </p>
-
-          <h2 style={{ fontSize: 15.5, margin: "22px 0 10px", color: "var(--ff-text)" }}>
-            مهاجرت: گودری‌ها کجا رفتند
-          </h2>
-          <p style={{ margin: "0 0 16px" }}>
-            اعلام تعطیلی بلافاصله موجی از تلاش برای پیدا کردن جایگزین در میان
-            بلاگرهای فارسی راه انداخت. Feedly یکی از اولین و پرطرفدارترین
-            مقصدها بود و امکان وارد کردن مستقیم اشتراک‌های گوگل ریدر را
-            فراهم کرد. Digg Reader و NewsBlur هم به‌عنوان گزینه‌های دیگر
-            معرفی شدند، دومی مشخصاً برای کسانی که دلشان برای فرهنگ اشتراک و
-            کامنت‌گذاری به سبک گودر قدیم تنگ شده بود. در کنار این فیدخوان‌های
-            خارجی، تلاش‌های داخلی هم برای بازسازی نسخه‌ی فارسی گودر شکل
-            گرفت. بخش بزرگی از بعد اجتماعی گودر هم به فرندفید فارسی منتقل شد
-            که از حدود ۱۳۸۸ در حال رشد موازی بود، و بعدها که فرندفید هم در
-            ۱۳۹۴ تعطیل شد، بازماندگان این دو موج به شبکه‌های بزرگ‌تر مثل
-            توییتر و فیسبوک پراکنده شدند. نکته‌ی مهم این است که آنچه واقعاً از
-            بین رفت جامعه بود، نه فقط تکنولوژی؛ فیدخوان‌های جایگزین امکانات
-            فنی مشابه یا حتی بهتری ارائه می‌دادند، اما هیچ‌کدام نتوانستند
-            دقیقاً همان جمع آشنا و همان حس تعلق را که در گودر شکل گرفته بود
-            بازسازی کنند.
-          </p>
-
-          <h2 style={{ fontSize: 15.5, margin: "22px 0 10px", color: "var(--ff-text)" }}>
-            جمع‌بندی
-          </h2>
-          <p style={{ margin: 0 }}>
-            گودر نمونه‌ی اولیه‌ای از چیزی بود که بعدها در شبکه‌های اجتماعی
-            بزرگ‌تر به شکل پخته‌تری تکرار شد؛ تجمیع محتوا به‌همراه لایک، کامنت
-            و دنبال کردن، حتی اگر ابزار اصلی هرگز برای این منظور طراحی نشده
-            باشد. برای نسل خاصی از وبلاگ‌نویسان فارسی، گودر نه‌فقط یک فیدخوان
-            که تجربه‌ی اول آشنایی با مفهوم فید اجتماعی و جامعه‌ی آنلاین با
-            هویت واحد بود. تعطیلی آن در ۲۰۱۳ نقطه‌ی عطفی نمادین برای افول
-            کلی‌تر وبلاگستان فارسی کلاسیک محسوب می‌شود، دوره‌ای که به‌تدریج
-            جای خود را به شبکه‌های اجتماعی سراسری داد.
-          </p>
-        </div>
-      </div>
+        بازسازی رابط گوگل ریدر و شبیه‌سازی کامنت‌ها برای فضا؛ محتوای تاریخی بر اساس پژوهش، نام کاربری‌های زیر پست‌ها ساختگی هستند.
+      </p>
     </article>
   );
 };
