@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { useSEO } from "../seo/useSEO";
+import { GoogleReaderHero } from "../components/GoogleReaderHero";
 
 /**
  * "گودر" (Google Reader) article, linked as its own sub-item under
@@ -11,12 +12,10 @@ import { useSEO } from "../seo/useSEO";
  * FriendFeed, so it gets its own route, its own hero, and its own
  * structured sections instead of one flowing article.
  *
- * Hero: intentionally a plain placeholder box right now (no image),
- * separate from the content panel below it, so hero artwork can be
- * dropped in later without touching the article layout. Replace the
- * placeholder <div> in the hero section with an <img> (or background
- * image) once art is ready; the surrounding markup/spacing is already
- * sized for that.
+ * Hero: a recreated, animated Google Reader UI (see
+ * ../components/GoogleReaderHero.tsx) instead of the old empty dashed
+ * placeholder box. Kept as its own component/panel, separate from the
+ * article body below it, so it can be revised independently.
  *
  * Content is adapted from research on the Farsi Google Reader
  * ("گودر") blogger community: what it was, how it grew a social layer,
@@ -52,24 +51,9 @@ export const GoogleReaderPage: FC = () => {
 
   return (
     <article style={{ maxWidth: 760, margin: "0 auto" }}>
-      {/* ---- Hero: placeholder only, art to be added later ---- */}
-      <section
-        style={{
-          ...panelStyle,
-          marginBottom: 18,
-          minHeight: 220,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "var(--ff-panel-alt)",
-          borderStyle: "dashed",
-          borderColor: "var(--ff-border-strong)",
-        }}
-        aria-hidden="true"
-      >
-        <span style={{ fontSize: 12.5, color: "var(--ff-muted)" }}>
-          جای هنر هدر (بعدا اضافه می‌شود)
-        </span>
+      {/* ---- Hero: recreated, animated Google Reader UI ---- */}
+      <section style={{ marginBottom: 18 }} aria-label="بازسازی رابط کاربری گوگل ریدر">
+        <GoogleReaderHero />
       </section>
 
       {/* ---- Article body, in its own panel, separate from the hero ---- */}

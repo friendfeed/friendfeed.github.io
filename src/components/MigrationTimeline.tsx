@@ -223,11 +223,17 @@ const growthSteps: GrowthStep[] = [
 /** Eras the community lived through, as x-index ranges into growthSteps
  * (inclusive), rendered as a labeled background band instead of
  * repeating the platform name under every single point. */
+// NOTE: every era MUST span at least one full step (to > from) or its
+// label box renders at 0% width and, with overflow hidden, the text is
+// completely invisible -- this was the bug behind the missing top-right
+// label. A trailing zero-width "فقط توییتر" era used to sit on top of
+// the last point for that reason. It's covered by the last point's own
+// title and the caption below the chart, so it's dropped rather than
+// patched with an arbitrary width.
 const growthEras: { from: number; to: number; label: string }[] = [
   { from: 0, to: 1, label: "خانه: اتاق‌های گفتگوی یاهو" },
   { from: 1, to: 2, label: "خانه: یاهو ۳۶۰" },
   { from: 2, to: 6, label: "خانه: فرندفید + توییتر" },
-  { from: 6, to: 6, label: "فقط توییتر" },
 ];
 
 // Chart geometry, computed once from growthSteps.length so the SVG
