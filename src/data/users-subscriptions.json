@@ -438,12 +438,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "ad gallery",
-    "username": "ad-gallery",
-    "avatar": "/avatars/users/ad-gallery.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "ADVERTISEMENT",
     "username": "advertisement",
     "avatar": "/avatars/users/advertisement.webp",
@@ -484,12 +478,6 @@
     "username": "animals",
     "avatar": "/avatars/users/animals.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "Architectural & Interior Design",
-    "username": "isunix",
-    "avatar": "/avatars/users/isunix.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "ART ROOMََََ",
@@ -570,18 +558,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Creative Design",
-    "username": "creative-design",
-    "avatar": "/avatars/users/creative-design.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "Dance",
-    "username": "step-up",
-    "avatar": "/avatars/users/step-up.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Design on the Web",
     "username": "design-on-the-web",
     "avatar": "/avatars/users/design-on-the-web.webp",
@@ -600,12 +576,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Download",
-    "username": "download",
-    "avatar": "/avatars/users/download.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "fashion photography",
     "username": "fashion-photography",
     "avatar": "/avatars/users/fashion-photography.webp",
@@ -615,12 +585,6 @@
     "name": "Fine Art Photography",
     "username": "fine-art-photography",
     "avatar": "/avatars/users/fine-art-photography.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "firefox-extensions",
-    "username": "firefox-addons",
-    "avatar": "/avatars/users/firefox-addons.webp",
     "hasRealAvatar": true
   },
   {
@@ -672,12 +636,6 @@
     "hasRealAvatar": false
   },
   {
-    "name": "FriendFeedHolic",
-    "username": "friendfeedholic",
-    "avatar": "/avatars/users/friendfeedholic.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Funny Funny",
     "username": "funny-funny",
     "avatar": "/avatars/users/funny-funny.webp",
@@ -720,12 +678,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Invites",
-    "username": "invites",
-    "avatar": "/avatars/users/invites.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "iPhone",
     "username": "pro-iphone",
     "avatar": "/avatars/users/pro-iphone.webp",
@@ -762,18 +714,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Love-pic",
-    "username": "love-pic",
-    "avatar": "/avatars/users/love-pic.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "mazidi",
-    "username": "mazidi",
-    "avatar": "/avatars/users/mazidi.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "Mazidi Birthday",
     "username": "mazidi-birthday",
     "avatar": "/avatars/users/mazidi-birthday.webp",
@@ -798,21 +738,9 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Music Video",
-    "username": "musicvideo",
-    "avatar": "/avatars/users/musicvideo.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "No Fake ID",
     "username": "no-fake-id",
     "avatar": "/avatars/users/no-fake-id.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "Persian Cam",
-    "username": "persian-cam",
-    "avatar": "/avatars/users/persian-cam.webp",
     "hasRealAvatar": true
   },
   {
@@ -864,12 +792,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Photography as Art",
-    "username": "photography-as-art",
-    "avatar": "/avatars/users/photography-as-art.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Photography United",
     "username": "photo-united",
     "avatar": "/avatars/users/photo-united.webp",
@@ -906,27 +828,9 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Share Music (No Video)",
-    "username": "sharemusic",
-    "avatar": "/avatars/users/sharemusic.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "shhhh ...it's a secret!",
-    "username": "shhhh-it-s-a-secret",
-    "avatar": "/avatars/users/shhhh-it-s-a-secret.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "Side boobs",
     "username": "side-boobs",
     "avatar": "/avatars/users/side-boobs.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "SMS",
-    "username": "payamak",
-    "avatar": "/avatars/users/payamak.webp",
     "hasRealAvatar": true
   },
   {
@@ -954,12 +858,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Ubuntu",
-    "username": "ubuntu",
-    "avatar": "/avatars/users/ubuntu.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "UK photographers",
     "username": "uk-photographers",
     "avatar": "/avatars/users/uk-photographers.webp",
@@ -978,12 +876,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "آوای ماندگار",
-    "username": "tasnif",
-    "avatar": "/avatars/users/tasnif.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "احمد شاملو",
     "username": "shamlou",
     "avatar": "/avatars/users/shamlou.webp",
@@ -996,22 +888,10 @@
     "hasRealAvatar": false
   },
   {
-    "name": "اصفهان، نصف جهان (Isfahan) (اصفهان زیبا)",
-    "username": "isfahan",
-    "avatar": "/avatars/users/isfahan.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "بالاآتئیست",
     "username": "balatheist",
     "avatar": "/avatars/users/balatheist.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "بهترین تم های وردپرس",
-    "username": "wordpress-templates",
-    "avatar": "/avatars/users/wordpress-templates.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "بیا درباره سینما صحبت کنیم",
@@ -1030,12 +910,6 @@
     "username": "tablou",
     "avatar": "/avatars/users/tablou.webp",
     "hasRealAvatar": false
-  },
-  {
-    "name": "تازه های آی تی",
-    "username": "information-technology",
-    "avatar": "/avatars/users/information-technology.webp",
-    "hasRealAvatar": true
   },
   {
     "name": "تورنت",
@@ -1066,12 +940,6 @@
     "username": "my-desktop",
     "avatar": "/avatars/users/my-desktop.webp",
     "hasRealAvatar": false
-  },
-  {
-    "name": "دعوتنامه",
-    "username": "ir-invitation",
-    "avatar": "/avatars/users/ir-invitation.webp",
-    "hasRealAvatar": true
   },
   {
     "name": "سریال های تلویزیونی",
@@ -1152,12 +1020,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "نظرسنجی",
-    "username": "poll",
-    "avatar": "/avatars/users/poll.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "هنر سوم",
     "username": "3rd-art",
     "avatar": "/avatars/users/3rd-art.webp",
@@ -1185,12 +1047,6 @@
     "name": "پزشکی و بهداشتی",
     "username": "persian-medical",
     "avatar": "/avatars/users/persian-medical.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "کتاب خوانه",
-    "username": "ketabkhane",
-    "avatar": "/avatars/users/ketabkhane.webp",
     "hasRealAvatar": true
   },
   {
@@ -10956,12 +10812,6 @@
     "hasRealAvatar": false
   },
   {
-    "name": "Appetite",
-    "username": "weloveapps",
-    "avatar": "/avatars/users/weloveapps.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Arad",
     "username": "arad",
     "avatar": "/avatars/users/arad.webp",
@@ -11601,12 +11451,6 @@
     "name": "Bahram  Hemmatee",
     "username": "bahram",
     "avatar": "/avatars/users/bahram.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "Balatarin Feedback",
-    "username": "balatarin-feedback",
-    "avatar": "/avatars/users/balatarin-feedback.webp",
     "hasRealAvatar": true
   },
   {
@@ -14256,12 +14100,6 @@
     "hasRealAvatar": false
   },
   {
-    "name": "تولد بابای سی اس اس :)) امیرعباس",
-    "username": "amir-bd",
-    "avatar": "/avatars/users/amir-bd.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "amir2v",
     "username": "amir2v",
     "avatar": "/avatars/users/amir2v.webp",
@@ -15624,12 +15462,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Face Off",
-    "username": "faceoff",
-    "avatar": "/avatars/users/faceoff.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "Faghih",
     "username": "faghih",
     "avatar": "/avatars/users/faghih.webp",
@@ -15867,12 +15699,6 @@
     "name": "Farzad",
     "username": "fattahi",
     "avatar": "/avatars/users/fattahi.webp",
-    "hasRealAvatar": false
-  },
-  {
-    "name": "درگذشتگان فرندفید",
-    "username": "ferferdeparted",
-    "avatar": "/avatars/users/ferferdeparted.webp",
     "hasRealAvatar": false
   },
   {
@@ -16485,12 +16311,6 @@
     "name": "Hasti",
     "username": "hassti",
     "avatar": "/avatars/users/hassti.webp",
-    "hasRealAvatar": false
-  },
-  {
-    "name": "تنفرجات",
-    "username": "hated",
-    "avatar": "/avatars/users/hated.webp",
     "hasRealAvatar": false
   },
   {
@@ -17154,12 +16974,6 @@
     "hasRealAvatar": false
   },
   {
-    "name": "خودرو",
-    "username": "khodro",
-    "avatar": "/avatars/users/khodro.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "Masoud",
     "username": "khorshidneshan",
     "avatar": "/avatars/users/khorshidneshan.webp",
@@ -17344,12 +17158,6 @@
     "username": "losted",
     "avatar": "/avatars/users/losted.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "گمشده‌گان",
-    "username": "losts",
-    "avatar": "/avatars/users/losts.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "مهراوه",
@@ -18510,12 +18318,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "تولد میم عزیز",
-    "username": "mrsmim",
-    "avatar": "/avatars/users/mrsmim.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "Murad Sheixi",
     "username": "msheixi",
     "avatar": "/avatars/users/msheixi.webp",
@@ -18532,12 +18334,6 @@
     "username": "mspower",
     "avatar": "/avatars/users/mspower.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "تولد مریم اس اس",
-    "username": "mss-birthday",
-    "avatar": "/avatars/users/mss-birthday.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "moh@mad",
@@ -18897,12 +18693,6 @@
     "name": "تولد نیالا",
     "username": "niala-bd",
     "avatar": "/avatars/users/niala-bd.webp",
-    "hasRealAvatar": false
-  },
-  {
-    "name": "نیازمندی‌‌ها",
-    "username": "niazmandi",
-    "avatar": "/avatars/users/niazmandi.webp",
     "hasRealAvatar": false
   },
   {
@@ -21144,22 +20934,10 @@
     "hasRealAvatar": true
   },
   {
-    "name": "روز ولنتاین Valentine’s day",
-    "username": "valentine-day",
-    "avatar": "/avatars/users/valentine-day.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "Sir Vali",
     "username": "valiollah",
     "avatar": "/avatars/users/valiollah.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "تولد وارش",
-    "username": "varbday",
-    "avatar": "/avatars/users/varbday.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "iran vattandoost",
@@ -21192,12 +20970,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "تولد ویدا",
-    "username": "vnbd",
-    "avatar": "/avatars/users/vnbd.webp",
-    "hasRealAvatar": false
-  },
-  {
     "name": "wahidlobo",
     "username": "wahidlobo",
     "avatar": "/avatars/users/wahidlobo.webp",
@@ -21207,12 +20979,6 @@
     "name": "حسن موحد",
     "username": "wallfa",
     "avatar": "/avatars/users/wallfa.webp",
-    "hasRealAvatar": false
-  },
-  {
-    "name": "آکادمی وب",
-    "username": "webacademy",
-    "avatar": "/avatars/users/webacademy.webp",
     "hasRealAvatar": false
   },
   {
@@ -22308,12 +22074,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Barf",
-    "username": "barf",
-    "avatar": "/avatars/users/barf.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Saeed Barzegar",
     "username": "barzegar",
     "avatar": "/avatars/users/barzegar.webp",
@@ -22374,22 +22134,10 @@
     "hasRealAvatar": false
   },
   {
-    "name": "I ♥ Bokeh",
-    "username": "bokeh-lover",
-    "avatar": "/avatars/users/bokeh-lover.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Reza Kazemi",
     "username": "bolintasnow",
     "avatar": "/avatars/users/bolintasnow.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "brithday",
-    "username": "brithday",
-    "avatar": "/avatars/users/brithday.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "Cafe Pen",
@@ -22590,12 +22338,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "تولد دنــــــــــــــــیــــــــــــــــــــا",
-    "username": "drbd",
-    "avatar": "/avatars/users/drbd.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Ebrahim Gray",
     "username": "ebrahimgray",
     "avatar": "/avatars/users/ebrahimgray.webp",
@@ -22683,12 +22425,6 @@
     "name": "اسفندیار",
     "username": "esfandyaar",
     "avatar": "/avatars/users/esfandyaar.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "Esteghlal",
-    "username": "esteghlal",
-    "avatar": "/avatars/users/esteghlal.webp",
     "hasRealAvatar": true
   },
   {
@@ -22818,12 +22554,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Friend Feed Blogers",
-    "username": "ffblogs",
-    "avatar": "/avatars/users/ffblogs.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "جنبش کتاب خوانی فرفر",
     "username": "ffreading",
     "avatar": "/avatars/users/ffreading.webp",
@@ -22836,21 +22566,9 @@
     "hasRealAvatar": true
   },
   {
-    "name": "Mozilla Firefox",
-    "username": "firefox3",
-    "avatar": "/avatars/users/firefox3.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "فوهاد صا.",
     "username": "foadsa",
     "avatar": "/avatars/users/foadsa.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "IRANIAN Photos &amp; Photographers",
-    "username": "foto",
-    "avatar": "/avatars/users/foto.webp",
     "hasRealAvatar": true
   },
   {
@@ -23019,12 +22737,6 @@
     "name": "hans enjeen",
     "username": "hansenjeen",
     "avatar": "/avatars/users/hansenjeen.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "HappyBirthday",
-    "username": "happybirthday",
-    "avatar": "/avatars/users/happybirthday.webp",
     "hasRealAvatar": true
   },
   {
@@ -23230,12 +22942,6 @@
     "username": "jkaa",
     "avatar": "/avatars/users/jkaa.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "joomla",
-    "username": "joomla-discussion",
-    "avatar": "/avatars/users/joomla-discussion.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "Mohammad Hadi Narimisa",
@@ -23470,12 +23176,6 @@
     "username": "lilooshka",
     "avatar": "/avatars/users/lilooshka.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "Share your linksُ",
-    "username": "linkdooni",
-    "avatar": "/avatars/users/linkdooni.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "LJ Rich",
@@ -24240,24 +23940,6 @@
     "hasRealAvatar": false
   },
   {
-    "name": "Persian Pictures",
-    "username": "persian-pic",
-    "avatar": "/avatars/users/persian-pic.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "فرندفید فارسی",
-    "username": "persianff",
-    "avatar": "/avatars/users/persianff.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "wordpress",
-    "username": "persianwordpress",
-    "avatar": "/avatars/users/persianwordpress.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Peyman Akbari",
     "username": "peymanakbari1",
     "avatar": "/avatars/users/peymanakbari1.webp",
@@ -24339,12 +24021,6 @@
     "name": "عمو پورنگ",
     "username": "purang",
     "avatar": "/avatars/users/purang.webp",
-    "hasRealAvatar": true
-  },
-  {
-    "name": "سوال از شما جواب از دیگران",
-    "username": "que-room",
-    "avatar": "/avatars/users/que-room.webp",
     "hasRealAvatar": true
   },
   {
@@ -24672,12 +24348,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "در جستجوی كار",
-    "username": "shoghl",
-    "avatar": "/avatars/users/shoghl.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "Shokoufe Shadabi",
     "username": "shokoufeshadabi",
     "avatar": "/avatars/users/shokoufeshadabi.webp",
@@ -24834,12 +24504,6 @@
     "hasRealAvatar": true
   },
   {
-    "name": "آموزشگاه زبان",
-    "username": "torki",
-    "avatar": "/avatars/users/torki.webp",
-    "hasRealAvatar": true
-  },
-  {
     "name": "soheilaram",
     "username": "tragic",
     "avatar": "/avatars/users/tragic.webp",
@@ -24874,12 +24538,6 @@
     "username": "ultirosh",
     "avatar": "/avatars/users/ultirosh.webp",
     "hasRealAvatar": true
-  },
-  {
-    "name": "UndergroundMusic",
-    "username": "umusic",
-    "avatar": "/avatars/users/umusic.webp",
-    "hasRealAvatar": false
   },
   {
     "name": "Vahid Farazan",

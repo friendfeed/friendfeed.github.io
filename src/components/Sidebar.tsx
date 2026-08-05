@@ -11,11 +11,11 @@ import { Link, useLocation } from "react-router-dom";
  * literal left/right copy.
  *
  * Items are mapped to what this project actually has pages for --
- * "خانه" (/) is the landing page and sits first, then "کاربران فرندفید در ایکس"
+ * "خانه" (/) is the landing page and sits first, then "همه کاربران"
  * (the X-crossover directory, at /users), which is the main content of
- * the site. The rest are kept as labelled, inert placeholders matching
- * the source screenshot's structure so the chrome reads as authentic
- * FriendFeed rather than an invented menu.
+ * the site. "اتاق‌ها" (/rooms) lists FriendFeed rooms/group feeds --
+ * these are distinct from real people and are kept out of the
+ * Subscriptions user list for that reason.
  */
 const itemStyle = (active: boolean): CSSProperties => ({
   display: "block",
@@ -42,14 +42,14 @@ export const Sidebar: FC = () => {
           خانه
         </Link>
         <Link to="/users" style={itemStyle(pathname === "/users")}>
-          کاربران فرندفید در ایکس
+          همه کاربران
         </Link>
         <Link to="/subscriptions" style={itemStyle(pathname === "/subscriptions")}>
-          همه کاربران فرندفید
+          Subscriptions
         </Link>
-        <span style={itemStyle(false)} aria-disabled="true">
+        <Link to="/rooms" style={itemStyle(pathname === "/rooms")}>
           اتاق‌ها
-        </span>
+        </Link>
       </nav>
 
       <div
