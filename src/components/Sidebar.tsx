@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom";
  * literal left/right copy.
  *
  * Items are mapped to what this project actually has pages for --
- * "خانه" (/) is the landing page and sits first, then "همه کاربران"
+ * "خانه" (/) is the landing page and sits first, then "کاربران فرندفید در ایکس"
  * (the X-crossover directory, at /users), which is the main content of
  * the site. The rest are kept as labelled, inert placeholders matching
  * the source screenshot's structure so the chrome reads as authentic
@@ -42,10 +42,10 @@ export const Sidebar: FC = () => {
           خانه
         </Link>
         <Link to="/users" style={itemStyle(pathname === "/users")}>
-          همه کاربران
+          کاربران فرندفید در ایکس
         </Link>
         <Link to="/subscriptions" style={itemStyle(pathname === "/subscriptions")}>
-          Subscriptions
+          همه کاربران فرندفید
         </Link>
         <span style={itemStyle(false)} aria-disabled="true">
           اتاق‌ها

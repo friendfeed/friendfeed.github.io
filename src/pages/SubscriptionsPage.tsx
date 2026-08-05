@@ -77,7 +77,7 @@ export const SubscriptionsPage: FC = () => {
           gap: 12,
         }}
       >
-        <h1 style={{ fontSize: 14, margin: 0 }}>FriendFeed Subscriptions</h1>
+        <h1 style={{ fontSize: 14, margin: 0 }}>مشترکان فرندفید</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {searchQuery
             ? `${filteredUsers.length} نتیجه از ${users.length} کاربر`

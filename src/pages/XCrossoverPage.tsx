@@ -47,7 +47,7 @@ export const XCrossoverPage: FC = () => {
           marginBottom: 6,
         }}
       >
-        <h1 style={{ fontSize: 14 }}>آرشیو و کاربران فعلی</h1>
+        <h1 style={{ fontSize: 14 }}>کاربران فرندفید در ایکس</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {normalizedQuery
             ? `${filtered.length} نتیجه از ${users.length} کاربر`
