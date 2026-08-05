@@ -7,6 +7,7 @@ import { HomePage } from "./pages/HomePage";
 import { XCrossoverPage } from "./pages/XCrossoverPage";
 import { FaqPage } from "./pages/FaqPage";
 import { MagazinePage } from "./pages/MagazinePage";
+import { GoogleReaderPage } from "./pages/GoogleReaderPage";
 import { SearchProvider } from "./services/SearchContext";
 
 // ProfilePage / PyramidPage / HistoryPage exist in ./pages but are
@@ -46,6 +47,7 @@ const App: FC = () => {
               <Route path="/users" element={<XCrossoverPage />} />
               <Route path="/faq" element={<FaqPage />} />
               <Route path="/magazine" element={<MagazinePage />} />
+              <Route path="/magazine/google-reader" element={<GoogleReaderPage />} />
             </Routes>
           </main>
         </div>

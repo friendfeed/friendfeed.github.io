@@ -68,6 +68,15 @@ export const Sidebar: FC = () => {
         <Link to="/magazine" style={itemStyle(pathname === "/magazine")}>
           مجله فرندفید
         </Link>
+        <Link
+          to="/magazine/google-reader"
+          style={{
+            ...itemStyle(pathname === "/magazine/google-reader"),
+            paddingRight: 12,
+          }}
+        >
+          گودر (گوگل ریدر)
+        </Link>
       </div>
     </aside>
   );
