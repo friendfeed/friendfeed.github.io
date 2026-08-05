@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useState, useMemo } from "react";
 import { useSEO } from "../seo/useSEO";
+import usersData from "../data/users-subscriptions.json";
 
 interface FriendFeedUser {
   name: string;
@@ -50,8 +51,7 @@ export const SubscriptionsPage: FC = () => {
   useSEO({ path: "/subscriptions" });
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Import users from JSON - this would be imported from data/users.json in actual implementation
-  const users: FriendFeedUser[] = require("../data/users-subscriptions.json");
+  const users: FriendFeedUser[] = usersData as FriendFeedUser[];
 
   const filteredUsers = useMemo(() => {
     if (!searchQuery.trim()) {
