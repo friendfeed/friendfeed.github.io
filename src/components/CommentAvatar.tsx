@@ -31,9 +31,16 @@ export const CommentAvatar: FC<{ user: string; size?: number }> = ({ user, size 
         background: colorFor(user),
         color: "#fff",
         fontSize: size * 0.5,
+        lineHeight: 1,
         fontWeight: "bold",
         fontFamily: "Arial, Helvetica, sans-serif",
         flexShrink: 0,
+        textAlign: "center",
+        /* Latin capitals sit visually slightly above a font's true
+           center (little to no descender), so the box reads as
+           "letter pushed up" unless nudged back down a touch. */
+        paddingTop: "0.1em",
+        boxSizing: "border-box",
       }}
     >
       {initial}

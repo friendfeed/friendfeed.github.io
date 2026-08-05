@@ -8,7 +8,7 @@
  * star/share/like row) instead of prose. Each post also carries a small
  * set of invented, atmospheric fake comments in the sarcastic,
  * politically-bickering register that genuinely defined گودر comment
- * threads (اصلاح‌طلب/اصولگرا/چپ banter, dismissive "کاغذ و نمک" replies,
+ * threads (اصلاح‌طلب/اصولگرا/چپ banter, sharp one-line clapbacks,
  * nostalgia). Usernames are invented placeholders, not real people.
  *
  * Text fixes applied per request:
@@ -48,7 +48,7 @@ export const readerPosts: ReaderPost[] = [
     comments: [
       { user: "shabnam_2010", text: "چقدر دلم برای این‌جور نوشتن تنگ شده، الان همه‌چی تو یه استوریه." },
       { user: "cynical_cat", text: "این نوشته خیلی اصلاح‌طلبیه ها 😄" },
-      { user: "no1knows", text: "کاغذ و نمک... بازم نوستالژی‌بازی؟" },
+      { user: "no1knows", text: "بازم نوستالژی‌بازی؟ خب بگو دلت تنگ شده دیگه، راحت باش 😄" },
     ],
   },
   {
@@ -86,7 +86,7 @@ export const readerPosts: ReaderPost[] = [
     time: "دیروز",
     comments: [
       { user: "shazde_kolah", text: "طنزنویسای گودر رو کسی به‌اندازه‌ی خودشون جدی نمی‌گرفت." },
-      { user: "khejalati", text: "کاغذ و نمک، همه‌ی دوره‌ها همینو می‌گن :)" },
+      { user: "khejalati", text: "هر نسلی فکر می‌کنه عصر طلاییِ خودشو دیده، جالبه :)" },
       { user: "bi_esm_moghim", text: "شعرا بیشتر از سیاسی‌ها لایک می‌گرفتن، جالبه." },
     ],
   },
@@ -113,7 +113,7 @@ export const readerPosts: ReaderPost[] = [
     comments: [
       { user: "khoone_khoda", text: "همون روزی که پیام تعطیلی اومد رو یادمه، انگار یه چیزی مرد." },
       { user: "no1knows", text: "چپای گودر گفتن بازم تقصیر سرمایه‌داریه 😄" },
-      { user: "shabnam_2010", text: "کاغذ و نمک، گوگل هر سرویسی رو دیر یا زود می‌بنده." },
+      { user: "shabnam_2010", text: "گوگل یه قبرستون مخصوص محصولاته، این یکی فقط زودتر رفت اونجا." },
     ],
   },
   {
@@ -138,7 +138,7 @@ export const readerPosts: ReaderPost[] = [
     time: "هفته‌ی پیش",
     comments: [
       { user: "chai_talkh", text: "جمع‌بندی خوبیه ولی دلم گرفت آخرش." },
-      { user: "mard_e_khamoosh", text: "کاغذ و نمک، آخرش همه‌چی به فیسبوک ختم شد." },
+      { user: "mard_e_khamoosh", text: "آخرش هر مسیری رو بری، سر از فیسبوک درمیاری، عجب سرنوشتی." },
       { user: "sarbaz_sabz", text: "چپای قدیم گودر همینو ده سال پیش هم گفته بودن." },
     ],
   },

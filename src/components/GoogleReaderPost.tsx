@@ -5,12 +5,22 @@ import type { ReaderPost } from "../data/googleReaderArticle";
 
 /**
  * One article section rendered as a real Google Reader item, not a <p>.
- * Reuses the exact read/unread mechanic from the old GoogleReaderHero.tsx
- * autoplay loop, but now user-driven: clicking the row gives it the same
- * light-blue "selected" wash Reader used for the open item, then ~650ms
- * later (matching the hero's original timing) the wash fades out and the
- * title flips from bold unread-blue to plain read-grey, exactly like
- * clicking into an item in real Reader did.
+ * Reuses the read/unread mechanic from the old GoogleReaderHero.tsx
+ * autoplay loop, but now user-driven and deliberately staged into two
+ * separate beats so the highlight itself is actually visible (the first
+ * version fired both state updates in the same tick, which behaved
+ * correctly but was too quick to register on a click-then-look pace):
+ *
+ *   1. Click -> row gets an immediate, strong blue "selected" wash
+ *      (Reader's classic #d7e6fb open-item highlight).
+ *   2. ~550ms later, the item is marked read: the "جدید" badge drops,
+ *      the title flips from bold unread-blue to plain read-grey, the
+ *      feed dot dims -- all while the blue wash is STILL showing.
+ *   3. ~450ms after that, the wash itself fades back out to white.
+ *
+ * That highlight-then-unhighlight sequence (not just an instant color
+ * swap) is what actually reads as "Google Reader" rather than a plain
+ * click state.
  *
  * A small fake comment thread sits under the action row purely for
  * atmosphere, styled like the hover-card/comment look already used
@@ -26,12 +36,12 @@ export const GoogleReaderPost: FC<{
   const [commentsOpen, setCommentsOpen] = useState(false);
 
   const handleOpen = () => {
-    if (isRead) return;
+    if (isRead || isActive) return;
     setIsActive(true);
     window.setTimeout(() => {
       onRead(post.id);
-      setIsActive(false);
-    }, 650);
+      window.setTimeout(() => setIsActive(false), 450);
+    }, 550);
   };
 
   return (
@@ -53,27 +63,27 @@ export const GoogleReaderPost: FC<{
           display: "flex",
           gap: 12,
           padding: "14px 16px",
-          background: isActive ? "#e3f0ff" : "#fff",
-          transition: "background-color 500ms ease",
+          borderInlineStart: isActive ? "3px solid #4184f3" : "3px solid transparent",
+          background: isActive ? "#d7e6fb" : "#fff",
+          transition: "background-color 450ms ease, border-color 450ms ease",
           cursor: isRead ? "default" : "pointer",
           direction: "rtl",
         }}
       >
-        <span
-          aria-hidden
-          style={{
-            width: 9,
-            height: 9,
-            borderRadius: "50%",
-            marginTop: 6,
-            flexShrink: 0,
-            background: post.feedColor,
-            opacity: isRead ? 0.25 : 1,
-            transition: "opacity 400ms ease",
-          }}
-        />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+            <span
+              aria-hidden
+              style={{
+                width: 9,
+                height: 9,
+                borderRadius: "50%",
+                flexShrink: 0,
+                background: post.feedColor,
+                opacity: isRead ? 0.25 : 1,
+                transition: "opacity 400ms ease",
+              }}
+            />
             <span style={{ fontSize: 11, color: "#767676" }}>{post.feed}</span>
             <span style={{ fontSize: 10.5, color: "#aaaaaa" }}>· {post.time}</span>
             {!isRead && (

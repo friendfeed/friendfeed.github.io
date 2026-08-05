@@ -34,8 +34,23 @@ function curve(x1: number, y1: number, x2: number, y2: number) {
 }
 
 export const GooderDiagram: FC = () => (
-  <div style={{ position: "relative", direction: "ltr", padding: "6px 4px 0" }}>
-    <svg viewBox={`0 0 ${VB_W} ${VB_H}`} style={{ width: "100%", height: "auto", display: "block" }} role="img" aria-label="نمودار: چند وبلاگ جدا از هم در گودر جمع می‌شوند، و بعد از تعطیلی گودر، همان جمع به فرندفید فارسی و توییتر تقسیم می‌شود">
+  <div style={{ padding: "6px 0 0" }}>
+    {/*
+      The SVG and the absolutely-positioned labels below MUST share the
+      exact same box to line up: this inner div is the positioned
+      ancestor for the labels' percentage offsets, and it has ZERO
+      padding of its own so those percentages resolve against the same
+      width the SVG (width: 100%, content-box) actually renders into.
+      (Padding used to live on this same element, which meant labels
+      were computed against the wider padding-box while the SVG drew
+      into the narrower content-box -- a small but very visible
+      everything-is-slightly-off-center bug.) Physical `left` is used
+      instead of the logical `insetInlineStart` too, since the SVG's x
+      coordinates are always physical/left-to-right regardless of the
+      page's RTL direction.
+    */}
+    <div style={{ position: "relative", direction: "ltr" }}>
+      <svg viewBox={`0 0 ${VB_W} ${VB_H}`} style={{ width: "100%", height: "auto", display: "block" }} role="img" aria-label="نمودار: چند وبلاگ جدا از هم در گودر جمع می‌شوند، و بعد از تعطیلی گودر، همان جمع به فرندفید فارسی و توییتر تقسیم می‌شود">
       {blogs.map((b, i) => (
         <path key={i} d={curve(b.x, 40, hub.x, hub.y - 26)} fill="none" stroke={b.color} strokeOpacity={0.45} strokeWidth={2} />
       ))}
@@ -53,57 +68,58 @@ export const GooderDiagram: FC = () => (
       {dests.map((d, i) => (
         <rect key={i} x={d.x - 62} y={d.y - 16} width={124} height={32} rx={4} fill="#fff" stroke={d.color} strokeWidth={2} />
       ))}
-    </svg>
+      </svg>
 
-    {/* ---- Labels, absolutely positioned to match the geometry above ---- */}
-    {blogs.map((b, i) => (
+      {/* ---- Labels, absolutely positioned to match the geometry above ---- */}
+      {blogs.map((b, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            left: `${(b.x / VB_W) * 100}%`,
+            top: `${(40 / VB_H) * 100}%`,
+            transform: "translate(-50%, -230%)",
+            fontSize: 10,
+            color: "var(--ff-muted)",
+            whiteSpace: "nowrap",
+            direction: "rtl",
+          }}
+        >
+          وبلاگ {i + 1}
+        </div>
+      ))}
       <div
-        key={i}
         style={{
           position: "absolute",
-          insetInlineStart: `${(b.x / VB_W) * 100}%`,
-          top: `${(40 / VB_H) * 100}%`,
-          transform: "translate(-50%, -230%)",
-          fontSize: 10,
-          color: "var(--ff-muted)",
-          whiteSpace: "nowrap",
-          direction: "rtl",
-        }}
-      >
-        وبلاگ {i + 1}
-      </div>
-    ))}
-    <div
-      style={{
-        position: "absolute",
-        insetInlineStart: `${(hub.x / VB_W) * 100}%`,
-        top: `${(hub.y / VB_H) * 100}%`,
-        transform: "translate(-50%, -50%)",
-        fontSize: 12.5,
-        fontWeight: "bold",
-        color: "#333",
-        direction: "rtl",
-      }}
-    >
-      گودر
-    </div>
-    {dests.map((d, i) => (
-      <div
-        key={i}
-        style={{
-          position: "absolute",
-          insetInlineStart: `${(d.x / VB_W) * 100}%`,
-          top: `${(d.y / VB_H) * 100}%`,
+          left: `${(hub.x / VB_W) * 100}%`,
+          top: `${(hub.y / VB_H) * 100}%`,
           transform: "translate(-50%, -50%)",
-          fontSize: 11.5,
+          fontSize: 12.5,
           fontWeight: "bold",
-          color: d.color,
+          color: "#333",
           direction: "rtl",
         }}
       >
-        {d.label}
+        گودر
       </div>
-    ))}
+      {dests.map((d, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            left: `${(d.x / VB_W) * 100}%`,
+            top: `${(d.y / VB_H) * 100}%`,
+            transform: "translate(-50%, -50%)",
+            fontSize: 11.5,
+            fontWeight: "bold",
+            color: d.color,
+            direction: "rtl",
+          }}
+        >
+          {d.label}
+        </div>
+      ))}
+    </div>
 
     <p style={{ margin: "10px 0 0", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center", direction: "rtl" }}>
       وبلاگ‌های پراکنده، در گودر یک‌جا جمع می‌شدند؛ بعد از تعطیلی‌اش، همان جمع بین فرندفید فارسی و توییتر تقسیم شد.
