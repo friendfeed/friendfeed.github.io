@@ -444,7 +444,29 @@ export const HomePage: FC = () => {
         <MigrationTimeline />
       </section>
 
-      <div style={{ textAlign: "center", marginBottom: 8 }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: 10,
+          marginBottom: 8,
+        }}
+      >
+        <Link
+          to="/subscriptions"
+          style={{
+            display: "inline-block",
+            fontSize: 13,
+            fontWeight: "bold",
+            color: "#fff",
+            background: "#2e7df3",
+            padding: "9px 22px",
+            borderRadius: 3,
+          }}
+        >
+          همه کاربران فرندفید ‹
+        </Link>
         <Link
           to="/users"
           style={{
@@ -457,7 +479,7 @@ export const HomePage: FC = () => {
             borderRadius: 3,
           }}
         >
-          مرور فهرست کاربران آرشیو ‹
+          کاربران فرندفید در ایکس ‹
         </Link>
       </div>
     </div>
