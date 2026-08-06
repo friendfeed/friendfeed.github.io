@@ -27,8 +27,7 @@
     <pattern id="geo-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
       <g stroke="#e8a04a" stroke-width="0.4" fill="none" opacity="0.12">
         <!-- 8-pointed star geometry -->
-        <polygon points="30,5 35,20 50,20 38,29 43,44 30,35 17,44 22,29 10,20 25,20"/>
-        <polygon points="30,15 33,23 42,23 35,28 38,36 30,31 22,36 25,28 18,23 27,23" opacity="0.5"/>
+        <polygon points="30.00,11.00 41.00,22.00 30.00,33.00 19.00,22.00"/><polygon points="37.78,14.22 37.78,29.78 22.22,29.78 22.22,14.22" opacity="0.6"/>
         <line x1="30" y1="0" x2="30" y2="60"/>
         <line x1="0" y1="30" x2="60" y2="30"/>
         <line x1="0" y1="0" x2="60" y2="60" opacity="0.3"/>
@@ -63,7 +62,7 @@
   <g transform="translate(130, 200)" opacity="0.55">
     <circle cx="0" cy="0" r="28" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
     <circle cx="0" cy="0" r="20" stroke="#e8a04a" stroke-width="0.5" fill="none"/>
-    <polygon points="0,-18 5,-5 19,-5 8,3 13,16 0,8 -13,16 -8,3 -19,-5 -5,-5" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
+    <polygon points="0.00,-17.00 17.00,0.00 0.00,17.00 -17.00,0.00" stroke="#e8a04a" stroke-width="0.9" fill="none" opacity="0.85"/><polygon points="12.02,-12.02 12.02,12.02 -12.02,12.02 -12.02,-12.02" stroke="#e8a04a" stroke-width="0.9" fill="none" opacity="0.85"/>
     <line x1="-28" y1="0" x2="28" y2="0" stroke="#e8a04a" stroke-width="0.5"/>
     <line x1="0" y1="-28" x2="0" y2="28" stroke="#e8a04a" stroke-width="0.5"/>
   </g>
@@ -72,7 +71,7 @@
   <g transform="translate(1070, 200)" opacity="0.55">
     <circle cx="0" cy="0" r="28" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
     <circle cx="0" cy="0" r="20" stroke="#e8a04a" stroke-width="0.5" fill="none"/>
-    <polygon points="0,-18 5,-5 19,-5 8,3 13,16 0,8 -13,16 -8,3 -19,-5 -5,-5" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
+    <polygon points="0.00,-17.00 17.00,0.00 0.00,17.00 -17.00,0.00" stroke="#e8a04a" stroke-width="0.9" fill="none" opacity="0.85"/><polygon points="12.02,-12.02 12.02,12.02 -12.02,12.02 -12.02,-12.02" stroke="#e8a04a" stroke-width="0.9" fill="none" opacity="0.85"/>
     <line x1="-28" y1="0" x2="28" y2="0" stroke="#e8a04a" stroke-width="0.5"/>
     <line x1="0" y1="-28" x2="0" y2="28" stroke="#e8a04a" stroke-width="0.5"/>
   </g>
