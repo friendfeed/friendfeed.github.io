@@ -82,4 +82,36 @@ for (const [path, meta] of Object.entries(routes)) {
   console.log(`[generate-static-routes] wrote ${path}/index.html`);
 }
 
+// sitemap.xml, generated from the same routes.json used above -- this is
+// the fix for a previous drift bug where public/sitemap.xml was hand-
+// maintained and silently fell out of sync with the routes that actually
+// exist (it was missing /subscriptions, /rooms, and
+// /magazine/friendfeed-1388 for a while). Regenerating it here on every
+// build, from the same single source of truth as the per-route <head>
+// shells above, means it can't drift again.
+function renderSitemap() {
+  const urls = Object.entries(routes)
+    .map(([path, meta]) => {
+      const loc = `${siteUrl}${path === "/" ? "/" : path + "/"}`;
+      return [
+        "  <url>",
+        `    <loc>${loc}</loc>`,
+        `    <changefreq>${meta.changefreq}</changefreq>`,
+        `    <priority>${meta.priority}</priority>`,
+        "  </url>",
+      ].join("\n");
+    })
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+}
+
+const sitemap = renderSitemap();
+writeFileSync(join(distDir, "sitemap.xml"), sitemap, "utf8");
+// Also keep the checked-in copy under public/ in sync, so the repo itself
+// never shows a stale sitemap between builds (e.g. to anyone browsing the
+// source on GitHub, or if a future change forgets to run the build step
+// before committing).
+writeFileSync(join(root, "public/sitemap.xml"), sitemap, "utf8");
+console.log(`[generate-static-routes] wrote sitemap.xml (${Object.keys(routes).length} urls)`);
+
 console.log(`[generate-static-routes] done -- ${count} static route shell(s) generated (site: ${siteName}).`);

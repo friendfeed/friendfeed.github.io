@@ -11,6 +11,16 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://friendfeed.github.io/subscriptions/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://friendfeed.github.io/rooms/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://friendfeed.github.io/faq/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,6 +32,11 @@
   </url>
   <url>
     <loc>https://friendfeed.github.io/magazine/google-reader/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://friendfeed.github.io/magazine/friendfeed-1388/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
