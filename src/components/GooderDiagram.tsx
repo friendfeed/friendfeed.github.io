@@ -48,8 +48,19 @@ export const GooderDiagram: FC = () => (
       instead of the logical `insetInlineStart` too, since the SVG's x
       coordinates are always physical/left-to-right regardless of the
       page's RTL direction.
+
+      `container-type: inline-size` turns this box into a query
+      container so the label font sizes below can be given in `cqw`
+      (% of *this container's* width) instead of fixed px. Fixed px
+      labels used to stay full desktop size no matter how much the SVG
+      itself shrank on a narrow phone screen -- so on mobile the "گودر"
+      hub label (and the rest) visually stayed the same physical size
+      while the circles/curves around it shrank, making it look
+      oversized and forcing a pinch-zoom-out to read the diagram
+      properly. cqw ties each label's size to the diagram's own
+      rendered width, so everything shrinks together.
     */}
-    <div style={{ position: "relative", direction: "ltr" }}>
+    <div style={{ position: "relative", direction: "ltr", containerType: "inline-size" } as React.CSSProperties}>
       <svg viewBox={`0 0 ${VB_W} ${VB_H}`} style={{ width: "100%", height: "auto", display: "block" }} role="img" aria-label="نمودار: چند وبلاگ جدا از هم در گودر جمع می‌شوند، و بعد از تعطیلی گودر، همان جمع به فرندفید فارسی و توییتر تقسیم می‌شود">
       {/* ---- Blogs -> گودر ---- */}
       {blogs.map((b, i) => (
@@ -85,7 +96,7 @@ export const GooderDiagram: FC = () => (
             left: `${(b.x / VB_W) * 100}%`,
             top: `${(40 / VB_H) * 100}%`,
             transform: "translate(-50%, -230%)",
-            fontSize: 10,
+            fontSize: "clamp(7px, 1.6cqw, 10px)",
             color: "var(--ff-muted)",
             whiteSpace: "nowrap",
             direction: "rtl",
@@ -100,9 +111,10 @@ export const GooderDiagram: FC = () => (
           left: `${(hub.x / VB_W) * 100}%`,
           top: `${(hub.y / VB_H) * 100}%`,
           transform: "translate(-50%, -50%)",
-          fontSize: 12.5,
+          fontSize: "clamp(8px, 2cqw, 12.5px)",
           fontWeight: "bold",
           color: "#333",
+          whiteSpace: "nowrap",
           direction: "rtl",
         }}
       >
@@ -116,9 +128,10 @@ export const GooderDiagram: FC = () => (
             left: `${(d.x / VB_W) * 100}%`,
             top: `${(d.y / VB_H) * 100}%`,
             transform: "translate(-50%, -50%)",
-            fontSize: 11.5,
+            fontSize: "clamp(7.5px, 1.8cqw, 11.5px)",
             fontWeight: "bold",
             color: d.color,
+            whiteSpace: "nowrap",
             direction: "rtl",
           }}
         >

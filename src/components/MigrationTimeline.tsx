@@ -392,10 +392,22 @@ export const MigrationTimeline: FC = () => (
           scrolls horizontally. This is the standard mobile pattern for
           dense charts/tables (scroll the data, don't squash it); a
           small scroll hint is shown only on narrow screens where it's
-          needed. */}
+          needed.
+
+          Horizontal padding here (76px each side) is NOT decorative --
+          each x-axis label below is a 148px box centered via
+          translateX(-50%) on its point, so the first and last labels
+          overhang 74px past their point in each direction. Without
+          this padding, that overhang fell outside the scrollable
+          area's actual scroll range (scrollLeft can't go negative /
+          past scrollWidth), so the edge labels' text got silently
+          clipped by the scroll container's own boundary -- e.g. the
+          very first label ("اتاق‌های گفتگوی یاهو راه‌اندازی می‌شود")
+          reading as cut off on mobile. The padding reserves exactly
+          that overhang as scrollable room instead. */}
       <div
         className="growth-chart-scroll"
-        style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "0 -2px", padding: "0 2px", direction: "ltr" }}
+        style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", margin: "0 -2px", padding: "0 76px", direction: "ltr" }}
       >
         {/* 1000px (not 640) so that 6 gaps between 7 points give ~167px
             of spacing -- comfortably more than each label's 148px box.

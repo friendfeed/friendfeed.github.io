@@ -1,115 +1,146 @@
 import type { FC } from "react";
+import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
+import { IconNetwork, IconRss } from "../icons/Icons";
 
 /**
- * "مجله فرندفید" -- a single-post weblog page, styled like a classic
- * blog post rather than the card-grid pages elsewhere in the site:
- * one wide article column, a video player at the top, a title, then
- * body copy. No date is shown per request (the piece is written as a
- * standing retrospective, not a dated news item).
+ * "مجله فرندفید" -- now a proper post index instead of a single
+ * hard-coded article. Each entry below is one post, rendered as a
+ * clickable cover card (title + short excerpt + a small illustrative
+ * cover, no external image assets -- CSS gradient + one icon, same
+ * decorative approach as the rest of the site's diagrams) that links to
+ * that post's own dedicated page.
  *
- * Content summary (for anyone editing this later): after the disputed
- * June 1388 (2009) presidential election, state filtering of Twitter,
- * Facebook and much of the international web intensified sharply.
- * FriendFeed was not blocked as early or as consistently, and its
- * "everything in one page, live-updating" design meant a single feed
- * could aggregate tweets, blog posts and photos that were otherwise
- * scattered across blocked services -- so it briefly became a workaround
- * hub for the Persian-speaking online community, alongside a general
- * chilling effect (more cautious posting, more pseudonyms) that also
- * reshaped how people used it. General, non-partisan framing; no
- * specific claims beyond what's well documented about that period.
+ * گودر (previously reachable only from a standing link in <Sidebar>,
+ * which meant it had no path into it at all on mobile since <Sidebar>
+ * is desktop-only there -- see BottomNav.tsx) is now the FIRST post
+ * here instead, so it's reachable the same way every other post is: via
+ * "مجله" in the mobile tab bar -> tap its cover -> its own page. The
+ * standing Sidebar link was removed accordingly (see Sidebar.tsx).
  */
+type MagazinePost = {
+  to: string;
+  title: string;
+  excerpt: string;
+  cover: FC;
+};
+
+const GoogleReaderCover: FC = () => (
+  <div
+    style={{
+      background: "linear-gradient(135deg, #fef6e0 0%, #fde9b8 100%)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: 120,
+    }}
+  >
+    <div
+      style={{
+        width: 56,
+        height: 56,
+        borderRadius: "50%",
+        background: "#fff",
+        border: "3px solid #f4b400",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+      }}
+    >
+      <IconRss width={26} height={26} style={{ color: "#f4b400" }} />
+    </div>
+  </div>
+);
+
+const FriendFeed88Cover: FC = () => (
+  <div
+    style={{
+      background: "linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: 120,
+    }}
+  >
+    <div
+      style={{
+        width: 56,
+        height: 56,
+        borderRadius: "50%",
+        background: "#fff",
+        border: "3px solid #4184f3",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+      }}
+    >
+      <IconNetwork width={26} height={26} style={{ color: "#4184f3" }} />
+    </div>
+  </div>
+);
+
+const posts: MagazinePost[] = [
+  {
+    to: "/magazine/google-reader",
+    title: "گودر: خانه‌ی گمشده‌ی وبلاگ‌نویسان فارسی",
+    excerpt:
+      "پیش از توییتر و اینستاگرام، یک فیدخوان ساده به نام Google Reader که کاربران فارسی‌زبان با شوخ‌طبعی «گودر» صدایش می‌کردند، به یکی از پرشورترین اجتماعات آنلاین وبلاگستان فارسی تبدیل شد.",
+    cover: GoogleReaderCover,
+  },
+  {
+    to: "/magazine/friendfeed-1388",
+    title: "فرندفید ایرانی بعد از خرداد ۸۸: از سرگرمی به پناهگاه اطلاعات",
+    excerpt:
+      "بعد از انتخابات ریاست‌جمهوری خرداد ۱۳۸۸ و فیلترینگ گسترده‌ی توییتر و فیس‌بوک، همان صفحه‌ی ساده‌ی فرندفید نقش دیگری هم پیدا کرد: راهی میان‌بر برای دنبال کردن خبر و گزارش لحظه‌ای.",
+    cover: FriendFeed88Cover,
+  },
+];
+
 export const MagazinePage: FC = () => {
-  useSEO({
-    path: "/magazine",
-    structuredData: [
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        headline: "فرندفید ایرانی بعد از خرداد ۸۸: از سرگرمی به پناهگاه اطلاعات",
-        inLanguage: "fa",
-        isPartOf: {
-          "@type": "WebSite",
-          name: "فرندفید فارسی | آرشیو",
-          url: "https://friendfeed.github.io",
-        },
-      },
-    ],
-  });
+  useSEO({ path: "/magazine" });
 
   return (
-    <article style={{ maxWidth: 760, margin: "0 auto" }}>
-      <div
-        style={{
-          background: "#000",
-          border: "1px solid var(--ff-border)",
-          boxShadow: "var(--ff-card-shadow)",
-        }}
-      >
-        <video
-          controls
-          preload="metadata"
-          style={{ display: "block", width: "100%", background: "#000" }}
-        >
-          <source src="/media/friendfeed-magazine.mp4" type="video/mp4" />
-        </video>
-      </div>
+    <div style={{ maxWidth: 760, margin: "0 auto" }}>
+      <h1 style={{ fontSize: 16, margin: "0 0 4px" }}>مجله فرندفید</h1>
+      <p style={{ fontSize: 12.5, color: "var(--ff-muted)", margin: "0 0 18px" }}>
+        مطالب، خاطرات و مقالات مرتبط با جامعه فارسی‌زبان فرندفید و تاریخچه آن
+      </p>
 
-      <div
-        style={{
-          background: "var(--ff-panel)",
-          border: "1px solid var(--ff-border)",
-          borderTop: "none",
-          padding: "20px 24px 28px",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: 20,
-            lineHeight: 1.5,
-            margin: "0 0 14px",
-            color: "var(--ff-text)",
-          }}
-        >
-          فرندفید ایرانی بعد از خرداد ۸۸: از سرگرمی به پناهگاه اطلاعات
-        </h1>
-
-        <div style={{ fontSize: 13.5, lineHeight: 2.1, color: "var(--ff-text)" }}>
-          <p style={{ margin: "0 0 16px" }}>
-            تا پیش از انتخابات ریاست‌جمهوری خرداد ۱۳۸۸، فرندفید برای بیشتر
-            کاربران فارسی‌زبانش یک سرگرمی وبلاگی بود، جایی برای جمع کردن
-            پست‌های توییتر و فلیکر و وبلاگ در یک صفحه و بحث و شوخی زیر آن‌ها.
-            بعد از اعلام نتیجه انتخابات و اعتراض‌های گسترده‌ای که به راه
-            افتاد، همان صفحه ساده و زنده به‌روزرسانی‌شونده، نقش دیگری هم پیدا
-            کرد.
-          </p>
-          <p style={{ margin: "0 0 16px" }}>
-            در روزهای بعد از انتخابات، فیلترینگ توییتر، فیس‌بوک و بخش بزرگی
-            از اینترنت بین‌المللی در ایران به‌شدت بیشتر شد. فرندفید اما برای
-            مدتی زیر همان فشار مستقیم نبود؛ و چون طراحی‌اش اجازه می‌داد
-            پست‌های توییتر، عکس و لینک وبلاگ در یک فید واحد کنار هم دیده
-            شوند، برای خیلی‌ها به راهی میان‌بر برای دنبال کردن خبرها و
-            گزارش‌های لحظه‌ای تبدیل شد؛ در کنار سرویس‌هایی مثل گوگل‌ریدر که
-            همان روزها نقش مشابهی داشتند.
-          </p>
-          <p style={{ margin: "0 0 16px" }}>
-            این تغییر فقط در نوع استفاده نبود. لحن و فضای جامعه هم عوض شد.
-            پست‌های سیاسی و خبری جای بیشتری از فید را گرفتند، بعضی کاربران به
-            نام‌های مستعار روی آوردند یا محتاط‌تر شدند، و اتاق‌هایی با
-            موضوعات خبری و اجتماعی که پیش‌تر کم‌رنگ بودند فعال‌تر شدند.
-            خبرنگاران و رسانه‌های خارجی هم که دسترسی مستقیم‌شان به داخل ایران
-            محدود شده بود، بخشی از گزارش‌ها را از همین فیدهای عمومی و
-            به‌روزرسانی‌های کاربران برمی‌داشتند.
-          </p>
-          <p style={{ margin: 0 }}>
-            این دوره، هرچند کوتاه، یکی از دلایلی است که فرندفید در خاطره
-            جمعی کاربران فارسی‌زبان فقط یک شبکه اجتماعی قدیمی نیست؛ برای مدتی
-            پنجره‌ای بود که از پشتش، وسط قطعی‌ها و فیلترینگ، می‌شد دید بیرون
-            چه خبر است.
-          </p>
-        </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        {posts.map((post) => {
+          const Cover = post.cover;
+          return (
+            <Link
+              key={post.to}
+              to={post.to}
+              className="ff-magazine-card"
+              style={{
+                display: "block",
+                background: "var(--ff-panel)",
+                border: "1px solid var(--ff-border)",
+                borderRadius: "var(--ff-radius)",
+                overflow: "hidden",
+                boxShadow: "var(--ff-shadow-panel)",
+                color: "inherit",
+                textDecoration: "none",
+                transition: "box-shadow 120ms ease, transform 120ms ease",
+              }}
+            >
+              <Cover />
+              <div style={{ padding: "14px 18px 18px" }}>
+                <h2 style={{ fontSize: 15, margin: "0 0 8px", color: "var(--ff-text)", lineHeight: 1.6 }}>
+                  {post.title}
+                </h2>
+                <p style={{ fontSize: 12.5, lineHeight: 1.9, color: "var(--ff-muted)", margin: 0 }}>
+                  {post.excerpt}
+                </p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
-    </article>
+    </div>
   );
 };

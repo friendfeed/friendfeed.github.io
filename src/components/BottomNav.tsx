@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { IconRoom, IconUsers, IconStar, IconBlog } from "../icons/Icons";
+import { IconRoom, IconUsers, IconStar, IconBlog, IconBookmark } from "../icons/Icons";
 
 /**
  * Mobile-only bottom tab bar -- the phone-native replacement for
@@ -16,6 +16,7 @@ import { IconRoom, IconUsers, IconStar, IconBlog } from "../icons/Icons";
 const items = [
   { to: "/", label: "خانه", icon: IconRoom },
   { to: "/users", label: "کاربران", icon: IconUsers },
+  { to: "/subscriptions", label: "مشترکان", icon: IconBookmark },
   { to: "/faq", label: "سوالات", icon: IconStar },
   { to: "/magazine", label: "مجله", icon: IconBlog },
 ];

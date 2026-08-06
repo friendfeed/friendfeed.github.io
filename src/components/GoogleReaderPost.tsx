@@ -46,7 +46,13 @@ export const GoogleReaderPost: FC<{
         border: "1px solid #d6d6d6",
         borderTop: "none",
         background: "#fff",
-        overflow: "hidden",
+        /* No border-radius on this card, so overflow:hidden here served
+           no visual purpose -- but it silently clipped the share popover
+           below (position:absolute, opens *below* the action row) at
+           this card's own bottom edge, making it invisible/unclickable
+           the moment it opened, which also made the adjacent "نظر"
+           (comments) button feel broken: clicks meant for it were
+           landing on the invisible clipped popover instead. Removed. */
       }}
     >
       {/* ---- Post row (click target: mark-as-read mechanic) ---- */}
@@ -181,7 +187,7 @@ export const GoogleReaderPost: FC<{
                     border: "1px solid #ddd",
                     borderRadius: 2,
                     boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                    zIndex: 10,
+                    zIndex: 50,
                     direction: "rtl",
                   }}
                 >
