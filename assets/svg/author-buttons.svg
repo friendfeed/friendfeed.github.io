@@ -1,0 +1,68 @@
+<svg viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Author profile and portfolio links for Reza Hassani">
+  <defs>
+    <linearGradient id="ab-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0f14"/>
+      <stop offset="100%" style="stop-color:#111520"/>
+    </linearGradient>
+    <linearGradient id="gh-btn" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a3045"/>
+      <stop offset="100%" style="stop-color:#1e2535"/>
+    </linearGradient>
+    <linearGradient id="portfolio-btn" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a1f10"/>
+      <stop offset="100%" style="stop-color:#1e1710"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="520" height="90" fill="url(#ab-bg)" rx="10"/>
+
+  <!-- Divider top -->
+  <line x1="30" y1="20" x2="490" y2="20" stroke="#e8a04a" stroke-width="0.4" opacity="0.3"/>
+
+  <!-- Label -->
+  <text x="260" y="16" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle" letter-spacing="3">CREATED BY</text>
+
+  <!-- Ornament left -->
+  <polygon points="42,45 47,37 52,45 47,53" fill="none" stroke="#e8a04a" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Author name -->
+  <text x="78" y="43" font-family="Georgia, serif" font-size="20" font-weight="700" fill="#c8d4e8">Reza</text>
+  <text x="130" y="43" font-family="Georgia, serif" font-size="20" font-weight="400" fill="#e8a04a">Hassani</text>
+
+  <!-- Farsi name -->
+  <text x="78" y="58" font-family="'Courier New', monospace" font-size="9" fill="#6a7a9a">رضا حسنی</text>
+
+  <!-- GitHub button -->
+  <a href="https://github.com/hassanireza" target="_blank">
+    <g transform="translate(248, 25)">
+      <rect x="0" y="0" width="118" height="40" rx="6" fill="url(#gh-btn)" stroke="#3a4a6a" stroke-width="1"/>
+      <!-- GitHub icon mark -->
+      <circle cx="18" cy="20" r="9" fill="none" stroke="#8a9ab8" stroke-width="1.2"/>
+      <path d="M14,24 C14,22 15.5,21.5 18,21.5 C20.5,21.5 22,22 22,24" stroke="#8a9ab8" stroke-width="1" fill="none"/>
+      <circle cx="15" cy="18" r="1.5" fill="#8a9ab8"/>
+      <circle cx="21" cy="18" r="1.5" fill="#8a9ab8"/>
+      <!-- Label -->
+      <text x="68" y="16" font-family="'Courier New', monospace" font-size="8" fill="#6a7a9a" text-anchor="middle" letter-spacing="1">GITHUB</text>
+      <text x="68" y="30" font-family="'Courier New', monospace" font-size="9" fill="#c8d4e8" text-anchor="middle">@hassanireza</text>
+    </g>
+  </a>
+
+  <!-- Portfolio button -->
+  <a href="https://hassanireza.github.io/" target="_blank">
+    <g transform="translate(378, 25)">
+      <rect x="0" y="0" width="118" height="40" rx="6" fill="url(#portfolio-btn)" stroke="#7a5a2a" stroke-width="1"/>
+      <!-- Globe icon mark -->
+      <circle cx="18" cy="20" r="9" fill="none" stroke="#e8a04a" stroke-width="1.2"/>
+      <ellipse cx="18" cy="20" rx="4.5" ry="9" fill="none" stroke="#e8a04a" stroke-width="0.8"/>
+      <line x1="9" y1="20" x2="27" y2="20" stroke="#e8a04a" stroke-width="0.8"/>
+      <line x1="10.5" y1="14.5" x2="25.5" y2="14.5" stroke="#e8a04a" stroke-width="0.6"/>
+      <line x1="10.5" y1="25.5" x2="25.5" y2="25.5" stroke="#e8a04a" stroke-width="0.6"/>
+      <!-- Label -->
+      <text x="68" y="16" font-family="'Courier New', monospace" font-size="8" fill="#8a7a5a" text-anchor="middle" letter-spacing="1">PORTFOLIO</text>
+      <text x="68" y="30" font-family="'Courier New', monospace" font-size="9" fill="#e8a04a" text-anchor="middle">hassanireza.github.io</text>
+    </g>
+  </a>
+
+  <!-- Divider bottom -->
+  <line x1="30" y1="73" x2="490" y2="73" stroke="#e8a04a" stroke-width="0.4" opacity="0.3"/>
+</svg>

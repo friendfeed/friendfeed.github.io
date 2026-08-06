@@ -1,0 +1,135 @@
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Responsive design layout diagram showing desktop tablet and mobile">
+  <defs>
+    <linearGradient id="rl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0f14"/>
+      <stop offset="100%" style="stop-color:#111520"/>
+    </linearGradient>
+    <linearGradient id="screen-desktop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#141925"/>
+      <stop offset="100%" style="stop-color:#0f1420"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="320" fill="url(#rl-bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="30" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#c8d4e8" text-anchor="middle" letter-spacing="2">RESPONSIVE DESIGN SYSTEM</text>
+  <line x1="200" y1="40" x2="600" y2="40" stroke="#e8a04a" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- ───── DESKTOP ───── -->
+  <g transform="translate(55, 55)">
+    <!-- Monitor frame -->
+    <rect x="0" y="0" width="220" height="155" rx="6" fill="#1a2030" stroke="#3a4a6a" stroke-width="1.2"/>
+    <!-- Screen area -->
+    <rect x="6" y="6" width="208" height="139" rx="3" fill="url(#screen-desktop)"/>
+    <!-- Header bar -->
+    <rect x="6" y="6" width="208" height="22" rx="3" fill="#1e2e50"/>
+    <rect x="10" y="12" width="80" height="10" rx="2" fill="#e8a04a" opacity="0.7"/>
+    <rect x="160" y="12" width="12" height="10" rx="2" fill="#2a3a60"/>
+    <rect x="176" y="12" width="12" height="10" rx="2" fill="#2a3a60"/>
+    <rect x="192" y="12" width="16" height="10" rx="2" fill="#3a4a80"/>
+    <!-- Sidebar -->
+    <rect x="6" y="30" width="50" height="115" rx="0" fill="#131a28"/>
+    <rect x="10" y="36" width="40" height="8" rx="2" fill="#2a3a60"/>
+    <rect x="10" y="50" width="34" height="6" rx="2" fill="#1e2a45"/>
+    <rect x="10" y="62" width="38" height="6" rx="2" fill="#1e2a45"/>
+    <rect x="10" y="74" width="30" height="6" rx="2" fill="#1e2a45"/>
+    <rect x="10" y="86" width="36" height="6" rx="2" fill="#1e2a45"/>
+    <!-- Content area -->
+    <rect x="60" y="32" width="150" height="30" rx="3" fill="#1e2a3a"/>
+    <rect x="64" y="36" width="90" height="10" rx="2" fill="#2a3a55"/>
+    <rect x="64" y="50" width="130" height="6" rx="2" fill="#1a2235"/>
+    <!-- Cards -->
+    <rect x="60" y="68" width="46" height="40" rx="3" fill="#1a2535"/>
+    <rect x="112" y="68" width="46" height="40" rx="3" fill="#1a2535"/>
+    <rect x="164" y="68" width="46" height="40" rx="3" fill="#1a2535"/>
+    <rect x="64" y="72" width="36" height="20" rx="2" fill="#1e3050" opacity="0.7"/>
+    <rect x="116" y="72" width="36" height="20" rx="2" fill="#1e3050" opacity="0.7"/>
+    <rect x="168" y="72" width="36" height="20" rx="2" fill="#1e3050" opacity="0.7"/>
+    <!-- Stand -->
+    <rect x="95" y="155" width="30" height="10" rx="0" fill="#1a2030" stroke="#3a4a6a" stroke-width="0.8"/>
+    <rect x="80" y="165" width="60" height="5" rx="2" fill="#1a2030" stroke="#3a4a6a" stroke-width="0.8"/>
+
+    <!-- Label -->
+    <text x="110" y="188" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#7a9ad8" text-anchor="middle">Desktop</text>
+    <text x="110" y="202" font-family="'Courier New', monospace" font-size="9" fill="#4a5a7a" text-anchor="middle">&gt; 680px</text>
+    <text x="110" y="215" font-family="'Courier New', monospace" font-size="8" fill="#3a4a6a" text-anchor="middle">Multi-column · Sidebar nav</text>
+  </g>
+
+  <!-- ───── TABLET ───── -->
+  <g transform="translate(320, 65)">
+    <!-- Tablet frame -->
+    <rect x="0" y="0" width="160" height="210" rx="12" fill="#1a2030" stroke="#3a4a6a" stroke-width="1.2"/>
+    <!-- Camera -->
+    <circle cx="80" cy="9" r="4" fill="#131825"/>
+    <circle cx="80" cy="9" r="2" fill="#0f1420"/>
+    <!-- Screen -->
+    <rect x="8" y="18" width="144" height="178" rx="3" fill="url(#screen-desktop)"/>
+    <!-- Header -->
+    <rect x="8" y="18" width="144" height="24" rx="3" fill="#1e2e50"/>
+    <rect x="12" y="24" width="60" height="10" rx="2" fill="#e8a04a" opacity="0.6"/>
+    <rect x="130" y="24" width="16" height="10" rx="2" fill="#3a4a80"/>
+    <!-- Content blocks (single col) -->
+    <rect x="12" y="48" width="136" height="28" rx="3" fill="#1e2a3a"/>
+    <rect x="16" y="52" width="80" height="8" rx="2" fill="#2a3a55"/>
+    <rect x="16" y="64" width="100" height="6" rx="2" fill="#1a2235"/>
+    <rect x="12" y="82" width="64" height="54" rx="3" fill="#1a2535"/>
+    <rect x="82" y="82" width="66" height="54" rx="3" fill="#1a2535"/>
+    <rect x="16" y="86" width="54" height="30" rx="2" fill="#1e3050" opacity="0.7"/>
+    <rect x="86" y="86" width="56" height="30" rx="2" fill="#1e3050" opacity="0.7"/>
+    <!-- Bottom row -->
+    <rect x="12" y="142" width="136" height="48" rx="3" fill="#131a28"/>
+    <rect x="16" y="147" width="40" height="8" rx="2" fill="#2a3a60"/>
+    <rect x="16" y="160" width="110" height="6" rx="2" fill="#1e2a45"/>
+    <rect x="16" y="172" width="90" height="6" rx="2" fill="#1e2a45"/>
+    <!-- Home indicator -->
+    <rect x="60" y="200" width="40" height="4" rx="2" fill="#2a3a6a"/>
+
+    <!-- Label -->
+    <text x="80" y="232" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#6ab8a0" text-anchor="middle">Tablet</text>
+    <text x="80" y="246" font-family="'Courier New', monospace" font-size="9" fill="#4a5a7a" text-anchor="middle">≤ 680px</text>
+    <text x="80" y="259" font-family="'Courier New', monospace" font-size="8" fill="#3a4a6a" text-anchor="middle">Single-col · Touch controls</text>
+  </g>
+
+  <!-- ───── MOBILE ───── -->
+  <g transform="translate(555, 80)">
+    <!-- Phone frame -->
+    <rect x="0" y="0" width="100" height="190" rx="16" fill="#1a2030" stroke="#3a4a6a" stroke-width="1.2"/>
+    <!-- Notch -->
+    <rect x="28" y="0" width="44" height="12" rx="8" fill="#0d0f14"/>
+    <circle cx="70" cy="6" r="3" fill="#131825"/>
+    <!-- Screen -->
+    <rect x="6" y="14" width="88" height="162" rx="6" fill="url(#screen-desktop)"/>
+    <!-- Status bar -->
+    <rect x="6" y="14" width="88" height="16" rx="6" fill="#0f1420"/>
+    <!-- Header/nav -->
+    <rect x="6" y="30" width="88" height="22" rx="0" fill="#1e2e50"/>
+    <rect x="10" y="35" width="48" height="10" rx="2" fill="#e8a04a" opacity="0.55"/>
+    <!-- Content -->
+    <rect x="10" y="58" width="80" height="22" rx="3" fill="#1e2a3a"/>
+    <rect x="14" y="62" width="50" height="7" rx="2" fill="#2a3a55"/>
+    <rect x="14" y="72" width="65" height="4" rx="2" fill="#1a2235"/>
+    <!-- Cards stacked -->
+    <rect x="10" y="86" width="80" height="44" rx="3" fill="#1a2535"/>
+    <rect x="14" y="90" width="72" height="24" rx="2" fill="#1e3050" opacity="0.7"/>
+    <rect x="10" y="136" width="80" height="34" rx="3" fill="#1a2535"/>
+    <rect x="14" y="140" width="72" height="24" rx="2" fill="#1e3050" opacity="0.7"/>
+    <!-- Bottom nav bar -->
+    <rect x="6" y="154" width="88" height="22" rx="0" fill="#1a2a44"/>
+    <rect x="6" y="169" width="88" height="7" rx="6" fill="#1a2a44"/>
+    <rect x="12" y="157" width="14" height="14" rx="3" fill="#2a3a60"/>
+    <rect x="32" y="157" width="14" height="14" rx="3" fill="#2a3a60"/>
+    <rect x="52" y="157" width="14" height="14" rx="3" fill="#3a5a90"/>
+    <rect x="72" y="157" width="14" height="14" rx="3" fill="#2a3a60"/>
+    <!-- Home bar -->
+    <rect x="32" y="175" width="36" height="4" rx="2" fill="#2a3a6a"/>
+
+    <!-- Label -->
+    <text x="50" y="212" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#d07ad0" text-anchor="middle">Mobile</text>
+    <text x="50" y="226" font-family="'Courier New', monospace" font-size="9" fill="#4a5a7a" text-anchor="middle">&lt; 480px</text>
+    <text x="50" y="239" font-family="'Courier New', monospace" font-size="8" fill="#3a4a6a" text-anchor="middle">Full-screen · Bottom nav</text>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="400" y="306" font-family="'Courier New', monospace" font-size="9" fill="#3a4a6a" text-anchor="middle" letter-spacing="1">FRIENDFEED FARSI COMMUNITY ARCHIVE  ·  RESPONSIVE BREAKPOINTS</text>
+</svg>
