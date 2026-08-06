@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { IconRoom, IconUsers, IconStar, IconBlog, IconBookmark } from "../icons/Icons";
+import { IconRoom, IconUsers, IconStar, IconBlog, IconArchive } from "../icons/Icons";
 
 /**
  * Mobile-only bottom tab bar -- the phone-native replacement for
@@ -12,11 +12,17 @@ import { IconRoom, IconUsers, IconStar, IconBlog, IconBookmark } from "../icons/
  * Renders unconditionally in the DOM (App.tsx mounts it on every route);
  * it's the CSS media query that decides whether it's actually on screen,
  * so there's no layout jump / hydration mismatch between breakpoints.
+ *
+ * Keep this in sync with <Sidebar> (desktop nav) -- both should expose
+ * the same destinations so a link like اتاق‌ها is reachable regardless
+ * of viewport width. IconRoom is (despite the name) a house glyph, used
+ * for خانه; IconArchive (a lidded box) stands in for اتاق‌ها since rooms
+ * are a contained space distinct from the open کاربران list.
  */
 const items = [
   { to: "/", label: "خانه", icon: IconRoom },
   { to: "/users", label: "کاربران", icon: IconUsers },
-  { to: "/subscriptions", label: "مشترکان", icon: IconBookmark },
+  { to: "/rooms", label: "اتاق‌ها", icon: IconArchive },
   { to: "/faq", label: "سوالات", icon: IconStar },
   { to: "/magazine", label: "مجله", icon: IconBlog },
 ];
