@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { IconRoom, IconUsers, IconStar, IconBlog, IconArchive } from "../icons/Icons";
+import { IconRoom, IconUsers, IconStar, IconBlog, IconX } from "../icons/Icons";
 
 /**
  * Mobile-only bottom tab bar -- the phone-native replacement for
@@ -13,16 +13,19 @@ import { IconRoom, IconUsers, IconStar, IconBlog, IconArchive } from "../icons/I
  * it's the CSS media query that decides whether it's actually on screen,
  * so there's no layout jump / hydration mismatch between breakpoints.
  *
- * Keep this in sync with <Sidebar> (desktop nav) -- both should expose
- * the same destinations so a link like اتاق‌ها is reachable regardless
- * of viewport width. IconRoom is (despite the name) a house glyph, used
- * for خانه; IconArchive (a lidded box) stands in for اتاق‌ها since rooms
- * are a contained space distinct from the open کاربران list.
+ * اتاق‌ها is intentionally dropped from this bar (still reachable from
+ * <Sidebar> on desktop / the homepage) to make room for both directory
+ * pages here instead: "مشترکین" (-> /subscriptions, all FriendFeed
+ * members) and "ایکس" (-> /users, the X-crossover list) sit either side
+ * of the middle slot. Labels are deliberately short -- the full page
+ * titles ("همه کاربران فرندفید" / "کاربران فرندفید در ایکس") don't fit a
+ * 5-item mobile tab bar, so IconUsers/IconX carry the rest of the
+ * meaning that the short label alone can't.
  */
 const items = [
   { to: "/", label: "خانه", icon: IconRoom },
-  { to: "/users", label: "کاربران", icon: IconUsers },
-  { to: "/rooms", label: "اتاق‌ها", icon: IconArchive },
+  { to: "/subscriptions", label: "مشترکین", icon: IconUsers },
+  { to: "/users", label: "ایکس", icon: IconX },
   { to: "/faq", label: "سوالات", icon: IconStar },
   { to: "/magazine", label: "مجله", icon: IconBlog },
 ];
