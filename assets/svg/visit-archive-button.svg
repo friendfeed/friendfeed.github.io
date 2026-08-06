@@ -1,0 +1,12 @@
+<svg viewBox="0 0 146 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visit the Archive">
+  <defs>
+    <linearGradient id="cta-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2c374"/><stop offset="100%" stop-color="#c97c2e"/>
+    </linearGradient>
+  </defs>
+  <a href="https://friendfeed.github.io/" target="_blank">
+    <rect x="0" y="0" width="146" height="40" rx="20.0" fill="url(#cta-grad)"/>
+    <text x="20" y="24.5" font-family="Georgia, 'Times New Roman', serif" font-size="11.5" font-weight="700" fill="#12151f">Visit the Archive</text>
+    <path d="M 126,16.0 L 132,20.0 L 126,24.0" fill="none" stroke="#12151f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </a>
+</svg>
