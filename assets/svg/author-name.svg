@@ -1,0 +1,16 @@
+<svg viewBox="0 0 300 106" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Created by Reza Hassani">
+  <defs>
+    <linearGradient id="bg-created" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c10"/><stop offset="100%" stop-color="#12151f"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="106" fill="url(#bg-created)" rx="12"/>
+  <line x1="24" y1="26" x2="276" y2="26" stroke="#e8a04a" stroke-width="0.5" opacity="0.32"/>
+  <line x1="24" y1="80" x2="276" y2="80" stroke="#e8a04a" stroke-width="0.5" opacity="0.32"/>
+  <text x="150.0" y="18" font-family="'Courier New', Consolas, monospace" font-size="8.5" fill="#5a6a8c" text-anchor="middle" letter-spacing="3">CREATED BY</text>
+  <polygon points="32,45 40,53 32,61 24,53" fill="none" stroke="#e8a04a" stroke-width="1" opacity="0.55"/>
+  <circle cx="32" cy="53" r="2" fill="#e8a04a" opacity="0.55"/>
+  <text x="56" y="49" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-weight="700" fill="#dce5f7">Reza</text>
+  <text x="109.31" y="49" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-weight="400" fill="#e8a04a">Hassani</text>
+  <text x="56" y="69" font-family="Vazirmatn, 'Noto Naskh Arabic', 'Noto Sans Arabic', Tahoma, sans-serif" font-size="12" fill="#6a7a9c">رضا حسنی</text>
+</svg>
