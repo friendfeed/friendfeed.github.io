@@ -25,11 +25,13 @@ import { SearchProvider } from "./services/SearchContext";
 const App: FC = () => {
   const { pathname } = useLocation();
   // The header (logo + search box) is chrome built specifically for
-  // browsing/searching the user list, so it only renders on /users now.
-  // Every other page (home, faq, magazine, google-reader, ...) starts
-  // flush at the top with no header above it, same as the home page
-  // always has.
-  const showHeader = pathname === "/users";
+  // browsing/searching a user list, so it renders on both directory
+  // pages -- /users (X-crossover) and /subscriptions (all FriendFeed
+  // members) -- which is what makes those two pages read as the same
+  // site instead of two different designs. Every other page (home,
+  // rooms, faq, magazine, google-reader, ...) starts flush at the top
+  // with no header above it, same as the home page always has.
+  const showHeader = pathname === "/users" || pathname === "/subscriptions";
   // Pages without the header (everything but /users) sat flush against
   // the very top of the viewport once the header was made conditional,
   // so they get extra top padding here instead, applied to the shared
