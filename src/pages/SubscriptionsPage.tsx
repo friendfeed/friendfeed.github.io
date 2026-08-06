@@ -108,27 +108,45 @@ const PageNav: FC<{ page: number; pageCount: number; onGo: (p: number) => void }
   onGo,
 }) => {
   if (pageCount <= 1) return null;
-  const pages = Array.from({ length: pageCount }, (_, i) => i);
   const hrefFor = (p: number) => (p === 0 ? "/subscriptions" : `/subscriptions?page=${p + 1}`);
+
+  // Windowed page list -- always show the first and last page, plus up
+  // to 2 pages either side of the current one, with "…" filling any
+  // gap. Without this a large result set (200+ pages) renders every
+  // single page number in one unreadable, unbounded row.
+  const pages: number[] = [];
+  const radius = 2;
+  for (let p = 0; p < pageCount; p++) {
+    if (p === 0 || p === pageCount - 1 || Math.abs(p - page) <= radius) {
+      pages.push(p);
+    }
+  }
+
   return (
     <div className="ff-page-nav" style={{ fontSize: 12.5, display: "flex", gap: 8, alignItems: "center", marginBottom: 8, flexWrap: "wrap" }}>
-      {pages.map((p) => (
-        <Link
-          key={p}
-          to={hrefFor(p)}
-          onClick={(e) => {
-            e.preventDefault();
-            onGo(p);
-          }}
-          style={{
-            fontWeight: p === page ? "bold" : "normal",
-            color: p === page ? "var(--ff-text)" : "var(--ff-link)",
-            fontSize: 12.5,
-          }}
-        >
-          {p + 1}
-        </Link>
-      ))}
+      {pages.map((p, i) => {
+        const prevP = pages[i - 1];
+        const showEllipsis = prevP !== undefined && p - prevP > 1;
+        return (
+          <span key={p} style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            {showEllipsis && <span style={{ color: "var(--ff-muted)", fontSize: 12.5 }}>…</span>}
+            <Link
+              to={hrefFor(p)}
+              onClick={(e) => {
+                e.preventDefault();
+                onGo(p);
+              }}
+              style={{
+                fontWeight: p === page ? "bold" : "normal",
+                color: p === page ? "var(--ff-text)" : "var(--ff-link)",
+                fontSize: 12.5,
+              }}
+            >
+              {p + 1}
+            </Link>
+          </span>
+        );
+      })}
       {page < pageCount - 1 && (
         <Link
           to={hrefFor(page + 1)}
