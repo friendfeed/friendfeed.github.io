@@ -192,7 +192,7 @@ export const RoomsPage: FC = () => {
           gap: 12,
         }}
       >
-        <h1 style={{ fontSize: 14, margin: 0 }}>FriendFeed Rooms</h1>
+        <h1 style={{ fontSize: 14, margin: 0 }}>اتاق‌های فرندفید</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {searchQuery
             ? `${filteredRooms.length} نتیجه از ${rooms.length} اتاق`
