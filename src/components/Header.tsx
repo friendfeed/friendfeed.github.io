@@ -1,7 +1,8 @@
 import type { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSearch } from "../services/SearchContext";
 import xUsersRaw from "../data/xUsers.json";
+import subscribersRaw from "../data/users-subscriptions.json";
 
 const toPersianDigits = (n: number) =>
   n.toString().replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
@@ -26,7 +27,12 @@ const toPersianDigits = (n: number) =>
  */
 export const Header: FC = () => {
   const { query, setQuery } = useSearch();
-  const userCount = xUsersRaw.length;
+  const { pathname } = useLocation();
+  // Header now renders on both directory pages (/users and
+  // /subscriptions) so they share one design -- the count under the
+  // logo has to reflect whichever list is actually on screen instead
+  // of always showing the X-crossover total.
+  const userCount = pathname === "/subscriptions" ? subscribersRaw.length : xUsersRaw.length;
 
   return (
     <header className="ff-app-header" style={{ background: "#fff", borderBottom: "1px solid var(--ff-border)" }}>
