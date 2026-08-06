@@ -1,285 +1,165 @@
 import type { FC } from "react";
-import { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { useSearch } from "../services/SearchContext";
+import { RoomCell } from "../components/RoomCell";
+import type { RoomRecord } from "../components/RoomCell";
 import { useSEO } from "../seo/useSEO";
 import roomsData from "../data/rooms.json";
 
-interface FriendFeedRoom {
-  name: string;
-  slug: string;
-  avatar?: string;
-  hasRealAvatar?: boolean;
-}
+// Same page size as the other two directory pages, so browsing feels
+// identical across all three.
+const PAGE_SIZE = 20;
 
-// Same page size as the Subscriptions page, for a consistent browsing feel.
-const PAGE_SIZE = 72;
-
-// Rooms share the same avatar folder as users (per instruction), so this
-// points at the exact same fallback file as SubscriptionsPage.
-const FALLBACK_AVATAR = "/avatars/users/_fallback.webp";
-
-const getArchiveUrl = (slug: string): string => {
-  return `https://web.archive.org/web/20150000000000*/http://friendfeed.com/rooms/${slug}`;
-};
-
-const RoomCard: FC<{ room: FriendFeedRoom }> = ({ room }) => {
-  return (
-    <a
-      href={getArchiveUrl(room.slug)}
-      target="_blank"
-      rel="noreferrer"
-      style={cardStyle}
-    >
-      <img
-        src={room.avatar || FALLBACK_AVATAR}
-        alt={room.name}
-        width={64}
-        height={64}
-        loading="lazy"
-        onError={(e) => {
-          (e.currentTarget as HTMLImageElement).src = FALLBACK_AVATAR;
-        }}
-        style={{
-          borderRadius: "var(--ff-radius)",
-          border: "1px solid var(--ff-border)",
-          objectFit: "cover",
-          width: "100%",
-          height: "auto",
-          aspectRatio: "1 / 1",
-          marginBottom: 8,
-        }}
-      />
-      <div
-        style={{
-          fontSize: 12.5,
-          fontWeight: 500,
-          textAlign: "center",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          display: "-webkit-box",
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: "vertical",
-          lineHeight: 1.3,
-        }}
-      >
-        {room.name}
-      </div>
-    </a>
-  );
-};
-
-const PageButton: FC<{
-  active?: boolean;
-  disabled?: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}> = ({ active, disabled, onClick, children }) => (
-  <button
-    onClick={onClick}
-    disabled={disabled}
-    style={{
-      minWidth: 28,
-      height: 28,
-      padding: "0 6px",
-      fontSize: 12,
-      fontFamily: "inherit",
-      borderRadius: "var(--ff-radius)",
-      border: "1px solid var(--ff-border)",
-      background: active ? "var(--ff-accent, #3b6ea5)" : "var(--ff-panel)",
-      color: active ? "#fff" : disabled ? "var(--ff-muted)" : "inherit",
-      cursor: disabled ? "default" : "pointer",
-      opacity: disabled ? 0.5 : 1,
-    }}
-  >
-    {children}
-  </button>
-);
-
-const Pagination: FC<{
-  page: number;
-  totalPages: number;
-  onChange: (page: number) => void;
-}> = ({ page, totalPages, onChange }) => {
-  const pages = useMemo(() => {
-    const set = new Set<number>();
-    for (let p = 1; p <= totalPages; p++) {
-      if (p === 1 || p === totalPages || Math.abs(p - page) <= 2) set.add(p);
-    }
-    return Array.from(set).sort((a, b) => a - b);
-  }, [page, totalPages]);
-
-  if (totalPages <= 1) return null;
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: 6,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 20,
-        marginBottom: 8,
-      }}
-    >
-      <PageButton disabled={page === 1} onClick={() => onChange(page - 1)}>
-        ‹
-      </PageButton>
-      {pages.map((p, i) => {
-        const prev = pages[i - 1];
-        const showEllipsis = prev !== undefined && p - prev > 1;
-        return (
-          <span key={p} style={{ display: "flex", gap: 6, alignItems: "center" }}>
-            {showEllipsis && <span style={{ color: "var(--ff-muted)", fontSize: 12 }}>…</span>}
-            <PageButton active={p === page} onClick={() => onChange(p)}>
-              {p}
-            </PageButton>
-          </span>
-        );
-      })}
-      <PageButton disabled={page === totalPages} onClick={() => onChange(page + 1)}>
-        ›
-      </PageButton>
-    </div>
-  );
-};
-
+/**
+ * Rebuilt to be pixel-for-pixel the same page as <XCrossoverPage> and
+ * <SubscriptionsPage>: same header/count line, same URL-param
+ * pagination (?page=N) with the same windowed numbered-links +
+ * "صفحه بعد »" control, same search (via the shared header search box /
+ * SearchContext -- independent per route, so it never leaks into or
+ * out of the other two directory pages -- not a page-local input), same
+ * card grid gap. The only intentional difference lives in <RoomCell>
+ * itself: a single "آرشیو" action and no current-account badge, same as
+ * <FriendFeedUserCell>, since rooms only ever link to one place.
+ */
 export const RoomsPage: FC = () => {
   useSEO({ path: "/rooms" });
-  const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);
+  const rooms = roomsData as RoomRecord[];
+  const { query } = useSearch();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageParam = parseInt(searchParams.get("page") ?? "1", 10);
+  const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam - 1 : 0;
 
-  const rooms: FriendFeedRoom[] = roomsData as FriendFeedRoom[];
+  const normalizedQuery = query.trim().toLowerCase();
+  const filtered = normalizedQuery
+    ? rooms.filter(
+        (r) =>
+          r.name.toLowerCase().includes(normalizedQuery) ||
+          r.slug.toLowerCase().includes(normalizedQuery)
+      )
+    : rooms;
 
-  const filteredRooms = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return rooms;
-    }
-    const query = searchQuery.toLowerCase();
-    return rooms.filter(
-      (r) =>
-        r.name.toLowerCase().includes(query) ||
-        r.slug.toLowerCase().includes(query)
-    );
-  }, [searchQuery, rooms]);
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, pageCount - 1);
+  const start = safePage * PAGE_SIZE;
+  const pageRooms = filtered.slice(start, start + PAGE_SIZE);
 
-  useEffect(() => {
-    setPage(1);
-  }, [searchQuery]);
-
-  const totalPages = Math.max(1, Math.ceil(filteredRooms.length / PAGE_SIZE));
-  const currentPage = Math.min(page, totalPages);
-
-  const pageRooms = useMemo(() => {
-    const start = (currentPage - 1) * PAGE_SIZE;
-    return filteredRooms.slice(start, start + PAGE_SIZE);
-  }, [filteredRooms, currentPage]);
-
-  const goToPage = (p: number) => {
-    const clamped = Math.min(Math.max(1, p), totalPages);
-    setPage(clamped);
+  const goTo = (p: number) => {
+    setSearchParams(p === 0 ? {} : { page: String(p + 1) });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <div style={{ maxWidth: "100%", padding: "0" }}>
+    <div>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "baseline",
-          marginBottom: 16,
-          flexWrap: "wrap",
-          gap: 12,
+          marginBottom: 6,
         }}
       >
-        <h1 style={{ fontSize: 14, margin: 0 }}>اتاق‌های فرندفید</h1>
+        <h1 style={{ fontSize: 14 }}>اتاق‌های فرندفید</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
-          {searchQuery
-            ? `${filteredRooms.length} نتیجه از ${rooms.length} اتاق`
+          {normalizedQuery
+            ? `${filtered.length} نتیجه از ${rooms.length} اتاق`
             : `${rooms.length} اتاق`}
         </span>
       </div>
 
-      <div
-        style={{
-          background: "var(--ff-panel)",
-          border: "1px solid var(--ff-border)",
-          borderRadius: "var(--ff-radius)",
-          padding: 12,
-          marginBottom: 16,
-          boxShadow: "var(--ff-shadow-panel)",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="جستجو بر اساس نام اتاق..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "8px 12px",
-            fontSize: 13,
-            border: "1px solid var(--ff-border)",
-            borderRadius: "var(--ff-radius)",
-            fontFamily: "inherit",
-            boxSizing: "border-box",
-          }}
-        />
-      </div>
-
-      {filteredRooms.length === 0 ? (
+      {filtered.length === 0 ? (
         <div
           style={{
-            background: "var(--ff-panel)",
-            border: "1px solid var(--ff-border)",
-            borderRadius: "var(--ff-radius)",
-            padding: 24,
+            padding: "30px 10px",
             textAlign: "center",
             color: "var(--ff-muted)",
+            fontSize: 12.5,
           }}
         >
-          <p>اتاقی با این معیار پیدا نشد.</p>
+          موردی با این نام پیدا نشد.
         </div>
       ) : (
         <>
+          <PageNav page={safePage} pageCount={pageCount} onGo={goTo} />
+
           <div
+            className="ff-x-grid"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-              gap: 14,
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "14px 14px",
             }}
           >
-            {pageRooms.map((room) => (
-              <RoomCard key={room.slug} room={room} />
+            {pageRooms.map((r) => (
+              <RoomCell key={r.slug} room={r} />
             ))}
           </div>
 
-          <Pagination page={currentPage} totalPages={totalPages} onChange={goToPage} />
-
-          <div style={{ fontSize: 11, color: "var(--ff-muted)", textAlign: "center" }}>
-            صفحه {currentPage} از {totalPages}
+          <div style={{ marginTop: 10 }}>
+            <PageNav page={safePage} pageCount={pageCount} onGo={goTo} />
           </div>
         </>
       )}
-
-      <div style={{ marginTop: 24, fontSize: 12, color: "var(--ff-muted)", textAlign: "center" }}>
-        <p>تمام لینک‌ها به web.archive.org متصل می‌شوند</p>
-      </div>
     </div>
   );
 };
 
-const cardStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  textAlign: "center",
-  padding: 12,
-  background: "var(--ff-panel)",
-  border: "1px solid var(--ff-border)",
-  borderRadius: "var(--ff-radius)",
-  textDecoration: "none",
-  color: "inherit",
-  transition: "all 120ms ease",
-  cursor: "pointer",
+const PageNav: FC<{ page: number; pageCount: number; onGo: (p: number) => void }> = ({
+  page,
+  pageCount,
+  onGo,
+}) => {
+  if (pageCount <= 1) return null;
+  const hrefFor = (p: number) => (p === 0 ? "/rooms" : `/rooms?page=${p + 1}`);
+
+  // Windowed page list -- always show the first and last page, plus up
+  // to 2 pages either side of the current one, with "…" filling any
+  // gap. Without this a large result set renders every single page
+  // number in one unreadable, unbounded row.
+  const pages: number[] = [];
+  const radius = 2;
+  for (let p = 0; p < pageCount; p++) {
+    if (p === 0 || p === pageCount - 1 || Math.abs(p - page) <= radius) {
+      pages.push(p);
+    }
+  }
+
+  return (
+    <div className="ff-page-nav" style={{ fontSize: 12.5, display: "flex", gap: 8, alignItems: "center", marginBottom: 8, flexWrap: "wrap" }}>
+      {pages.map((p, i) => {
+        const prevP = pages[i - 1];
+        const showEllipsis = prevP !== undefined && p - prevP > 1;
+        return (
+          <span key={p} style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            {showEllipsis && <span style={{ color: "var(--ff-muted)", fontSize: 12.5 }}>…</span>}
+            <Link
+              to={hrefFor(p)}
+              onClick={(e) => {
+                e.preventDefault();
+                onGo(p);
+              }}
+              style={{
+                fontWeight: p === page ? "bold" : "normal",
+                color: p === page ? "var(--ff-text)" : "var(--ff-link)",
+                fontSize: 12.5,
+              }}
+            >
+              {p + 1}
+            </Link>
+          </span>
+        );
+      })}
+      {page < pageCount - 1 && (
+        <Link
+          to={hrefFor(page + 1)}
+          onClick={(e) => {
+            e.preventDefault();
+            onGo(page + 1);
+          }}
+          style={{ color: "var(--ff-link)", fontSize: 12.5 }}
+        >
+          صفحه بعد »
+        </Link>
+      )}
+    </div>
+  );
 };

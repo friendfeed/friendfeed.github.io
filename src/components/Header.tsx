@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSearch } from "../services/SearchContext";
 import xUsersRaw from "../data/xUsers.json";
 import subscribersRaw from "../data/users-subscriptions.json";
+import roomsRaw from "../data/rooms.json";
 
 const toPersianDigits = (n: number) =>
   n.toString().replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
@@ -28,11 +29,16 @@ const toPersianDigits = (n: number) =>
 export const Header: FC = () => {
   const { query, setQuery } = useSearch();
   const { pathname } = useLocation();
-  // Header now renders on both directory pages (/users and
-  // /subscriptions) so they share one design -- the count under the
-  // logo has to reflect whichever list is actually on screen instead
-  // of always showing the X-crossover total.
-  const userCount = pathname === "/subscriptions" ? subscribersRaw.length : xUsersRaw.length;
+  // Header now renders on all three directory pages (/users,
+  // /subscriptions, /rooms) so they share one design -- the count (and
+  // its unit word) under the logo has to reflect whichever list is
+  // actually on screen, and the search placeholder switches to match
+  // what that page's items actually are (a room has no username).
+  const isRooms = pathname === "/rooms";
+  const isSubscriptions = pathname === "/subscriptions";
+  const count = isRooms ? roomsRaw.length : isSubscriptions ? subscribersRaw.length : xUsersRaw.length;
+  const unit = isRooms ? "اتاق" : "کاربر";
+  const placeholder = isRooms ? "جستجوی نام اتاق..." : "جستجوی نام یا نام کاربری...";
 
   return (
     <header className="ff-app-header" style={{ background: "#fff", borderBottom: "1px solid var(--ff-border)" }}>
@@ -55,7 +61,7 @@ export const Header: FC = () => {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="جستجوی نام یا نام کاربری..."
+              placeholder={placeholder}
               style={{
                 border: "1px solid var(--ff-border)",
                 borderRadius: 2,
@@ -101,7 +107,7 @@ export const Header: FC = () => {
               color: "var(--ff-muted)",
             }}
           >
-            {toPersianDigits(userCount)} کاربر
+            {toPersianDigits(count)} {unit}
           </div>
         </div>
       </div>
