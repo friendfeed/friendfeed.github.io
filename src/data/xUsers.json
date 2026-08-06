@@ -470,7 +470,7 @@
   {
     "handle": "Certfalab",
     "displayName": "Certfalab",
-    "imagePath": "",
+    "imagePath": "images/x/certfalab.webp",
     "friendfeedHandle": ""
   },
   {
@@ -572,7 +572,7 @@
   {
     "handle": "DigImpactLab",
     "displayName": "DigImpactLab",
-    "imagePath": "",
+    "imagePath": "images/x/digimpactlab.webp",
     "friendfeedHandle": ""
   },
   {
@@ -638,7 +638,7 @@
   {
     "handle": "etemaddaily",
     "displayName": "etemaddaily",
-    "imagePath": "",
+    "imagePath": "images/x/etemaddaily.webp",
     "friendfeedHandle": ""
   },
   {
@@ -986,13 +986,13 @@
   {
     "handle": "Iranappfestival",
     "displayName": "Iranappfestival",
-    "imagePath": "",
+    "imagePath": "images/x/iranappfestival.webp",
     "friendfeedHandle": ""
   },
   {
     "handle": "IranWebFestival",
     "displayName": "IranWebFestival",
-    "imagePath": "",
+    "imagePath": "images/x/iranwebfestival.webp",
     "friendfeedHandle": ""
   },
   {
@@ -1173,12 +1173,6 @@
     "handle": "ManiaBadri",
     "displayName": "Mania",
     "imagePath": "images/x/maniabadri.webp",
-    "friendfeedHandle": ""
-  },
-  {
-    "handle": "ManUtd",
-    "displayName": "ManUtd",
-    "imagePath": "",
     "friendfeedHandle": ""
   },
   {
@@ -1784,7 +1778,7 @@
   {
     "handle": "sam1kia_en",
     "displayName": "sam1kia_en",
-    "imagePath": "",
+    "imagePath": "images/x/sam1kia-en.webp",
     "friendfeedHandle": ""
   },
   {
@@ -2066,7 +2060,7 @@
   {
     "handle": "VARZAW",
     "displayName": "VARZAW",
-    "imagePath": "",
+    "imagePath": "images/x/varzaw.webp",
     "friendfeedHandle": ""
   },
   {
