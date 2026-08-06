@@ -1,4 +1,4 @@
-<svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Responsive design system showing desktop, tablet, and mobile breakpoints">
+<svg width="780" height="420" viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Responsive design system showing desktop, tablet, and mobile breakpoints">
   <defs>
     <linearGradient id="rl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0a0c10"/><stop offset="100%" stop-color="#12151f"/>

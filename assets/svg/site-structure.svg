@@ -1,4 +1,4 @@
-<svg viewBox="0 0 1084.0 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Website information architecture: Home links to Users, Rooms, Timeline, Migration, FAQ, and About">
+<svg width="1084" height="430" viewBox="0 0 1084.0 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Website information architecture: Home links to Users, Rooms, Timeline, Migration, FAQ, and About">
   <defs>
     <linearGradient id="ss-bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0a0c10"/><stop offset="100%" stop-color="#12151f"/>
@@ -17,7 +17,7 @@
     </marker>
   </defs>
 
-  <rect width="1084.0" height="430" fill="url(#ss-bg)" rx="14"/>
+  <rect width="1084" height="430" fill="url(#ss-bg)" rx="14"/>
   <text x="542.0" y="38" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="600" fill="#dce5f7" text-anchor="middle" letter-spacing="2.5">INFORMATION ARCHITECTURE</text>
   <line x1="312.0" y1="50" x2="772.0" y2="50" stroke="#e8a04a" stroke-width="0.6" opacity="0.35"/>
   <g transform="translate(542.0, 118.0)">

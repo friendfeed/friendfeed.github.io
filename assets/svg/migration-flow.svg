@@ -1,4 +1,4 @@
-<svg viewBox="0 0 920 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Community migration flow diagram: FriendFeed users dispersed 2013-2015 to Twitter/X, Instagram, Telegram, Discord, Reddit, and WhatsApp">
+<svg width="920" height="650" viewBox="0 0 920 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Community migration flow diagram: FriendFeed users dispersed 2013-2015 to Twitter/X, Instagram, Telegram, Discord, Reddit, and WhatsApp">
   <defs>
     <linearGradient id="mf-bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0a0c10"/><stop offset="100%" stop-color="#12151f"/>

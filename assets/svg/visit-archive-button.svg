@@ -1,4 +1,4 @@
-<svg viewBox="0 0 146 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visit the Archive">
+<svg width="146" height="40" viewBox="0 0 146 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visit the Archive">
   <defs>
     <linearGradient id="cta-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f2c374"/><stop offset="100%" stop-color="#c97c2e"/>
