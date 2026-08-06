@@ -1,0 +1,126 @@
+<svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Farsi community platform migration diagram">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0f14"/>
+      <stop offset="100%" style="stop-color:#111520"/>
+    </linearGradient>
+    <linearGradient id="hub-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2535"/>
+      <stop offset="100%" style="stop-color:#161c28"/>
+    </linearGradient>
+    <linearGradient id="node-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2030"/>
+      <stop offset="100%" style="stop-color:#131825"/>
+    </linearGradient>
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#e8a04a" opacity="0.7"/>
+    </marker>
+    <marker id="arrow-dim" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4a5a7a" opacity="0.6"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="url(#bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="40" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#c8d4e8" text-anchor="middle" letter-spacing="2">COMMUNITY MIGRATION FLOW</text>
+  <line x1="200" y1="52" x2="700" y2="52" stroke="#e8a04a" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- FriendFeed hub node (center-left) -->
+  <g transform="translate(200, 260)">
+    <circle cx="0" cy="0" r="72" fill="url(#hub-grad)" stroke="#e8a04a" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="78" fill="none" stroke="#e8a04a" stroke-width="0.4" opacity="0.4"/>
+    <!-- 8-pointed star ornament -->
+    <polygon points="0,-50 8,-22 36,-22 14,0 22,28 0,14 -22,28 -14,0 -36,-22 -8,-22" stroke="#e8a04a" stroke-width="0.8" fill="none" opacity="0.35"/>
+    <text x="0" y="-12" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#e8a04a" text-anchor="middle">Friend</text>
+    <text x="0" y="10" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#e8a04a" text-anchor="middle">Feed</text>
+    <text x="0" y="30" font-family="'Courier New', monospace" font-size="9" fill="#8a9ab8" text-anchor="middle" letter-spacing="2">2007 – 2015</text>
+    <text x="0" y="48" font-family="'Courier New', monospace" font-size="8" fill="#e8a04a" text-anchor="middle" opacity="0.6">جامعه فارسی</text>
+  </g>
+
+  <!-- Year labels on hub -->
+  <text x="200" y="175" font-family="'Courier New', monospace" font-size="9" fill="#4a5a7a" text-anchor="middle">PEAK 2010</text>
+
+  <!-- Destination nodes -->
+  <!-- Twitter -->
+  <g transform="translate(640, 110)">
+    <rect x="-75" y="-38" width="150" height="76" rx="8" fill="url(#node-grad)" stroke="#1DA1F2" stroke-width="1" opacity="0.8"/>
+    <text x="0" y="-10" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#1DA1F2" text-anchor="middle">Twitter / X</text>
+    <text x="0" y="8" font-family="'Courier New', monospace" font-size="9" fill="#6a7a9a" text-anchor="middle">Real-time discourse</text>
+    <text x="0" y="24" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle">Tech · News · Commentary</text>
+  </g>
+
+  <!-- Instagram -->
+  <g transform="translate(640, 210)">
+    <rect x="-75" y="-38" width="150" height="76" rx="8" fill="url(#node-grad)" stroke="#E1306C" stroke-width="1" opacity="0.8"/>
+    <text x="0" y="-10" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#E1306C" text-anchor="middle">Instagram</text>
+    <text x="0" y="8" font-family="'Courier New', monospace" font-size="9" fill="#6a7a9a" text-anchor="middle">Visual storytelling</text>
+    <text x="0" y="24" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle">Content · Culture · Art</text>
+  </g>
+
+  <!-- Telegram -->
+  <g transform="translate(640, 310)">
+    <rect x="-75" y="-38" width="150" height="76" rx="8" fill="url(#node-grad)" stroke="#2CA5E0" stroke-width="1" opacity="0.8"/>
+    <text x="0" y="-10" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#2CA5E0" text-anchor="middle">Telegram</text>
+    <text x="0" y="8" font-family="'Courier New', monospace" font-size="9" fill="#6a7a9a" text-anchor="middle">Organized channels</text>
+    <text x="0" y="24" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle">Groups · Broadcasts · Rooms</text>
+  </g>
+
+  <!-- Discord -->
+  <g transform="translate(640, 410)">
+    <rect x="-75" y="-38" width="150" height="76" rx="8" fill="url(#node-grad)" stroke="#5865F2" stroke-width="1" opacity="0.8"/>
+    <text x="0" y="-10" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#5865F2" text-anchor="middle">Discord</text>
+    <text x="0" y="8" font-family="'Courier New', monospace" font-size="9" fill="#6a7a9a" text-anchor="middle">Niche communities</text>
+    <text x="0" y="24" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle">Gaming · Interests · Servers</text>
+  </g>
+
+  <!-- WhatsApp (smaller, dimmed) -->
+  <g transform="translate(420, 420)">
+    <rect x="-60" y="-28" width="120" height="56" rx="6" fill="url(#node-grad)" stroke="#25D366" stroke-width="0.8" opacity="0.5"/>
+    <text x="0" y="-6" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#25D366" text-anchor="middle" opacity="0.7">WhatsApp</text>
+    <text x="0" y="14" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle">Private circles</text>
+  </g>
+
+  <!-- Reddit (smaller, dimmed) -->
+  <g transform="translate(420, 350)">
+    <rect x="-60" y="-28" width="120" height="56" rx="6" fill="url(#node-grad)" stroke="#FF4500" stroke-width="0.8" opacity="0.5"/>
+    <text x="0" y="-6" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#FF4500" text-anchor="middle" opacity="0.7">Reddit</text>
+    <text x="0" y="14" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle">Anonymous discourse</text>
+  </g>
+
+  <!-- Arrow paths from hub to main destinations -->
+  <!-- To Twitter -->
+  <path d="M272,220 C380,180 480,130 560,110" stroke="#e8a04a" stroke-width="1.2" fill="none" marker-end="url(#arrow)" opacity="0.65"/>
+  <!-- To Instagram -->
+  <path d="M275,245 C380,240 480,225 560,210" stroke="#e8a04a" stroke-width="1.2" fill="none" marker-end="url(#arrow)" opacity="0.65"/>
+  <!-- To Telegram -->
+  <path d="M275,275 C380,285 480,295 560,310" stroke="#e8a04a" stroke-width="1.2" fill="none" marker-end="url(#arrow)" opacity="0.65"/>
+  <!-- To Discord -->
+  <path d="M272,300 C380,340 480,380 560,410" stroke="#e8a04a" stroke-width="1.2" fill="none" marker-end="url(#arrow)" opacity="0.65"/>
+
+  <!-- Arrow paths to secondary nodes (dimmed) -->
+  <path d="M250,320 C310,370 350,390 355,392" stroke="#4a5a7a" stroke-width="0.8" fill="none" marker-end="url(#arrow-dim)" opacity="0.4"/>
+  <path d="M240,310 C290,345 320,348 355,350" stroke="#4a5a7a" stroke-width="0.8" fill="none" marker-end="url(#arrow-dim)" opacity="0.4"/>
+
+  <!-- Migration year callout -->
+  <g transform="translate(390, 255)">
+    <rect x="-45" y="-16" width="90" height="32" rx="4" fill="#1a2030" stroke="#e8a04a" stroke-width="0.6" opacity="0.9"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="9" fill="#e8a04a" text-anchor="middle">2013 – 2015</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="8" fill="#6a7a9a" text-anchor="middle">Mass Migration</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 440)">
+    <line x1="0" y1="8" x2="30" y2="8" stroke="#e8a04a" stroke-width="1.2" marker-end="url(#arrow)"/>
+    <text x="38" y="12" font-family="'Courier New', monospace" font-size="9" fill="#6a7a9a">Primary migration path</text>
+    <line x1="0" y1="28" x2="30" y2="28" stroke="#4a5a7a" stroke-width="0.8" marker-end="url(#arrow-dim)"/>
+    <text x="38" y="32" font-family="'Courier New', monospace" font-size="9" fill="#4a5a7a">Secondary migration path</text>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="450" y="496" font-family="'Courier New', monospace" font-size="9" fill="#3a4a6a" text-anchor="middle" letter-spacing="1">FRIENDFEED FARSI COMMUNITY ARCHIVE  ·  PLATFORM MIGRATION ANALYSIS</text>
+</svg>

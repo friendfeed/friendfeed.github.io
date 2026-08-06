@@ -1,0 +1,108 @@
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FriendFeed Farsi community timeline 2007 to 2016">
+  <defs>
+    <linearGradient id="tl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0f14"/>
+      <stop offset="100%" style="stop-color:#111520"/>
+    </linearGradient>
+    <linearGradient id="bar-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#c97c2e"/>
+      <stop offset="100%" style="stop-color:#f0c070"/>
+    </linearGradient>
+    <linearGradient id="bar-dim" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#2a3550"/>
+      <stop offset="100%" style="stop-color:#3a4a70"/>
+    </linearGradient>
+    <linearGradient id="line-fade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8a04a;stop-opacity:0.2"/>
+      <stop offset="30%" style="stop-color:#e8a04a;stop-opacity:1"/>
+      <stop offset="70%" style="stop-color:#e8a04a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#e8a04a;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="340" fill="url(#tl-bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="34" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#c8d4e8" text-anchor="middle" letter-spacing="2">COMMUNITY GROWTH TIMELINE</text>
+  <line x1="200" y1="44" x2="700" y2="44" stroke="#e8a04a" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Y-axis labels -->
+  <text x="62" y="72" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="end">PEAK</text>
+  <text x="62" y="122" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="end">HIGH</text>
+  <text x="62" y="172" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="end">MID</text>
+  <text x="62" y="222" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="end">LOW</text>
+
+  <!-- Horizontal grid lines -->
+  <line x1="70" y1="70" x2="860" y2="70" stroke="#1e2535" stroke-width="0.6"/>
+  <line x1="70" y1="120" x2="860" y2="120" stroke="#1e2535" stroke-width="0.6"/>
+  <line x1="70" y1="170" x2="860" y2="170" stroke="#1e2535" stroke-width="0.6"/>
+  <line x1="70" y1="220" x2="860" y2="220" stroke="#1e2535" stroke-width="0.6"/>
+
+  <!-- Bars: heights representing community activity -->
+  <!-- 2007 -->
+  <rect x="80" y="215" width="56" height="15" rx="2" fill="url(#bar-grad)" opacity="0.7"/>
+  <!-- 2008 -->
+  <rect x="162" y="185" width="56" height="45" rx="2" fill="url(#bar-grad)" opacity="0.8"/>
+  <!-- 2009 -->
+  <rect x="244" y="145" width="56" height="85" rx="2" fill="url(#bar-grad)" opacity="0.9"/>
+  <!-- 2010 PEAK -->
+  <rect x="326" y="73" width="56" height="157" rx="2" fill="url(#bar-grad)"/>
+  <!-- 2011 -->
+  <rect x="408" y="88" width="56" height="142" rx="2" fill="url(#bar-grad)" opacity="0.9"/>
+  <!-- 2012 -->
+  <rect x="490" y="120" width="56" height="110" rx="2" fill="url(#bar-dim)" opacity="0.85"/>
+  <!-- 2013 -->
+  <rect x="572" y="155" width="56" height="75" rx="2" fill="url(#bar-dim)" opacity="0.7"/>
+  <!-- 2014 -->
+  <rect x="654" y="185" width="56" height="45" rx="2" fill="url(#bar-dim)" opacity="0.6"/>
+  <!-- 2015 -->
+  <rect x="736" y="205" width="56" height="25" rx="2" fill="url(#bar-dim)" opacity="0.5"/>
+  <!-- 2016+ -->
+  <rect x="818" y="215" width="30" height="15" rx="2" fill="#1a2535" opacity="0.8"/>
+
+  <!-- Peak annotation -->
+  <line x1="354" y1="65" x2="354" y2="73" stroke="#e8a04a" stroke-width="1" stroke-dasharray="2,2"/>
+  <rect x="290" y="46" width="128" height="22" rx="4" fill="#1e2535" stroke="#e8a04a" stroke-width="0.8"/>
+  <text x="354" y="61" font-family="'Courier New', monospace" font-size="9" fill="#e8a04a" text-anchor="middle">● PEAK ACTIVITY 2010</text>
+
+  <!-- Migration start annotation -->
+  <line x1="518" y1="115" x2="518" y2="123" stroke="#4a5a7a" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <rect x="458" y="100" width="120" height="18" rx="3" fill="#1a2535" stroke="#4a5a7a" stroke-width="0.6"/>
+  <text x="518" y="113" font-family="'Courier New', monospace" font-size="8" fill="#6a7a9a" text-anchor="middle">Facebook Acquisition</text>
+
+  <!-- X-axis year labels -->
+  <g font-family="'Courier New', monospace" font-size="10" fill="#6a7a9a" text-anchor="middle">
+    <text x="108" y="250">2007</text>
+    <text x="190" y="250">2008</text>
+    <text x="272" y="250">2009</text>
+    <text x="354" y="250" fill="#e8a04a">2010</text>
+    <text x="436" y="250">2011</text>
+    <text x="518" y="250">2012</text>
+    <text x="600" y="250">2013</text>
+    <text x="682" y="250">2014</text>
+    <text x="764" y="250">2015</text>
+    <text x="833" y="250">2016+</text>
+  </g>
+
+  <!-- Phase labels -->
+  <text x="190" y="290" font-family="'Courier New', monospace" font-size="8" fill="#3a5a4a" text-anchor="middle">GROWTH</text>
+  <text x="354" y="290" font-family="'Courier New', monospace" font-size="8" fill="#6a8a5a" text-anchor="middle">PEAK ERA</text>
+  <text x="518" y="290" font-family="'Courier New', monospace" font-size="8" fill="#4a5a7a" text-anchor="middle">TRANSITION</text>
+  <text x="700" y="290" font-family="'Courier New', monospace" font-size="8" fill="#3a3a5a" text-anchor="middle">MIGRATION</text>
+
+  <!-- Phase divider lines -->
+  <line x1="244" y1="260" x2="244" y2="285" stroke="#2a3545" stroke-width="0.8"/>
+  <line x1="408" y1="260" x2="408" y2="285" stroke="#2a3545" stroke-width="0.8"/>
+  <line x1="572" y1="260" x2="572" y2="285" stroke="#2a3545" stroke-width="0.8"/>
+
+  <!-- Activity line overlay -->
+  <polyline points="108,222 190,207 272,187 354,151 436,159 518,175 600,192 682,207 764,217 833,222"
+    stroke="url(#line-fade)" stroke-width="2" fill="none" stroke-linejoin="round" opacity="0.6"/>
+
+  <!-- Dots on line -->
+  <circle cx="354" cy="151" r="4" fill="#e8a04a"/>
+  <circle cx="436" cy="159" r="3" fill="#e8a04a" opacity="0.7"/>
+
+  <!-- Bottom label -->
+  <text x="450" y="326" font-family="'Courier New', monospace" font-size="9" fill="#3a4a6a" text-anchor="middle" letter-spacing="1">FRIENDFEED FARSI COMMUNITY ARCHIVE  ·  COMMUNITY ACTIVITY INDEX</text>
+</svg>

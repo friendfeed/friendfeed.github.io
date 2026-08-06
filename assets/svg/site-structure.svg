@@ -1,0 +1,137 @@
+<svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Website information architecture diagram">
+  <defs>
+    <linearGradient id="ss-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0f14"/>
+      <stop offset="100%" style="stop-color:#111520"/>
+    </linearGradient>
+    <linearGradient id="root-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a1f10"/>
+      <stop offset="100%" style="stop-color:#1e1710"/>
+    </linearGradient>
+    <linearGradient id="sec-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2030"/>
+      <stop offset="100%" style="stop-color:#131825"/>
+    </linearGradient>
+    <marker id="tree-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#e8a04a" opacity="0.5"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="420" fill="url(#ss-bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="430" y="34" font-family="Georgia, serif" font-size="15" font-weight="600" fill="#c8d4e8" text-anchor="middle" letter-spacing="2">INFORMATION ARCHITECTURE</text>
+  <line x1="200" y1="44" x2="660" y2="44" stroke="#e8a04a" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- ROOT: Home node -->
+  <g transform="translate(380, 90)">
+    <rect x="-70" y="-24" width="140" height="48" rx="6" fill="url(#root-grad)" stroke="#e8a04a" stroke-width="1.2"/>
+    <text x="0" y="-4" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#e8a04a" text-anchor="middle">Home</text>
+    <text x="0" y="14" font-family="'Courier New', monospace" font-size="8" fill="#8a7a5a" text-anchor="middle">Overview · Featured · Stats</text>
+  </g>
+
+  <!-- Connector lines from Home -->
+  <line x1="380" y1="114" x2="100" y2="185" stroke="#e8a04a" stroke-width="0.8" opacity="0.4" marker-end="url(#tree-arrow)"/>
+  <line x1="380" y1="114" x2="247" y2="185" stroke="#e8a04a" stroke-width="0.8" opacity="0.4" marker-end="url(#tree-arrow)"/>
+  <line x1="380" y1="114" x2="394" y2="185" stroke="#e8a04a" stroke-width="0.8" opacity="0.4" marker-end="url(#tree-arrow)"/>
+  <line x1="380" y1="114" x2="545" y2="185" stroke="#e8a04a" stroke-width="0.8" opacity="0.4" marker-end="url(#tree-arrow)"/>
+  <line x1="380" y1="114" x2="697" y2="185" stroke="#e8a04a" stroke-width="0.8" opacity="0.4" marker-end="url(#tree-arrow)"/>
+  <line x1="380" y1="114" x2="790" y2="185" stroke="#e8a04a" stroke-width="0.8" opacity="0.4" marker-end="url(#tree-arrow)"/>
+
+  <!-- Lvl 2 section nodes -->
+  <!-- Users -->
+  <g transform="translate(100, 205)">
+    <rect x="-55" y="-22" width="110" height="44" rx="5" fill="url(#sec-grad)" stroke="#3a5a8a" stroke-width="0.9"/>
+    <text x="0" y="-4" font-family="Georgia, serif" font-size="12" font-weight="600" fill="#7ab0e0" text-anchor="middle">Users</text>
+    <text x="0" y="12" font-family="'Courier New', monospace" font-size="7.5" fill="#4a5a7a" text-anchor="middle">Directory · Profiles</text>
+  </g>
+  <!-- Rooms -->
+  <g transform="translate(247, 205)">
+    <rect x="-55" y="-22" width="110" height="44" rx="5" fill="url(#sec-grad)" stroke="#3a6a5a" stroke-width="0.9"/>
+    <text x="0" y="-4" font-family="Georgia, serif" font-size="12" font-weight="600" fill="#6ac0a0" text-anchor="middle">Rooms</text>
+    <text x="0" y="12" font-family="'Courier New', monospace" font-size="7.5" fill="#4a5a7a" text-anchor="middle">Topics · Communities</text>
+  </g>
+  <!-- Timeline -->
+  <g transform="translate(394, 205)">
+    <rect x="-55" y="-22" width="110" height="44" rx="5" fill="url(#sec-grad)" stroke="#7a5a2a" stroke-width="0.9"/>
+    <text x="0" y="-4" font-family="Georgia, serif" font-size="12" font-weight="600" fill="#e8a04a" text-anchor="middle">Timeline</text>
+    <text x="0" y="12" font-family="'Courier New', monospace" font-size="7.5" fill="#4a5a7a" text-anchor="middle">History · Milestones</text>
+  </g>
+  <!-- Migration -->
+  <g transform="translate(545, 205)">
+    <rect x="-60" y="-22" width="120" height="44" rx="5" fill="url(#sec-grad)" stroke="#5a3a6a" stroke-width="0.9"/>
+    <text x="0" y="-4" font-family="Georgia, serif" font-size="12" font-weight="600" fill="#b07ad0" text-anchor="middle">Migration</text>
+    <text x="0" y="12" font-family="'Courier New', monospace" font-size="7.5" fill="#4a5a7a" text-anchor="middle">Platforms · Paths</text>
+  </g>
+  <!-- FAQ -->
+  <g transform="translate(697, 205)">
+    <rect x="-45" y="-22" width="90" height="44" rx="5" fill="url(#sec-grad)" stroke="#3a4a6a" stroke-width="0.9"/>
+    <text x="0" y="-4" font-family="Georgia, serif" font-size="12" font-weight="600" fill="#8a9ab8" text-anchor="middle">FAQ</text>
+    <text x="0" y="12" font-family="'Courier New', monospace" font-size="7.5" fill="#4a5a7a" text-anchor="middle">Common questions</text>
+  </g>
+  <!-- About -->
+  <g transform="translate(790, 205)">
+    <rect x="-45" y="-22" width="90" height="44" rx="5" fill="url(#sec-grad)" stroke="#3a4a6a" stroke-width="0.9"/>
+    <text x="0" y="-4" font-family="Georgia, serif" font-size="12" font-weight="600" fill="#8a9ab8" text-anchor="middle">About</text>
+    <text x="0" y="12" font-family="'Courier New', monospace" font-size="7.5" fill="#4a5a7a" text-anchor="middle">Mission · Terms</text>
+  </g>
+
+  <!-- Lvl 3 sub-items: Users -->
+  <line x1="100" y1="227" x2="60" y2="300" stroke="#3a5a8a" stroke-width="0.6" opacity="0.5"/>
+  <line x1="100" y1="227" x2="140" y2="300" stroke="#3a5a8a" stroke-width="0.6" opacity="0.5"/>
+  <g transform="translate(60, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#2a3a5a" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#4a6a8a" text-anchor="middle">A-Z Browse</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ Search</text>
+  </g>
+  <g transform="translate(140, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#2a3a5a" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#4a6a8a" text-anchor="middle">Profiles</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ Connections</text>
+  </g>
+
+  <!-- Lvl 3 sub-items: Rooms -->
+  <line x1="247" y1="227" x2="210" y2="300" stroke="#3a6a5a" stroke-width="0.6" opacity="0.5"/>
+  <line x1="247" y1="227" x2="284" y2="300" stroke="#3a6a5a" stroke-width="0.6" opacity="0.5"/>
+  <g transform="translate(210, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#2a4a3a" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#3a7a5a" text-anchor="middle">Categories</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ Members</text>
+  </g>
+  <g transform="translate(284, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#2a4a3a" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#3a7a5a" text-anchor="middle">Activity</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ History</text>
+  </g>
+
+  <!-- Lvl 3: Timeline -->
+  <line x1="394" y1="227" x2="368" y2="300" stroke="#7a5a2a" stroke-width="0.6" opacity="0.5"/>
+  <line x1="394" y1="227" x2="424" y2="300" stroke="#7a5a2a" stroke-width="0.6" opacity="0.5"/>
+  <g transform="translate(368, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#3a2a10" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#8a6a2a" text-anchor="middle">Year View</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ Events</text>
+  </g>
+  <g transform="translate(424, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#3a2a10" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#8a6a2a" text-anchor="middle">Growth</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ Charts</text>
+  </g>
+
+  <!-- Lvl 3: Migration -->
+  <line x1="545" y1="227" x2="510" y2="300" stroke="#5a3a6a" stroke-width="0.6" opacity="0.5"/>
+  <line x1="545" y1="227" x2="580" y2="300" stroke="#5a3a6a" stroke-width="0.6" opacity="0.5"/>
+  <g transform="translate(510, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#3a2a4a" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#7a5a9a" text-anchor="middle">Platforms</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ Find People</text>
+  </g>
+  <g transform="translate(580, 315)">
+    <rect x="-42" y="-16" width="84" height="32" rx="3" fill="#0f1520" stroke="#3a2a4a" stroke-width="0.6"/>
+    <text x="0" y="-2" font-family="'Courier New', monospace" font-size="8" fill="#7a5a9a" text-anchor="middle">Pathways</text>
+    <text x="0" y="11" font-family="'Courier New', monospace" font-size="7" fill="#3a4a6a" text-anchor="middle">+ Guides</text>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="430" y="406" font-family="'Courier New', monospace" font-size="9" fill="#3a4a6a" text-anchor="middle" letter-spacing="1">FRIENDFEED FARSI COMMUNITY ARCHIVE  ·  SITE MAP</text>
+</svg>

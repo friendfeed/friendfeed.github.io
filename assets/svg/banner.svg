@@ -1,0 +1,96 @@
+<svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FriendFeed Farsi Community Archive banner">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0f14"/>
+      <stop offset="50%" style="stop-color:#111520"/>
+      <stop offset="100%" style="stop-color:#0a0c10"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8a04a;stop-opacity:0"/>
+      <stop offset="40%" style="stop-color:#e8a04a;stop-opacity:1"/>
+      <stop offset="70%" style="stop-color:#c97c2e;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c97c2e;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8a04a"/>
+      <stop offset="100%" style="stop-color:#f0c070"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#e8a04a;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#e8a04a;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="blur-glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Persian geometric tile pattern -->
+    <pattern id="geo-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <g stroke="#e8a04a" stroke-width="0.4" fill="none" opacity="0.12">
+        <!-- 8-pointed star geometry -->
+        <polygon points="30,5 35,20 50,20 38,29 43,44 30,35 17,44 22,29 10,20 25,20"/>
+        <polygon points="30,15 33,23 42,23 35,28 38,36 30,31 22,36 25,28 18,23 27,23" opacity="0.5"/>
+        <line x1="30" y1="0" x2="30" y2="60"/>
+        <line x1="0" y1="30" x2="60" y2="30"/>
+        <line x1="0" y1="0" x2="60" y2="60" opacity="0.3"/>
+        <line x1="60" y1="0" x2="0" y2="60" opacity="0.3"/>
+      </g>
+    </pattern>
+    <mask id="fade-mask">
+      <linearGradient id="mask-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:white;stop-opacity:0"/>
+        <stop offset="15%" style="stop-color:white;stop-opacity:1"/>
+        <stop offset="85%" style="stop-color:white;stop-opacity:1"/>
+        <stop offset="100%" style="stop-color:white;stop-opacity:0"/>
+      </linearGradient>
+      <rect width="1200" height="400" fill="url(#mask-grad)"/>
+    </mask>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bg-grad)"/>
+
+  <!-- Persian geometric pattern overlay -->
+  <rect width="1200" height="400" fill="url(#geo-pattern)" mask="url(#fade-mask)"/>
+
+  <!-- Radial glow center -->
+  <ellipse cx="600" cy="200" rx="500" ry="300" fill="url(#glow)"/>
+
+  <!-- Decorative horizontal rules -->
+  <line x1="100" y1="85" x2="1100" y2="85" stroke="url(#accent-grad)" stroke-width="0.75"/>
+  <line x1="100" y1="315" x2="1100" y2="315" stroke="url(#accent-grad)" stroke-width="0.75"/>
+
+  <!-- Left Persian ornament -->
+  <g transform="translate(130, 200)" opacity="0.55">
+    <circle cx="0" cy="0" r="28" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
+    <circle cx="0" cy="0" r="20" stroke="#e8a04a" stroke-width="0.5" fill="none"/>
+    <polygon points="0,-18 5,-5 19,-5 8,3 13,16 0,8 -13,16 -8,3 -19,-5 -5,-5" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
+    <line x1="-28" y1="0" x2="28" y2="0" stroke="#e8a04a" stroke-width="0.5"/>
+    <line x1="0" y1="-28" x2="0" y2="28" stroke="#e8a04a" stroke-width="0.5"/>
+  </g>
+
+  <!-- Right Persian ornament -->
+  <g transform="translate(1070, 200)" opacity="0.55">
+    <circle cx="0" cy="0" r="28" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
+    <circle cx="0" cy="0" r="20" stroke="#e8a04a" stroke-width="0.5" fill="none"/>
+    <polygon points="0,-18 5,-5 19,-5 8,3 13,16 0,8 -13,16 -8,3 -19,-5 -5,-5" stroke="#e8a04a" stroke-width="0.8" fill="none"/>
+    <line x1="-28" y1="0" x2="28" y2="0" stroke="#e8a04a" stroke-width="0.5"/>
+    <line x1="0" y1="-28" x2="0" y2="28" stroke="#e8a04a" stroke-width="0.5"/>
+  </g>
+
+  <!-- Eyebrow label -->
+  <text x="600" y="140" font-family="'Courier New', monospace" font-size="11" letter-spacing="6" fill="#e8a04a" text-anchor="middle" opacity="0.8">HISTORICAL ARCHIVE  ·  2007 – 2015</text>
+
+  <!-- Main title -->
+  <text x="600" y="210" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" fill="url(#text-grad)" text-anchor="middle" filter="url(#blur-glow)">FriendFeed</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="252" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" fill="#c8d4e8" text-anchor="middle" letter-spacing="2">Farsi Community Archive</text>
+
+  <!-- Farsi text -->
+  <text x="600" y="285" font-family="'Noto Nastaliq Urdu', 'Segoe UI', sans-serif" font-size="14" fill="#e8a04a" text-anchor="middle" opacity="0.7">آرشیو جامعه فارسی‌زبان</text>
+
+  <!-- Bottom rule ornament center -->
+  <circle cx="600" cy="315" r="3" fill="#e8a04a" opacity="0.6"/>
+  <circle cx="580" cy="315" r="1.5" fill="#e8a04a" opacity="0.35"/>
+  <circle cx="620" cy="315" r="1.5" fill="#e8a04a" opacity="0.35"/>
+</svg>

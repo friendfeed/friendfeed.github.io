@@ -1,0 +1,56 @@
+<svg viewBox="0 0 800 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Technology stack badges">
+  <defs>
+    <linearGradient id="badge-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2030"/>
+      <stop offset="100%" style="stop-color:#131825"/>
+    </linearGradient>
+  </defs>
+
+  <!-- React badge -->
+  <g transform="translate(0,0)">
+    <rect x="0" y="8" width="104" height="28" rx="4" fill="#1a2030"/>
+    <rect x="0" y="8" width="32" height="28" rx="4" fill="#20232a"/>
+    <text x="16" y="27" font-family="'Courier New', monospace" font-size="11" fill="#61DAFB" text-anchor="middle" font-weight="700">⚛</text>
+    <text x="68" y="27" font-family="'Courier New', monospace" font-size="10" fill="#8a9ab8" text-anchor="middle">React</text>
+  </g>
+
+  <!-- TypeScript badge -->
+  <g transform="translate(114,0)">
+    <rect x="0" y="8" width="120" height="28" rx="4" fill="#1a2030"/>
+    <rect x="0" y="8" width="32" height="28" rx="4" fill="#3178C6"/>
+    <text x="16" y="27" font-family="'Courier New', monospace" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="700">TS</text>
+    <text x="76" y="27" font-family="'Courier New', monospace" font-size="10" fill="#8a9ab8" text-anchor="middle">TypeScript</text>
+  </g>
+
+  <!-- Vite badge -->
+  <g transform="translate(244,0)">
+    <rect x="0" y="8" width="96" height="28" rx="4" fill="#1a2030"/>
+    <rect x="0" y="8" width="32" height="28" rx="4" fill="#646CFF"/>
+    <text x="16" y="27" font-family="'Courier New', monospace" font-size="11" fill="#FFD62E" text-anchor="middle">⚡</text>
+    <text x="64" y="27" font-family="'Courier New', monospace" font-size="10" fill="#8a9ab8" text-anchor="middle">Vite</text>
+  </g>
+
+  <!-- Mobile-first badge -->
+  <g transform="translate(350,0)">
+    <rect x="0" y="8" width="136" height="28" rx="4" fill="#1a2030"/>
+    <rect x="0" y="8" width="32" height="28" rx="4" fill="#1e3a2a"/>
+    <text x="16" y="27" font-family="'Courier New', monospace" font-size="11" fill="#4ade80" text-anchor="middle">◉</text>
+    <text x="84" y="27" font-family="'Courier New', monospace" font-size="10" fill="#8a9ab8" text-anchor="middle">Mobile First</text>
+  </g>
+
+  <!-- Archive badge -->
+  <g transform="translate(496,0)">
+    <rect x="0" y="8" width="120" height="28" rx="4" fill="#1a2030"/>
+    <rect x="0" y="8" width="32" height="28" rx="4" fill="#2a1f10"/>
+    <text x="16" y="27" font-family="'Courier New', monospace" font-size="11" fill="#e8a04a" text-anchor="middle">▦</text>
+    <text x="76" y="27" font-family="'Courier New', monospace" font-size="10" fill="#8a9ab8" text-anchor="middle">Static PWA</text>
+  </g>
+
+  <!-- License badge -->
+  <g transform="translate(626,0)">
+    <rect x="0" y="8" width="138" height="28" rx="4" fill="#1a2030"/>
+    <rect x="0" y="8" width="72" height="28" rx="4" fill="#2a1520"/>
+    <text x="36" y="27" font-family="'Courier New', monospace" font-size="9" fill="#f87171" text-anchor="middle" font-weight="600">All Rights</text>
+    <text x="111" y="27" font-family="'Courier New', monospace" font-size="9" fill="#6a7a9a" text-anchor="middle">Reserved</text>
+  </g>
+</svg>
