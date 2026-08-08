@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   IconRoom,
@@ -82,23 +82,43 @@ export const BottomNav: FC = () => {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
 
+  const close = useCallback(() => setDrawerOpen(false), []);
+
+  // Close on route change
   useEffect(() => {
-    setDrawerOpen(false);
-  }, [pathname]);
+    close();
+  }, [pathname, close]);
 
+  // Close on outside pointer-down — but only if the target is NOT the
+  // hamburger button itself (which handles its own toggle via onClick).
   useEffect(() => {
     if (!drawerOpen) return;
-    const handler = (e: TouchEvent | MouseEvent) => {
-      if (drawerRef.current && !drawerRef.current.contains(e.target as Node)) {
-        setDrawerOpen(false);
+    const handler = (e: PointerEvent) => {
+      const target = e.target as Node;
+      if (
+        hamburgerRef.current?.contains(target) ||
+        drawerRef.current?.contains(target)
+      ) {
+        return;
       }
+      close();
     };
-    document.addEventListener("mousedown", handler);
-    document.addEventListener("touchstart", handler);
+    // Use pointerdown so we capture before click fires
+    document.addEventListener("pointerdown", handler);
+    return () => document.removeEventListener("pointerdown", handler);
+  }, [drawerOpen, close]);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
     return () => {
-      document.removeEventListener("mousedown", handler);
-      document.removeEventListener("touchstart", handler);
+      document.body.style.overflow = "";
     };
   }, [drawerOpen]);
 
@@ -106,25 +126,28 @@ export const BottomNav: FC = () => {
 
   return (
     <>
-      {/* Backdrop */}
-      {drawerOpen && (
-        <div
-          onClick={() => setDrawerOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 28,
-            background: "rgba(0,0,0,0.35)",
-          }}
-        />
-      )}
+      {/* Backdrop — tapping it closes the drawer */}
+      <div
+        onClick={close}
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 28,
+          background: "rgba(0,0,0,0.4)",
+          opacity: drawerOpen ? 1 : 0,
+          pointerEvents: drawerOpen ? "auto" : "none",
+          transition: "opacity 220ms ease",
+        }}
+        aria-hidden="true"
+      />
 
-      {/* Slide-up drawer -- rendered in DOM always, shown/hidden via
-          transform. The .ff-hamburger-drawer class is what the CSS
-          media query uses to make this visible only on mobile. */}
+      {/* Slide-up drawer */}
       <div
         ref={drawerRef}
         className="ff-hamburger-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="منوی کامل"
         style={{
           position: "fixed",
           insetInlineStart: 0,
@@ -133,74 +156,43 @@ export const BottomNav: FC = () => {
           zIndex: 29,
           background: "#fff",
           borderTop: "1px solid var(--ff-border)",
-          boxShadow: "0 -4px 20px rgba(0,0,0,0.12)",
-          borderRadius: "14px 14px 0 0",
-          transform: drawerOpen ? "translateY(0)" : "translateY(110%)",
-          transition: "transform 260ms cubic-bezier(0.32,0.72,0,1)",
-          maxHeight: "72vh",
+          boxShadow: "0 -8px 32px rgba(0,0,0,0.14)",
+          borderRadius: "16px 16px 0 0",
+          transform: drawerOpen ? "translateY(0)" : "translateY(100%)",
+          // visible immediately on open; hidden only AFTER slide-out completes
+          visibility: drawerOpen ? "visible" : "hidden",
+          transition: drawerOpen
+            ? "transform 280ms cubic-bezier(0.32,0.72,0,1)"
+            : "transform 280ms cubic-bezier(0.32,0.72,0,1), visibility 0ms 280ms",
+          maxHeight: "70vh",
           overflowY: "auto",
+          WebkitOverflowScrolling: "touch" as never,
         }}
-        aria-hidden={!drawerOpen}
       >
-        {/* Drag handle */}
+        {/* Drag handle — purely decorative */}
         <div
+          aria-hidden="true"
           style={{
-            width: 36,
+            width: 40,
             height: 4,
             borderRadius: 2,
-            background: "#ccc",
-            margin: "10px auto 8px",
+            background: "#ddd",
+            margin: "12px auto 0",
           }}
         />
 
-        {/* Drawer header */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "4px 16px 10px",
-            borderBottom: "1px solid var(--ff-border)",
-          }}
-        >
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: "bold",
-              color: "var(--ff-muted)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            منو
-          </span>
-          <button
-            onClick={() => setDrawerOpen(false)}
-            aria-label="بستن منو"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "var(--ff-muted)",
-              padding: 4,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <IconClose width={18} height={18} />
-          </button>
-        </div>
-
-        {/* Sectioned nav */}
-        <nav aria-label="منوی کامل">
+        {/* Sectioned nav — no close button inside the drawer.
+            The hamburger in the tab bar is the single toggle. */}
+        <nav aria-label="منوی کامل" style={{ paddingBottom: 8 }}>
           {DRAWER_SECTIONS.map((section, si) => (
             <div key={section.heading}>
               <div
                 style={{
                   fontSize: 10,
-                  fontWeight: "bold",
+                  fontWeight: 700,
                   color: "var(--ff-muted)",
-                  letterSpacing: "0.05em",
-                  padding: "10px 18px 4px",
+                  letterSpacing: "0.06em",
+                  padding: "14px 20px 6px",
                   textTransform: "uppercase",
                 }}
               >
@@ -213,13 +205,15 @@ export const BottomNav: FC = () => {
                   <Link
                     key={to}
                     to={to}
+                    className="ff-drawer-item"
+                    data-active={active}
                     style={{
                       display: "flex",
                       alignItems: "center",
                       gap: 14,
-                      padding: "11px 18px",
-                      fontSize: 13.5,
-                      fontWeight: active ? "bold" : "normal",
+                      padding: "12px 20px",
+                      fontSize: 14,
+                      fontWeight: active ? 700 : 400,
                       color: active ? "var(--ff-text)" : "var(--ff-link)",
                       textDecoration: "none",
                       background: active ? "var(--ff-panel-alt)" : "transparent",
@@ -228,14 +222,14 @@ export const BottomNav: FC = () => {
                   >
                     <span
                       style={{
-                        width: 22,
+                        width: 24,
                         display: "flex",
                         justifyContent: "center",
                         flexShrink: 0,
-                        color: active ? "var(--ff-text)" : "var(--ff-muted)",
+                        color: active ? "var(--ff-link)" : "var(--ff-muted)",
                       }}
                     >
-                      <Icon width={17} height={17} />
+                      <Icon width={18} height={18} />
                     </span>
                     {label}
                   </Link>
@@ -243,13 +237,16 @@ export const BottomNav: FC = () => {
               })}
 
               {si < DRAWER_SECTIONS.length - 1 && (
-                <div style={{ height: 6, background: "var(--ff-panel-alt)" }} />
+                <div
+                  aria-hidden="true"
+                  style={{ height: 8, background: "var(--ff-panel-alt)" }}
+                />
               )}
             </div>
           ))}
         </nav>
 
-        <div style={{ height: "max(var(--ff-safe-bottom), 12px)" }} />
+        <div style={{ height: "max(var(--ff-safe-bottom), 8px)" }} />
       </div>
 
       {/* Fixed tab bar */}
@@ -263,31 +260,39 @@ export const BottomNav: FC = () => {
               className="ff-bottom-nav-item"
               data-active={active}
             >
-              <Icon width={20} height={20} />
+              <Icon width={22} height={22} />
               <span>{label}</span>
             </Link>
           );
         })}
 
+        {/* Hamburger — single source of truth for open/close.
+            onClick always toggles; the outside-pointerdown handler
+            explicitly skips this button so the two don't fight. */}
         <button
+          ref={hamburgerRef}
           onClick={() => setDrawerOpen((v) => !v)}
           className="ff-bottom-nav-item"
           data-active={drawerActive || drawerOpen}
-          aria-label="منوی بیشتر"
+          aria-label={drawerOpen ? "بستن منو" : "منوی بیشتر"}
           aria-expanded={drawerOpen}
-          style={{
-            flex: 1,
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-          }}
+          aria-controls="ff-main-drawer"
         >
-          {drawerOpen ? (
-            <IconClose width={20} height={20} />
-          ) : (
-            <IconMenu width={20} height={20} />
-          )}
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "transform 220ms ease",
+              transform: drawerOpen ? "rotate(90deg)" : "rotate(0deg)",
+            }}
+          >
+            {drawerOpen ? (
+              <IconClose width={22} height={22} />
+            ) : (
+              <IconMenu width={22} height={22} />
+            )}
+          </span>
           <span>بیشتر</span>
         </button>
       </nav>

@@ -345,14 +345,29 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
   color: var(--ff-muted);
-  font-size: 10.5px;
+  font-size: 10px;
   min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  /* Kill the gray tap-flash browsers inject on mobile */
   -webkit-tap-highlight-color: transparent;
+  /* Remove browser default outline — replaced by focus-visible below */
+  outline: none;
+  transition: color 120ms ease;
 }
 .ff-bottom-nav-item:hover {
   text-decoration: none;
+  color: var(--ff-text);
+}
+/* Keyboard-only focus ring — invisible on mouse/touch */
+.ff-bottom-nav-item:focus-visible {
+  outline: 2px solid var(--ff-link);
+  outline-offset: -2px;
+  border-radius: 6px;
 }
 .ff-bottom-nav-item span {
   overflow: hidden;
@@ -362,8 +377,22 @@ button {
 }
 .ff-bottom-nav-item[data-active="true"] {
   color: var(--ff-link);
-  font-weight: bold;
+  font-weight: 700;
 }
 .ff-bottom-nav-item svg {
   display: block;
+}
+
+/* Drawer link rows */
+.ff-drawer-item {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  transition: background 100ms ease;
+}
+.ff-drawer-item:focus-visible {
+  outline: 2px solid var(--ff-link);
+  outline-offset: -2px;
+}
+.ff-drawer-item:active {
+  background: var(--ff-tab-bg) !important;
 }
