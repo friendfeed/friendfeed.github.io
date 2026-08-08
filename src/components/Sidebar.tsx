@@ -44,6 +44,9 @@ export const Sidebar: FC = () => {
         <Link to="/users" style={itemStyle(pathname === "/users")}>
           کاربران فرندفید در ایکس
         </Link>
+        <Link to="/podcasts" style={itemStyle(pathname === "/podcasts")}>
+          ایکس پادکست
+        </Link>
         <Link to="/subscriptions" style={itemStyle(pathname === "/subscriptions")}>
           همه کاربران فرندفید
         </Link>
