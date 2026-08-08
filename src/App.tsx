@@ -13,6 +13,13 @@ import { FriendFeed88Page } from "./pages/FriendFeed88Page";
 import { SubscriptionsPage } from "./pages/SubscriptionsPage";
 import { RoomsPage } from "./pages/RoomsPage";
 import { SearchProvider } from "./services/SearchContext";
+import { BrandsPage } from "./pages/BrandsPage";
+import { NewsPage } from "./pages/NewsPage";
+import { StartupsPage } from "./pages/StartupsPage";
+import { OrgsPage } from "./pages/OrgsPage";
+import { BooksPage } from "./pages/BooksPage";
+import { DailyLifePage } from "./pages/DailyLifePage";
+import { EmbassiesPage } from "./pages/EmbassiesPage";
 
 // ProfilePage / PyramidPage / HistoryPage exist in ./pages but are
 // intentionally not routed yet -- current scope is the home page + the
@@ -46,7 +53,14 @@ const App: FC = () => {
     normalizedPath === "/users" ||
     normalizedPath === "/subscriptions" ||
     normalizedPath === "/rooms" ||
-    normalizedPath === "/podcasts";
+    normalizedPath === "/podcasts" ||
+    normalizedPath === "/brands" ||
+    normalizedPath === "/news" ||
+    normalizedPath === "/startups" ||
+    normalizedPath === "/orgs" ||
+    normalizedPath === "/books" ||
+    normalizedPath === "/daily-life" ||
+    normalizedPath === "/embassies";
   // Pages without the header (everything but /users) sat flush against
   // the very top of the viewport once the header was made conditional,
   // so they get extra top padding here instead, applied to the shared
@@ -79,6 +93,13 @@ const App: FC = () => {
               <Route path="/magazine" element={<MagazinePage />} />
               <Route path="/magazine/google-reader" element={<GoogleReaderPage />} />
               <Route path="/magazine/friendfeed-1388" element={<FriendFeed88Page />} />
+              <Route path="/brands" element={<BrandsPage />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/startups" element={<StartupsPage />} />
+              <Route path="/orgs" element={<OrgsPage />} />
+              <Route path="/books" element={<BooksPage />} />
+              <Route path="/daily-life" element={<DailyLifePage />} />
+              <Route path="/embassies" element={<EmbassiesPage />} />
             </Routes>
           </main>
         </div>

@@ -312,6 +312,13 @@ button {
   display: none;
 }
 
+/* Slide-up hamburger drawer -- hidden on desktop, rendered on mobile.
+   The tab bar (.ff-bottom-nav) and the drawer (.ff-hamburger-drawer)
+   share the same breakpoint so they always appear / disappear together. */
+.ff-hamburger-drawer {
+  display: none;
+}
+
 @media (max-width: 680px) {
   .ff-bottom-nav {
     display: flex;
@@ -325,6 +332,10 @@ button {
     background: #fff;
     border-top: 1px solid var(--ff-border);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  }
+
+  .ff-hamburger-drawer {
+    display: block;
   }
 }
 

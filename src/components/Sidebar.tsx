@@ -1,38 +1,62 @@
 import type { FC, CSSProperties } from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  IconRoom,
+  IconUsers,
+  IconStar,
+  IconBlog,
+  IconX,
+  IconMusic,
+  IconBrand,
+  IconNewspaper,
+  IconRocket,
+  IconBuilding,
+  IconBook,
+  IconSun,
+  IconFlag,
+} from "../icons/Icons";
 
-/**
- * Recreates the classic FriendFeed left-hand nav column (Home / Me / Rooms
- * / Everyone) from the archived screenshot -- plain stacked text links,
- * no borders or pill backgrounds, bold when active. In the original
- * (LTR) site this column sat on the far left; in this localized Farsi
- * (RTL) build the whole page mirrors, so the equivalent column sits on
- * the far right instead, per the source layout logic rather than a
- * literal left/right copy.
- *
- * Items are mapped to what this project actually has pages for --
- * "خانه" (/) is the landing page and sits first, then "کاربران فرندفید در ایکس"
- * (the X-crossover directory, at /users), which is the main content of
- * the site. "اتاق‌ها" (/rooms) lists FriendFeed rooms/group feeds --
- * these are distinct from real people and are kept out of the
- * Subscriptions user list for that reason.
- */
 const itemStyle = (active: boolean): CSSProperties => ({
-  display: "block",
+  display: "flex",
+  alignItems: "center",
+  gap: 7,
   padding: "4px 0",
   fontSize: 12.5,
   fontWeight: active ? "bold" : "normal",
   color: active ? "var(--ff-text)" : "var(--ff-link)",
+  textDecoration: "none",
 });
+
+const SectionLabel: FC<{ children: string }> = ({ children }) => (
+  <div
+    style={{
+      fontSize: 10,
+      fontWeight: "bold",
+      color: "var(--ff-muted)",
+      letterSpacing: "0.04em",
+      padding: "10px 0 4px",
+      textTransform: "uppercase",
+    }}
+  >
+    {children}
+  </div>
+);
+
+const Divider = () => (
+  <div style={{ borderTop: "1px solid var(--ff-border)", margin: "6px 0" }} />
+);
 
 export const Sidebar: FC = () => {
   const { pathname: rawPathname } = useLocation();
-  // Static shells for the directory pages (see
-  // scripts/generate-static-routes.mjs) live at e.g. dist/users/index.html,
-  // so a direct load or hard refresh of /users/ lands with a trailing
-  // slash in pathname -- stripped here so active-link highlighting still
-  // matches in that case.
-  const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/+$/, "") : rawPathname;
+  const pathname =
+    rawPathname.length > 1 ? rawPathname.replace(/\/+$/, "") : rawPathname;
+
+  const link = (to: string, label: string, Icon: FC<{ width?: number; height?: number }>) => (
+    <Link to={to} style={itemStyle(pathname === to)}>
+      <Icon width={13} height={13} />
+      {label}
+    </Link>
+  );
 
   return (
     <aside
@@ -43,41 +67,33 @@ export const Sidebar: FC = () => {
         padding: "16px 4px 16px 0",
       }}
     >
-      <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        <Link to="/" style={itemStyle(pathname === "/")}>
-          خانه
-        </Link>
-        <Link to="/users" style={itemStyle(pathname === "/users")}>
-          کاربران فرندفید در ایکس
-        </Link>
-        <Link to="/podcasts" style={itemStyle(pathname === "/podcasts")}>
-          ایکس پادکست
-        </Link>
-        <Link to="/subscriptions" style={itemStyle(pathname === "/subscriptions")}>
-          همه کاربران فرندفید
-        </Link>
-        <Link to="/rooms" style={itemStyle(pathname === "/rooms")}>
-          اتاق‌ها
-        </Link>
-      </nav>
+      <nav style={{ display: "flex", flexDirection: "column", gap: 1 }}>
 
-      <div
-        style={{
-          marginTop: 18,
-          paddingTop: 10,
-          borderTop: "1px solid var(--ff-border)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
-      >
-        <Link to="/faq" style={itemStyle(pathname === "/faq")}>
-          سوالات متداول
-        </Link>
-        <Link to="/magazine" style={itemStyle(pathname === "/magazine")}>
-          مجله فرندفید
-        </Link>
-      </div>
+        {/* Section 1: FriendFeed archive */}
+        {link("/", "خانه", IconRoom)}
+        {link("/subscriptions", "همه کاربران فرندفید", IconUsers)}
+        {link("/rooms", "اتاق‌ها", IconX)}
+
+        <Divider />
+
+        {/* Section 2: X / ایکس directory */}
+        <SectionLabel>در ایکس</SectionLabel>
+        {link("/users", "کاربران فرندفید", IconX)}
+        {link("/podcasts", "پادکست", IconMusic)}
+        {link("/brands", "برندها", IconBrand)}
+        {link("/news", "خبرگزاری‌ها", IconNewspaper)}
+        {link("/startups", "استارت‌آپ‌ها", IconRocket)}
+        {link("/orgs", "ادارات و سازمان‌ها", IconBuilding)}
+        {link("/books", "کتاب‌ها", IconBook)}
+        {link("/daily-life", "زندگی روزمره", IconSun)}
+        {link("/embassies", "سفارت‌ها", IconFlag)}
+
+        <Divider />
+
+        {/* Section 3: Meta */}
+        {link("/faq", "سوالات متداول", IconStar)}
+        {link("/magazine", "مجله فرندفید", IconBlog)}
+      </nav>
     </aside>
   );
 };
