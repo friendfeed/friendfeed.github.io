@@ -33,7 +33,11 @@ const items = [
 ];
 
 export const BottomNav: FC = () => {
-  const { pathname } = useLocation();
+  const { pathname: rawPathname } = useLocation();
+  // See Sidebar.tsx for why: the /users, /podcasts, /subscriptions
+  // directory-page shells are served with a trailing slash on direct
+  // load/refresh, so it's stripped before comparing against `to`.
+  const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/+$/, "") : rawPathname;
 
   return (
     <nav className="ff-bottom-nav" aria-label="ناوبری اصلی">

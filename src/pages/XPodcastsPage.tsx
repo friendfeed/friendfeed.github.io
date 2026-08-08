@@ -7,6 +7,9 @@ import { useSEO } from "../seo/useSEO";
 
 const PAGE_SIZE = 20;
 
+const toPersianDigits = (n: number) =>
+  n.toString().replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+
 /**
  * Independent sibling of XCrossoverPage (/users): same layout, pagination,
  * and search behaviour, but a completely separate dataset (X list export
@@ -54,8 +57,8 @@ export const XPodcastsPage: FC = () => {
         <h1 style={{ fontSize: 14 }}>ایکس پادکست</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {normalizedQuery
-            ? `${filtered.length} نتیجه از ${podcasts.length} پادکست`
-            : `${podcasts.length} پادکست`}
+            ? `${toPersianDigits(filtered.length)} نتیجه از ${toPersianDigits(podcasts.length)} پادکست`
+            : `${toPersianDigits(podcasts.length)} پادکست`}
         </span>
       </div>
 
