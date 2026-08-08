@@ -7,7 +7,23 @@ import type { FC } from "react";
  * reproduced deliberately rather than using a generic broken-image icon.
  */
 export const DefaultAvatar: FC<{ size?: number }> = ({ size = 64 }) => (
-  <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label="بدون تصویر پروفایل">
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 64 64"
+    role="img"
+    aria-label="بدون تصویر پروفایل"
+    // svg's default display is inline, which leaves a few px of
+    // baseline whitespace below it -- same as the classic "extra gap
+    // under an <img>" bug. Inside a size-less wrapper div (see the
+    // *UserCell/*Cell components, which just do overflow:hidden +
+    // border-radius:50% around this with no explicit width/height),
+    // that gap made the wrapper a few px taller than it is wide, so
+    // border-radius:50% drew an oval instead of a circle, with a
+    // visible white strip at the bottom. display:block removes the
+    // gap entirely -- the box is exactly size x size again.
+    style={{ display: "block" }}
+  >
     <rect width="64" height="64" fill="#efefef" />
     <circle cx="32" cy="32" r="22" fill="none" stroke="#333" strokeWidth="2.5" />
     <circle cx="24" cy="27" r="2.6" fill="#333" />

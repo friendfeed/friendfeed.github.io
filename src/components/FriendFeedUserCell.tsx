@@ -59,7 +59,7 @@ export const FriendFeedUserCell: FC<{ user: FriendFeedSubscriberRecord }> = ({ u
               onError={() => setFailed(true)}
             />
           ) : (
-            <div style={{ borderRadius: "50%", overflow: "hidden", border: "1px solid var(--ff-border)" }}>
+            <div style={{ width: 52, height: 52, borderRadius: "50%", overflow: "hidden", border: "1px solid var(--ff-border)" }}>
               <DefaultAvatar size={52} />
             </div>
           )}
