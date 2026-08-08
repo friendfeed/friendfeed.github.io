@@ -7,6 +7,9 @@ import { useSEO } from "../seo/useSEO";
 
 const PAGE_SIZE = 20;
 
+const toPersianDigits = (n: number) =>
+  n.toString().replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+
 export const XCrossoverPage: FC = () => {
   useSEO({ path: "/users" });
   const users = useXUsers();
@@ -50,8 +53,8 @@ export const XCrossoverPage: FC = () => {
         <h1 style={{ fontSize: 14 }}>کاربران فرندفید در ایکس</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {normalizedQuery
-            ? `${filtered.length} نتیجه از ${users.length} کاربر`
-            : `${users.length} کاربر`}
+            ? `${toPersianDigits(filtered.length)} نتیجه از ${toPersianDigits(users.length)} کاربر`
+            : `${toPersianDigits(users.length)} کاربر`}
         </span>
       </div>
 

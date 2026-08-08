@@ -1,56 +1,38 @@
 import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSearch } from "../services/SearchContext";
-import xUsersRaw from "../data/xUsers.json";
-import subscribersRaw from "../data/users-subscriptions.json";
-import roomsRaw from "../data/rooms.json";
-import xPodcastsRaw from "../data/xPodcasts.json";
-
-const toPersianDigits = (n: number) =>
-  n.toString().replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
 
 /**
  * Header rebuilt to match the real archived FriendFeed chrome: white
  * background, wordmark logo, a functional search box (filters the list on
  * the active page via SearchContext), and plain flat nav text.
  *
- * Two-column layout: logo + live user count anchored to the left, search
- * box anchored to the right -- each pair grouped together rather than
- * the logo/search sitting alone with copy underneath both. DOM order
- * below is search-block-then-logo-block on purpose: this is an RTL
- * document, so in a row flex container the first child renders on the
- * *right* and the second on the *left* -- putting the logo block second
- * is what actually lands it on the left edge.
+ * Two-column layout: logo anchored to the left, search box anchored to
+ * the right -- each pair grouped together rather than the logo/search
+ * sitting alone with copy underneath both. DOM order below is
+ * search-block-then-logo-block on purpose: this is an RTL document, so
+ * in a row flex container the first child renders on the *right* and
+ * the second on the *left* -- putting the logo block second is what
+ * actually lands it on the left edge.
  *
  * The long "what is FriendFeed" paragraph that used to live here has
  * moved to the homepage (/) -- it's a proper landing page now, so the
  * header itself stays lean, matching the real archived chrome (search +
  * logo, no marketing copy in every page's header).
+ *
+ * The user/room count used to also be shown here under the logo, but
+ * that duplicated the count each directory page already renders in its
+ * own body -- removed to show it in one place only.
  */
 export const Header: FC = () => {
   const { query, setQuery } = useSearch();
   const { pathname } = useLocation();
-  // Header now renders on all four directory pages (/users,
-  // /subscriptions, /rooms, /podcasts) so they share one design -- the
-  // count (and its unit word) under the logo has to reflect whichever
-  // list is actually on screen, and the search placeholder switches to
-  // match what that page's items actually are (a room has no username).
+  // Header now renders on all three directory pages (/users,
+  // /subscriptions, /rooms) so they share one design -- the search
+  // placeholder switches to match what that page's items actually are
+  // (a room has no username).
   const isRooms = pathname === "/rooms";
-  const isSubscriptions = pathname === "/subscriptions";
-  const isPodcasts = pathname === "/podcasts";
-  const count = isRooms
-    ? roomsRaw.length
-    : isSubscriptions
-      ? subscribersRaw.length
-      : isPodcasts
-        ? xPodcastsRaw.length
-        : xUsersRaw.length;
-  const unit = isRooms ? "اتاق" : isPodcasts ? "پادکست" : "کاربر";
-  const placeholder = isRooms
-    ? "جستجوی نام اتاق..."
-    : isPodcasts
-      ? "جستجوی نام پادکست..."
-      : "جستجوی نام یا نام کاربری...";
+  const placeholder = isRooms ? "جستجوی نام اتاق..." : "جستجوی نام یا نام کاربری...";
 
   return (
     <header className="ff-app-header" style={{ background: "#fff", borderBottom: "1px solid var(--ff-border)" }}>
@@ -112,15 +94,6 @@ export const Header: FC = () => {
               style={{ height: 34, display: "block" }}
             />
           </Link>
-          <div
-            style={{
-              marginTop: 8,
-              fontSize: 11.5,
-              color: "var(--ff-muted)",
-            }}
-          >
-            {toPersianDigits(count)} {unit}
-          </div>
         </div>
       </div>
     </header>

@@ -10,6 +10,9 @@ import usersData from "../data/users-subscriptions.json";
 // between the two directories.
 const PAGE_SIZE = 20;
 
+const toPersianDigits = (n: number) =>
+  n.toString().replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+
 /**
  * Rebuilt to be pixel-for-pixel the same page as <XCrossoverPage>: same
  * header/count line, same URL-param pagination (?page=N) with the same
@@ -60,8 +63,8 @@ export const SubscriptionsPage: FC = () => {
         <h1 style={{ fontSize: 14 }}>همه کاربران فرندفید</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {normalizedQuery
-            ? `${filtered.length} نتیجه از ${users.length} کاربر`
-            : `${users.length} کاربر`}
+            ? `${toPersianDigits(filtered.length)} نتیجه از ${toPersianDigits(users.length)} کاربر`
+            : `${toPersianDigits(users.length)} کاربر`}
         </span>
       </div>
 
