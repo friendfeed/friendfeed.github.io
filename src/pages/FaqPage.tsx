@@ -12,6 +12,12 @@ type SlangEntry = {
   meaning: string;
 };
 
+type HashtagEntry = {
+  tag: string;
+  url: string;
+  meaning: string;
+};
+
 const SLANG: SlangEntry[] = [
   {
     term: "فرفر",
@@ -176,6 +182,34 @@ const LIKE_TYPES: SlangEntry[] = [
   },
 ];
 
+const USEFUL_HASHTAGS: HashtagEntry[] = [
+  {
+    tag: "#بازارکار",
+    url: "https://x.com/hashtag/%D8%A8%D8%A7%D8%B2%D8%A7%D8%B1%DA%A9%D8%A7%D8%B1",
+    meaning: "آگهی‌های استخدام و فرصت‌های شغلی که اعضای جامعه به اشتراک می‌گذارند.",
+  },
+  {
+    tag: "#کاربازار",
+    url: "https://x.com/hashtag/%DA%A9%D8%A7%D8%B1%D8%A8%D8%A7%D8%B2%D8%A7%D8%B1",
+    meaning: "پروژه‌های فریلنسری و همکاری‌های کوتاه‌مدت میان اعضا.",
+  },
+  {
+    tag: "#پیشنهادفالو",
+    url: "https://x.com/hashtag/%D9%BE%DB%8C%D8%B4%D9%86%D9%87%D8%A7%D8%AF%D9%81%D8%A7%D9%84%D9%88",
+    meaning: "معرفی حساب‌های ارزشمند یا کمترشناخته‌شده برای فالو کردن.",
+  },
+  {
+    tag: "#پیشنهادمطالعه",
+    url: "https://x.com/hashtag/%D9%BE%DB%8C%D8%B4%D9%86%D9%87%D8%A7%D8%AF%D9%85%D8%B7%D8%A7%D9%84%D8%B9%D9%87",
+    meaning: "کتاب، مقاله و منابعی که اعضا خواندنش را به بقیه توصیه می‌کنند.",
+  },
+  {
+    tag: "#پیشنهادفیلم",
+    url: "https://x.com/hashtag/%D9%BE%DB%8C%D8%B4%D9%86%D9%87%D8%A7%D8%AF%D9%81%DB%8C%D9%84%D9%85",
+    meaning: "فیلم و سریال‌هایی که اعضای جامعه دیدنش را پیشنهاد می‌دهند.",
+  },
+];
+
 export const FaqPage: FC = () => {
   useSEO({
     path: "/faq",
@@ -282,6 +316,57 @@ export const FaqPage: FC = () => {
               }}
             >
               {entry.term}
+            </div>
+            <div style={{ fontSize: 12.5, color: "var(--ff-text)", lineHeight: 1.8 }}>
+              {entry.meaning}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 style={{ fontSize: 13, marginTop: 22, marginBottom: 6 }}>هشتگ‌های پرکاربرد جامعه در ایکس</h2>
+      <p style={{ fontSize: 12, color: "var(--ff-muted)", lineHeight: 1.9, marginTop: 0, marginBottom: 10 }}>
+        بعد از مهاجرت جامعه به ایکس (توییتر سابق)، چند هشتگ فارسی به مرور
+        محل تجمع کاربردی‌ترین پست‌های اعضا شدند. با کلیک روی هر هشتگ، آخرین
+        پست‌های همان هشتگ در ایکس باز می‌شود.
+      </p>
+
+      <div
+        style={{
+          border: "1px solid var(--ff-border)",
+          borderRadius: 3,
+          overflow: "hidden",
+        }}
+      >
+        {USEFUL_HASHTAGS.map((entry, i) => (
+          <div
+            key={entry.tag}
+            className="ff-glossary-row"
+            style={{
+              display: "flex",
+              gap: 14,
+              padding: "10px 12px",
+              background: i % 2 === 0 ? "#fff" : "var(--ff-panel-alt)",
+              borderBottom:
+                i === USEFUL_HASHTAGS.length - 1 ? "none" : "1px solid var(--ff-border)",
+              alignItems: "flex-start",
+            }}
+          >
+            <div
+              className="ff-glossary-term"
+              style={{
+                flexShrink: 0,
+                width: 150,
+              }}
+            >
+              <a
+                href={entry.url}
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontWeight: "bold", fontSize: 12.5, color: "var(--ff-link)" }}
+              >
+                {entry.tag}
+              </a>
             </div>
             <div style={{ fontSize: 12.5, color: "var(--ff-text)", lineHeight: 1.8 }}>
               {entry.meaning}
