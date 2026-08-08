@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { IconRoom, IconUsers, IconStar, IconBlog, IconX } from "../icons/Icons";
+import { IconRoom, IconUsers, IconStar, IconBlog, IconX, IconMusic } from "../icons/Icons";
 
 /**
  * Mobile-only bottom tab bar -- the phone-native replacement for
@@ -14,18 +14,20 @@ import { IconRoom, IconUsers, IconStar, IconBlog, IconX } from "../icons/Icons";
  * so there's no layout jump / hydration mismatch between breakpoints.
  *
  * اتاق‌ها is intentionally dropped from this bar (still reachable from
- * <Sidebar> on desktop / the homepage) to make room for both directory
+ * <Sidebar> on desktop / the homepage) to make room for the directory
  * pages here instead: "مشترکین" (-> /subscriptions, all FriendFeed
- * members) and "ایکس" (-> /users, the X-crossover list) sit either side
- * of the middle slot. Labels are deliberately short -- the full page
- * titles ("همه کاربران فرندفید" / "کاربران فرندفید در ایکس") don't fit a
- * 5-item mobile tab bar, so IconUsers/IconX carry the rest of the
+ * members), "ایکس" (-> /users, the X-crossover list), and "پادکست"
+ * (-> /podcasts, the independent X-podcasts directory) sit around the
+ * middle slot. Labels are deliberately short -- the full page titles
+ * ("همه کاربران فرندفید" / "کاربران فرندفید در ایکس" / "ایکس پادکست")
+ * don't fit a 6-item mobile tab bar, so the icons carry the rest of the
  * meaning that the short label alone can't.
  */
 const items = [
   { to: "/", label: "خانه", icon: IconRoom },
   { to: "/subscriptions", label: "مشترکین", icon: IconUsers },
   { to: "/users", label: "ایکس", icon: IconX },
+  { to: "/podcasts", label: "پادکست", icon: IconMusic },
   { to: "/faq", label: "سوالات", icon: IconStar },
   { to: "/magazine", label: "مجله", icon: IconBlog },
 ];

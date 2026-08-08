@@ -5,6 +5,7 @@ import { Sidebar } from "./components/Sidebar";
 import { BottomNav } from "./components/BottomNav";
 import { HomePage } from "./pages/HomePage";
 import { XCrossoverPage } from "./pages/XCrossoverPage";
+import { XPodcastsPage } from "./pages/XPodcastsPage";
 import { FaqPage } from "./pages/FaqPage";
 import { MagazinePage } from "./pages/MagazinePage";
 import { GoogleReaderPage } from "./pages/GoogleReaderPage";
@@ -31,7 +32,11 @@ const App: FC = () => {
   // the same site instead of different designs. Every other page (home,
   // faq, magazine, google-reader, ...) starts flush at the top with no
   // header above it, same as the home page always has.
-  const showHeader = pathname === "/users" || pathname === "/subscriptions" || pathname === "/rooms";
+  const showHeader =
+    pathname === "/users" ||
+    pathname === "/subscriptions" ||
+    pathname === "/rooms" ||
+    pathname === "/podcasts";
   // Pages without the header (everything but /users) sat flush against
   // the very top of the viewport once the header was made conditional,
   // so they get extra top padding here instead, applied to the shared
@@ -57,6 +62,7 @@ const App: FC = () => {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/users" element={<XCrossoverPage />} />
+              <Route path="/podcasts" element={<XPodcastsPage />} />
               <Route path="/subscriptions" element={<SubscriptionsPage />} />
               <Route path="/rooms" element={<RoomsPage />} />
               <Route path="/faq" element={<FaqPage />} />
