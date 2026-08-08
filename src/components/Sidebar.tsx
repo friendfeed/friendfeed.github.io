@@ -26,7 +26,13 @@ const itemStyle = (active: boolean): CSSProperties => ({
 });
 
 export const Sidebar: FC = () => {
-  const { pathname } = useLocation();
+  const { pathname: rawPathname } = useLocation();
+  // Static shells for the directory pages (see
+  // scripts/generate-static-routes.mjs) live at e.g. dist/users/index.html,
+  // so a direct load or hard refresh of /users/ lands with a trailing
+  // slash in pathname -- stripped here so active-link highlighting still
+  // matches in that case.
+  const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/+$/, "") : rawPathname;
 
   return (
     <aside

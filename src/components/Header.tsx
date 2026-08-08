@@ -31,7 +31,7 @@ export const Header: FC = () => {
   // /subscriptions, /rooms) so they share one design -- the search
   // placeholder switches to match what that page's items actually are
   // (a room has no username).
-  const isRooms = pathname === "/rooms";
+  const isRooms = pathname.replace(/\/+$/, "") === "/rooms";
   const placeholder = isRooms ? "جستجوی نام اتاق..." : "جستجوی نام یا نام کاربری...";
 
   return (

@@ -26,17 +26,27 @@ import { SearchProvider } from "./services/SearchContext";
 const App: FC = () => {
   const { pathname } = useLocation();
   // The header (logo + search box) is chrome built specifically for
-  // browsing/searching a directory list, so it renders on all three
+  // browsing/searching a directory list, so it renders on all four
   // directory pages -- /users (X-crossover), /subscriptions (all
-  // FriendFeed members), and /rooms -- which is what makes them read as
-  // the same site instead of different designs. Every other page (home,
-  // faq, magazine, google-reader, ...) starts flush at the top with no
-  // header above it, same as the home page always has.
+  // FriendFeed members), /rooms, and /podcasts -- which is what makes
+  // them read as the same site instead of different designs. Every
+  // other page (home, faq, magazine, google-reader, ...) starts flush
+  // at the top with no header above it, same as the home page always
+  // has.
+  //
+  // Trailing slash is stripped before comparing: the static shells
+  // generate-static-routes.mjs writes for these routes live at
+  // dist/users/index.html etc, so a direct load or a hard refresh of
+  // e.g. /users/ lands with pathname "/users/" (trailing slash), not
+  // "/users" -- an exact match against the no-slash form used to fail
+  // that case and silently drop the header/search bar. Comparing
+  // against the trimmed pathname makes both forms match.
+  const normalizedPath = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
   const showHeader =
-    pathname === "/users" ||
-    pathname === "/subscriptions" ||
-    pathname === "/rooms" ||
-    pathname === "/podcasts";
+    normalizedPath === "/users" ||
+    normalizedPath === "/subscriptions" ||
+    normalizedPath === "/rooms" ||
+    normalizedPath === "/podcasts";
   // Pages without the header (everything but /users) sat flush against
   // the very top of the viewport once the header was made conditional,
   // so they get extra top padding here instead, applied to the shared
