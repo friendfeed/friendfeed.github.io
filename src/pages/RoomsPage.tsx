@@ -10,6 +10,9 @@ import roomsData from "../data/rooms.json";
 // identical across all three.
 const PAGE_SIZE = 20;
 
+const toPersianDigits = (n: number) =>
+  n.toString().replace(/[0-9]/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+
 /**
  * Rebuilt to be pixel-for-pixel the same page as <XCrossoverPage> and
  * <SubscriptionsPage>: same header/count line, same URL-param
@@ -61,8 +64,8 @@ export const RoomsPage: FC = () => {
         <h1 style={{ fontSize: 14 }}>اتاق‌های فرندفید</h1>
         <span style={{ fontSize: 11.5, color: "var(--ff-muted)" }}>
           {normalizedQuery
-            ? `${filtered.length} نتیجه از ${rooms.length} اتاق`
-            : `${rooms.length} اتاق`}
+            ? `${toPersianDigits(filtered.length)} نتیجه از ${toPersianDigits(rooms.length)} اتاق`
+            : `${toPersianDigits(rooms.length)} اتاق`}
         </span>
       </div>
 
