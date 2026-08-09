@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { IconBluesky, IconRss, IconX } from "../icons/Icons";
+import { IconBluesky, IconX } from "../icons/Icons";
 
 /**
  * Site-wide footer, replacing the single centered disclaimer line that
@@ -80,7 +80,7 @@ export const Footer: FC = () => {
               <IconX width={14} height={14} />
             </a>
             <a
-              href="https://bsky.app/profile/friendfeedx.bsky.social"
+              href="https://bsky.app/profile/friendfeed.bsky.social"
               target="_blank"
               rel="noreferrer"
               aria-label="فرندفید فارسی در بلواسکای"
@@ -88,9 +88,6 @@ export const Footer: FC = () => {
             >
               <IconBluesky width={14} height={14} />
             </a>
-            <Link to="/magazine" aria-label="فید مجله" title="فید مجله">
-              <IconRss width={14} height={14} />
-            </Link>
           </div>
         </div>
       </div>

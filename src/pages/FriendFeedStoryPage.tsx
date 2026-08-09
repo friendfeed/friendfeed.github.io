@@ -89,8 +89,8 @@ export const FriendFeedStoryPage: FC = () => {
   return (
     <article style={{ maxWidth: 760, margin: "0 auto" }}>
       <div style={{ marginBottom: 18 }}>
-        <Link to="/magazine" style={{ fontSize: 12, color: "var(--ff-link)" }}>
-          › بازگشت به مجله
+        <Link to="/magazine" className="ff-back-link">
+          بازگشت به مجله
         </Link>
       </div>
 

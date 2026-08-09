@@ -2,10 +2,11 @@ import type { FC, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
-import { FriendFeedStoryCover, FerferLeaksCover, GoogleReaderCover } from "../components/MagazineCovers";
+import { FriendFeedStoryCover, FerferLeaksCover, FriendFeed88Cover } from "../components/MagazineCovers";
 import {
   IconUsers,
   IconX,
+  IconRoom,
   IconMusic,
   IconBrand,
   IconNewspaper,
@@ -72,24 +73,131 @@ const Reveal: FC<{ children: ReactNode; className?: string }> = ({ children, cla
 type HighlightItem = {
   to: string;
   title: string;
+  description: string;
   count?: string;
   icon: FC<{ width?: number; height?: number }>;
 };
 
-const HIGHLIGHTS: HighlightItem[] = [
-  { to: "/subscriptions", title: "همه کاربران فرندفید", count: "+۴٬۳۰۰ کاربر", icon: IconUsers },
-  { to: "/rooms", title: "اتاق‌ها", count: "+۲۵۰ اتاق", icon: IconX },
-  { to: "/users", title: "کاربران فرندفید در ایکس", count: "+۶۰۰ حساب", icon: IconX },
-  { to: "/podcasts", title: "پادکست", count: "+۱٬۱۰۰ حساب", icon: IconMusic },
-  { to: "/brands", title: "برندها", icon: IconBrand },
-  { to: "/news", title: "خبرگزاری‌ها", icon: IconNewspaper },
-  { to: "/startups", title: "استارت‌آپ‌ها", icon: IconRocket },
-  { to: "/orgs", title: "ادارات و سازمان‌ها", icon: IconBuilding },
-  { to: "/books", title: "کتاب‌ها", icon: IconBook },
-  { to: "/daily-life", title: "زندگی روزمره", icon: IconSun },
-  { to: "/embassies", title: "سفارت‌ها", icon: IconFlag },
-  { to: "/magazine", title: "مجله فرندفید", icon: IconBlog },
-  { to: "/faq", title: "سوالات متداول", icon: IconStar },
+type HighlightGroup = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  icon: FC<{ width?: number; height?: number }>;
+  items: HighlightItem[];
+};
+
+/** Every section of the site, grouped exactly the way the main nav
+ *  (Sidebar/BottomNav) already groups them, so this reads as a real
+ *  sitemap and not an invented taxonomy -- just presented with more
+ *  weight: one small "hero" band per group, then bigger cards with a
+ *  real description on each. */
+const HIGHLIGHT_GROUPS: HighlightGroup[] = [
+  {
+    eyebrow: "بخش یکم",
+    title: "آرشیو اصلی فرندفید",
+    description: "هسته‌ی آرشیو: فهرست کامل کاربران و اتاق‌های گفتگوی فرندفید فارسی، همان‌طور که سال ۲۰۱۵ متوقف شد.",
+    icon: IconUsers,
+    items: [
+      {
+        to: "/subscriptions",
+        title: "همه کاربران فرندفید",
+        description: "فهرست کامل کاربران فارسی‌زبان فرندفید به همراه آواتار و اطلاعات پروفایل آرشیوی هرکدام.",
+        count: "+۴٬۳۰۰ کاربر",
+        icon: IconUsers,
+      },
+      {
+        to: "/rooms",
+        title: "اتاق‌ها",
+        description: "اتاق‌های گفتگوی گروهی فرندفید، از عمومی تا خصوصی، با فهرست اعضا و توضیحات هرکدام.",
+        count: "+۲۵۰ اتاق",
+        icon: IconRoom,
+      },
+    ],
+  },
+  {
+    eyebrow: "بخش دوم",
+    title: "زندگی بعد از فرندفید، در ایکس",
+    description: "همان کاربران و اجتماع، این‌بار در بستر ایکس -- به‌علاوه رسانه‌ها، برندها و نهادهایی که در مسیر مهاجرت این جامعه ردیابی کرده‌ایم.",
+    icon: IconX,
+    items: [
+      {
+        to: "/users",
+        title: "کاربران فرندفید در ایکس",
+        description: "ردیابی حساب ایکس کاربران قدیمی فرندفید، برای پیدا کردن دوباره آدم‌های همان دوره.",
+        count: "+۶۰۰ حساب",
+        icon: IconX,
+      },
+      {
+        to: "/podcasts",
+        title: "پادکست",
+        description: "پادکست‌های فارسی که بسیاری از میزبان‌ها و مهمان‌هایشان از همان نسل فرندفید هستند.",
+        count: "+۱٬۱۰۰ حساب",
+        icon: IconMusic,
+      },
+      {
+        to: "/brands",
+        title: "برندها",
+        description: "برندها و کسب‌وکارهای فارسی‌زبان با ریشه یا سابقه فعالیت در فرندفید.",
+        icon: IconBrand,
+      },
+      {
+        to: "/news",
+        title: "خبرگزاری‌ها",
+        description: "رسانه‌ها و خبرگزاری‌های فارسی‌زبانی که کاربران فرندفید در ایکس دنبال می‌کنند.",
+        icon: IconNewspaper,
+      },
+      {
+        to: "/startups",
+        title: "استارت‌آپ‌ها",
+        description: "استارت‌آپ‌های فارسی‌زبان که بنیان‌گذاران یا اعضای اولیه‌شان در فرندفید فعال بودند.",
+        icon: IconRocket,
+      },
+      {
+        to: "/orgs",
+        title: "ادارات و سازمان‌ها",
+        description: "نهادها، ادارات و سازمان‌های فارسی‌زبان با حضور رسمی در ایکس.",
+        icon: IconBuilding,
+      },
+      {
+        to: "/books",
+        title: "کتاب‌ها",
+        description: "نویسنده‌ها و ناشرهای فارسی‌زبان مرتبط با جامعه‌ی فرندفید و کتاب‌هایشان.",
+        icon: IconBook,
+      },
+      {
+        to: "/daily-life",
+        title: "زندگی روزمره",
+        description: "حساب‌های سبک زندگی، خوراک و زندگی روزمره‌ی فارسی‌زبان در ایکس.",
+        icon: IconSun,
+      },
+      {
+        to: "/embassies",
+        title: "سفارت‌ها",
+        description: "حساب رسمی سفارتخانه‌ها و نمایندگی‌های دیپلماتیک فارسی‌زبان در ایکس.",
+        icon: IconFlag,
+      },
+    ],
+  },
+  {
+    eyebrow: "بخش سوم",
+    title: "بیشتر بدانید",
+    description: "روایت کامل داستان فرندفید و پاسخ سوالات پرتکرار درباره‌ی این آرشیو.",
+    icon: IconBlog,
+    items: [
+      {
+        to: "/magazine",
+        title: "مجله فرندفید",
+        description: "یادداشت‌ها و روایت‌های آرشیوی درباره‌ی فرندفید، گودر و جامعه‌ی فارسی‌زبان وبلاگستان.",
+        icon: IconBlog,
+      },
+      {
+        to: "/faq",
+        title: "سوالات متداول",
+        description: "پاسخ سوالاتی که درباره‌ی هدف، منابع داده و نحوه‌ی کار این آرشیو پرسیده می‌شود.",
+        icon: IconStar,
+      },
+    ],
+  },
 ];
 
 const panelStyle: React.CSSProperties = {
@@ -129,7 +237,7 @@ export const HomePage: FC = () => {
 
             <div className="ff-hero-cta-row">
               <Link to="/subscriptions" className="ff-btn ff-btn-primary">
-                دیدن همه کاربران ‹
+                دیدن همه کاربران
               </Link>
               <Link to="/magazine/dastan-khane-friendfeed" className="ff-btn ff-btn-ghost">
                 خواندن داستان فرندفید
@@ -180,28 +288,52 @@ export const HomePage: FC = () => {
         </div>
       </section>
 
-      {/* ---- Highlights: every section of the site, one card each ---- */}
+      {/* ---- Highlights: every section of the site, grouped into the
+          same 3 groups as the main nav, each with its own small hero
+          band (art direction) and bigger, described cards. ---- */}
       <Reveal>
-        <section style={{ marginBottom: 22 }}>
+        <section style={{ marginBottom: 8 }}>
           <div className="ff-section-heading">
             <h2 style={{ fontSize: 16 }}>هر چیزی که این‌جا هست</h2>
             <span style={{ fontSize: 12, color: "var(--ff-muted-light)" }}>
               همه بخش‌های آرشیو، از یک نگاه
             </span>
           </div>
-          <div className="ff-highlight-grid">
-            {HIGHLIGHTS.map(({ to, title, count, icon: Icon }) => (
-              <Link key={to} to={to} className="ff-highlight-card">
-                <span className="ff-highlight-icon">
-                  <Icon width={17} height={17} />
-                </span>
-                <span className="ff-highlight-title">{title}</span>
-                {count && <span className="ff-highlight-count">{count}</span>}
-              </Link>
-            ))}
-          </div>
         </section>
       </Reveal>
+
+      {HIGHLIGHT_GROUPS.map((group) => (
+        <Reveal key={group.title}>
+          <section className="ff-menu-section">
+            <div className="ff-menu-section-glow" aria-hidden="true" />
+            <div className="ff-menu-section-inner">
+              <div className="ff-menu-section-head">
+                <span className="ff-menu-section-icon">
+                  <group.icon width={22} height={22} />
+                </span>
+                <div>
+                  <span className="ff-menu-section-eyebrow">{group.eyebrow}</span>
+                  <h3 className="ff-menu-section-title">{group.title}</h3>
+                  <p className="ff-menu-section-desc">{group.description}</p>
+                </div>
+              </div>
+
+              <div className="ff-menu-grid">
+                {group.items.map(({ to, title, description, count, icon: Icon }) => (
+                  <Link key={to} to={to} className="ff-menu-card">
+                    <span className="ff-menu-card-icon">
+                      <Icon width={20} height={20} />
+                    </span>
+                    <span className="ff-menu-card-title">{title}</span>
+                    <span className="ff-menu-card-desc">{description}</span>
+                    {count && <span className="ff-menu-card-count">{count}</span>}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        </Reveal>
+      ))}
 
       {/* ---- Magazine teaser ---- */}
       <Reveal>
@@ -209,7 +341,7 @@ export const HomePage: FC = () => {
           <div className="ff-section-heading">
             <h2 style={{ fontSize: 16 }}>از مجله فرندفید</h2>
             <Link to="/magazine" className="ff-section-more">
-              همه مطالب ‹
+              همه مطالب
             </Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
@@ -233,12 +365,14 @@ export const HomePage: FC = () => {
                 </p>
               </div>
             </Link>
-            <Link to="/magazine/google-reader" className="ff-home-post-card">
-              <GoogleReaderCover />
+            <Link to="/magazine/friendfeed-1388" className="ff-home-post-card">
+              <FriendFeed88Cover />
               <div style={{ padding: "12px 14px 16px" }}>
-                <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>گودر</h3>
+                <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>
+                  فرندفید ایرانی بعد از خرداد ۸۸
+                </h3>
                 <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
-                  خانه‌ی گمشده‌ی وبلاگ‌نویسان فارسی، پیش از توییتر و اینستاگرام.
+                  از سرگرمی وبلاگی به پناهگاه خبر و گزارش لحظه‌ای.
                 </p>
               </div>
             </Link>
@@ -262,10 +396,10 @@ export const HomePage: FC = () => {
           </p>
           <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10 }}>
             <Link to="/subscriptions" className="ff-btn ff-btn-primary">
-              همه کاربران فرندفید ‹
+              همه کاربران فرندفید
             </Link>
             <Link to="/users" className="ff-btn ff-btn-ghost">
-              کاربران فرندفید در ایکس ‹
+              کاربران فرندفید در ایکس
             </Link>
           </div>
         </section>

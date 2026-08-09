@@ -493,6 +493,7 @@ button {
   font-family: var(--ff-font-body);
   font-size: 13.5px;
   font-weight: 700;
+  letter-spacing: -0.005em;
   line-height: 1;
   height: 42px;
   padding: 0 22px;
@@ -501,14 +502,16 @@ button {
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
+  user-select: none;
   transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease, border-color 140ms ease, color 140ms ease;
 }
 .ff-btn:hover {
   text-decoration: none;
-  transform: translateY(-1px);
+  transform: translateY(-1.5px);
 }
 .ff-btn:active {
   transform: translateY(0);
+  transition-duration: 60ms;
 }
 .ff-btn:focus-visible {
   outline: 2px solid var(--ff-link);
@@ -521,23 +524,54 @@ button {
   gap: 5px;
 }
 .ff-btn-primary {
-  background: var(--ff-link);
+  background: linear-gradient(180deg, #3b82f6 0%, var(--ff-link) 100%);
   border-color: var(--ff-link);
   color: #fff;
-  box-shadow: 0 6px 16px rgba(46, 125, 243, 0.28);
+  box-shadow: 0 6px 16px rgba(46, 125, 243, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .ff-btn-primary:hover {
-  background: #2569d1;
+  background: linear-gradient(180deg, #2f74e0 0%, #2569d1 100%);
   border-color: #2569d1;
+  box-shadow: 0 10px 22px rgba(46, 125, 243, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .ff-btn-ghost {
   background: #fff;
-  border-color: var(--ff-link);
-  color: var(--ff-link);
-  box-shadow: none;
+  border-color: var(--ff-border-strong);
+  color: var(--ff-text);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 .ff-btn-ghost:hover {
-  background: rgba(46, 125, 243, 0.08);
+  background: var(--ff-panel-alt);
+  border-color: var(--ff-link);
+  color: var(--ff-link);
+}
+
+/* Small inline "back" link (e.g. atop a magazine post) -- text link with
+   a leading arrow drawn in CSS instead of an inline "›" character, so it
+   scales/aligns cleanly and matches RTL direction automatically. */
+.ff-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ff-muted);
+  text-decoration: none;
+  transition: color 140ms ease, gap 140ms ease;
+}
+.ff-back-link::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-inline-start: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+.ff-back-link:hover {
+  color: var(--ff-link);
+  text-decoration: none;
+  gap: 8px;
 }
 
 .ff-hero-stats {
@@ -640,6 +674,142 @@ button {
   color: var(--ff-muted-light);
 }
 
+/* Homepage highlight groups -- each is a small "hero" band (same visual
+   language/art-direction as the main .ff-hero: soft glow, eyebrow pill,
+   bold title) followed by a grid of bigger, described cards. */
+.ff-menu-section {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ff-radius);
+  border: 1px solid var(--ff-border);
+  background: #fff;
+  isolation: isolate;
+  margin-bottom: 20px;
+}
+.ff-menu-section-glow {
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 100%;
+  background: radial-gradient(50% 50% at 20% 10%, rgba(46, 125, 243, 0.09) 0%, rgba(46, 125, 243, 0) 70%);
+  z-index: 0;
+}
+.ff-menu-section-inner {
+  position: relative;
+  z-index: 1;
+  padding: 26px 26px 28px;
+}
+.ff-menu-section-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ff-border);
+}
+.ff-menu-section-icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(46, 125, 243, 0.1);
+  color: var(--ff-link);
+}
+.ff-menu-section-eyebrow {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ff-link);
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+.ff-menu-section-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+.ff-menu-section-desc {
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--ff-muted);
+  margin: 0;
+  max-width: 640px;
+}
+.ff-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+}
+.ff-menu-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 16px;
+  background: var(--ff-panel);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease, background-color 140ms ease;
+}
+.ff-menu-card:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--ff-link);
+  background: #fff;
+}
+.ff-menu-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ff-panel-alt);
+  color: var(--ff-link);
+  flex-shrink: 0;
+}
+.ff-menu-card-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ff-text);
+}
+.ff-menu-card-desc {
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: var(--ff-muted);
+  flex-grow: 1;
+}
+.ff-menu-card-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ff-link);
+  margin-top: 2px;
+}
+
+@media (max-width: 680px) {
+  .ff-menu-section-inner {
+    padding: 20px 18px 22px;
+  }
+  .ff-menu-section-head {
+    gap: 10px;
+  }
+  .ff-menu-section-icon {
+    width: 38px;
+    height: 38px;
+  }
+  .ff-menu-section-title {
+    font-size: 16px;
+  }
+  .ff-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Section reveal-on-scroll -- progressive enhancement only, everything
    is fully visible/usable without JS or with reduced motion. */
 .ff-reveal {
@@ -664,10 +834,28 @@ button {
   margin: 0;
 }
 .ff-section-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 12px;
   font-weight: 700;
   color: var(--ff-link);
   white-space: nowrap;
+  text-decoration: none;
+  transition: gap 140ms ease;
+}
+.ff-section-more::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-inline-start: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-135deg);
+  flex-shrink: 0;
+}
+.ff-section-more:hover {
+  text-decoration: none;
+  gap: 8px;
 }
 
 /* Magazine teaser cards on the homepage */
