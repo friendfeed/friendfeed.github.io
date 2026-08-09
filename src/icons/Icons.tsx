@@ -145,6 +145,16 @@ export const IconRss: FC<IconProps> = (p) => (
   </svg>
 );
 
+/** Bluesky "butterfly" mark, simplified to the same two-stroke line style
+ *  as the rest of this icon set (no brand-exact glyph, just a legible
+ *  butterfly silhouette at 24x24). */
+export const IconBluesky: FC<IconProps> = (p) => (
+  <svg {...base(p)} fill="currentColor" stroke="none">
+    <path d="M12 7.2C10.4 4.6 7.4 2.6 4.7 2.4c-.5 0-.7.3-.6.8.4 3.2 1 5.4 3.8 7.6-2.8-.4-5.2.9-6.9 2.9-.3.4-.2.9.3 1 3 .8 5.6.5 7.6-1 .5-.3 1-.3 1.4 0 2 1.5 4.6 1.8 7.6 1 .5-.1.6-.6.3-1-1.7-2-4.1-3.3-6.9-2.9 2.8-2.2 3.4-4.4 3.8-7.6.1-.5-.1-.8-.6-.8-2.7.2-5.7 2.2-7.3 4.8Z" />
+  </svg>
+);
+
+
 /** Generic "switched off / retired" glyph, used for shutdown events on
  *  the timeline (Yahoo 360, Google Reader, Google+, FriendFeed itself). */
 export const IconOff: FC<IconProps> = (p) => (

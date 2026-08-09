@@ -1,17 +1,18 @@
 /* -----------------------------------------------------------------------
-   Design tokens, rebuilt directly from a real archived FriendFeed profile
-   screenshot (colors sampled by pixel from the source image, not guessed):
+   Design tokens, originally rebuilt from a real archived FriendFeed
+   profile screenshot (colors sampled by pixel from the source image).
 
-     nav / action links ......... #0000CC  (sampled from "Me" nav text)
-     tab / pill / button bg ..... #efefef  (sampled from tab background)
-     sidebar / panel wash ....... #f4f4f4  (sampled from left column)
-     page background ............ #ffffff  (near-white, sampled #fffffa)
-     avatar border ............... light neutral gray, thin, no radius tricks
+   --ff-link was sampled as #0000CC (the real archived nav-link blue).
+   It has since been changed to #2e7df3, the same blue used by every
+   button (--ff-btn-primary) and CTA on this site, so links/menus and
+   buttons share one brand blue instead of two different ones. This is
+   an intentional departure from strict archival accuracy, made once the
+   site grew a proper button system that needed to feel unified.
 
    FriendFeed's actual UI was NOT rounded pills, gradients, or shadows --
-   it was flat, dense, Arial-based, and slightly gray. The previous version
-   of this file invented a nicer-looking but *inauthentic* blue/gradient
-   theme; this version intentionally undoes that in favor of accuracy.
+   it was flat, dense, Arial-based, and slightly gray. This file keeps
+   that flat, borderless-panel character everywhere except the one blue
+   accent above.
    ----------------------------------------------------------------------- */
 
 :root {
@@ -22,7 +23,7 @@
   --ff-border: #cccccc;
   --ff-border-strong: #999999;
 
-  --ff-link: #0000cc;
+  --ff-link: #2e7df3;
   --ff-link-visited: #551a8b;
 
   --ff-like: #b8860b;
@@ -487,33 +488,56 @@ button {
 .ff-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  font-size: 13px;
+  font-family: var(--ff-font-body);
+  font-size: 13.5px;
   font-weight: 700;
-  padding: 10px 20px;
-  border-radius: 4px;
+  line-height: 1;
+  height: 42px;
+  padding: 0 22px;
+  border-radius: var(--ff-radius);
+  border: 1.5px solid transparent;
   text-decoration: none;
-  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease, border-color 140ms ease, color 140ms ease;
 }
 .ff-btn:hover {
   text-decoration: none;
   transform: translateY(-1px);
 }
+.ff-btn:active {
+  transform: translateY(0);
+}
+.ff-btn:focus-visible {
+  outline: 2px solid var(--ff-link);
+  outline-offset: 2px;
+}
+.ff-btn-sm {
+  height: 34px;
+  padding: 0 16px;
+  font-size: 12.5px;
+  gap: 5px;
+}
 .ff-btn-primary {
-  background: #2e7df3;
+  background: var(--ff-link);
+  border-color: var(--ff-link);
   color: #fff;
   box-shadow: 0 6px 16px rgba(46, 125, 243, 0.28);
 }
 .ff-btn-primary:hover {
   background: #2569d1;
+  border-color: #2569d1;
 }
 .ff-btn-ghost {
   background: #fff;
-  color: var(--ff-text);
-  border: 1px solid var(--ff-border-strong);
+  border-color: var(--ff-link);
+  color: var(--ff-link);
+  box-shadow: none;
 }
 .ff-btn-ghost:hover {
-  background: var(--ff-panel-alt);
+  background: rgba(46, 125, 243, 0.08);
 }
 
 .ff-hero-stats {

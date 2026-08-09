@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
+import { MigrationTimeline } from "../components/MigrationTimeline";
 
 /**
  * "داستان خانه‌ی فرندفید" -- this post is the FULL body of what used to
@@ -64,20 +65,6 @@ export const FriendFeedStoryPage: FC = () => {
   const shareText = encodeURIComponent(pageTitle + " " + pageUrl);
   const xShareUrl = `https://x.com/intent/tweet?text=${shareText}`;
   const bskyShareUrl = `https://bsky.app/intent/compose?text=${shareText}`;
-
-  const shareBtn: React.CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 7,
-    padding: "7px 14px",
-    borderRadius: 4,
-    fontSize: 12,
-    fontWeight: 600,
-    textDecoration: "none",
-    border: "1px solid var(--ff-border)",
-    color: "var(--ff-text)",
-    background: "var(--ff-panel)",
-  };
 
   useSEO({
     path: "/magazine/dastan-khane-friendfeed",
@@ -249,22 +236,27 @@ export const FriendFeedStoryPage: FC = () => {
           امروز از فرندفید واقعی چیزی باقی نمانده جز همین اسکرین‌شات‌های قدیمی، چند نسخه در آرشیو
           وی‌بک‌مشین و خاطره‌ی جمعی چند هزار نفری که یک بار، برای چند سال، بهترین گوشه اینترنتشان همین‌جا
           بود. این آرشیو هم دقیقاً برای همین ساخته شده: تا آن خاطره، این‌بار به فارسی، یک‌جا جمع بماند.
-          مسیر کامل مهاجرت این جامعه بین پلتفرم‌ها را هم می‌توانید{" "}
-          <Link to="/#migration" style={{ color: "var(--ff-link)" }}>
-            در صفحه اصلی، روی تایم‌لاین تعاملی
-          </Link>{" "}
-          دنبال کنید.
         </p>
       </section>
 
+      <section style={{ marginBottom: 28 }}>
+        <h2 style={{ fontSize: 15, margin: "0 0 4px" }}>
+          مسیر مهاجرت جامعه فارسی‌زبان: از اتاق‌های گفتگوی یاهو تا توییتر
+        </h2>
+        <p style={{ margin: "0 0 16px", fontSize: 12, color: "var(--ff-muted-light)" }}>
+          تایم‌لاین تاریخی تعطیلی سرویس‌ها و مهاجرت کاربران، از ۱۹۹۷ تا ۲۰۱۹
+        </p>
+        <MigrationTimeline />
+      </section>
+
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", padding: "18px 0", borderTop: "1px solid var(--ff-border)" }}>
-        <a href={xShareUrl} target="_blank" rel="noreferrer" style={shareBtn}>
+        <a href={xShareUrl} target="_blank" rel="noreferrer" className="ff-btn ff-btn-sm ff-btn-ghost">
           اشتراک در ایکس
         </a>
-        <a href={bskyShareUrl} target="_blank" rel="noreferrer" style={shareBtn}>
+        <a href={bskyShareUrl} target="_blank" rel="noreferrer" className="ff-btn ff-btn-sm ff-btn-ghost">
           اشتراک در بلواسکای
         </a>
-        <Link to="/magazine" style={shareBtn}>
+        <Link to="/magazine" className="ff-btn ff-btn-sm ff-btn-ghost">
           سایر مطالب مجله
         </Link>
       </div>

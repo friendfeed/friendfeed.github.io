@@ -2,7 +2,7 @@ import type { FC, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
-import { MigrationTimeline } from "../components/MigrationTimeline";
+import { FriendFeedStoryCover, FerferLeaksCover, GoogleReaderCover } from "../components/MagazineCovers";
 import {
   IconUsers,
   IconX,
@@ -26,10 +26,11 @@ import {
  * footer (see App.tsx / Footer.tsx).
  *
  * The long-form "درباره فرندفید" / "چرا فرندفید دیگر وجود ندارد؟" essay
- * that used to live here in full has moved to its own magazine post,
- * /magazine/dastan-khane-friendfeed (see FriendFeedStoryPage.tsx) -- the
- * old hero's browser-chrome visual now doubles as that post's cover
- * image on /magazine. Nothing written before was deleted, it just now
+ * (plus the full migration timeline) that used to live here has moved to
+ * its own magazine post, /magazine/dastan-khane-friendfeed (see
+ * FriendFeedStoryPage.tsx) -- the old hero's browser-chrome visual now
+ * doubles as that post's cover image on /magazine (and here, in the
+ * teaser row below). Nothing written before was deleted, it just now
  * has a dedicated page instead of being the entire home page.
  */
 
@@ -202,19 +203,6 @@ export const HomePage: FC = () => {
         </section>
       </Reveal>
 
-      {/* ---- Migration timeline ---- */}
-      <Reveal>
-        <section id="migration" style={{ ...panelStyle, padding: 16, marginBottom: 22, scrollMarginTop: 24 }}>
-          <h2 style={{ fontSize: 15, margin: "0 0 4px" }}>
-            مسیر مهاجرت جامعه فارسی‌زبان: از اتاق‌های گفتگوی یاهو تا توییتر
-          </h2>
-          <p style={{ margin: "0 0 16px", fontSize: 12, color: "var(--ff-muted-light)" }}>
-            تایم‌لاین تاریخی تعطیلی سرویس‌ها و مهاجرت کاربران، از ۱۹۹۷ تا ۲۰۱۹
-          </p>
-          <MigrationTimeline />
-        </section>
-      </Reveal>
-
       {/* ---- Magazine teaser ---- */}
       <Reveal>
         <section style={{ marginBottom: 22 }}>
@@ -226,33 +214,18 @@ export const HomePage: FC = () => {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
             <Link to="/magazine/dastan-khane-friendfeed" className="ff-home-post-card">
-              <div
-                style={{
-                  height: 96,
-                  background: "linear-gradient(135deg, #eef4ff 0%, #dfe9fb 100%)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <img src="/brand/friendfeed-wordmark.webp" alt="" style={{ height: 22 }} />
-              </div>
+              <FriendFeedStoryCover />
               <div style={{ padding: "12px 14px 16px" }}>
                 <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>
                   داستان خانه‌ی فرندفید
                 </h3>
                 <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
-                  از بهترین فید اینترنت تا تعطیلی؛ روایت کامل با اسناد و عکس.
+                  از بهترین فید اینترنت تا تعطیلی؛ روایت کامل با اسناد، عکس و تایم‌لاین مهاجرت.
                 </p>
               </div>
             </Link>
             <Link to="/magazine/ferferleaks" className="ff-home-post-card">
-              <div
-                style={{
-                  height: 96,
-                  background: "linear-gradient(160deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
-                }}
-              />
+              <FerferLeaksCover />
               <div style={{ padding: "12px 14px 16px" }}>
                 <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>فرفرلیکس</h3>
                 <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
@@ -261,12 +234,7 @@ export const HomePage: FC = () => {
               </div>
             </Link>
             <Link to="/magazine/google-reader" className="ff-home-post-card">
-              <div
-                style={{
-                  height: 96,
-                  background: "linear-gradient(135deg, #fef6e0 0%, #fde9b8 100%)",
-                }}
-              />
+              <GoogleReaderCover />
               <div style={{ padding: "12px 14px 16px" }}>
                 <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>گودر</h3>
                 <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>

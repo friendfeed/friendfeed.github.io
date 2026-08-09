@@ -1,22 +1,23 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
-import { IconNetwork, IconRss } from "../icons/Icons";
+import {
+  FriendFeedStoryCover,
+  FerferLeaksCover,
+  GoogleReaderCover,
+  FriendFeed88Cover,
+} from "../components/MagazineCovers";
 
 /**
- * "مجله فرندفید" -- now a proper post index instead of a single
- * hard-coded article. Each entry below is one post, rendered as a
- * clickable cover card (title + short excerpt + a small illustrative
- * cover, no external image assets -- CSS gradient + one icon, same
- * decorative approach as the rest of the site's diagrams) that links to
- * that post's own dedicated page.
+ * "مجله فرندفید" -- a post index. Each entry below is one post, rendered
+ * as a clickable cover card (title + short excerpt + a small
+ * illustrative cover, no external image assets -- CSS gradient + one
+ * icon, same decorative approach as the rest of the site's diagrams)
+ * that links to that post's own dedicated page.
  *
- * گودر (previously reachable only from a standing link in <Sidebar>,
- * which meant it had no path into it at all on mobile since <Sidebar>
- * is desktop-only there -- see BottomNav.tsx) is now the FIRST post
- * here instead, so it's reachable the same way every other post is: via
- * "مجله" in the mobile tab bar -> tap its cover -> its own page. The
- * standing Sidebar link was removed accordingly (see Sidebar.tsx).
+ * Cover art now lives in components/MagazineCovers.tsx, shared with the
+ * homepage's "از مجله فرندفید" teaser row so the same art shows up in
+ * both places instead of the teaser using a plain placeholder.
  */
 type MagazinePost = {
   to: string;
@@ -25,162 +26,12 @@ type MagazinePost = {
   cover: FC;
 };
 
-const GoogleReaderCover: FC = () => (
-  <div
-    style={{
-      background: "linear-gradient(135deg, #fef6e0 0%, #fde9b8 100%)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: 120,
-    }}
-  >
-    <div
-      style={{
-        width: 56,
-        height: 56,
-        borderRadius: "50%",
-        background: "#fff",
-        border: "3px solid #f4b400",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
-      }}
-    >
-      <IconRss width={26} height={26} style={{ color: "#f4b400" }} />
-    </div>
-  </div>
-);
-
-const FriendFeed88Cover: FC = () => (
-  <div
-    style={{
-      background: "linear-gradient(135deg, #e8f0fe 0%, #d2e3fc 100%)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: 120,
-    }}
-  >
-    <div
-      style={{
-        width: 56,
-        height: 56,
-        borderRadius: "50%",
-        background: "#fff",
-        border: "3px solid #4184f3",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
-      }}
-    >
-      <IconNetwork width={26} height={26} style={{ color: "#4184f3" }} />
-    </div>
-  </div>
-);
-
-const FerferLeaksCover: FC = () => (
-  <div
-    style={{
-      position: "relative",
-      overflow: "hidden",
-      height: 120,
-      background: "linear-gradient(160deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
-    <svg
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.07 }}
-      viewBox="0 0 400 120"
-      preserveAspectRatio="xMidYMid slice"
-    >
-      {[0,50,100,150,200,250,300,350,400].map(x => (
-        <line key={x} x1={x} y1="0" x2={x} y2="120" stroke="#4fc3f7" strokeWidth="1"/>
-      ))}
-      {[0,40,80,120].map(y => (
-        <line key={y} x1="0" y1={y} x2="400" y2={y} stroke="#4fc3f7" strokeWidth="1"/>
-      ))}
-    </svg>
-    <svg viewBox="0 0 120 140" width="46" height="54" style={{ position: "relative", zIndex: 2, filter: "drop-shadow(0 0 10px rgba(79,195,247,0.5))" }}>
-      <path d="M30 60 V42 A30 30 0 0 1 90 42 V60" fill="none" stroke="#4fc3f7" strokeWidth="5" strokeLinecap="round"/>
-      <rect x="14" y="58" width="92" height="66" rx="8" fill="#1a1a2e" stroke="#4fc3f7" strokeWidth="3"/>
-      <circle cx="60" cy="88" r="12" fill="none" stroke="#ef5350" strokeWidth="3"/>
-      <rect x="56" y="96" width="8" height="16" rx="3" fill="#ef5350"/>
-    </svg>
-    <div style={{
-      position: "absolute",
-      bottom: 0,
-      right: 0,
-      left: 0,
-      padding: "6px 14px 8px",
-      background: "linear-gradient(transparent, rgba(0,0,0,0.8))",
-      zIndex: 3,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "flex-end",
-    }}>
-      <span style={{ fontFamily: "monospace", fontSize: 9, color: "#4fc3f7", opacity: 0.7, letterSpacing: "0.1em" }}>
-        FERFERLEAKS / ۱۳۹۰
-      </span>
-      <span style={{
-        fontSize: 9,
-        color: "#ef5350",
-        fontWeight: 700,
-        background: "rgba(239,83,80,0.15)",
-        border: "1px solid rgba(239,83,80,0.4)",
-        padding: "1px 6px",
-        borderRadius: 2,
-      }}>
-        LEAKED
-      </span>
-    </div>
-  </div>
-);
-
-/**
- * Cover for "داستان خانه‌ی فرندفید" -- a static, non-interactive replay
- * of the old hero's browser-chrome motif (traffic-light dots + URL bar +
- * wordmark), used here as the post's cover image per the "hero image as
- * post cover" instruction. The actual buttons/CTAs from the old hero are
- * intentionally left out since this is a thumbnail, not a live UI.
- */
-const FriendFeedStoryCover: FC = () => (
-  <div style={{ height: 120, background: "#fff", display: "flex", flexDirection: "column" }}>
-    <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "8px 12px", background: "#e8e8e8" }}>
-      <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#ff5f57" }} />
-      <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#febc2e" }} />
-      <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#28c840" }} />
-      <span
-        dir="ltr"
-        style={{
-          marginInlineStart: 8,
-          background: "#fff",
-          border: "1px solid var(--ff-border)",
-          borderRadius: 2,
-          fontSize: 9.5,
-          color: "var(--ff-muted)",
-          padding: "2px 8px",
-        }}
-      >
-        friendfeed.com
-      </span>
-    </div>
-    <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, #eef4ff 0%, #dfe9fb 100%)" }}>
-      <img src="/brand/friendfeed-wordmark.webp" alt="FriendFeed" style={{ height: 26 }} />
-    </div>
-  </div>
-);
-
 const posts: MagazinePost[] = [
   {
     to: "/magazine/dastan-khane-friendfeed",
     title: "داستان خانه‌ی فرندفید: از بهترین فید اینترنت تا تعطیلی",
     excerpt:
-      "فرندفید چطور آسان‌ترین راه اشتراک مطالب در اینترنت شد، فیس‌بوک چرا آن را خرید، و در نهایت چه شد که در سال ۲۰۱۵ برای همیشه خاموش شد؛ همراه با اسکرین‌شات‌های آرشیوی و عکس شب امضای قرارداد.",
+      "فرندفید چطور آسان‌ترین راه اشتراک مطالب در اینترنت شد، فیس‌بوک چرا آن را خرید، و در نهایت چه شد که در سال ۲۰۱۵ برای همیشه خاموش شد؛ همراه با اسکرین‌شات‌های آرشیوی، عکس شب امضای قرارداد و تایم‌لاین کامل مهاجرت جامعه.",
     cover: FriendFeedStoryCover,
   },
   {
@@ -230,7 +81,7 @@ export const MagazinePage: FC = () => {
                 border: "1px solid var(--ff-border)",
                 borderRadius: "var(--ff-radius)",
                 overflow: "hidden",
-                boxShadow: "var(--ff-shadow-panel)",
+                boxShadow: "var(--ff-card-shadow)",
                 color: "inherit",
                 textDecoration: "none",
                 transition: "box-shadow 120ms ease, transform 120ms ease",

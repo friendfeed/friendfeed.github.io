@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { IconX, IconRss } from "../icons/Icons";
+import { IconBluesky, IconRss, IconX } from "../icons/Icons";
 
 /**
  * Site-wide footer, replacing the single centered disclaimer line that
@@ -70,8 +70,23 @@ export const Footer: FC = () => {
             داده‌ها از منابع آرشیوی عمومی گردآوری شده‌اند.
           </span>
           <div className="ff-footer-social">
-            <a href="https://x.com/" target="_blank" rel="noreferrer" aria-label="ایکس" title="ایکس">
+            <a
+              href="https://x.com/friendfeedx"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="فرندفید فارسی در ایکس"
+              title="فرندفید فارسی در ایکس"
+            >
               <IconX width={14} height={14} />
+            </a>
+            <a
+              href="https://bsky.app/profile/friendfeedx.bsky.social"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="فرندفید فارسی در بلواسکای"
+              title="فرندفید فارسی در بلواسکای"
+            >
+              <IconBluesky width={14} height={14} />
             </a>
             <Link to="/magazine" aria-label="فید مجله" title="فید مجله">
               <IconRss width={14} height={14} />
