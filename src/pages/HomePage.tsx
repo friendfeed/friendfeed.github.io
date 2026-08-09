@@ -18,6 +18,7 @@ import {
   IconFlag,
   IconBlog,
   IconStar,
+  IconChevronStart,
 } from "../icons/Icons";
 
 /**
@@ -281,9 +282,9 @@ export const HomePage: FC = () => {
       <Reveal>
         <section style={{ marginBottom: 8 }}>
           <div className="ff-section-heading">
-            <h2 style={{ fontSize: 16 }}>هر چیزی که این‌جا هست</h2>
+            <h2 style={{ fontSize: 16 }}>نقشه‌ی آرشیو</h2>
             <span style={{ fontSize: 12, color: "var(--ff-muted-light)" }}>
-              همه بخش‌های آرشیو، از یک نگاه
+              همه بخش‌های سایت، دسته‌بندی‌شده در یک نگاه
             </span>
           </div>
         </section>
@@ -305,13 +306,15 @@ export const HomePage: FC = () => {
                 </div>
               </div>
 
-              <div className="ff-menu-grid">
+              <div className={`ff-menu-grid ${group.items.length <= 2 ? "ff-menu-grid-wide" : ""}`}>
                 {group.items.map(({ to, title, description, count, icon: Icon }) => (
                   <Link key={to} to={to} className="ff-menu-card">
-                    <span className="ff-menu-card-icon">
-                      <Icon width={20} height={20} />
+                    <span className="ff-menu-card-head">
+                      <span className="ff-menu-card-title">{title}</span>
+                      <span className="ff-menu-card-icon">
+                        <Icon width={24} height={24} />
+                      </span>
                     </span>
-                    <span className="ff-menu-card-title">{title}</span>
                     <span className="ff-menu-card-desc">{description}</span>
                     {count && <span className="ff-menu-card-count">{count}</span>}
                   </Link>
@@ -329,6 +332,7 @@ export const HomePage: FC = () => {
             <h2 style={{ fontSize: 16 }}>از مجله فرندفید</h2>
             <Link to="/magazine" className="ff-section-more">
               همه مطالب
+              <IconChevronStart width={14} height={14} />
             </Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>

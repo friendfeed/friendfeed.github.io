@@ -19,17 +19,37 @@ export const Footer: FC = () => {
     <footer className="ff-footer">
       <div className="ff-footer-inner">
         <div className="ff-footer-grid">
-          <div className="ff-footer-col">
+          <div className="ff-footer-col ff-footer-brand">
             <Link
               to="/"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 10 }}
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 12 }}
             >
               <img src="/brand/friendfeed-wordmark.webp" alt="فرندفید فارسی" style={{ height: 20 }} />
             </Link>
-            <p style={{ fontSize: 12, lineHeight: 1.9, color: "var(--ff-muted)", margin: "0 0 14px", maxWidth: 260 }}>
+            <p style={{ fontSize: 12, lineHeight: 1.9, color: "var(--ff-muted)", margin: "0 0 16px", maxWidth: 280 }}>
               آرشیو غیررسمی و غیرفعالِ جامعه فارسی‌زبان فرندفید: کاربران، اتاق‌ها، تاریخچه سرویس و مسیر
               مهاجرت این جامعه بین پلتفرم‌های مختلف.
             </p>
+            <div className="ff-footer-social">
+              <a
+                href="https://x.com/friendfeedx"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="فرندفید فارسی در ایکس"
+                title="فرندفید فارسی در ایکس"
+              >
+                <IconX width={14} height={14} />
+              </a>
+              <a
+                href="https://bsky.app/profile/friendfeed.bsky.social"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="فرندفید فارسی در بلواسکای"
+                title="فرندفید فارسی در بلواسکای"
+              >
+                <IconBluesky width={14} height={14} />
+              </a>
+            </div>
           </div>
 
           <div className="ff-footer-col">
@@ -64,31 +84,11 @@ export const Footer: FC = () => {
         </div>
 
         <div className="ff-footer-bottom">
-          <span style={{ maxWidth: 640, lineHeight: 1.9 }}>
+          <span>
             © {year} فرندفید فارسی. این پروژه زنده است و به‌طور مرتب با کاربران و اطلاعات تازه
             به‌روزرسانی می‌شود. پروژه‌ای آرشیوی و غیررسمی است و ارتباطی با فرندفید یا متا ندارد. تمام
             داده‌ها از منابع آرشیوی عمومی گردآوری شده‌اند.
           </span>
-          <div className="ff-footer-social">
-            <a
-              href="https://x.com/friendfeedx"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="فرندفید فارسی در ایکس"
-              title="فرندفید فارسی در ایکس"
-            >
-              <IconX width={14} height={14} />
-            </a>
-            <a
-              href="https://bsky.app/profile/friendfeed.bsky.social"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="فرندفید فارسی در بلواسکای"
-              title="فرندفید فارسی در بلواسکای"
-            >
-              <IconBluesky width={14} height={14} />
-            </a>
-          </div>
         </div>
       </div>
     </footer>

@@ -245,6 +245,12 @@ export const IconSun: FC<IconProps> = (p) => (
 );
 
 /** Flag / embassy icon */
+export const IconChevronStart: FC<IconProps> = (p) => (
+  <svg {...base(p)}>
+    <path d="M15 6l-6 6 6 6" />
+  </svg>
+);
+
 export const IconFlag: FC<IconProps> = (p) => (
   <svg {...base(p)}>
     <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />

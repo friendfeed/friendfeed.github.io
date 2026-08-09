@@ -743,11 +743,14 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 12px;
 }
+.ff-menu-grid-wide {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
 .ff-menu-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 18px 16px;
+  gap: 10px;
+  padding: 18px;
   background: var(--ff-panel);
   border: 1px solid var(--ff-border);
   border-radius: var(--ff-radius);
@@ -762,21 +765,33 @@ button {
   border-color: var(--ff-link);
   background: #fff;
 }
+.ff-menu-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
 .ff-menu-card-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--ff-panel-alt);
   color: var(--ff-link);
   flex-shrink: 0;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+.ff-menu-card:hover .ff-menu-card-icon {
+  background: rgba(46, 125, 243, 0.12);
 }
 .ff-menu-card-title {
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 14.5px;
+  font-weight: 800;
   color: var(--ff-text);
+  line-height: 1.5;
+  padding-top: 2px;
 }
 .ff-menu-card-desc {
   font-size: 11.5px;
@@ -807,6 +822,9 @@ button {
   }
   .ff-menu-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .ff-menu-grid-wide {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -988,26 +1006,24 @@ button {
 .ff-section-more {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   font-size: 12px;
   font-weight: 700;
   color: var(--ff-link);
   white-space: nowrap;
   text-decoration: none;
-  transition: gap 140ms ease;
+  padding: 6px 10px 6px 8px;
+  border-radius: 999px;
+  background: rgba(46, 125, 243, 0.08);
+  transition: gap 140ms ease, background-color 140ms ease;
 }
-.ff-section-more::after {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-inline-start: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(-135deg);
+.ff-section-more svg {
   flex-shrink: 0;
 }
 .ff-section-more:hover {
   text-decoration: none;
-  gap: 8px;
+  gap: 7px;
+  background: rgba(46, 125, 243, 0.14);
 }
 
 /* Magazine teaser cards on the homepage */
@@ -1071,18 +1087,21 @@ button {
 .ff-footer-inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 36px 16px 20px;
+  padding: 48px 16px 28px;
 }
 .ff-footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 24px;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 28px;
+}
+.ff-footer-brand {
+  padding-inline-end: 12px;
 }
 .ff-footer-col h3 {
   font-size: 12px;
-  margin: 0 0 12px;
-  color: var(--ff-muted);
+  font-weight: 700;
+  margin: 0 0 14px;
+  color: var(--ff-text);
 }
 .ff-footer-col ul {
   list-style: none;
@@ -1090,33 +1109,35 @@ button {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 .ff-footer-col a {
   font-size: 12.5px;
-  color: var(--ff-text);
+  color: var(--ff-muted);
+  transition: color 120ms ease;
 }
 .ff-footer-col a:hover {
   color: var(--ff-link);
 }
 .ff-footer-bottom {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 18px;
+  margin-top: 36px;
+  padding-top: 20px;
   border-top: 1px solid var(--ff-border);
   font-size: 11px;
+  line-height: 1.9;
   color: var(--ff-muted-light);
+}
+.ff-footer-bottom span {
+  display: block;
+  max-width: 820px;
 }
 .ff-footer-social {
   display: flex;
   gap: 8px;
 }
 .ff-footer-social a {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1124,25 +1145,40 @@ button {
   background: #fff;
   border: 1px solid var(--ff-border);
   color: var(--ff-muted);
-  transition: color 120ms ease, border-color 120ms ease;
+  transition: color 120ms ease, border-color 120ms ease, background-color 120ms ease;
 }
 .ff-footer-social a:hover {
   color: var(--ff-link);
   border-color: var(--ff-link);
+  background: rgba(46, 125, 243, 0.06);
 }
 
 @media (max-width: 780px) {
+  .ff-footer-inner {
+    padding: 36px 16px 22px;
+  }
   .ff-footer-grid {
     grid-template-columns: 1fr 1fr;
+    row-gap: 30px;
+  }
+  .ff-footer-brand {
+    grid-column: 1 / -1;
+    padding-inline-end: 0;
+  }
+  .ff-footer-brand p {
+    max-width: none !important;
   }
 }
 @media (max-width: 460px) {
   .ff-footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 16px;
+  }
+  .ff-footer-col h3 {
+    margin-bottom: 12px;
   }
   .ff-footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
+    margin-top: 28px;
   }
 }
 
