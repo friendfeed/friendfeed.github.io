@@ -167,3 +167,55 @@ export const FerferLeaksCover: FC = () => (
     </div>
   </div>
 );
+
+export const CafePragueCover: FC = () => (
+  <div
+    style={{
+      position: "relative",
+      overflow: "hidden",
+      height: 120,
+    }}
+  >
+    <img
+      src="/images/magazine/cafe-prague-last-night.webp"
+      alt="آخرین شب کافه پراگ"
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: "center 30%",
+        display: "block",
+        filter: "brightness(0.72)",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        left: 0,
+        padding: "6px 14px 8px",
+        background: "linear-gradient(transparent, rgba(0,0,0,0.75))",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
+      }}
+    >
+      <span style={{ fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.6)", letterSpacing: "0.05em" }}>
+        CAFE PRAGUE / ۱۳۹۱
+      </span>
+      <span
+        style={{
+          fontSize: 9,
+          color: "#fff",
+          background: "rgba(255,255,255,0.15)",
+          border: "1px solid rgba(255,255,255,0.3)",
+          padding: "1px 6px",
+          borderRadius: 2,
+        }}
+      >
+        پاتوق فرندفید
+      </span>
+    </div>
+  </div>
+);

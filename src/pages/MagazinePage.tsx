@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
 import {
+  CafePragueCover,
   FriendFeedStoryCover,
   FerferLeaksCover,
   GoogleReaderCover,
@@ -27,6 +28,13 @@ type MagazinePost = {
 };
 
 const posts: MagazinePost[] = [
+  {
+    to: "/magazine/cafe-prague-tehran",
+    title: "کافه پراگ: پاتوق فرندفید",
+    excerpt:
+      "روایتی از کافه‌ای در بلوار کشاورز تهران که خانهٔ جامعهٔ فرندفید ایران شد. جایی که فرندفیدی‌ها از سراسر دنیا برای نشستن کنار هم پیدایش می‌کردند، بدون قرار قبلی، باریستاها فرندفیدی بودند و گاهی تمام طبقه.",
+    cover: CafePragueCover,
+  },
   {
     to: "/magazine/ferferleaks",
     title: "فرفرلیکس: روزی که دخمه افسران جنگ نرم در فرندفید لو رفت",

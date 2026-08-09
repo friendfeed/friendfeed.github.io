@@ -11,6 +11,7 @@ import { FaqPage } from "./pages/FaqPage";
 import { MagazinePage } from "./pages/MagazinePage";
 import { GoogleReaderPage } from "./pages/GoogleReaderPage";
 import { FriendFeed88Page } from "./pages/FriendFeed88Page";
+import { CafePraguePage } from "./pages/CafePraguePage";
 import { FriendFeedStoryPage } from "./pages/FriendFeedStoryPage";
 import { SubscriptionsPage } from "./pages/SubscriptionsPage";
 import { RoomsPage } from "./pages/RoomsPage";
@@ -94,6 +95,7 @@ const App: FC = () => {
               <Route path="/rooms" element={<RoomsPage />} />
               <Route path="/faq" element={<FaqPage />} />
               <Route path="/magazine" element={<MagazinePage />} />
+              <Route path="/magazine/cafe-prague-tehran" element={<CafePraguePage />} />
               <Route path="/magazine/dastan-khane-friendfeed" element={<FriendFeedStoryPage />} />
               <Route path="/magazine/google-reader" element={<GoogleReaderPage />} />
               <Route path="/magazine/friendfeed-1388" element={<FriendFeed88Page />} />
