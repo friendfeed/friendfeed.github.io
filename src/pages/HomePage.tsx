@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
 import { FriendFeedStoryCover, FerferLeaksCover, FriendFeed88Cover } from "../components/MagazineCovers";
+import { LiveFeedDemo } from "../components/LiveFeedDemo";
 import {
   IconUsers,
   IconX,
@@ -264,26 +265,12 @@ export const HomePage: FC = () => {
             </div>
           </div>
 
-          {/* Decorative animated browser-chrome mock -- desktop only,
-              purely illustrative, no real data/links inside it. */}
-          <div className="ff-hero-mock" style={{ flex: "1 1 300px", maxWidth: 360, minWidth: 260 }} aria-hidden="true">
-            <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "9px 12px", background: "#e8e8e8" }}>
-              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#ff5f57" }} />
-              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#febc2e" }} />
-              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#28c840" }} />
-              <span dir="ltr" style={{ marginInlineStart: 8, fontSize: 10, color: "var(--ff-muted)" }}>
-                friendfeed.com
-              </span>
-            </div>
-            <div style={{ padding: 18, display: "flex", flexDirection: "column", gap: 10 }}>
-              <div className="ff-hero-mock-row" style={{ width: "70%" }} />
-              <div className="ff-hero-mock-row" style={{ width: "94%", animationDelay: "180ms" }} />
-              <div className="ff-hero-mock-row" style={{ width: "55%", animationDelay: "360ms" }} />
-              <div style={{ height: 1, background: "var(--ff-border)", margin: "8px 0" }} />
-              <div className="ff-hero-mock-row" style={{ width: "85%", animationDelay: "540ms" }} />
-              <div className="ff-hero-mock-row" style={{ width: "40%", animationDelay: "720ms" }} />
-              <div className="ff-hero-mock-row" style={{ width: "76%", animationDelay: "900ms" }} />
-            </div>
+          {/* Live re-sort demo: FriendFeed's signature feature -- liking
+              or commenting on a post bumps it straight to the top of the
+              feed. See LiveFeedDemo.tsx. Desktop only, purely
+              illustrative/looping, no real data or links inside it. */}
+          <div style={{ flex: "1 1 300px", maxWidth: 360, minWidth: 260 }}>
+            <LiveFeedDemo />
           </div>
         </div>
       </section>

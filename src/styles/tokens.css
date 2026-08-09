@@ -810,6 +810,158 @@ button {
   }
 }
 
+/* -----------------------------------------------------------------------
+   Live feed demo (hero) -- self-playing loop recreating FriendFeed's
+   signature "liking/commenting bumps a post to the top" behaviour. See
+   components/LiveFeedDemo.tsx.
+   ----------------------------------------------------------------------- */
+.ff-livefeed {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+  background: #fff;
+  border: 1px solid var(--ff-border);
+  animation: ff-float 6s ease-in-out infinite;
+}
+.ff-livefeed-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  background: #e8e8e8;
+}
+.ff-livefeed-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ff-livefeed-url {
+  margin-inline-start: 8px;
+  font-size: 10px;
+  color: var(--ff-muted);
+}
+.ff-livefeed-live {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--ff-link);
+}
+
+.ff-livefeed-stack {
+  position: relative;
+  margin: 14px;
+  transition: height 320ms ease;
+}
+.ff-livefeed-item {
+  position: absolute;
+  inset-inline: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  height: 78px;
+  padding: 9px 10px;
+  background: var(--ff-panel);
+  border: 1px solid var(--ff-border);
+  border-radius: var(--ff-radius);
+  overflow: hidden;
+  transition: top 620ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease, border-color 260ms ease;
+}
+.ff-livefeed-item-flash-like,
+.ff-livefeed-item-flash-comment {
+  border-color: var(--ff-link);
+  box-shadow: 0 8px 20px rgba(46, 125, 243, 0.18);
+}
+.ff-livefeed-avatar {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.ff-livefeed-body {
+  min-width: 0;
+  flex: 1;
+}
+.ff-livefeed-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ff-text);
+  margin-bottom: 2px;
+}
+.ff-livefeed-text {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ff-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ff-livefeed-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 5px;
+}
+.ff-livefeed-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ff-like);
+  transition: transform 220ms ease;
+}
+.ff-livefeed-stat:last-child {
+  color: var(--ff-comment);
+}
+.ff-livefeed-stat-pop {
+  animation: ff-livefeed-pop 420ms ease;
+}
+@keyframes ff-livefeed-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.ff-livefeed-caption {
+  margin: 0;
+  padding: 0 14px 14px;
+  font-size: 10.5px;
+  line-height: 1.7;
+  color: var(--ff-muted-light);
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-livefeed-item {
+    transition: none;
+  }
+  .ff-livefeed-stat-pop {
+    animation: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .ff-livefeed {
+    display: none;
+  }
+}
+
 /* Section reveal-on-scroll -- progressive enhancement only, everything
    is fully visible/usable without JS or with reduced motion. */
 .ff-reveal {
@@ -881,6 +1033,9 @@ button {
   .ff-hero-dot,
   .ff-hero-mock,
   .ff-hero-mock-row {
+    animation: none !important;
+  }
+  .ff-livefeed {
     animation: none !important;
   }
   .ff-reveal {
