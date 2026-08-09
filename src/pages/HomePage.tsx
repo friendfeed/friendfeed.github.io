@@ -1,7 +1,95 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
 import { MigrationTimeline } from "../components/MigrationTimeline";
+import {
+  IconUsers,
+  IconX,
+  IconMusic,
+  IconBrand,
+  IconNewspaper,
+  IconRocket,
+  IconBuilding,
+  IconBook,
+  IconSun,
+  IconFlag,
+  IconBlog,
+  IconStar,
+} from "../icons/Icons";
+
+/**
+ * The site's landing page -- redesigned from a single long article into
+ * an actual homepage: animated hero, a highlight grid that surfaces
+ * every item from the main nav (Sidebar/BottomNav), a stats strip, the
+ * migration timeline, and a magazine teaser, closed by the site-wide
+ * footer (see App.tsx / Footer.tsx).
+ *
+ * The long-form "درباره فرندفید" / "چرا فرندفید دیگر وجود ندارد؟" essay
+ * that used to live here in full has moved to its own magazine post,
+ * /magazine/dastan-khane-friendfeed (see FriendFeedStoryPage.tsx) -- the
+ * old hero's browser-chrome visual now doubles as that post's cover
+ * image on /magazine. Nothing written before was deleted, it just now
+ * has a dedicated page instead of being the entire home page.
+ */
+
+/** Reveals a section as it scrolls into view. Fully visible/usable
+ * without JS (initial render has no inline style yet, so nothing is
+ * hidden by default -- the .ff-reveal class that hides it is only
+ * applied once JS has mounted and can also flip it back). */
+const Reveal: FC<{ children: ReactNode; className?: string }> = ({ children, className }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`ff-reveal ${inView ? "ff-reveal-in" : ""} ${className ?? ""}`}>
+      {children}
+    </div>
+  );
+};
+
+type HighlightItem = {
+  to: string;
+  title: string;
+  count?: string;
+  icon: FC<{ width?: number; height?: number }>;
+};
+
+const HIGHLIGHTS: HighlightItem[] = [
+  { to: "/subscriptions", title: "همه کاربران فرندفید", count: "+۴٬۳۰۰ کاربر", icon: IconUsers },
+  { to: "/rooms", title: "اتاق‌ها", count: "+۲۵۰ اتاق", icon: IconX },
+  { to: "/users", title: "کاربران فرندفید در ایکس", count: "+۶۰۰ حساب", icon: IconX },
+  { to: "/podcasts", title: "پادکست", count: "+۱٬۱۰۰ حساب", icon: IconMusic },
+  { to: "/brands", title: "برندها", icon: IconBrand },
+  { to: "/news", title: "خبرگزاری‌ها", icon: IconNewspaper },
+  { to: "/startups", title: "استارت‌آپ‌ها", icon: IconRocket },
+  { to: "/orgs", title: "ادارات و سازمان‌ها", icon: IconBuilding },
+  { to: "/books", title: "کتاب‌ها", icon: IconBook },
+  { to: "/daily-life", title: "زندگی روزمره", icon: IconSun },
+  { to: "/embassies", title: "سفارت‌ها", icon: IconFlag },
+  { to: "/magazine", title: "مجله فرندفید", icon: IconBlog },
+  { to: "/faq", title: "سوالات متداول", icon: IconStar },
+];
 
 const panelStyle: React.CSSProperties = {
   background: "var(--ff-panel)",
@@ -10,495 +98,210 @@ const panelStyle: React.CSSProperties = {
   boxShadow: "var(--ff-card-shadow)",
 };
 
-/**
- * Branded frame for the archived screenshots: reuses the same
- * browser-chrome motif as the hero (traffic-light dots + URL bar) so the
- * two illustrative screenshots read as part of the same site identity
- * instead of bare, borderless images.
- *
- * The image renders at its natural aspect ratio (width: 100%, height:
- * auto) -- no object-fit crop. An earlier version force-stretched the
- * image to match the height of the paragraph text next to it, which
- * cropped real content off the sides (sidebar labels) and, on one source
- * screenshot, revealed a baked-in reflection effect below the real
- * window. Both source screenshots have since been cropped at the file
- * level to remove their dead margins/reflections (see /public/images/history),
- * so the frame no longer needs a CSS crop to avoid showing empty space.
- */
-const ScreenshotFrame: FC<{ src: string; alt: string; caption: string }> = ({
-  src,
-  alt,
-  caption,
-}) => (
-  <figure style={{ margin: 0 }}>
-    <div
-      style={{
-        borderRadius: 6,
-        overflow: "hidden",
-        boxShadow: "var(--ff-card-shadow)",
-        background: "#fff",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          padding: "7px 10px",
-          background: "#e8e8e8",
-        }}
-      >
-        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#ff5f57" }} />
-        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#febc2e" }} />
-        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#28c840" }} />
-        <img
-          src="/brand/friendfeed-wordmark.webp"
-          alt="FriendFeed"
-          style={{ height: 12, marginInlineStart: 8, display: "block" }}
-        />
-        <span dir="ltr" style={{ marginInlineStart: "auto", fontSize: 10, color: "var(--ff-muted)" }}>
-          friendfeed.com
-        </span>
-      </div>
-      <img src={src} alt={alt} style={{ width: "100%", height: "auto", display: "block" }} />
-    </div>
-    <figcaption
-      style={{
-        marginTop: 8,
-        fontSize: 11,
-        color: "var(--ff-muted-light)",
-        textAlign: "center",
-      }}
-    >
-      {caption}
-    </figcaption>
-  </figure>
-);
-
-/**
- * The site's landing page. Previously "/" was the X-crossover user list
- * (moved to /users -- see Sidebar, which puts that link at the top of the
- * nav since it's the thing people actually come here for). This page is
- * the front door instead: a deliberately nostalgic recreation of the old
- * friendfeed.com marketing/about page, followed by the site's own about
- * copy (illustrated with a real archived home-feed screenshot) and the
- * story of why the real FriendFeed doesn't exist anymore (illustrated
- * with a second archived screenshot).
- *
- * Copy pass: rewritten to read like something a Farsi speaker would
- * actually write, not a literal translation, and with every em-dash
- * swapped for normal punctuation (comma / period / colon) per feedback
- * that em-dashes don't belong in Farsi text.
- */
 export const HomePage: FC = () => {
   useSEO({ path: "/" });
 
   return (
     <div>
-      {/* ---- Hero: browser-chrome recreation of the old marketing page ---- */}
-      <section
-        style={{
-          ...panelStyle,
-          padding: 0,
-          overflow: "hidden",
-          marginBottom: 18,
-        }}
-      >
+      {/* ---- Hero ---- */}
+      <section className="ff-hero" style={{ marginBottom: 20 }}>
+        <div className="ff-hero-glow" aria-hidden="true" />
         <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-            padding: "8px 10px",
-            background: "#e8e8e8",
-            borderBottom: "1px solid var(--ff-border)",
-          }}
+          className="ff-hero-inner"
+          style={{ display: "flex", flexWrap: "wrap", gap: 32, padding: "40px 32px", alignItems: "center" }}
         >
-          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57" }} />
-          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#febc2e" }} />
-          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28c840" }} />
-          <span
-            dir="ltr"
-            style={{
-              marginInlineStart: 10,
-              background: "#fff",
-              border: "1px solid var(--ff-border)",
-              borderRadius: 2,
-              fontSize: 11,
-              color: "var(--ff-muted)",
-              padding: "3px 10px",
-              flex: 1,
-              maxWidth: 340,
-            }}
-          >
-            http://friendfeed.com/
-          </span>
-        </div>
+          <div style={{ flex: "1 1 380px", minWidth: 260 }}>
+            <span className="ff-hero-eyebrow">
+              <span className="ff-hero-dot" aria-hidden="true" />
+              آرشیو زنده و غیررسمی، ۲۰۰۷ تا امروز
+            </span>
 
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 24,
-            padding: "28px 24px",
-          }}
-        >
-          <div style={{ flex: "1 1 280px", minWidth: 240 }}>
-            <img
-              src="/brand/friendfeed-wordmark.webp"
-              alt="FriendFeed"
-              style={{ height: 40, display: "block", marginBottom: 14 }}
-            />
-            <p style={{ margin: "0 0 16px", fontSize: 14, fontWeight: "bold", lineHeight: 1.9 }}>
-              فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت بود.
+            <h1 className="ff-hero-title">
+              خانه‌ی جامعه‌ی فارسی‌زبان <span>فرندفید</span>، این‌بار برای همیشه آرشیو شد
+            </h1>
+
+            <p className="ff-hero-lede">
+              فرندفید سال ۲۰۱۵ خاموش شد، اما جامعه‌اش نه. این‌جا فهرست کاربران، اتاق‌ها، مسیر مهاجرت این
+              جامعه بین پلتفرم‌ها و روایت کامل داستان فرندفید را یک‌جا جمع کرده‌ایم؛ به فارسی، بدون
+              نیاز به حساب کاربری.
             </p>
-            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-              <span
-                title="این سرویس دیگر ثبت‌نام نمی‌پذیرد"
-                style={{
-                  background: "#2e7df3",
-                  color: "#fff",
-                  fontSize: 13,
-                  fontWeight: "bold",
-                  padding: "8px 16px",
-                  borderRadius: 3,
-                  opacity: 0.5,
-                  cursor: "not-allowed",
-                }}
-              >
-                ساخت حساب
-              </span>
-              <span style={{ fontSize: 12, color: "var(--ff-muted)" }}>یا</span>
-              <span
-                style={{
-                  fontSize: 13,
-                  color: "var(--ff-link)",
-                  opacity: 0.55,
-                  cursor: "not-allowed",
-                }}
-                title="این سرویس دیگر فعال نیست"
-              >
-                ورود
+
+            <div className="ff-hero-cta-row">
+              <Link to="/subscriptions" className="ff-btn ff-btn-primary">
+                دیدن همه کاربران ‹
+              </Link>
+              <Link to="/magazine/dastan-khane-friendfeed" className="ff-btn ff-btn-ghost">
+                خواندن داستان فرندفید
+              </Link>
+            </div>
+
+            <div className="ff-hero-stats">
+              <div className="ff-hero-stat">
+                <b>+۴٬۳۰۰</b>
+                <span>کاربر آرشیو شده</span>
+              </div>
+              <div className="ff-hero-stat">
+                <b>+۲۵۰</b>
+                <span>اتاق</span>
+              </div>
+              <div className="ff-hero-stat">
+                <b>+۶۰۰</b>
+                <span>حساب فعال در ایکس</span>
+              </div>
+              <div className="ff-hero-stat">
+                <b>۲۰۰۷ تا ۲۰۱۵</b>
+                <span>دوران فعالیت سرویس</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Decorative animated browser-chrome mock -- desktop only,
+              purely illustrative, no real data/links inside it. */}
+          <div className="ff-hero-mock" style={{ flex: "1 1 300px", maxWidth: 360, minWidth: 260 }} aria-hidden="true">
+            <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "9px 12px", background: "#e8e8e8" }}>
+              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#ff5f57" }} />
+              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#febc2e" }} />
+              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#28c840" }} />
+              <span dir="ltr" style={{ marginInlineStart: 8, fontSize: 10, color: "var(--ff-muted)" }}>
+                friendfeed.com
               </span>
             </div>
-            <p style={{ marginTop: 14, fontSize: 11, color: "var(--ff-muted-light)" }}>
-              این آرشیو یک بازسازی غیررسمی و غیرفعال است. دکمه‌های بالا فقط برای حس‌وحال تاریخی این‌جا
-              هستند و به هیچ حساب واقعی وصل نمی‌شوند.{" "}
-              <Link to="/users" style={{ color: "var(--ff-link)" }}>
-                فهرست کاربران را این‌جا ببینید
+            <div style={{ padding: 18, display: "flex", flexDirection: "column", gap: 10 }}>
+              <div className="ff-hero-mock-row" style={{ width: "70%" }} />
+              <div className="ff-hero-mock-row" style={{ width: "94%", animationDelay: "180ms" }} />
+              <div className="ff-hero-mock-row" style={{ width: "55%", animationDelay: "360ms" }} />
+              <div style={{ height: 1, background: "var(--ff-border)", margin: "8px 0" }} />
+              <div className="ff-hero-mock-row" style={{ width: "85%", animationDelay: "540ms" }} />
+              <div className="ff-hero-mock-row" style={{ width: "40%", animationDelay: "720ms" }} />
+              <div className="ff-hero-mock-row" style={{ width: "76%", animationDelay: "900ms" }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Highlights: every section of the site, one card each ---- */}
+      <Reveal>
+        <section style={{ marginBottom: 22 }}>
+          <div className="ff-section-heading">
+            <h2 style={{ fontSize: 16 }}>هر چیزی که این‌جا هست</h2>
+            <span style={{ fontSize: 12, color: "var(--ff-muted-light)" }}>
+              همه بخش‌های آرشیو، از یک نگاه
+            </span>
+          </div>
+          <div className="ff-highlight-grid">
+            {HIGHLIGHTS.map(({ to, title, count, icon: Icon }) => (
+              <Link key={to} to={to} className="ff-highlight-card">
+                <span className="ff-highlight-icon">
+                  <Icon width={17} height={17} />
+                </span>
+                <span className="ff-highlight-title">{title}</span>
+                {count && <span className="ff-highlight-count">{count}</span>}
               </Link>
-              .
-            </p>
+            ))}
           </div>
+        </section>
+      </Reveal>
 
-          <div style={{ flex: "1 1 260px", minWidth: 220 }}>
-            <h2 style={{ fontSize: 13, margin: "0 0 12px" }}>یک نگاه کوتاه به فرندفید</h2>
-            <TourRow title="آخرین چیزهای دوستانت">
-              عکس‌ها، لینک‌ها، ویدیوها و پست‌های وبلاگی که دوستان و خانواده‌ات در اینترنت پیدا کرده بودند،
-              همه کنار هم و در یک فید.
-            </TourRow>
-            <TourRow title="اشتراک‌گذاری خودکار">
-              فرندفید خودش چیزهایی را که در بیش از چهل سایت دیگر، از فلیکر تا توییتر، به اشتراک می‌گذاشتی
-              می‌گرفت و همین‌جا نشان می‌داد.
-            </TourRow>
-            <TourRow title="گفت‌وگوهای به‌یادماندنی" last>
-              زیر هر پست می‌شد نظر داد یا لایک کرد. گاهی بحثی که زیر یک پست شکل می‌گرفت از خود پست هم
-              جذاب‌تر می‌شد.
-            </TourRow>
+      {/* ---- Migration timeline ---- */}
+      <Reveal>
+        <section id="migration" style={{ ...panelStyle, padding: 16, marginBottom: 22, scrollMarginTop: 24 }}>
+          <h2 style={{ fontSize: 15, margin: "0 0 4px" }}>
+            مسیر مهاجرت جامعه فارسی‌زبان: از اتاق‌های گفتگوی یاهو تا توییتر
+          </h2>
+          <p style={{ margin: "0 0 16px", fontSize: 12, color: "var(--ff-muted-light)" }}>
+            تایم‌لاین تاریخی تعطیلی سرویس‌ها و مهاجرت کاربران، از ۱۹۹۷ تا ۲۰۱۹
+          </p>
+          <MigrationTimeline />
+        </section>
+      </Reveal>
+
+      {/* ---- Magazine teaser ---- */}
+      <Reveal>
+        <section style={{ marginBottom: 22 }}>
+          <div className="ff-section-heading">
+            <h2 style={{ fontSize: 16 }}>از مجله فرندفید</h2>
+            <Link to="/magazine" className="ff-section-more">
+              همه مطالب ‹
+            </Link>
           </div>
-        </div>
-      </section>
-
-      {/* ---- About ---- */}
-      <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
-        <h2 style={{ fontSize: 15, margin: "0 0 10px" }}>درباره فرندفید</h2>
-
-        {/* Stacked layout: big full-width screenshot on top, text below.
-            A side-by-side flex layout previously forced the image to
-            stretch/crop to match the text column's height, which cut real
-            content off its sides. Stacking removes that mismatch entirely
-            and lets the screenshot show at full size, uncropped. */}
-        <div style={{ maxWidth: 640, margin: "0 auto 20px" }}>
-          <ScreenshotFrame
-            src="/images/history/rachel-fisher-home.webp"
-            alt="اسکرین‌شات آرشیوی از صفحه اصلی فرندفید"
-            caption="اسکرین‌شات از صفحه اصلی فرندفید، از دوران فعالیت سرویس"
-          />
-        </div>
-
-        <div>
-          <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-text)" }}>
-            فرندفید آسان‌ترین راه برای اشتراک مطالب در اینترنت بود. این سرویس در اکتبر ۲۰۰۷ توسط برت
-            تیلور، جیم نوریس، پل باکهایت و سنجیو سینگ راه‌اندازی شد و به‌روزرسانی‌های شبکه‌های اجتماعی،
-            وبلاگ‌ها و میکروبلاگ‌ها را در یک صفحه کنار هم می‌آورد. فیس‌بوک فرندفید را در سال ۲۰۰۹ خرید. یکی
-            از ویژگی‌های شاخص آن به‌روزرسانی زنده فید بدون نیاز به رفرش صفحه بود، فناوری‌ای که آن زمان کمتر
-            سایتی داشت.
-          </p>
-          <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-            کار کردن با آن خیلی ساده بود: ثبت‌نام می‌کردی، چند نفر را دنبال می‌کردی و یک فید شخصی و زنده
-            داشتی، پر از عکسی که یکی در فلیکر گذاشته بود، لینکی که یکی دیگر پیدا کرده بود، یا ویدیویی که یک
-            دوست پسندیده بود. در عوض، دوستانت هم فید خودشان را داشتند، پر از همان چیزهایی که تو به اشتراک
-            گذاشته بودی.
-          </p>
-          <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-            شروع یک گفت‌وگو زیر یک پست، یا نشان دادن این‌که چیزی را دوست داری، فقط یک کلیک فاصله داشت. حتی
-            می‌شد گروه ساخت، مثلاً برای خانواده یا برای هم‌تیمی‌های سرکار، و فقط به‌روزرسانی‌های همان‌ها را
-            دنبال کرد. چیزی هم برای نصب نبود؛ فرندفید را از ایمیل، از موبایل و حتی از دل فیس‌بوک هم می‌شد
-            خواند و در آن پست گذاشت. اگر فیدت را عمومی می‌کردی، حتی آدم‌های بدون حساب هم می‌توانستند آن را
-            ببینند یا در وبلاگ‌شان جاسازی کنند.
-          </p>
-          <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-            فرندفید سریع بود، ساده بود و گفت‌وگومحور. و چون هر فید از آدم‌هایی ساخته می‌شد که واقعاً
-            برایت مهم بودند، محتوایش هم برایت مهم بود.
-          </p>
-        </div>
-      </section>
-
-      {/* ---- Story: why it doesn't exist anymore ---- */}
-      <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
-        <h2 style={{ fontSize: 15, margin: "0 0 10px" }}>چرا فرندفید دیگر وجود ندارد؟</h2>
-
-        {/* Stacked layout here too, for the same reason as the About
-            section above: side-by-side forced the image to stretch/crop
-            to the text's height. Now the screenshot shows uncropped at
-            full size, with the story text following below it. */}
-        <div style={{ maxWidth: 640, margin: "0 auto 20px" }}>
-          <ScreenshotFrame
-            src="/images/history/ana-home.webp"
-            alt="اسکرین‌شات آرشیوی دیگر از صفحه اصلی فرندفید"
-            caption="یک فید نمونه از فرندفید، همان روزهایی که هنوز پر از پست و کامنت بود"
-          />
-        </div>
-
-        <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-          آگوست ۲۰۰۹. فیس‌بوک آن‌موقع هنوز بزرگ‌ترین شبکه اجتماعی دنیا بود، اما توییتر داشت خیلی سریع
-          رشد می‌کرد و «به‌روزرسانی زنده» تبدیل شده بود به چیزی که همه می‌خواستند. فیس‌بوک فرندفید را با
-          رقمی حدود پنجاه میلیون دلار خرید، و آن‌طور که بعدها روشن شد، این خرید بیشتر برای تیم مهندسی‌اش
-          بود تا برای خود سرویس. همان فناوری فید زنده‌ای که فرندفید ساخته بود، چند سال بعد در دل «فید
-          خبری» فیس‌بوک، همان چیزی که امروز میلیاردها نفر هر روز می‌بینند، دوباره به کار گرفته شد.
-        </p>
-
-        {/* marginTop separates this paragraph from the figcaption above it
-            (they used to sit almost flush against each other with no
-            visual break between the image credit line and the next block
-            of story text). */}
-        <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginTop: 22 }}>
-          <div style={{ flex: "1 1 100%" }}>
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              اما خود فرندفید سرنوشت آشنای اغلب این‌جور خریدهای شرکتی را پیدا کرد. بنیان‌گذارانش به تیم
-              مهندسی فیس‌بوک پیوستند، توسعه محصول عملاً متوقف شد و سایت فقط «روشن» نگه داشته شد، بدون ویژگی
-              تازه، بدون تبلیغات، بدون رشد. کاربرانش هم کم‌کم و بی‌سروصدا به جاهای دیگر رفتند.
-            </p>
-          </div>
-        </div>
-
-        {/* Two deal-night photos, centered as a pair instead of left-aligned
-            in a wide row (which used to leave a large empty gap on one side
-            when the row was wider than the two 340px-capped figures). Extra
-            top margin here (was 18px, now 32px) so the photos don't sit
-            almost flush against the paragraph above them. */}
-        <div
-          style={{
-            margin: "32px 0 18px",
-            display: "flex",
-            gap: 16,
-            flexWrap: "wrap",
-            alignItems: "stretch",
-            justifyContent: "center",
-          }}
-        >
-          <figure
-            style={{
-              flex: "1 1 260px",
-              minWidth: 220,
-              maxWidth: 340,
-              margin: 0,
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <img
-              src="/images/history/facebook-deal-group.webp"
-              alt="عکس دسته‌جمعی بنیان‌گذاران فرندفید و نمایندگان فیس‌بوک، شب امضای قرارداد خرید"
-              style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-card-shadow)" }}
-            />
-            <figcaption
-              style={{
-                marginTop: 8,
-                fontSize: 11,
-                lineHeight: 1.9,
-                color: "var(--ff-muted-light)",
-                textAlign: "center",
-              }}
-            >
-              از چپ به راست: <strong>ون اسمیت</strong> (فیس‌بوک) · <strong>جیم نوریس</strong> (فرندفید) ·{" "}
-              <strong>پل باکهایت</strong> (فرندفید) · <strong>برت تیلور</strong> (فرندفید) ·{" "}
-              <strong>مارک زاکربرگ</strong> (فیس‌بوک)
-            </figcaption>
-          </figure>
-          <figure
-            style={{
-              flex: "1 1 260px",
-              minWidth: 220,
-              maxWidth: 340,
-              margin: 0,
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <img
-              src="/images/history/facebook-deal-table.webp"
-              alt="بنیان‌گذاران فرندفید و نمایندگان فیس‌بوک دور میز کار، شب امضای قرارداد خرید"
-              style={{ width: "100%", display: "block", borderRadius: 6, boxShadow: "var(--ff-card-shadow)" }}
-            />
-            <figcaption
-              style={{
-                marginTop: 8,
-                fontSize: 11,
-                lineHeight: 1.9,
-                color: "var(--ff-muted-light)",
-                textAlign: "center",
-              }}
-            >
-              همان جمع دور میز کار؛ <strong>مارک زاکربرگ</strong> (فیس‌بوک) کنار لپ‌تاپ، به همراه
-              بنیان‌گذاران فرندفید و ون اسمیت از فیس‌بوک
-            </figcaption>
-          </figure>
-        </div>
-        <p style={{ margin: "0 0 12px", fontSize: 10.5, color: "var(--ff-muted-light)", textAlign: "center" }}>
-          منبع شناسایی افراد در عکس‌ها: Kara Swisher, "Boys Will Be... Especially in Silicon
-          Valley, Boys: Some Photos Après FaceFeed," AllThingsD, ۱۰ آگوست ۲۰۰۹.
-        </p>
-
-        <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 100%" }}>
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              خیلی از این کاربرها هم دست‌خالی نرفتند: چند نفر از برنامه‌نویس‌های همان جامعه، به‌جای این‌که
-              منتظر بمانند فرندفید یک روز واقعاً تعطیل شود، از صفر یک کپی متن‌باز از آن ساختند و اسمش را
-              گذاشتند{" "}
-              <a
-                href="https://freefeed.net/"
-                target="_blank"
-                rel="noreferrer"
-                style={{ color: "var(--ff-link)" }}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
+            <Link to="/magazine/dastan-khane-friendfeed" className="ff-home-post-card">
+              <div
+                style={{
+                  height: 96,
+                  background: "linear-gradient(135deg, #eef4ff 0%, #dfe9fb 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                فری‌فید
-              </a>
-              . همان فید، همان لایک، همان منطق دنبال‌کردن و کامنت‌گذاشتن، فقط این‌بار روی سروری که خودِ
-              کاربرانش اداره‌اش می‌کردند، نه یک شرکت بزرگ. بخش زیادی از کاربران فارسی‌زبان فرندفید هم دقیقاً
-              همین مسیر را رفتند و جمع‌شان را در فری‌فید از نو ساختند، چون هیچ‌جای دیگری این‌قدر به حال‌وهوای
-              فرندفید نزدیک نبود.
-            </p>
-
-            <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              گروهی دیگر از کاربران هم ترجیح دادند به جای یک جایگزین یک‌به‌یک، سراغ چیزی بزرگ‌تر و
-              شلوغ‌تر بروند: توییتر (که این روزها{" "}
-              <span dir="ltr">X</span>
-              {" "}نام دارد). و به‌تازگی، موج تازه‌ای از همین جامعه به{" "}
-              <a
-                href="https://bsky.app/"
-                target="_blank"
-                rel="noreferrer"
-                style={{ color: "var(--ff-link)" }}
-              >
-                بلواسکای
-              </a>{" "}
-              کوچ کرده: شبکه‌ای که ظاهرش شبیه توییتر است اما زیرساختش غیرمتمرکز است، یعنی هویت و دنبال‌کننده‌هایت
-              مال یک شرکت خاص نیستند و می‌توانی هر وقت خواستی حسابت را به سرویس دیگری روی همان پروتکل منتقل
-              کنی، دقیقاً همان دردی که کاربران فرندفید یک بار با تعطیلی ناگهانی سرویس تجربه‌اش کرده بودند.
-            </p>
-
-            <figure style={{ margin: "28px 0 32px" }}>
-              <img
-                src="/images/diagrams/friendfeed-migration.svg"
-                alt="نمودار مهاجرت جامعه: از اتاق‌های گفتگوی یاهو، یاهو ۳۶۰، گوگل ریدر و گوگل پلاس به فرندفید، و از فرندفید به سه پلتفرم بعدی: ایکس، فری‌فید و بلواسکای"
-                style={{ display: "block", width: "100%", height: "auto", maxWidth: 680, margin: "0 auto" }}
+                <img src="/brand/friendfeed-wordmark.webp" alt="" style={{ height: 22 }} />
+              </div>
+              <div style={{ padding: "12px 14px 16px" }}>
+                <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>
+                  داستان خانه‌ی فرندفید
+                </h3>
+                <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
+                  از بهترین فید اینترنت تا تعطیلی؛ روایت کامل با اسناد و عکس.
+                </p>
+              </div>
+            </Link>
+            <Link to="/magazine/ferferleaks" className="ff-home-post-card">
+              <div
+                style={{
+                  height: 96,
+                  background: "linear-gradient(160deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
+                }}
               />
-            </figure>
-
-            <p style={{ margin: 0, fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-              پنج سال و نیم بعد، در ۹ مارس ۲۰۱۵، یک پست کوتاه در وبلاگ فرندفید منتشر شد. تیم فیس‌بوک نوشت که
-              از وقتی به فیس‌بوک پیوسته‌اند سرویس را نگه داشته‌اند، اما تعداد کاربرانش پیوسته کم شده و
-              جامعه‌اش دیگر فقط سایه‌ای از آن‌چه زمانی بود باقی مانده، پس وقتش رسیده که به‌آرامی جمعش کنند.
-              همان روز ثبت‌نام تازه بسته شد و یک ماه بعد، در ۹ آوریل ۲۰۱۵، درست هفت سال و نیم بعد از اولین
-              پستی که در آن منتشر شده بود، فرندفید برای همیشه خاموش شد.
-            </p>
+              <div style={{ padding: "12px 14px 16px" }}>
+                <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>فرفرلیکس</h3>
+                <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
+                  نخستین افشاگری به سبک ویکی‌لیکس در وب فارسی، بهار ۱۳۹۰.
+                </p>
+              </div>
+            </Link>
+            <Link to="/magazine/google-reader" className="ff-home-post-card">
+              <div
+                style={{
+                  height: 96,
+                  background: "linear-gradient(135deg, #fef6e0 0%, #fde9b8 100%)",
+                }}
+              />
+              <div style={{ padding: "12px 14px 16px" }}>
+                <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>گودر</h3>
+                <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
+                  خانه‌ی گمشده‌ی وبلاگ‌نویسان فارسی، پیش از توییتر و اینستاگرام.
+                </p>
+              </div>
+            </Link>
           </div>
-        </div>
+        </section>
+      </Reveal>
 
-        <p style={{ margin: "16px 0 0", fontSize: 13, lineHeight: 2, color: "var(--ff-muted)" }}>
-          امروز از فرندفید واقعی چیزی باقی نمانده جز همین اسکرین‌شات‌های قدیمی، چند نسخه در آرشیو
-          وی‌بک‌مشین و خاطره‌ی جمعی چند هزار نفری که یک بار، برای چند سال، بهترین گوشه اینترنتشان همین‌جا
-          بود. این آرشیو هم دقیقاً برای همین ساخته شده: تا آن خاطره، این‌بار به فارسی، یک‌جا جمع بماند.
-        </p>
-      </section>
-
-      {/* ---- Migration timeline: how the Farsi community moved between platforms ---- */}
-      <section style={{ ...panelStyle, padding: 16, marginBottom: 16 }}>
-        <h2 style={{ fontSize: 15, margin: "0 0 4px" }}>
-          مسیر مهاجرت جامعه فارسی‌زبان: از اتاق‌های گفتگوی یاهو تا توییتر
-        </h2>
-        <p style={{ margin: "0 0 16px", fontSize: 12, color: "var(--ff-muted-light)" }}>
-          تایم‌لاین تاریخی تعطیلی سرویس‌ها و مهاجرت کاربران، از ۱۹۹۷ تا ۲۰۱۹
-        </p>
-        <MigrationTimeline />
-      </section>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          gap: 10,
-          marginBottom: 8,
-        }}
-      >
-        <Link
-          to="/subscriptions"
+      {/* ---- Closing CTA ---- */}
+      <Reveal>
+        <section
           style={{
-            display: "inline-block",
-            fontSize: 13,
-            fontWeight: "bold",
-            color: "#fff",
-            background: "#2e7df3",
-            padding: "9px 22px",
-            borderRadius: 3,
+            ...panelStyle,
+            textAlign: "center",
+            padding: "32px 20px",
+            marginBottom: 4,
           }}
         >
-          همه کاربران فرندفید ‹
-        </Link>
-        <Link
-          to="/users"
-          style={{
-            display: "inline-block",
-            fontSize: 13,
-            fontWeight: "bold",
-            color: "#fff",
-            background: "#2e7df3",
-            padding: "9px 22px",
-            borderRadius: 3,
-          }}
-        >
-          کاربران فرندفید در ایکس ‹
-        </Link>
-      </div>
+          <h2 style={{ fontSize: 16, margin: "0 0 8px" }}>دنبال یک کاربر یا اتاق خاصی می‌گردی؟</h2>
+          <p style={{ fontSize: 12.5, color: "var(--ff-muted)", margin: "0 0 18px", maxWidth: 480, marginInline: "auto" }}>
+            فهرست کامل کاربران فرندفید و ردیابی حساب‌های قدیمی‌شان در ایکس همین‌جاست.
+          </p>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10 }}>
+            <Link to="/subscriptions" className="ff-btn ff-btn-primary">
+              همه کاربران فرندفید ‹
+            </Link>
+            <Link to="/users" className="ff-btn ff-btn-ghost">
+              کاربران فرندفید در ایکس ‹
+            </Link>
+          </div>
+        </section>
+      </Reveal>
     </div>
   );
 };
-
-const TourRow: FC<{ title: string; children: React.ReactNode; last?: boolean }> = ({
-  title,
-  children,
-  last,
-}) => (
-  <div
-    style={{
-      paddingBottom: 12,
-      marginBottom: 12,
-      borderBottom: last ? "none" : "1px solid var(--ff-border)",
-    }}
-  >
-    <div style={{ fontSize: 12.5, fontWeight: "bold", marginBottom: 3 }}>{title}</div>
-    <div style={{ fontSize: 12, color: "var(--ff-muted)", lineHeight: 1.8 }}>{children}</div>
-  </div>
-);

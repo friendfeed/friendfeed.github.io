@@ -141,7 +141,48 @@ const FerferLeaksCover: FC = () => (
   </div>
 );
 
+/**
+ * Cover for "داستان خانه‌ی فرندفید" -- a static, non-interactive replay
+ * of the old hero's browser-chrome motif (traffic-light dots + URL bar +
+ * wordmark), used here as the post's cover image per the "hero image as
+ * post cover" instruction. The actual buttons/CTAs from the old hero are
+ * intentionally left out since this is a thumbnail, not a live UI.
+ */
+const FriendFeedStoryCover: FC = () => (
+  <div style={{ height: 120, background: "#fff", display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "8px 12px", background: "#e8e8e8" }}>
+      <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#ff5f57" }} />
+      <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#febc2e" }} />
+      <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#28c840" }} />
+      <span
+        dir="ltr"
+        style={{
+          marginInlineStart: 8,
+          background: "#fff",
+          border: "1px solid var(--ff-border)",
+          borderRadius: 2,
+          fontSize: 9.5,
+          color: "var(--ff-muted)",
+          padding: "2px 8px",
+        }}
+      >
+        friendfeed.com
+      </span>
+    </div>
+    <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, #eef4ff 0%, #dfe9fb 100%)" }}>
+      <img src="/brand/friendfeed-wordmark.webp" alt="FriendFeed" style={{ height: 26 }} />
+    </div>
+  </div>
+);
+
 const posts: MagazinePost[] = [
+  {
+    to: "/magazine/dastan-khane-friendfeed",
+    title: "داستان خانه‌ی فرندفید: از بهترین فید اینترنت تا تعطیلی",
+    excerpt:
+      "فرندفید چطور آسان‌ترین راه اشتراک مطالب در اینترنت شد، فیس‌بوک چرا آن را خرید، و در نهایت چه شد که در سال ۲۰۱۵ برای همیشه خاموش شد؛ همراه با اسکرین‌شات‌های آرشیوی و عکس شب امضای قرارداد.",
+    cover: FriendFeedStoryCover,
+  },
   {
     to: "/magazine/ferferleaks",
     title: "فرفرلیکس: روزی که دخمه افسران جنگ نرم در فرندفید لو رفت",

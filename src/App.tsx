@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 import { BottomNav } from "./components/BottomNav";
+import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import { XCrossoverPage } from "./pages/XCrossoverPage";
 import { XPodcastsPage } from "./pages/XPodcastsPage";
@@ -10,6 +11,7 @@ import { FaqPage } from "./pages/FaqPage";
 import { MagazinePage } from "./pages/MagazinePage";
 import { GoogleReaderPage } from "./pages/GoogleReaderPage";
 import { FriendFeed88Page } from "./pages/FriendFeed88Page";
+import { FriendFeedStoryPage } from "./pages/FriendFeedStoryPage";
 import { SubscriptionsPage } from "./pages/SubscriptionsPage";
 import { RoomsPage } from "./pages/RoomsPage";
 import { SearchProvider } from "./services/SearchContext";
@@ -92,6 +94,7 @@ const App: FC = () => {
               <Route path="/rooms" element={<RoomsPage />} />
               <Route path="/faq" element={<FaqPage />} />
               <Route path="/magazine" element={<MagazinePage />} />
+              <Route path="/magazine/dastan-khane-friendfeed" element={<FriendFeedStoryPage />} />
               <Route path="/magazine/google-reader" element={<GoogleReaderPage />} />
               <Route path="/magazine/friendfeed-1388" element={<FriendFeed88Page />} />
               <Route path="/magazine/ferferleaks" element={<FerferLeaksPage />} />
@@ -105,20 +108,7 @@ const App: FC = () => {
             </Routes>
           </main>
         </div>
-        <footer
-          style={{
-            textAlign: "center",
-            fontSize: 11,
-            color: "var(--ff-muted)",
-            padding: "16px 0 24px",
-            borderTop: "1px solid var(--ff-border)",
-          }}
-        >
-          این پروژه زنده است و به‌طور مرتب با کاربران و اطلاعات تازه
-          به‌روزرسانی می‌شود. پروژه‌ای آرشیوی و غیررسمی است و ارتباطی با
-          فرندفید یا متا ندارد. تمام داده‌ها از منابع آرشیوی عمومی گردآوری
-          شده‌اند.
-        </footer>
+        <Footer />
       </div>
       {/* Mobile app tab bar. CSS-only visibility (see .ff-bottom-nav in
           tokens.css) -- hidden above the 680px breakpoint, where
