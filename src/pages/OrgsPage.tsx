@@ -9,5 +9,6 @@ export const OrgsPage: FC = () => (
     title="ادارات و سازمان‌ها در ایکس"
     noun="سازمان"
     items={raw as XListRecord[]}
+    imageFolder="orgs"
   />
 );

@@ -9,6 +9,8 @@ export interface XListRecord {
   handle: string;
   displayName: string;
   imagePath: string | null;
+  /** Which public/images subfolder to look in, e.g. "brands" */
+  imageFolder?: string;
 }
 
 const liveAvatarUrl = (handle: string) =>
@@ -16,21 +18,36 @@ const liveAvatarUrl = (handle: string) =>
 
 /**
  * Generic X-list card -- same anatomy as XPodcastCell (single X action
- * row, live-first avatar cascade) used for all 7 new category pages:
- * brands, news, startups, orgs, books, daily_life, embassies.
+ * row, live-first avatar cascade) used for all 7 new category pages.
+ *
+ * Avatar cascade:
+ *   1. Live X photo via unavatar.io
+ *   2. Local webp at public/images/<imageFolder>/<handle>.webp
+ *      (derived automatically when imagePath is null, so you only need
+ *       to drop correctly-named files into the folder -- no JSON edits)
+ *   3. DefaultAvatar fallback
  */
-export const XListCell: FC<{ item: XListRecord }> = ({ item }) => {
+export const XListCell: FC<{ item: XListRecord; imageFolder: string }> = ({
+  item,
+  imageFolder,
+}) => {
+  // Derive local path from imagePath in JSON, or fall back to
+  // images/<folder>/<handle>.webp — so dropping a correctly-named
+  // file into the folder is all that's needed, no JSON edit required.
+  const localPath =
+    item.imagePath ?? `images/${imageFolder}/${item.handle}.webp`;
+
   const [stage, setStage] = useState<"live" | "local" | "none">("live");
 
   let imgSrc: string | null = null;
   if (stage === "live") {
     imgSrc = liveAvatarUrl(item.handle);
-  } else if (stage === "local" && item.imagePath) {
-    imgSrc = `${BASE}${item.imagePath}`;
+  } else if (stage === "local") {
+    imgSrc = `${BASE}${localPath}`;
   }
 
   const handleImgError = () => {
-    if (stage === "live") setStage(item.imagePath ? "local" : "none");
+    if (stage === "live") setStage("local");
     else if (stage === "local") setStage("none");
   };
 

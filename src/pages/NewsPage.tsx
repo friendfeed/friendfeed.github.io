@@ -9,5 +9,6 @@ export const NewsPage: FC = () => (
     title="خبرگزاری‌ها در ایکس"
     noun="خبرگزاری"
     items={raw as XListRecord[]}
+    imageFolder="news"
   />
 );

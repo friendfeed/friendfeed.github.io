@@ -19,6 +19,8 @@ interface XListPageProps {
   noun: string;
   /** The full dataset for this category. */
   items: XListRecord[];
+  /** Subfolder under public/images/ where local avatars live, e.g. "brands" */
+  imageFolder: string;
 }
 
 const PageNav: FC<{
@@ -91,7 +93,7 @@ const PageNav: FC<{
   );
 };
 
-export const XListPage: FC<XListPageProps> = ({ path, title, noun, items }) => {
+export const XListPage: FC<XListPageProps> = ({ path, title, noun, items, imageFolder }) => {
   useSEO({ path });
   const { query } = useSearch();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -159,7 +161,7 @@ export const XListPage: FC<XListPageProps> = ({ path, title, noun, items }) => {
             }}
           >
             {pageItems.map((item) => (
-              <XListCell key={item.handle} item={item} />
+              <XListCell key={item.handle} item={item} imageFolder={imageFolder} />
             ))}
           </div>
 

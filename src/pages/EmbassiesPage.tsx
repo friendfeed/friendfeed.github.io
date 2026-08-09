@@ -9,5 +9,6 @@ export const EmbassiesPage: FC = () => (
     title="سفارت‌ها در ایکس"
     noun="سفارت"
     items={raw as XListRecord[]}
+    imageFolder="embassies"
   />
 );

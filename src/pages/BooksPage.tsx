@@ -9,5 +9,6 @@ export const BooksPage: FC = () => (
     title="کتاب‌ها در ایکس"
     noun="کتاب"
     items={raw as XListRecord[]}
+    imageFolder="books"
   />
 );

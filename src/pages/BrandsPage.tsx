@@ -9,5 +9,6 @@ export const BrandsPage: FC = () => (
     title="برندها در ایکس"
     noun="برند"
     items={raw as XListRecord[]}
+    imageFolder="brands"
   />
 );

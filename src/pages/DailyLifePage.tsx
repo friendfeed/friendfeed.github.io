@@ -9,5 +9,6 @@ export const DailyLifePage: FC = () => (
     title="زندگی روزمره در ایکس"
     noun="حساب"
     items={raw as XListRecord[]}
+    imageFolder="daily_life"
   />
 );
