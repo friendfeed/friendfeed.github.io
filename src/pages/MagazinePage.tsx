@@ -81,7 +81,74 @@ const FriendFeed88Cover: FC = () => (
   </div>
 );
 
+const FerferLeaksCover: FC = () => (
+  <div
+    style={{
+      position: "relative",
+      overflow: "hidden",
+      height: 120,
+      background: "linear-gradient(160deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <svg
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.07 }}
+      viewBox="0 0 400 120"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      {[0,50,100,150,200,250,300,350,400].map(x => (
+        <line key={x} x1={x} y1="0" x2={x} y2="120" stroke="#4fc3f7" strokeWidth="1"/>
+      ))}
+      {[0,40,80,120].map(y => (
+        <line key={y} x1="0" y1={y} x2="400" y2={y} stroke="#4fc3f7" strokeWidth="1"/>
+      ))}
+    </svg>
+    <svg viewBox="0 0 120 140" width="46" height="54" style={{ position: "relative", zIndex: 2, filter: "drop-shadow(0 0 10px rgba(79,195,247,0.5))" }}>
+      <path d="M30 60 V42 A30 30 0 0 1 90 42 V60" fill="none" stroke="#4fc3f7" strokeWidth="5" strokeLinecap="round"/>
+      <rect x="14" y="58" width="92" height="66" rx="8" fill="#1a1a2e" stroke="#4fc3f7" strokeWidth="3"/>
+      <circle cx="60" cy="88" r="12" fill="none" stroke="#ef5350" strokeWidth="3"/>
+      <rect x="56" y="96" width="8" height="16" rx="3" fill="#ef5350"/>
+    </svg>
+    <div style={{
+      position: "absolute",
+      bottom: 0,
+      right: 0,
+      left: 0,
+      padding: "6px 14px 8px",
+      background: "linear-gradient(transparent, rgba(0,0,0,0.8))",
+      zIndex: 3,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-end",
+    }}>
+      <span style={{ fontFamily: "monospace", fontSize: 9, color: "#4fc3f7", opacity: 0.7, letterSpacing: "0.1em" }}>
+        FERFERLEAKS / ۱۳۹۰
+      </span>
+      <span style={{
+        fontSize: 9,
+        color: "#ef5350",
+        fontWeight: 700,
+        background: "rgba(239,83,80,0.15)",
+        border: "1px solid rgba(239,83,80,0.4)",
+        padding: "1px 6px",
+        borderRadius: 2,
+      }}>
+        LEAKED
+      </span>
+    </div>
+  </div>
+);
+
 const posts: MagazinePost[] = [
+  {
+    to: "/magazine/ferferleaks",
+    title: "فرفرلیکس: روزی که دخمه افسران جنگ نرم در فرندفید لو رفت",
+    excerpt:
+      "بهار ۱۳۹۰، اولین افشاگری به سبک ویکی‌لیکس در وب فارسی. ماجرای نفوذ به اتاق خصوصی گروه موسوم به افسران جنگ نرم در فرندفید و اسنادی که به فرفرلیکس معروف شدند.",
+    cover: FerferLeaksCover,
+  },
   {
     to: "/magazine/google-reader",
     title: "گودر: خانه‌ی گمشده‌ی وبلاگ‌نویسان فارسی",

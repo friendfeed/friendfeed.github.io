@@ -20,6 +20,7 @@ import { OrgsPage } from "./pages/OrgsPage";
 import { BooksPage } from "./pages/BooksPage";
 import { DailyLifePage } from "./pages/DailyLifePage";
 import { EmbassiesPage } from "./pages/EmbassiesPage";
+import { FerferLeaksPage } from "./pages/FerferLeaksPage";
 
 // ProfilePage / PyramidPage / HistoryPage exist in ./pages but are
 // intentionally not routed yet -- current scope is the home page + the
@@ -93,6 +94,7 @@ const App: FC = () => {
               <Route path="/magazine" element={<MagazinePage />} />
               <Route path="/magazine/google-reader" element={<GoogleReaderPage />} />
               <Route path="/magazine/friendfeed-1388" element={<FriendFeed88Page />} />
+              <Route path="/magazine/ferferleaks" element={<FerferLeaksPage />} />
               <Route path="/brands" element={<BrandsPage />} />
               <Route path="/news" element={<NewsPage />} />
               <Route path="/startups" element={<StartupsPage />} />
