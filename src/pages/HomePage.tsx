@@ -117,39 +117,39 @@ const HIGHLIGHT_GROUPS: HighlightGroup[] = [
   {
     eyebrow: "بخش دوم",
     title: "زندگی بعد از فرندفید، در ایکس",
-    description: "همان کاربران و اجتماع، این‌بار در بستر ایکس -- به‌علاوه رسانه‌ها، برندها و نهادهایی که در مسیر مهاجرت این جامعه ردیابی کرده‌ایم.",
+    description: "همان کاربران و اجتماع، این‌بار در بستر ایکس -- به‌علاوه رسانه‌ها، برندها و نهادهایی که در مسیر مهاجرت این جامعه پیدا کرده‌ایم.",
     icon: IconX,
     items: [
       {
         to: "/users",
         title: "کاربران فرندفید در ایکس",
-        description: "ردیابی حساب ایکس کاربران قدیمی فرندفید، برای پیدا کردن دوباره آدم‌های همان دوره.",
+        description: "پیوند حساب ایکس کاربران قدیمی فرندفید، برای پیدا کردن دوباره آدم‌های همان دوره.",
         count: "+۶۰۰ حساب",
         icon: IconX,
       },
       {
         to: "/podcasts",
         title: "پادکست",
-        description: "پادکست‌های فارسی که بسیاری از میزبان‌ها و مهمان‌هایشان از همان نسل فرندفید هستند.",
+        description: "پادکست‌های فارسی‌زبان با میزبان‌ها و مهمان‌های فعال در ایکس.",
         count: "+۱٬۱۰۰ حساب",
         icon: IconMusic,
       },
       {
         to: "/brands",
         title: "برندها",
-        description: "برندها و کسب‌وکارهای فارسی‌زبان با ریشه یا سابقه فعالیت در فرندفید.",
+        description: "برندها و کسب‌وکارهای فارسی‌زبان با حساب فعال در ایکس.",
         icon: IconBrand,
       },
       {
         to: "/news",
         title: "خبرگزاری‌ها",
-        description: "رسانه‌ها و خبرگزاری‌های فارسی‌زبانی که کاربران فرندفید در ایکس دنبال می‌کنند.",
+        description: "رسانه‌ها و خبرگزاری‌های فارسی‌زبان با حساب فعال در ایکس.",
         icon: IconNewspaper,
       },
       {
         to: "/startups",
         title: "استارت‌آپ‌ها",
-        description: "استارت‌آپ‌های فارسی‌زبان که بنیان‌گذاران یا اعضای اولیه‌شان در فرندفید فعال بودند.",
+        description: "استارت‌آپ‌های فارسی‌زبان و بنیان‌گذارانشان در ایکس.",
         icon: IconRocket,
       },
       {
@@ -161,7 +161,7 @@ const HIGHLIGHT_GROUPS: HighlightGroup[] = [
       {
         to: "/books",
         title: "کتاب‌ها",
-        description: "نویسنده‌ها و ناشرهای فارسی‌زبان مرتبط با جامعه‌ی فرندفید و کتاب‌هایشان.",
+        description: "نویسنده‌ها و ناشرهای فارسی‌زبان با حساب فعال در ایکس.",
         icon: IconBook,
       },
       {
@@ -345,17 +345,6 @@ export const HomePage: FC = () => {
             </Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
-            <Link to="/magazine/dastan-khane-friendfeed" className="ff-home-post-card">
-              <FriendFeedStoryCover />
-              <div style={{ padding: "12px 14px 16px" }}>
-                <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>
-                  داستان خانه‌ی فرندفید
-                </h3>
-                <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
-                  از بهترین فید اینترنت تا تعطیلی؛ روایت کامل با اسناد، عکس و تایم‌لاین مهاجرت.
-                </p>
-              </div>
-            </Link>
             <Link to="/magazine/ferferleaks" className="ff-home-post-card">
               <FerferLeaksCover />
               <div style={{ padding: "12px 14px 16px" }}>
@@ -376,6 +365,17 @@ export const HomePage: FC = () => {
                 </p>
               </div>
             </Link>
+            <Link to="/magazine/dastan-khane-friendfeed" className="ff-home-post-card">
+              <FriendFeedStoryCover />
+              <div style={{ padding: "12px 14px 16px" }}>
+                <h3 style={{ fontSize: 13.5, margin: "0 0 6px", lineHeight: 1.6 }}>
+                  داستان خانه‌ی فرندفید
+                </h3>
+                <p style={{ fontSize: 12, color: "var(--ff-muted)", margin: 0, lineHeight: 1.8 }}>
+                  از بهترین فید اینترنت تا تعطیلی؛ روایت کامل با اسناد، عکس و تایم‌لاین مهاجرت.
+                </p>
+              </div>
+            </Link>
           </div>
         </section>
       </Reveal>
@@ -392,7 +392,7 @@ export const HomePage: FC = () => {
         >
           <h2 style={{ fontSize: 16, margin: "0 0 8px" }}>دنبال یک کاربر یا اتاق خاصی می‌گردی؟</h2>
           <p style={{ fontSize: 12.5, color: "var(--ff-muted)", margin: "0 0 18px", maxWidth: 480, marginInline: "auto" }}>
-            فهرست کامل کاربران فرندفید و ردیابی حساب‌های قدیمی‌شان در ایکس همین‌جاست.
+            فهرست کامل کاربران فرندفید و پیوند حساب‌های قدیمی‌شان در ایکس همین‌جاست.
           </p>
           <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10 }}>
             <Link to="/subscriptions" className="ff-btn ff-btn-primary">

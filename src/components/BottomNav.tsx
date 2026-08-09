@@ -37,7 +37,7 @@ const DRAWER_SECTIONS: DrawerSection[] = [
     heading: "فرندفید",
     items: [
       { to: "/subscriptions", label: "همه کاربران فرندفید", icon: IconUsers },
-      { to: "/rooms", label: "اتاق‌ها", icon: IconX },
+      { to: "/rooms", label: "اتاق‌ها", icon: IconRoom },
     ],
   },
   {

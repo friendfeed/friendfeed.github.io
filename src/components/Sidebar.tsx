@@ -72,7 +72,7 @@ export const Sidebar: FC = () => {
         {/* Section 1: FriendFeed archive */}
         {link("/", "خانه", IconRoom)}
         {link("/subscriptions", "همه کاربران فرندفید", IconUsers)}
-        {link("/rooms", "اتاق‌ها", IconX)}
+        {link("/rooms", "اتاق‌ها", IconRoom)}
 
         <Divider />
 
