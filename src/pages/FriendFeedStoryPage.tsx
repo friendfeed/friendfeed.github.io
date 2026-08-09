@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { useSEO } from "../seo/useSEO";
 import { MigrationTimeline } from "../components/MigrationTimeline";
+import { IconX, IconBluesky } from "../icons/Icons";
 
 /**
  * "داستان خانه‌ی فرندفید" -- this post is the FULL body of what used to
@@ -251,9 +252,11 @@ export const FriendFeedStoryPage: FC = () => {
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", padding: "18px 0", borderTop: "1px solid var(--ff-border)" }}>
         <a href={xShareUrl} target="_blank" rel="noreferrer" className="ff-btn ff-btn-sm ff-btn-ghost">
+          <IconX width={13} height={13} />
           اشتراک در ایکس
         </a>
         <a href={bskyShareUrl} target="_blank" rel="noreferrer" className="ff-btn ff-btn-sm ff-btn-ghost">
+          <IconBluesky width={13} height={13} />
           اشتراک در بلواسکای
         </a>
         <Link to="/magazine" className="ff-btn ff-btn-sm ff-btn-ghost">
