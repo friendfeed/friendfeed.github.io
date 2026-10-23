@@ -114,10 +114,6 @@ By accessing this archive, you agree to all terms and conditions outlined in the
 
 <div align="center">
 
-![Author](assets/svg/author-name.svg)
-[![GitHub](assets/svg/github-button.svg)](https://github.com/hassanireza)
-[![Portfolio](assets/svg/portfolio-button.svg)](https://hassanireza.github.io/)
-
 *Preserving the history of the Persian internet.*
 
 </div>
